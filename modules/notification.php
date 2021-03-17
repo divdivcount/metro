@@ -5,7 +5,6 @@ Modified Date: 20210317
 Description: 페이지 알림 및 변경 함수 정의
 */
 // Load Modules
-require_once($_SERVER['DOCUMENT_ROOT'].'/modules/module_protect.php');
 
 // Parameter
 

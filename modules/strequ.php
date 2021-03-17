@@ -6,7 +6,6 @@ Description: 문자열 일치 검사 함수
 reference: https://jhrun.tistory.com/179 [JHRunning]
 */
 // Load Modules
-require_once($_SERVER['DOCUMENT_ROOT'].'/modules/module_protect.php');
 
 // Parameter
 
