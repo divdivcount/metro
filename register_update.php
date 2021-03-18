@@ -23,7 +23,7 @@ $mb_password = $_POST['mb_password']; // 첫번째 입력 패스워드
 $mb_password_re	= $_POST['mb_password_re']; // 두번째 입력 패스워드
 $mb_name = $_POST['mb_name']; // 이름
 $mb_email	= $_POST['mb_email']; // 이메일
-$mb_gender = $_POST['mb_gender']; // 성별
+$mb_gender = $_POST['mb_station']; // 역
 $mb_datetime = date('Y-m-d H:i:s', time()); // 가입일
 $mb_modify_datetime	= date('Y-m-d H:i:s', time()); // 수정일
 
@@ -109,7 +109,7 @@ if ($result) {
 		$result = mysqli_query($conn, $sql);
 		mysqli_close($conn); // 데이터베이스 접속 종료
 
-		$certify_href = 'http://localhost/ky_project/email_certify.php?&amp;mb_id='.$mb_id.'&amp;mb_md5='.$mb_md5; // 메일 인증 주소
+		$certify_href = 'http://localhost/email_certify.php?&amp;mb_id='.$mb_id.'&amp;mb_md5='.$mb_md5; // 메일 인증 주소
 
 		$subject = '인증확인 메일입니다.'; // 메일 제목
 
@@ -126,7 +126,7 @@ if ($result) {
 		echo "<script>location.replace('./login.php');</script>";
 	}
 if($mode == "modify") {
-	echo "<script>alert('".$title."이 완료 되었습니다.\\n신규가입의 경우 메일인증을 받으셔야 로그인 가능합니다.');</script>";
+	echo "<script>alert('".$title."이 완료 되었습니다.');</script>";
 	echo "<script>location.replace('./User_basket.php');</script>";
 }
 

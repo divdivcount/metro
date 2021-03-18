@@ -25,7 +25,7 @@ if($mb_id && isset($_GET['mode']) == 'modify') { // 세션이 있고 회원수�
 	$modify_mb_info = "";
 	$mb['mb_name'] = "";
 	$mb['mb_email'] = "";
-	$mb['mb_gender'] = "";
+	$mb['mb_station'] = "";
 
 	$mode = "insert";
 	$title = "register";
@@ -78,9 +78,8 @@ if($mb_id && isset($_GET['mode']) == 'modify') { // 세션이 있고 회원수�
 			<div class="textbox">
 				<input type="text" name="mb_email" placeholder="E-Mail" value="<?php echo $mb['mb_email'] ?>">
 			</div>
-			<div style="text-align:center;" >
-				<label style="margin-right:15px;"><input type="radio" name="mb_gender" value="남자" <?php echo ($mb['mb_gender'] == "남자") ? "checked" : "";?> >남자</label>
-				<label style="margin-left:100px;"><input type="radio" name="mb_gender" value="여자" <?php echo ($mb['mb_gender'] == "여자") ? "checked" : "";?> >여자</label>
+			<div class="textbox">
+				<input type="text" name="mb_station" placeholder="Station" value="<?php echo $mb['mb_station'] ?>">
 			</div>
 
 			<input type="submit" class="btn" value="<?php echo $title ?>">
