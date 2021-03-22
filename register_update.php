@@ -22,10 +22,12 @@ switch ($mode) {
 $mb_password = $_POST['mb_password']; // 첫번째 입력 패스워드
 $mb_password_re	= $_POST['mb_password_re']; // 두번째 입력 패스워드
 $mb_name = $_POST['mb_name']; // 이름
-$mb_email	= $_POST['mb_email']; // 이메일
-$mb_gender = $_POST['mb_station']; // 역
+$mb_email_one	= $_POST['mb_email']; // 이메일1
+$mb_email_two	= $_POST['mb_email_two']; // 이메일2
 $mb_datetime = date('Y-m-d H:i:s', time()); // 가입일
 $mb_modify_datetime	= date('Y-m-d H:i:s', time()); // 수정일
+$mb_email = $mb_email_one.'@'.$mb_email_two;
+
 
 if (!$mb_id) {
 	echo "<script>alert('아이디가 넘어오지 않았습니다.');</script>";
@@ -84,7 +86,6 @@ if($mode == "insert") { // 신규 등록 상태
 					 mb_password = '$mb_password',
 					 mb_name = '$mb_name',
 					 mb_email = '$mb_email',
-					 mb_gender = '$mb_gender',
 					 mb_datetime = '$mb_datetime' ";
 	$result = mysqli_query($conn, $sql);
 

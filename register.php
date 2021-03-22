@@ -89,8 +89,8 @@ if($mb_id && isset($_GET['mode']) == 'modify') { // 세션이 있고 회원수�
 				</div>
 
 				<div class="textbox"><!-- 이메일 폼 부분 재구성함 수정 요함  -->
-					<input type="text" id="fitst_email" name="" value="" placeholder="이메일"> <div style="float:left">@</div>
-					<input type="text" id="second_email" name="" value="">
+					<input type="text" id="fitst_email" name="mb_email" value="" placeholder="이메일"> <div style="float:left">@</div>
+					<input type="text" id="second_email" name="mb_email_two" value="">
 
 					<select id="selbox" class="" name="">
 						<option value="direct">직접입력</option>
@@ -152,14 +152,14 @@ function fregisterform_submit(f) { // submit 최종 폼체크
 		return false;
 	}
 
-	if (f.mb_email.value.length > 0) { // 이메일 형식 검사
-		var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-		if (f.mb_email.value.match(regExp) == null) {
-			alert("이메일 주소가 형식에 맞지 않습니다.");
-			f.mb_email.focus();
-			return false;
-		}
-	}
+	// if (f.mb_email.value.length > 0) { // 이메일 형식 검사
+	// 	var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	// 	if (f.mb_email.value.match(regExp) == null) {
+	// 		alert("이메일 주소가 형식에 맞지 않습니다.");
+	// 		f.mb_email.focus();
+	// 		return false;
+	// 	}
+	// }
 
 	return true;
 
