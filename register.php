@@ -26,7 +26,6 @@ if($mb_id && isset($_GET['mode']) == 'modify') { // 세션이 있고 회원수�
 	$modify_mb_info = "";
 	$mb['mb_name'] = "";
 	$mb['mb_email'] = "";
-	$mb['mb_station'] = "";
 
 	$mode = "insert";
 	$title = "register";
@@ -58,6 +57,11 @@ if($mb_id && isset($_GET['mode']) == 'modify') { // 세션이 있고 회원수�
 }
 ?>
 <body>
+
+<form action="register_update.php" onsubmit="return fregisterform_submit(this);" method="post">
+	<input type="hidden" name="mode" value="<?php echo $mode; ?>">
+
+		<div class="login-box">
 <div class="login-box">
 	<form action="./register_update.php" onsubmit="return fregisterform_submit(this);" method="post">
 		<input type="hidden" name="mode" value="<?php echo $mode; ?>">
