@@ -76,36 +76,33 @@ body{
   font-size: 1.15em;
 }
 .line  {
-  width: 34%;
+  width: 30%;
   height: 2px;
   margin:0px;
   background-color: #a7a7a7;
 }
-@media only screen and (max-width: 1024px) {
-.login-box{width:55%;}
+.tite_1{
+  width: 40%;
 }
+
+
+@media only screen and (max-width: 1024px) {
+  .login-box{width:70%;}
+  #inputbox{width: 80%;}
+}
+
 @media only screen and (max-width: 768px) {
-  .login-box{
-    width: 70%;
-    top:40%;
-  }
-  #inputbox {
-    width: 100%;
-    margin: auto;
-  }
-  html{font-size:12px}
+  .login-box{width: 70%;}
+  #inputbox {width: 100%;}
+}
+
+@media only screen and (max-width: 540px) {
+  #boundarybox{ font-size:1.1em;}
+  .line{width: 20%}
+  .tite_1{width: 60%}
   .imgbox img{    width: 100%;  }
   .imgbox input{    width: 100%;  }
-}
-@media only screen and (max-width: 414px) {
-  #fitst_email {
-    width:40%
-  }
-  #second_email {
-    width:35%
-  }
-  .textbox select{
-    width: 40%;
-    border: none;
-  }
+  #fitst_email {width:40%}
+  #second_email {width:35%}
+  .textbox select{display: none;}
 }

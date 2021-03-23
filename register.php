@@ -57,10 +57,16 @@ if($mb_id && isset($_GET['mode']) == 'modify') { // 세션이 있고 회원수�
 }
 ?>
 <body>
+<<<<<<< HEAD
 <form action="register_update.php" onsubmit="return fregisterform_submit(this);" method="post">
 	<input type="hidden" name="mode" value="<?php echo $mode; ?>">
 
 		<div class="login-box">
+=======
+<div class="login-box">
+	<form action="./register_update.php" onsubmit="return fregisterform_submit(this);" method="post">
+		<input type="hidden" name="mode" value="<?php echo $mode; ?>">
+>>>>>>> 2a3f3803f557724ad797218e0ab6d4bfcb906058
 
 			<div class="imgbox">
         <img src="img/metrocket.png" alt="" style="align-self: center;">
@@ -68,7 +74,7 @@ if($mb_id && isset($_GET['mode']) == 'modify') { // 세션이 있고 회원수�
 
 			<div id="boundarybox">
         <div class="line"></div>
-        <div style="width:32%;" >메트로켓 회원가입</div>
+        <div class="tite_1">메트로켓 회원가입</div>
         <div class="line"></div>
       </div>
 			<div id="inputbox">
@@ -107,8 +113,9 @@ if($mb_id && isset($_GET['mode']) == 'modify') { // 세션이 있고 회원수�
 			</div>
 
 			<div style="width:96%; text-align:center;"class="btn"><a style="font-size: 19px;text-decoration:none; color:#fff;" href="./login.php">Cancel</a></div>
-	</div>
-</form>
+
+		</form>
+</div>
 
 <script>
 function fregisterform_submit(f) { // submit 최종 폼체크

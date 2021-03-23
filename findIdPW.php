@@ -8,7 +8,7 @@
     <body>
         <div class="wrap">
             <div class="form-wrap">
-                <div id="imgbox">
+                <div class="imgbox">
                   <img src="/img/metrocket.png" alt="">
                 </div>
                 <div id="imgbtn_box">
