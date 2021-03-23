@@ -1,5 +1,6 @@
-<?php session_start();
+<?php
  // NAVER LOGIN
+require_once("modules/db.php");
 define('NAVER_CLIENT_ID', 'qFL1MdijiIfEemYxHv9a');
 define('NAVER_CLIENT_SECRET', 'OlLqFEtna0');
 define('NAVER_CALLBACK_URL', 'https://metroket.kro.kr/naver_callback.php');
@@ -27,10 +28,19 @@ if($status_code == 200) {
   $me_response = curl_exec ($me_ch); $me_status_code = curl_getinfo($me_ch, CURLINFO_HTTP_CODE);
   curl_close ($me_ch);
   $me_responseArr = json_decode($me_response, true);
-  if ($me_responseArr['response']['id']) { // 회원아이디(naver_ 접두사에 네이버 아이디를 붙여줌)
-    $mb_uid = 'naver_'.$me_responseArr['response']['id']; // 회원가입 DB에서 회원이 있으면(이미 가입되어 있다면) 토큰을 업데이트 하고 로그인함
-    if (false) { // 멤버 DB에 토큰값 업데이트
-      $responseArr['access_token']; // 로그인
+  if ($me_responseArr['response']['id']) { // 회원아이디
+    $mb_uid = $me_responseArr['response']['id']; // 회원가입 DB에서 회원이 있으면(이미 가입되어 있다면) 토큰을 업데이트 하고 로그인함
+    $oauth = new Oauths;
+    $result = $oauth->Om_select($mb_uid);
+    foreach ($result as $row) {
+      $om_id = $row['om_id'];
+    }
+    if ($om_id == $mb_uid) { // $om_id == $mb_uid멤버 DB에 토큰값 업데이트
+      //if(토큰 값이 같지 않다면){기존 데이터가 변경 될 수 있기 때문에 다시 불러 update 처리}
+      $oauth2 = new Oauths;
+      $update = $oauth2->Om_token_update($responseArr['access_token'], $mb_uid); // 로그인
+      echo "success";
+
     } // 회원정보가 없다면 회원가입
     else { // 회원아이디
       $mb_token = $responseArr['access_token'];
@@ -39,17 +49,21 @@ if($status_code == 200) {
       $mb_nickname = $me_responseArr['response']['nickname']; // 닉네임
       $mb_email = $me_responseArr['response']['email']; // 이메일
       $mb_profile_image = $me_responseArr['response']['profile_image']; // 프로필 이미지
+      $mb_company = 'naver';
       echo $mb_uid."<br>";
       echo $mb_token."<br>";
       echo $mb_name."<br>";
       echo $mb_nickname."<br>";
       echo $mb_email."<br>";
       echo $mb_profile_image."<br>";
+      $oauths = new Oauths;
+      $OauthObj = $oauths->Om_insert($mb_uid,$mb_token,$mb_name,$mb_nickname,$mb_email,$mb_profile_image,$mb_company);
       // 멤버 DB에 토큰과 회원정보를 넣고 로그인
     }
   } else {
-    // 회원정보를 가져오지 못했습니다.
+    echo "회원정보를 가져오지 못했습니다.";
   }
 } else {
-    // 토큰값을 가져오지 못했습니다.
+    echo "토큰값을 가져오지 못했습니다.";
    }
+?>

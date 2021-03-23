@@ -2,6 +2,7 @@
 	require_once('modules/parameter.php');
 	require_once('modules/db_dao.php');
 	require_once('modules/mb_dao.php');
+	require_once('modules/oauth_dao.php');
 	require_once('modules/dbconn.php');
 	require_once('modules/strequ.php');
 	class ProLogin extends MetroDAO {
