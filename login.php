@@ -8,8 +8,7 @@ require_once('modules/notification.php');
 <head>
 	<title>Login</title>
 	<link href="css/css_login.css" rel="stylesheet" type="text/css">
-	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="css/css_noamlfont.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -30,7 +29,7 @@ require_once('modules/notification.php');
 						<input type="image" id ="loginbtn" src="img/login.png">
 					</div>
 
-					<a class="text_center" href="">아이디 / 비밀번호 찾기</a>
+					<a class="text_center" href="findIdPW.php">아이디 / 비밀번호 찾기</a>
 
 					<div id="boundarybox">
 						<div class="line"></div>
@@ -38,16 +37,14 @@ require_once('modules/notification.php');
 						<div class="line"></div>
 					</div>
 
+					<!-- 소셜 로그인 아이콘 부분 -->
 					<div id="imgbox">
-						<img src="img/naver.png" alt="">
-						<img src="img/facebook.png" alt="">
+						<img src="img/naver.png"  alt="">
 						<img src="img/kakao.png" alt="">
 						<img src="img/google.png" alt="">
 					</div>
 
-					<a class="text_center" href="./register.php">
-						아직 회원이 아니신가요? 회원가입
-					</a>
+					<a class="text_center" href="register.php">아직 회원이 아니신가요? 회원가입</a>
 				</div>
 	</form>
 

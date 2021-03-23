@@ -5,7 +5,8 @@ html, body {
 body{
   margin: 0;
   padding: 0;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "NotoSansKR_m";
+  color: #6d6d6d;
   width:100%;
   height:100%;
   background-color:#F5F6F7;
@@ -37,7 +38,9 @@ h3{
   text-align:center;
 }
 .agreement {
-  font-size:0.8em;
+  color:Black;
+  font-size:10px;
+  font-family: "NotoSansKR_t";
   width: 100%;
   height: 280px;
   border: solid 1px #b7b7b7;
@@ -49,6 +52,15 @@ h3{
 }
 .checkline {
   margin-bottom:30px;
+  color: #848484;
+  font-size: 13px;
+}
+.both_checkline{
+  margin-bottom:35px;
+  color: #4a4a4a;
+  font-size: 13px;
+  font-family:"NotoSansKR_b";
+  text-decoration:underline 1px;
 }
 .line  {
   width: 34%;

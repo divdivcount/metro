@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>signup</title>
     <link href="css/css_signup_agreement.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/css_noamlfont.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
   <body>
@@ -166,8 +167,8 @@
         <input type="checkbox" name="" value="">개인정보 수집 및 이용에 동의합니다.<br>
       </div>
 
-      <div class="checkline" style="display:flex">
-        <input type="checkbox" name="" value=""><div style="font-weight:bold;text-decoration:underline 1px;">서비스 이용약관, 개인정보 수집 및 이용에 동의합니다.</div>
+      <div class="both_checkline" style="display:flex">
+        <input type="checkbox" name="" value="">서비스 이용약관, 개인정보 수집 및 이용에 동의합니다.
       </div>
 
       <div class="imgbox"><img src="img/register_continue.png" alt=""></div>
