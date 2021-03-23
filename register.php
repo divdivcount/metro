@@ -5,8 +5,9 @@ require_once("modules/db.php");
 <html>
 <head>
 	<title>Register</title>
-	<link rel="stylesheet" href="css/css_login.css">
+	<link rel="stylesheet" href="css/css_register.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 </head>
 <?php
@@ -56,31 +57,56 @@ if($mb_id && isset($_GET['mode']) == 'modify') { // 세션이 있고 회원수�
 }
 ?>
 <body>
-<form action="./register_update.php" onsubmit="return fregisterform_submit(this);" method="post">
+<form action="register_update.php" onsubmit="return fregisterform_submit(this);" method="post">
 	<input type="hidden" name="mode" value="<?php echo $mode; ?>">
-	<div style="height:600px;" class="login-box-bg">
+
 		<div class="login-box">
-			<h1><?php echo $title; ?></h1>
-			<div class="textbox">
-				<input type="text" placeholder="UserId" name="mb_id" id="mb_id"  class="id_checking" value="<?php echo $mb['mb_id']; ?>" <?php echo $modify_mb_info; ?>/>
-			</div>
-			<p id='id_check'></p>
-			<div class="textbox">
-				<input type="password" placeholder="Password" name="mb_password">
-			</div>
-			<div class="textbox">
-				<input type="password" placeholder="Password_Re" name="mb_password_re">
-			</div>
-			<div class="textbox">
-				<input type="text" name="mb_name" placeholder="Name" value="<?php echo $mb['mb_name'] ?>" <?php echo $modify_mb_info ?>>
-			</div>
-			<div class="textbox">
-				<input type="text" name="mb_email" placeholder="E-Mail" value="<?php echo $mb['mb_email'] ?>">
+
+			<div class="imgbox">
+        <img src="img/metrocket.png" alt="" style="align-self: center;">
+      </div>
+
+			<div id="boundarybox">
+        <div class="line"></div>
+        <div style="width:32%;" >메트로켓 회원가입</div>
+        <div class="line"></div>
+      </div>
+			<div id="inputbox">
+
+				<div class="textbox">
+					<input type="text" placeholder="아이디" name="mb_id" id="mb_id"  class="id_checking" value="<?php echo $mb['mb_id']; ?>" <?php echo $modify_mb_info; ?>/>
+				</div>
+				<p id='id_check'></p>
+				<div class="textbox">
+					<input type="password" placeholder="비밀번호" name="mb_password">
+				</div>
+				<div class="textbox">
+					<input type="password" placeholder="비밀번호 확인" name="mb_password_re">
+				</div>
+				<div class="textbox">
+					<input type="text" name="mb_name" placeholder="이름" value="<?php echo $mb['mb_name'] ?>" <?php echo $modify_mb_info ?>>
+				</div>
+
+				<div class="textbox"><!-- 이메일 폼 부분 재구성함 수정 요함  -->
+					<input type="text" id="fitst_email" name="mb_email" value="" placeholder="이메일"> <div style="float:left">@</div>
+					<input type="text" id="second_email" name="mb_email_two" value="">
+
+					<select id="selbox" class="" name="">
+						<option value="direct">직접입력</option>
+						<option value="naver.com">naver.com</option>
+						<option value="gmail.com">gmail.com</option>
+					</select>
+
+					<!-- <input type="text" name="mb_email" placeholder="이메일" value="<?php// echo $mb['mb_email'] ?>"> 기존 php 부분 일부러 놔둠 -->
+				</div>
+
+				<div class="imgbox">
+					<input type="image" src="img/register_complete.png" name="" value="<?php echo $title ?>">
+				</div>
+
 			</div>
 
-			<input type="submit" class="btn" value="<?php echo $title ?>">
 			<div style="width:96%; text-align:center;"class="btn"><a style="font-size: 19px;text-decoration:none; color:#fff;" href="./login.php">Cancel</a></div>
-			</div>
 	</div>
 </form>
 
@@ -125,16 +151,19 @@ function fregisterform_submit(f) { // submit 최종 폼체크
 		return false;
 	}
 
-	if (f.mb_email.value.length > 0) { // 이메일 형식 검사
-		var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-		if (f.mb_email.value.match(regExp) == null) {
-			alert("이메일 주소가 형식에 맞지 않습니다.");
-			f.mb_email.focus();
-			return false;
-		}
-	}
+	// if (f.mb_email.value.length > 0) { // 이메일 형식 검사
+	// 	var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	// 	if (f.mb_email.value.match(regExp) == null) {
+	// 		alert("이메일 주소가 형식에 맞지 않습니다.");
+	// 		f.mb_email.focus();
+	// 		return false;
+	// 	}
+	// }
 
 	return true;
+
+// 권햄  한거 경계선
+
 
 }
 </script>

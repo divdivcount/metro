@@ -22,9 +22,12 @@ switch ($mode) {
 $mb_password = $_POST['mb_password']; // 첫번째 입력 패스워드
 $mb_password_re	= $_POST['mb_password_re']; // 두번째 입력 패스워드
 $mb_name = $_POST['mb_name']; // 이름
-$mb_email	= $_POST['mb_email']; // 이메일
+$mb_email_one	= $_POST['mb_email']; // 이메일1
+$mb_email_two	= $_POST['mb_email_two']; // 이메일2
 $mb_datetime = date('Y-m-d H:i:s', time()); // 가입일
 $mb_modify_datetime	= date('Y-m-d H:i:s', time()); // 수정일
+$mb_email = $mb_email_one.'@'.$mb_email_two;
+
 
 if (!$mb_id) {
 	echo "<script>alert('아이디가 넘어오지 않았습니다.');</script>";
@@ -107,7 +110,7 @@ if ($result) {
 		$result = mysqli_query($conn, $sql);
 		mysqli_close($conn); // 데이터베이스 접속 종료
 
-		$certify_href = 'http://localhost/email_certify.php?&amp;mb_id='.$mb_id.'&amp;mb_md5='.$mb_md5; // 메일 인증 주소
+		$certify_href = 'https://metroket.kro.kr/email_certify.php?&amp;mb_id='.$mb_id.'&amp;mb_md5='.$mb_md5; // 메일 인증 주소
 
 		$subject = '인증확인 메일입니다.'; // 메일 제목
 
