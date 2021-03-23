@@ -1,3 +1,7 @@
+html, body {
+    margin: 0;
+    height: 100%;
+}
 body{
   margin: 0;
   padding: 0;
@@ -52,6 +56,9 @@ h3{
   margin:0px;
   background-color: #a7a7a7;
 }
+.tite_1{
+  width: 40%;
+}
 .bluedot{
   width: 10px;
   height: 17px;
@@ -59,14 +66,17 @@ h3{
   background-color: #00b3ff;
 }
 @media only screen and (max-width: 1024px) {
-#signupbox{width:55%;}
+  #signupbox{width:70%;}
 }
+
 @media only screen and (max-width: 768px) {
-  #signupbox{
-    width: 70%;
-    top:40%;
-  }
-  html{font-size:12px}
+  #signupbox{width: 70%;}
+}
+
+@media only screen and (max-width: 540px) {
+  #boundarybox{ font-size:1.1em;}
+  .line{width: 20%}
+  .tite_1{width: 60%}
   .imgbox img{    width: 100%;  }
   .imgbox input{    width: 100%;  }
 }

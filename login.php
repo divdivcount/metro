@@ -25,7 +25,11 @@ require_once('modules/notification.php');
 			<div class="textbox">
 				<input type="password" placeholder="비밀번호" name="mb_password">
 			</div>
-					<input type="image" id ="loginbtn" src="img/login.png" style="width:100%">
+
+					<div class="imgbox">
+						<input type="image" id ="loginbtn" src="img/login.png">
+					</div>
+
 					<a class="text_center" href="">아이디 / 비밀번호 찾기</a>
 
 					<div id="boundarybox">

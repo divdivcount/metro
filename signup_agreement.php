@@ -14,7 +14,7 @@
 
       <div id="boundarybox">
         <div class="line"></div>
-        <div style="width:32%;" >메트로켓 회원가입</div>
+        <div class="tite_1">메트로켓 회원가입</div>
         <div class="line"></div>
       </div>
 
