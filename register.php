@@ -57,16 +57,14 @@ if($mb_id && isset($_GET['mode']) == 'modify') { // 세션이 있고 회원수�
 }
 ?>
 <body>
-<<<<<<< HEAD
+
 <form action="register_update.php" onsubmit="return fregisterform_submit(this);" method="post">
 	<input type="hidden" name="mode" value="<?php echo $mode; ?>">
 
 		<div class="login-box">
-=======
 <div class="login-box">
 	<form action="./register_update.php" onsubmit="return fregisterform_submit(this);" method="post">
 		<input type="hidden" name="mode" value="<?php echo $mode; ?>">
->>>>>>> 2a3f3803f557724ad797218e0ab6d4bfcb906058
 
 			<div class="imgbox">
         <img src="img/metrocket.png" alt="" style="align-self: center;">
