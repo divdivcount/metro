@@ -13,24 +13,29 @@
                 <div class="imgbox">
                   <img src="/img/metrocket.png" alt="">
                 </div>
+
+                <!-- 상단 아이디 및 비밀번호 찾기 버튼 -->
                 <div id="imgbtn_box">
-                  <img src="img/findid_top_btn_on.png" onclick="findId()">
-                  <img src="img/findpw_top_btn_off.png" onclick="findPw()">
+                  <img id = "findid_btn" src="img/findid_top_btn_on.png" onclick="findId()">
+                  <img id = "findpw_btn" src="img/findpw_top_btn_off.png" onclick="findPw()">
                 </div>
 
                 <!-- 아이디 찾는 폼 부분 -->
                 <form id="findId" action="findId.php" class="input-group" method="post">
 
+                  <!-- 이름 -->
                   <div class="inputbox">
                     <div class="textbox"><div class="bluedot">*</div>이름</div>
-                    <input type="text" name ="id" class="input-field" placeholder="User Id" required >
+                    <input type="text" name ="id" class="input-field" required >
                   </div>
 
+                  <!-- 이메일 -->
                   <div class="inputbox">
                     <div class="textbox"><div class="bluedot">*</div>이메일</div>
-                    <input type="password" name ="pw" class="input-field" placeholder="Enter Password" required>
+                    <input type="password" name ="pw" class="input-field" required>
                   </div>
 
+                  <!-- 아이디 찾기 버튼 -->
                   <div class="imgbox">
                     <input type="image" src="img/findid_btn.png" class="submit">
                   </div>
@@ -38,67 +43,82 @@
 
                 <!-- 비밀번호 찾는 폼 부분 -->
                 <form id="findPw" action="findPw.php" class="input-group" method="post">
+
+                  <!-- 이름 -->
                   <div class="inputbox">
                     <div class="textbox"><div class="bluedot">*</div>이름</div>
                     <input type="text" id ="userName" name="userName" class="input-field_2" required>
                   </div>
 
+                  <!-- 아이디 -->
                   <div class="inputbox">
                     <div class="textbox"><div class="bluedot">*</div>아이디</div>
                     <input type="text" id ="userId" name="userId" class="input-field_2" required>
                   </div>
 
+                  <!-- 이메일 -->
                   <div class="inputbox">
                     <div class="textbox"><div class="bluedot">*</div>이메일</div>
                       <!-- 이메일 폼 부분 재구성함 수정 요함  -->
               					<input type="text" id="fitst_email" name="" value="" > <div style="font-family:'NotoSansKR_m';color:#3b3b3b;">@</div>
               					<input type="text" id="second_email" name="" value="">
 
-              					<select id="selbox" class="" name="">
+                        <!-- 이메일 선택 select 박스 -->
+              					<select id="selbox" onchange="email()" class="" name="">
               						<option value="direct">직접입력</option>
               						<option value="naver.com">naver.com</option>
               						<option value="gmail.com">gmail.com</option>
+                          <option value="hanmail.net">hanmail.net</option>
+                          <option value="nate.com">nate.com</option>
+                          <option value="yahoo.co.kr">yahoo.co.kr</option>
+                          <option value="yahoo.com">yahoo.com</option>
+                          <option value="dreamwiz.com">dreamwiz.com</option>
+                          <option value="daum.net">daum.net</option>
               					</select>
-
-              					<!-- <input type="text" name="mb_email" placeholder="이메일" value="<?php// echo $mb['mb_email'] ?>"> 기존 php 부분 일부러 놔둠 -->
-
                   </div>
 
+                  <!-- 비밀번호 찾기 버튼 -->
                   <div class="imgbox">
                     <input type="image" src="img/findpw_btn.png" class="submit">
                   </div>
                 </form>
 
-                <div id="output">
-
-                </div>
             </div>
         </div>
 
-        <script  type="text/javascript">
-            var x = document.getElementById("findId");
-            var y = document.getElementById("findPw");
-            var z = document.getElementById("btn");
-            var f_id = document.getElementById('idbtn');
-            var f_pw = document.getElementById('pwbtn');
-
-            function findId(){
-                x.style.left = "50px";
-                y.style.left = "450px";
-                z.style.left = "0";
-                f_id.className = "onbtn";
-                f_pw.className = "offbtn";
-
-            }
-            function findPw(){
-                x.style.left = "-400px";
-                y.style.left = "50px";
-                z.style.left = "110px";
-                f_id.className = "offbtn";
-                f_pw.className = "onbtn";
-            }
-
-
-        </script>
     </body>
+  <script  type="text/javascript">
+      var id_form = document.getElementById("findId");
+      var pw_form = document.getElementById("findPw");
+      var findid_btn =document.getElementById("findid_btn");
+      var findpw_btn =document.getElementById("findpw_btn");
+
+      function findId(){
+        findid_btn.src = "img/findid_top_btn_on.png";
+        findpw_btn.src = "img/findpw_top_btn_off.png";
+        id_form.style.visibility="visible";
+        pw_form.style.visibility="hidden";
+      }
+      function findPw(){
+        findid_btn.src = "img/findid_top_btn_off.png";
+        findpw_btn.src = "img/findpw_top_btn_on.png";
+        id_form.style.visibility="hidden";
+        pw_form.style.visibility="visible";
+      }
+
+      // 이메일 선택 select 박스에 자동으로 텍스트 적용하는 함수
+      function email() {
+        var selbox= document.getElementById('selbox');
+        var secondText = document.getElementById('second_email');
+        var domainText ="";
+        if (selbox.selectedIndex > 0) {
+          domainText = selbox.options[selbox.selectedIndex].value;
+          secondText.value = domainText;
+        }else{
+          secondText.value = "";
+        }
+      }
+
+
+  </script>
 </html>

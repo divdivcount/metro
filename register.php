@@ -77,31 +77,44 @@ if($mb_id && isset($_GET['mode']) == 'modify') { // 세션이 있고 회원수�
       </div>
 			<div id="inputbox">
 
+				<!-- 아이디 -->
 				<div class="textbox">
 					<input type="text" placeholder="아이디" name="mb_id" id="mb_id"  class="id_checking" value="<?php echo $mb['mb_id']; ?>" <?php echo $modify_mb_info; ?>/>
 				</div>
 				<p id='id_check'></p>
+
+				<!-- 비밀번호 -->
 				<div class="textbox">
 					<input type="password" placeholder="비밀번호" name="mb_password">
 				</div>
+
+				<!-- 비밀번호 확인 -->
 				<div class="textbox">
 					<input type="password" placeholder="비밀번호 확인" name="mb_password_re">
 				</div>
+
+				<!-- 이름 -->
 				<div class="textbox">
 					<input type="text" name="mb_name" placeholder="이름" value="<?php echo $mb['mb_name'] ?>" <?php echo $modify_mb_info ?>>
 				</div>
 
+				<!-- 이메일 -->
 				<div class="textbox">
 					<input type="text" id="fitst_email" name="mb_email" value="" placeholder="이메일"> <div style="float:left;font-family:'NotoSansKR_m';color:#3b3b3b;">@</div>
 					<input type="text" id="second_email" name="mb_email_two" value="">
 
+					<!-- 이메일 선택 select 박스 -->
 					<select id="selbox" onchange="email()" class="" name="">
 						<option value="direct">직접입력</option>
 						<option value="naver.com">naver.com</option>
 						<option value="gmail.com">gmail.com</option>
+						<option value="hanmail.net">hanmail.net</option>
+						<option value="nate.com">nate.com</option>
+						<option value="yahoo.co.kr">yahoo.co.kr</option>
+						<option value="yahoo.com">yahoo.com</option>
+						<option value="dreamwiz.com">dreamwiz.com</option>
+						<option value="daum.net">daum.net</option>
 					</select>
-
-					<!-- <input type="text" name="mb_email" placeholder="이메일" value="<?php// echo $mb['mb_email'] ?>"> 기존 php 부분 일부러 놔둠 -->
 				</div>
 
 				<div class="imgbox">
