@@ -44,7 +44,7 @@ require_once('modules/notification.php');
 						<img src="img/google.png" alt="">
 					</div>
 
-					<a class="text_center" href="register.php">아직 회원이 아니신가요? 회원가입</a>
+					<a class="text_center" href="signup_agreement.php">아직 회원이 아니신가요? 회원가입</a>
 				</div>
 	</form>
 
@@ -61,5 +61,5 @@ require_once('modules/notification.php');
 
  } ?>
 
-</body>
+	</body>
 </html>
