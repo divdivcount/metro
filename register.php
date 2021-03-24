@@ -52,7 +52,6 @@ if($mb_id && isset($_GET['mode']) == 'modify') { // 세션이 있고 회원수�
 			);
 		});
 	});
-
 	</script>
 	<?php
 }
@@ -96,7 +95,7 @@ if($mb_id && isset($_GET['mode']) == 'modify') { // 세션이 있고 회원수�
 					<input type="text" id="fitst_email" name="mb_email" value="" placeholder="이메일"> <div style="float:left;font-family:'NotoSansKR_m';color:#3b3b3b;">@</div>
 					<input type="text" id="second_email" name="mb_email_two" value="">
 
-					<select id="selbox" class="" name="">
+					<select id="selbox" onchange="email()" class="" name="">
 						<option value="direct">직접입력</option>
 						<option value="naver.com">naver.com</option>
 						<option value="gmail.com">gmail.com</option>
@@ -165,11 +164,27 @@ function fregisterform_submit(f) { // submit 최종 폼체크
 	// }
 
 	return true;
+	}
 
-// 권햄  한거 경계선
+// master -------------------------------------------------
+
+// main ---------------------------------------------------
+
+	// 이메일 선택 select 박스에 자동으로 텍스트 적용하는 함수
+	function email() {
+		var selbox= document.getElementById('selbox');
+		var secondText = document.getElementById('second_email');
+		var domainText ="";
+		if (selbox.selectedIndex > 0) {
+			domainText = selbox.options[selbox.selectedIndex].value;
+			secondText.value = domainText;
+		}else{
+			secondText.value = "";
+		}
+	}
 
 
-}
+
 </script>
 
 </body>

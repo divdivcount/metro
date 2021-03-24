@@ -23,6 +23,7 @@
         <div class="bluedot"></div><h3>서비스 이용약관</h3>
       </div>
 
+      <!-- 서비스 이용약관 텍스트내용 -->
       <div class="agreement">
         여러분을 환영합니다.<br>
         메트로켓 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 메트로켓 서비스의 이용과 관련하여 메트로켓 서비스를 제공하는 메트로켓 주식회사(이하 ‘메트로켓’)와 이를 이용하는 메트로켓 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 메트로켓 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.<br><br>
@@ -99,14 +100,16 @@
         이전 이용약관 보기(2014년 6월 25일 ~ 2018년 4월 30일 적용)<br>
       </div>
 
+      <!-- 서비스 이용약관 체크박스 -->
       <div class="checkline">
-        <input type="checkbox" name="" value="">서비스 이용약관에 동의합니다.
+        <input type="checkbox" name="check_agreement" value="">서비스 이용약관에 동의합니다.
       </div>
 
       <div class="agreement_title">
         <div class="bluedot"></div><h3>개인정보 수집 및 이용동의</h3>
       </div>
 
+      <!-- 개인정보 수집 및 이용동의 텍스트내용 -->
       <div class="agreement">
         개인정보보호법에 따라 메트로켓에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간, 동의 거부권 및 동의 거부 시 불이익에 관한 사항을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.<br><br>
         1. 수집하는 개인정보<br>
@@ -163,16 +166,58 @@
         이용자는 개인정보의 수집 및 이용 동의를 거부할 권리가 있습니다. 회원가입 시 수집하는 최소한의 개인정보, 즉, 필수 항목에 대한 수집 및 이용 동의를 거부하실 경우, 회원가입이 어려울 수 있습니다.<br>
       </div>
 
+      <!-- 개인정보 수집 및 이용동의 체크박스 -->
       <div class="checkline">
-        <input type="checkbox" name="" value="">개인정보 수집 및 이용에 동의합니다.<br>
+        <input type="checkbox" name="check_agreement" value="">개인정보 수집 및 이용에 동의합니다.<br>
       </div>
 
-      <div class="both_checkline" style="display:flex">
-        <input type="checkbox" name="" value="">서비스 이용약관, 개인정보 수집 및 이용에 동의합니다.
+      <!-- 모두 동의하는 체크박스 -->
+      <div class="both_checkline" onclick="allcheck()" style="display:flex">
+        <input type="checkbox" id="check_all" value="">서비스 이용약관, 개인정보 수집 및 이용에 동의합니다.
       </div>
 
-      <div class="imgbox"><img src="img/register_continue.png" alt=""></div>
+      <div class="imgbox" onclick="checkAgeement()"><img src="img/register_continue.png"></div>
 
     </div>
   </body>
+  <script type="text/javascript">
+    // 체크박스 모두 체크했는지 확인하는 함수
+    function checkAgeement(){
+      var all_agreement= document.getElementsByName('check_agreement');
+      var check = 0;
+
+      // 체크박스 모두 체크했는지 확인하는 부분
+      for (var i = 0; i < all_agreement.length; i++) {
+        if (all_agreement[i].checked == false) {
+          check = 1;
+        }
+      }
+
+      //체크여부 확인후 페이지이동
+      if (check==0) {
+        location.href="register.php";
+      }else{
+        alert("모두 동의 되어야 합니다.");
+      }
+    }
+
+    // 체크박스 모두 해주는 함수
+    function allcheck() {
+      var all_agreement= document.getElementsByName('check_agreement');
+      var check_all= document.getElementById('check_all');
+
+      // 체크박스 모두 해주는 부분
+      if (check_all.checked == true) {
+        for (var i = 0; i < all_agreement.length; i++) {
+          all_agreement[i].checked = true;
+        }
+        check_all.checked = true;
+      }else{
+        for (var i = 0; i < all_agreement.length; i++) {
+          all_agreement[i].checked = false;
+        }
+        check_all.checked = false;
+      }
+    }
+  </script>
 </html>
