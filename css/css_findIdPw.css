@@ -16,24 +16,6 @@ body {
     margin: 30px auto 0 auto;
     overflow: hidden;
 }
-.onbtn {
-    width: 49.5%;
-    cursor: pointer;
-    background: transparent;
-    border: 0;
-    outline: 0;
-    position: relative;
-    border:solid 2px #ff00ff;
-    border-bottom: none;
-}
-.offbtn {
-  width: 49.5%;
-  cursor: pointer;
-  border: 0;
-  outline: 0;
-  position: relative;
-  border-bottom:solid 2px #ff00ff;
-}
 /* #btn {
     top: 0;
     left: 0;
@@ -47,6 +29,11 @@ body {
      transition: .5s;
 }*/
 .input-group {
+    height: 350px;
+    position: absolute;
+    left:50%;
+    top:45%;
+    transform:translate(-50%,-50%);
     margin: auto;
     width: 80%;
 }
@@ -99,18 +86,19 @@ body {
   text-align: center;
   width: 100%;
 }
+.submit{
+  margin-top: 20px;
+}
 #imgbtn_box {
   display: flex;
 }
 #imgbtn_box img{
   width: 400px;
 }
-#findId{
-  display: none;
-}
-#findPw{
-
-}
+#findId{visibility:visible;}
+#findPw{visibility:hidden;}
+#findid_btn{cursor:pointer;}
+#findpw_btn{cursor:pointer;}
 #fitst_email {
   width:30%;
   border: none;
