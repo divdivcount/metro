@@ -1,6 +1,7 @@
 <?php
  // NAVER LOGIN
 require_once("modules/db.php");
+require_once("modules/notification.php");
 define('NAVER_CLIENT_ID', 'qFL1MdijiIfEemYxHv9a');
 define('NAVER_CLIENT_SECRET', 'OlLqFEtna0');
 define('NAVER_CALLBACK_URL', 'https://metroket.kro.kr/naver_callback.php');
@@ -34,15 +35,18 @@ if($status_code == 200) {
     $result = $oauth->Om_select($mb_uid);
     foreach ($result as $row) {
       $om_id = $row['om_id'];
+      $om_token = $row['om_access_token'];
     }
     if ($om_id == $mb_uid) { // $om_id == $mb_uid멤버 DB에 토큰값 업데이트
-      //if(토큰 값이 같지 않다면){기존 데이터가 변경 될 수 있기 때문에 다시 불러 update 처리}
-      $oauth2 = new Oauths;
-      $update = $oauth2->Om_token_update($responseArr['access_token'], $mb_uid); // 로그인
-      echo "success";
-
+      // if($om_token != $responseArr['access_token']){
+        //기존 데이터가 변경 될 수 있기 때문에 다시 불러 update 처리
+        $oauth2 = new Oauths;
+        $update = $oauth2->Om_token_update($responseArr['access_token'], $mb_uid); // 로그인
+      // }else{
+        userGoNow("/Oauth_login_check.php?om_id='$om_id'");
+      // }
     } // 회원정보가 없다면 회원가입
-    else { // 회원아이디
+      else { // 회원아이디
       $mb_token = $responseArr['access_token'];
       $mb_uid = $me_responseArr['response']['id'];
       $mb_name = $me_responseArr['response']['name'];
@@ -59,6 +63,7 @@ if($status_code == 200) {
       $oauths = new Oauths;
       $OauthObj = $oauths->Om_insert($mb_uid,$mb_token,$mb_name,$mb_nickname,$mb_email,$mb_profile_image,$mb_company);
       // 멤버 DB에 토큰과 회원정보를 넣고 로그인
+      userGoNow("/Oauth_login_check.php?om_id='$om_id'");
     }
   } else {
     echo "회원정보를 가져오지 못했습니다.";
