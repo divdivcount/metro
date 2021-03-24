@@ -32,7 +32,7 @@ body {
     height: 350px;
     position: absolute;
     left:50%;
-    top:45%;
+    top:400px;
     transform:translate(-50%,-50%);
     margin: auto;
     width: 80%;
@@ -145,12 +145,13 @@ body {
   .form-wrap{width:90%;}
   .textbox{font-size: 1.1em;}
   .inputbox{font-size: 1.1em;}
+  .input-group {width: 100%;top:350px;}
 }
 
 @media only screen and (max-width: 540px) {
   .form-wrap{width:90%;}
   .bluedot{margin-right: 3px;}
-  .input-group {width: 100%;}
+  .input-group {width: 100%;top:320px;}
   .textbox{font-size: 0.9em;}
   .inputbox{font-size: 0.9em;}
   .imgbox img{    width: 100%;  }
