@@ -63,7 +63,7 @@ if($status_code == 200) {
       $oauths = new Oauths;
       $OauthObj = $oauths->Om_insert($mb_uid,$mb_token,$mb_name,$mb_nickname,$mb_email,$mb_profile_image,$mb_company);
       // 멤버 DB에 토큰과 회원정보를 넣고 로그인
-      userGoNow("/Oauth_login_check.php?om_id='$om_id'");
+      userGoNow("/Oauth_login_check.php?iada='$om_id'");
     }
   } else {
     echo "회원정보를 가져오지 못했습니다.";
