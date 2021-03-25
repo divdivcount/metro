@@ -3,10 +3,13 @@
   <head>
     <meta charset="utf-8">
     <title>매트로켓</title>
-    <link rel="stylesheet" href="css\css.index.css">
+    <link rel="stylesheet" href="css/css.index.css">
     <link rel="stylesheet" href="css/css_noamlfont.css">
+    <link rel="stylesheet" href="css/bxslider-4-4.2.12/src/css/jquery.bxslider.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="css/bxslider-4-4.2.12/src/js/jquery.bxslider.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script> -->
   </head>
   <body>
     <!-- 최상단 로고 및 상단메뉴 -->
@@ -26,14 +29,14 @@
           <li>프로필</li>
         </ul>
       </div>
-
+      <div class="clear"></div>
 
 
     </div>
 
     <!-- 메인 배너이미지 부분 -->
     <div id="bannerImg_box">
-
+      <img src="img\banner.png" class="imgbox_2">
       <!-- 이중select box 로 지하철역 선택하는 부분 -->
       <div id="selectMetro_box">
 
@@ -55,6 +58,19 @@
     <!-- 슬라이드 이미지 부분  -->
     <div id="slideImg_box">
 
+      <!-- 나중에 php로 동적으로 이미지나오게 작업예정 -->
+      <div class="slider">
+        <div><img src="img\slideimg_1.png" alt=""></div>
+        <div><img src="img\slideimg_2.png" alt=""></div>
+        <div><img src="img\slideimg_3.png" alt=""></div>
+        <div><img src="img\slideimg_4.png" alt=""></div>
+        <div><img src="img\slideimg_5.png" alt=""></div>
+      </div>
+
+      <div class="btn">
+        <button type="button" class="prev"></button>
+        <button type="button" class="next"></button>
+      </div>
     </div>
 
     <!-- 매트로켓 장점 소개 부분  -->
@@ -100,48 +116,59 @@
     </div> -->
   </body>
   <script>
+  //슬라이드 이미지
+  $(document).ready(function(){
+    $('.slider').bxSlider({
+      auto: true, speed: 500, pause: 4000, mode:'fade', autoControls: true, pager:true,
+    });
 
-  var link = 'http://localhost/index.php?'
 
-  $("#testInput").autocomplete({
-      source : function(request, response) {
-          $.ajax({
-                url : "autocomplete_keyword.php"
-              , type : "GET"
-              , data : {keyword : $("#search_box").val()} // 검색 키워드
-              , success : function(data){ // 성공
-                  response(
-                      $.map(data, function(item) {//써보고 추후 업데이트 요망
-                          return {
-                                label : item.testNm    //목록에 표시되는 값
-                              , value : item.testNm    //선택 시 input창에 표시되는 값
-                          };
-                      })
-                  );    //response
-              }
-              ,
-              error : function(){ //실패
-                  alert("통신에 실패했습니다.");
-              }
-          });
-      }
-      , minLength : 1
-      , autoFocus : false
-      , select : function(evt, ui) {
-        //검색 부분 자동완성 키워드 url 뒤에 붙여서 전달
-        link += ui.item.value;
-        location.href=link;
-        //----------
-        //  console.log("전체 data: " + JSON.stringify(ui));
-        //  console.log("db Index : " + ui.item.idx);
-        //  console.log("검색 데이터 : " + ui.item.value);
-      }
-      , focus : function(evt, ui) {
-          return false;
-      }
-      , close : function(evt) {
-      }
+
+
   });
+
+
+  // var link = 'http://localhost/index.php?'
+  //
+  // $("#testInput").autocomplete({
+  //     source : function(request, response) {
+  //         $.ajax({
+  //               url : "autocomplete_keyword.php"
+  //             , type : "GET"
+  //             , data : {keyword : $("#search_box").val()} // 검색 키워드
+  //             , success : function(data){ // 성공
+  //                 response(
+  //                     $.map(data, function(item) {//써보고 추후 업데이트 요망
+  //                         return {
+  //                               label : item.testNm    //목록에 표시되는 값
+  //                             , value : item.testNm    //선택 시 input창에 표시되는 값
+  //                         };
+  //                     })
+  //                 );    //response
+  //             }
+  //             ,
+  //             error : function(){ //실패
+  //                 alert("통신에 실패했습니다.");
+  //             }
+  //         });
+  //     }
+  //     , minLength : 1
+  //     , autoFocus : false
+  //     , select : function(evt, ui) {
+  //       //검색 부분 자동완성 키워드 url 뒤에 붙여서 전달
+  //       link += ui.item.value;
+  //       location.href=link;
+  //       //----------
+  //       //  console.log("전체 data: " + JSON.stringify(ui));
+  //       //  console.log("db Index : " + ui.item.idx);
+  //       //  console.log("검색 데이터 : " + ui.item.value);
+  //     }
+  //     , focus : function(evt, ui) {
+  //         return false;
+  //     }
+  //     , close : function(evt) {
+  //     }
+  // });
 
 </script>
 </html>

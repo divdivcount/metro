@@ -5,6 +5,8 @@ body {
   height:100%;
   background-color:#F5F6F7;
   position: relative;
+  font-size: 10px;
+  font-family: "NotoSansKR_r";
 }
 #topMenu_box{
   width: 100%;
@@ -15,19 +17,36 @@ body {
   justify-content: space-between;
 }
 #topToolbar_box{
-
+  width: 100%;
 }
 #topToolbar_box ul{
+  margin-right: 14%;
+  float: right;
   list-style: none;
   display: flex;
 }
 #topToolbar_box li{
   text-decoration: none;
+  padding: 8px 12px;
+  font-size: 2.0em;
+  color:#707070
 }
 #bannerImg_box{
+  width: 100%;
+  position: relative;
 }
 
 #selectMetro_box{
+  background-color: #00ff00;
+  box-shadow: 10px 10px 50px 0 rgba(0, 0, 0, 0.16);
+  width: 71%;
+  height: 45%;
+  z-index: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform:translate(-50%,82%);
+  border-radius: 30px;
 
 }
 #mainContent_box{
@@ -37,6 +56,20 @@ body {
 
 }
 #slideImg_box{
+  width: 100%;
+
+  position: relative;
+  overflow: hidden;
+}
+#slideImg_list{
+  width: 100%;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+#slideImg_list li>img{
+  width: 100%;
+
 
 }
 #explain_box{
@@ -55,10 +88,23 @@ body {
 
 }
 .imgbox_1 {
-
+  margin-left: 14%;
+  float: left;
 }
 .imgbox_2 {
+  width: 100%;
+}
+.imgbox_3 {
 
+}
+.next{
+
+}
+.prev{
+
+}
+.btn{
+  height: 200px;
 }
 .clear{
   clear: both;
