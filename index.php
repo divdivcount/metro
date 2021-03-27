@@ -67,21 +67,56 @@
         <div><img src="img\slideimg_5.png" alt=""></div>
       </div>
 
-      <div class="btn">
-        <button type="button" class="prev"></button>
-        <button type="button" class="next"></button>
-      </div>
     </div>
 
     <!-- 매트로켓 장점 소개 부분  -->
     <div id="advantages_box">
+
+      <!-- 타이틀  -->
       <div class="titleText_1">
         왜 매트로켓이 좋을까요
       </div>
       <div class="textStyle_1">
-
+        메트로켓은 가장 실용성있는 중고거래사이트 입니다.
       </div>
-      <div class="explain_box">
+
+      <!-- 텍스트 박스 4개  -->
+      <div id="explain_box">
+
+        <div class="textBox_1 left">
+          <ul class="leftLine">
+            <li><span>비대면 거래</span></li>
+            <li>필요에 따라 물품 보관함을 이용해 비대면 거래를 이용할 수 있습니다.</li>
+          </ul>
+          <div class="imgbox_3"><img src="img\locker.png" alt=""></div>
+        </div>
+
+        <div class="textBox_1 right">
+          <div class="imgbox_3"><img src="img\time.png" alt=""></div>
+          <ul class="rightLine">
+            <li><span>도착시간</span></li>
+            <li>메트로켓은 출발시간에 맞춰서 도착시간을 알려줍니다.</li>
+          </ul>
+        </div>
+
+        <div class="textBox_1 left">
+          <ul class="leftLine">
+            <li><span>지하철역 거래</span></li>
+            <li>인증받은 주변 역을 중심으로 품목들을 볼 수 있고, 호선을 선택하여 다양한 물품들을 검색할 수 있습니다.</li>
+          </ul>
+          <div class="imgbox_3"><img src="img\train.png" alt=""></div>
+        </div>
+
+        <div class="textBox_1 right">
+          <div class="imgbox_3"><img src="img\shield.png" alt=""></div>
+          <ul class="rightLine">
+            <li><span>안전거래</span></li>
+            <li>실시간으로 물건을 직접 보고 거래하여 안전하게 거래를 이용할 수 있습니다.</li>
+          </ul>
+        </div>
+        <div class="clear"></div>
+
+
 
       </div>
 

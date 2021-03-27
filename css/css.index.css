@@ -73,8 +73,13 @@ body {
 
 }
 #explain_box{
-
+  margin: 0 auto;
+  font-family: "NotoSansKR_r";
+  width: 70%;
+  text-align: center;
+  justify-content: space-between;
 }
+
 #footer_box{
 
 }
@@ -82,10 +87,11 @@ body {
 
 }
 .titleText_1{
-
+  text-align: center;
 }
 .textStyle_1{
-
+  text-align: center;
+  margin-bottom: 90px;
 }
 .imgbox_1 {
   margin-left: 14%;
@@ -97,6 +103,30 @@ body {
 .imgbox_3 {
 
 }
+.textBox_1{
+  padding: 0 auto;
+  align-items: center;
+  width:50%;
+  height: 242px;
+  display: flex;
+  margin: 0;
+  box-shadow: 5px 5px 30px 0 rgba(0, 0, 0, 0.16);
+  background-color: #ffffff;
+}
+.textBox_1 ul{
+  list-style: none;
+  width: 250px;
+}
+.textBox_1 li{font-size: 1.6em;}
+.textBox_1 span{font-size: 2.0em;}
+.textBox_1 img {width:100%;}
+.textBox_1 .leftLine{
+  text-align: right;
+}
+.textBox_1 .rightLine{
+  text-align: left;
+}
+
 .next{
 
 }
@@ -106,6 +136,6 @@ body {
 .btn{
   height: 200px;
 }
-.clear{
-  clear: both;
-}
+.left{float: left;}
+.right{float: right;}
+.clear{clear: both;}
