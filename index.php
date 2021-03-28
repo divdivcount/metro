@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php
+require_once('modules/db.php');
+?>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
