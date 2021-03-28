@@ -60,7 +60,7 @@
     $mb_company = 'kakao';
     $oauths = new Oauths;
     $OauthObj = $oauths->Om_insert($mb_uid,$mb_token,$mb_name,$mb_nickname,$mb_email,$mb_profile_image,$mb_company);
-    userGoNow("/Oauth_login_check.php?iadas='$om_id'");
+    userGoNow("/Oauth_login_check.php?om_id='$om_id'");
   }
 
 ?>

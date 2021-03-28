@@ -14,12 +14,48 @@
   <body>
     <!-- 최상단 로고 및 상단메뉴 -->
     <div id="topMenu_box">
+      <?php
+          if(empty($_SESSION['ss_mb_id'] || empty($_SESSION['naver_mb_id'] || empty($_SESSION['kakao_mb_id'])){
+            echo "";
+          }else{
+            if(isset($_SESSION['ss_mb_id'])){
+              $mb_id = $_SESSION['ss_mb_id'];
+              $sql = " select * from member where mb_id = TRIM('$mb_id') ";
+              $result = mysqli_query($conn, $sql);
+              $mb = mysqli_fetch_assoc($result);
+              mysqli_close($conn); // 데이터베이스 접속 종료
+            }elseif(isset($_SESSION['naver_mb_id'])){
+              $om_id = $_SESSION['naver_mb_id'];
+              $sql = " select * from oauth_member where om_id = TRIM('$om_id') ";
+              $result = mysqli_query($conn, $sql);
+              $naver = mysqli_fetch_assoc($result);
+              mysqli_close($conn); // 데이터베이스 접속 종료
+            }elseif(isset($_SESSION['kakao_mb_id'])){
+              $oms_id = $_SESSION['kakao_mb_id'];
+              $sql = " select * from oauth_member where om_id = TRIM('$oms_id') ";
+              $result = mysqli_query($conn, $sql);
+              $kakao = mysqli_fetch_assoc($result);
+              mysqli_close($conn); // 데이터베이스 접속 종료
+            }
+          }
 
+      ?>
       <!-- 상단 로고 -->
       <div class="imgbox_1">
         <a href="index.php"><img src="img\mainlogo.png" alt=""></a>
       </div>
-
+	<?php
+	 	if(isset($mb['mb_num'])){
+			echo "<td style='float:right; margin-top:20px;'>"."&nbsp;<a href='./User_page.php'>상품등록</a>"."&nbsp;<a href='./User_page.php'>채팅</a>"."&nbsp;<a href='./User_page.php'>마이페이지</a>"."&nbsp;<a href='./logout.php'>로그아웃</a>"."</td>";
+    }elseif(isset($mb['naver_mb_id'])){
+      echo "<td style='float:right; margin-top:20px;'>"."&nbsp;<a href='./User_page.php'>상품등록</a>"."&nbsp;<a href='./User_page.php'>채팅</a>"."&nbsp;<a href='./User_page.php'>마이페이지</a>"."&nbsp;<a href='./oauth_logout.php'>로그아웃</a>"."</td>";
+    }elseif(isset($mb['kakao_mb_id'])){
+      echo "<td style='float:right; margin-top:20px;'>"."&nbsp;<a href='./User_page.php'>상품등록</a>"."&nbsp;<a href='./User_page.php'>채팅</a>"."&nbsp;<a href='./User_page.php'>마이페이지</a>"."&nbsp;<a href='./oauth_logout.php'>로그아웃</a>"."</td>";
+    }
+    else {
+			echo "<td style='float:right; margin-top:20px;'><a href='./login.php'>login</a></td>";
+    }
+	 ?>
       <!-- 상단 툴바 -->
       <div id="topToolbar_box">
         <ul>
