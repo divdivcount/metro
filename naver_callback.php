@@ -43,7 +43,11 @@ if($status_code == 200) {
         $oauth2 = new Oauths;
         $update = $oauth2->Om_token_update($responseArr['access_token'], $mb_uid); // 로그인
       // }else{
-        userGoNow("/Oauth_login_check.php?om_id='$om_id'");
+      $_SESSION['naver_mb_id'] = $mb_uid;
+      if(isset($_SESSION['naver_mb_id'])) { // 세션이 있다면 로그인 확인 페이지로 이동
+        echo "<script>alert('로그인 되었습니다.');</script>";
+        echo "<script>location.replace('./login.php');</script>";
+      }
       // }
     } // 회원정보가 없다면 회원가입
       else { // 회원아이디
@@ -63,7 +67,11 @@ if($status_code == 200) {
       $oauths = new Oauths;
       $OauthObj = $oauths->Om_insert($mb_uid,$mb_token,$mb_name,$mb_nickname,$mb_email,$mb_profile_image,$mb_company);
       // 멤버 DB에 토큰과 회원정보를 넣고 로그인
-      userGoNow("/Oauth_login_check.php?om_id='$om_id'");
+      $_SESSION['naver_mb_id'] = $mb_uid;
+      if(isset($_SESSION['naver_mb_id'])) { // 세션이 있다면 로그인 확인 페이지로 이동
+      	echo "<script>alert('로그인 되었습니다.');</script>";
+      	echo "<script>location.replace('./login.php');</script>";
+      }
     }
   } else {
     echo "회원정보를 가져오지 못했습니다.";

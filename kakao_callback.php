@@ -49,7 +49,11 @@
   if ($om_id == $userid) {
     $oauth2 = new Oauths;
     $update = $oauth2->Om_token_update($accessToken, $userid); // 로그인
-    userGoNow("/Oauth_login_check.php?om_id='$om_id'");
+    $_SESSION['kakao_mb_id'] = $userid;
+    if(isset($_SESSION['kakao_mb_id'])) { // 세션이 있다면 로그인 확인 페이지로 이동
+      echo "<script>alert('로그인 되었습니다.');</script>";
+      echo "<script>location.replace('./login.php');</script>";
+    }
   }else{
     $mb_uid = $profileResponse->id;
     $mb_token = $accessToken;
@@ -60,7 +64,11 @@
     $mb_company = 'kakao';
     $oauths = new Oauths;
     $OauthObj = $oauths->Om_insert($mb_uid,$mb_token,$mb_name,$mb_nickname,$mb_email,$mb_profile_image,$mb_company);
-    userGoNow("/Oauth_login_check.php?om_id='$om_id'");
+    $_SESSION['kakao_mb_id'] = $mb_uid;
+    if(isset($_SESSION['kakao_mb_id'])) { // 세션이 있다면 로그인 확인 페이지로 이동
+      echo "<script>alert('로그인 되었습니다.');</script>";
+      echo "<script>location.replace('./login.php');</script>";
+    }
   }
 
 ?>

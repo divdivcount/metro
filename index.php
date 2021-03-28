@@ -26,17 +26,16 @@ require_once('modules/db.php');
               $sql = " select * from member where mb_id = TRIM('$mb_id') ";
               $result = mysqli_query($conn, $sql);
               $mb = mysqli_fetch_assoc($result);
-              echo $mb['mb_num'];
               mysqli_close($conn); // 데이터베이스 접속 종료
             }elseif(isset($_SESSION['naver_mb_id'])){
               $om_id = $_SESSION['naver_mb_id'];
-              $sql = " select * from oauth_member where om_id = TRIM('$om_id') ";
+              $sql = " select * from oauth_member where om_id = TRIM($om_id) ";
               $result = mysqli_query($conn, $sql);
               $naver = mysqli_fetch_assoc($result);
               mysqli_close($conn); // 데이터베이스 접속 종료
             }elseif(isset($_SESSION['kakao_mb_id'])){
               $oms_id = $_SESSION['kakao_mb_id'];
-              $sql = " select * from oauth_member where om_id = TRIM('$oms_id') ";
+              $sql = " select * from oauth_member where om_id = TRIM($oms_id) ";
               $result = mysqli_query($conn, $sql);
               $kakao = mysqli_fetch_assoc($result);
               mysqli_close($conn); // 데이터베이스 접속 종료
@@ -54,10 +53,13 @@ require_once('modules/db.php');
         <?php
           if(isset($mb['mb_num'])){
             echo "<ul>"."&nbsp;<a href='./User_page.php'><li>상품등록</li></a>"."&nbsp;<a href='./User_page.php'><li>채팅</li></a>"."&nbsp;<a href='./User_page.php'><li>마이페이지</li></a>"."&nbsp;<a href='./logout.php'><li>로그아웃</li></a>"."</ul>";
-          }elseif(isset($mb['naver_mb_id'])){
-            echo "<ul>"."&nbsp;<a href='./User_page.php'><li>상품등록</li></a>"."&nbsp;<a href='./User_page.php'><li>채팅</li></a>"."&nbsp;<a href='./User_page.php'><li>마이페이지</li></a>"."&nbsp;<a href='./logout.php'><li>로그아웃</li></a>"."</ul>";
-          }elseif(isset($mb['kakao_mb_id'])){
-            echo "<ul>"."&nbsp;<a href='./User_page.php'><li>상품등록</li></a>"."&nbsp;<a href='./User_page.php'><li>채팅</li></a>"."&nbsp;<a href='./User_page.php'><li>마이페이지</li></a>"."&nbsp;<a href='./logout.php'><li>로그아웃</li></a>"."</ul>";
+            // echo "일반 아이디";
+          }elseif(isset($naver['om_id'])){
+            echo "<ul>"."&nbsp;<a href='./User_page.php'><li>상품등록</li></a>"."&nbsp;<a href='./User_page.php'><li>채팅</li></a>"."&nbsp;<a href='./User_page.php'><li>마이페이지</li></a>"."&nbsp;<a href='./oauth_logout.php'><li>로그아웃</li></a>"."</ul>";
+            // echo "네이버 아이디";
+          }elseif(isset($kakao['om_id'])){
+            echo "<ul>"."&nbsp;<a href='./User_page.php'><li>상품등록</li></a>"."&nbsp;<a href='./User_page.php'><li>채팅</li></a>"."&nbsp;<a href='./User_page.php'><li>마이페이지</li></a>"."&nbsp;<a href='./oauth_logout.php'><li>로그아웃</li></a>"."</ul>";
+            // echo "카카오 아이디";
           }
           else {
             echo "<ul><a href='./login.php'><li>login</li></a></ul>";
