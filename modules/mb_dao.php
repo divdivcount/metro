@@ -24,14 +24,10 @@
       }
     }
 
-    public function Member_Search($mb_num, $mb_id=null) {
+    public function Member_Search($mb_name, $mb_email) {
       // 회원 번호 찾기 User_page 회원번호 찾는데 사용합니다.
       $this->openDB();
-      if($mb_id){
-        $query = $this->db->prepare("select * from member where mb_id like '$mb_id'");
-      }else{
-        $query = $this->db->prepare("select * from paygo where mb_num like $mb_num");
-      }
+      $query = $this->db->prepare("select mb_id from member where mb_name ='$mb_name' and mb_email = '$mb_email'");
       $query->execute();
       $fetch = $query->fetchAll(PDO::FETCH_ASSOC);
       if($fetch){

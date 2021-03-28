@@ -21,18 +21,34 @@
                 </div>
 
                 <!-- 아이디 찾는 폼 부분 -->
-                <form id="findId" action="findId.php" class="input-group" method="post">
+                <form id="findId" action="findidpw_check.php" class="input-group" method="post">
 
                   <!-- 이름 -->
                   <div class="inputbox">
                     <div class="textbox"><div class="bluedot">*</div>이름</div>
-                    <input type="text" name ="id" class="input-field" required >
+                    <input type="text" name ="mb_name" class="input-field" required >
                   </div>
 
                   <!-- 이메일 -->
+                  <!-- 이메일 -->
                   <div class="inputbox">
                     <div class="textbox"><div class="bluedot">*</div>이메일</div>
-                    <input type="password" name ="pw" class="input-field" required>
+                      <!-- 이메일 폼 부분 재구성함 수정 요함  -->
+              					<input type="text" id="fitst_email" name="" value="" > <div style="font-family:'NotoSansKR_m';color:#3b3b3b;">@</div>
+              					<input type="text" id="second_email" name="" value="">
+
+                        <!-- 이메일 선택 select 박스 -->
+              					<select id="selbox" onchange="email()" class="" name="">
+              						<option value="direct">직접입력</option>
+              						<option value="naver.com">naver.com</option>
+              						<option value="gmail.com">gmail.com</option>
+                          <option value="hanmail.net">hanmail.net</option>
+                          <option value="nate.com">nate.com</option>
+                          <option value="yahoo.co.kr">yahoo.co.kr</option>
+                          <option value="yahoo.com">yahoo.com</option>
+                          <option value="dreamwiz.com">dreamwiz.com</option>
+                          <option value="daum.net">daum.net</option>
+              					</select>
                   </div>
 
                   <!-- 아이디 찾기 버튼 -->
@@ -42,7 +58,7 @@
                 </form>
 
                 <!-- 비밀번호 찾는 폼 부분 -->
-                <form id="findPw" action="findPw.php" class="input-group" method="post">
+                <form id="findPw" action="findidpw_check.php" class="input-group" method="post">
 
                   <!-- 이름 -->
                   <div class="inputbox">

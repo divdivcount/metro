@@ -59,12 +59,12 @@ if($status_code == 200) {
       $mb_email = $me_responseArr['response']['email']; // 이메일
       $mb_profile_image = $me_responseArr['response']['profile_image']; // 프로필 이미지
       $mb_company = 'naver';
-      echo $mb_uid."<br>";
-      echo $mb_token."<br>";
-      echo $mb_name."<br>";
-      echo $mb_nickname."<br>";
-      echo $mb_email."<br>";
-      echo $mb_profile_image."<br>";
+      // echo $mb_uid."<br>";
+      // echo $mb_token."<br>";
+      // echo $mb_name."<br>";
+      // echo $mb_nickname."<br>";
+      // echo $mb_email."<br>";
+      // echo $mb_profile_image."<br>";
       $OauthObj = $oauth->Om_insert($mb_uid,$mb_token,$mb_name,$mb_nickname,$mb_email,$mb_profile_image,$mb_company);
       // 멤버 DB에 토큰과 회원정보를 넣고 로그인
       $_SESSION['naver_mb_id'] = $mb_uid;

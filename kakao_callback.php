@@ -66,13 +66,13 @@
     $mb_profile_image = $profileResponse->properties->profile_image;
     $mb_nickname = "null";
     $mb_company = 'kakao';
-    echo "<br>".$mb_uid."<br>";
-    echo $mb_token."<br>";
-    echo $mb_name."<br>";
-    echo $mb_email."<br>";
-    echo $mb_profile_image."<br>";
-    echo $mb_nickname."<br>";
-    echo $mb_company."<br>";
+    // echo "<br>".$mb_uid."<br>";
+    // echo $mb_token."<br>";
+    // echo $mb_name."<br>";
+    // echo $mb_email."<br>";
+    // echo $mb_profile_image."<br>";
+    // echo $mb_nickname."<br>";
+    // echo $mb_company."<br>";
     if(isset($mb_email)){
       $mb_email = "메일을 선택 하지 않으셨습니다.";
     }else{
