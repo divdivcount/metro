@@ -1,6 +1,7 @@
 <?php
   require_once("modules/db.php");
   require_once("modules/notification.php");
+  $oauth = new Oauths;
   $returnCode = $_GET["code"]; // 서버로 부터 토큰을 발급받을 수 있는 코드를 받아옵니다
 	$restAPIKey = "24c58b732b0414e7d5d850cdafc310b8"; // 본인의 REST API KEY를 입력해주세요
 	$callbacURI = urlencode("https://metroket.kro.kr/kakao_callback.php"); // 본인의 Call Back URL을 입력해주세요
@@ -40,19 +41,22 @@
 	var_dump($profileResponse); // Kakao API 서버로 부터 받아온 값
   $profileResponse = json_decode($profileResponse);
   $userid = $profileResponse->id;
-  $oauth = new Oauths;
+
   $result = $oauth->Om_select($userid);
+
   foreach ($result as $row) {
     $om_id = $row['om_id'];
     $om_token = $row['om_access_token'];
   }
   if ($om_id == $userid) {
-    $oauth2 = new Oauths;
-    $update = $oauth2->Om_token_update($accessToken, $userid); // 로그인
+
+    $update = $oauth->Om_token_update($accessToken, $userid); // 로그인
     $_SESSION['kakao_mb_id'] = $userid;
     if(isset($_SESSION['kakao_mb_id'])) { // 세션이 있다면 로그인 확인 페이지로 이동
       echo "<script>alert('로그인 되었습니다.');</script>";
       echo "<script>location.replace('./login.php');</script>";
+    }else{
+      echo "안됌";
     }
   }else{
     $mb_uid = $profileResponse->id;
@@ -62,12 +66,25 @@
     $mb_profile_image = $profileResponse->properties->profile_image;
     $mb_nickname = "null";
     $mb_company = 'kakao';
-    $oauths = new Oauths;
-    $OauthObj = $oauths->Om_insert($mb_uid,$mb_token,$mb_name,$mb_nickname,$mb_email,$mb_profile_image,$mb_company);
+    echo "<br>".$mb_uid."<br>";
+    echo $mb_token."<br>";
+    echo $mb_name."<br>";
+    echo $mb_email."<br>";
+    echo $mb_profile_image."<br>";
+    echo $mb_nickname."<br>";
+    echo $mb_company."<br>";
+    if(isset($mb_email)){
+      $mb_email = "메일을 선택 하지 않으셨습니다.";
+    }else{
+      $mb_email = "메일을 선택 하지 않으셨습니다.";
+    }
+    $OauthObj = $oauth->Om_insert($mb_uid,$mb_token,$mb_name,$mb_nickname,$mb_email,$mb_profile_image,$mb_company);
     $_SESSION['kakao_mb_id'] = $mb_uid;
     if(isset($_SESSION['kakao_mb_id'])) { // 세션이 있다면 로그인 확인 페이지로 이동
       echo "<script>alert('로그인 되었습니다.');</script>";
       echo "<script>location.replace('./login.php');</script>";
+    }else{
+      echo "안됌";
     }
   }
 

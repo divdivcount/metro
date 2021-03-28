@@ -16,7 +16,7 @@
       ?>
       <script>
         alert("아이디가 삭제되었습니다.");
-        window.top.location.href = "../ky_project/index.php";
+        window.top.location.href = "../index.php";
       </script>
       <?php
       }catch(PDOException $e){
@@ -59,15 +59,15 @@
     // 	$query->execute();
     // }
 
-    public function Member_Rating() {
-      // 회원 등급 출력
-      $this->openDB();
-      $query = $this->db->prepare("select * from member_rating");
-      $query->execute();
-      $fetch = $query->fetchAll(PDO::FETCH_ASSOC);
-      if($fetch){
-        return $fetch;
-      }
-      else return null;
-    }
+    // public function Member_Rating() {
+    //   // 회원 등급 출력
+    //   $this->openDB();
+    //   $query = $this->db->prepare("select * from member_rating");
+    //   $query->execute();
+    //   $fetch = $query->fetchAll(PDO::FETCH_ASSOC);
+    //   if($fetch){
+    //     return $fetch;
+    //   }
+    //   else return null;
+    // }
   }
