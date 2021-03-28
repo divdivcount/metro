@@ -34,8 +34,8 @@
                   <div class="inputbox">
                     <div class="textbox"><div class="bluedot">*</div>이메일</div>
                       <!-- 이메일 폼 부분 재구성함 수정 요함  -->
-              					<input type="text" class="first_email" name="" value="" > <div style="font-family:'NotoSansKR_m';color:#3b3b3b;">@</div>
-              					<input type="text" class="second_email" name="" value="">
+              					<input type="text" class="first_email" name="first_email" value="" > <div style="font-family:'NotoSansKR_m';color:#3b3b3b;">@</div>
+              					<input type="text" class="second_email" name="second_email" value="">
 
                         <!-- 이메일 선택 select 박스 -->
               					<select class="selbox" onchange="email(0)" class="" name="">
@@ -63,7 +63,7 @@
                   <!-- 이름 -->
                   <div class="inputbox">
                     <div class="textbox"><div class="bluedot">*</div>이름</div>
-                    <input type="text"  name="userName" class="input-field_2" required>
+                    <input type="text"  name="mb_names" class="input-field_2" required>
                   </div>
 
                   <!-- 아이디 -->
@@ -76,8 +76,8 @@
                   <div class="inputbox">
                     <div class="textbox"><div class="bluedot">*</div>이메일</div>
                       <!-- 이메일 폼 부분 재구성함 수정 요함  -->
-              					<input type="text" class="first_email" name="" value="" > <div style="font-family:'NotoSansKR_m';color:#3b3b3b;">@</div>
-              					<input type="text" class="second_email" name="" value="">
+              					<input type="text" class="first_email" name="first_email" value="" > <div style="font-family:'NotoSansKR_m';color:#3b3b3b;">@</div>
+              					<input type="text" class="second_email" name="second_email" value="">
 
                         <!-- 이메일 선택 select 박스 -->
               					<select class="selbox" onchange="email(1)" class="" name="">
