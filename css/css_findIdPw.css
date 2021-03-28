@@ -99,7 +99,7 @@ body {
 #findPw{visibility:hidden;}
 #findid_btn{cursor:pointer;}
 #findpw_btn{cursor:pointer;}
-#fitst_email {
+.first_email {
   width:30%;
   border: none;
   outline: none;
@@ -110,7 +110,7 @@ body {
   margin: 0 10px;
   border-bottom: 1px solid #999;
 }
-#second_email {
+.second_email {
   width:25%;
   border: none;
   outline: none;
@@ -121,7 +121,7 @@ body {
   margin: 0 10px;
   border-bottom: 1px solid #999;
 }
-#selbox{
+.selbox{
   font-family: "NotoSansKR_r";
   font-size: 1.2em;
   color: #a7a7a7;
@@ -156,7 +156,7 @@ body {
   .inputbox{font-size: 0.9em;}
   .imgbox img{    width: 100%;  }
   .imgbox input{    width: 100%;  }
-  #fitst_email {width:40%}
-  #second_email {width:35%}
-  #selbox{display: none;}
+  .first_email {width:40%}
+  .second_email {width:35%}
+  .selbox{display: none;}
 }

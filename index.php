@@ -126,7 +126,7 @@ require_once('modules/db.php');
       <!-- 텍스트 박스 4개  -->
       <div id="explain_box">
 
-        <div class="textBox_1 left">
+        <div class="textBox_1">
           <ul class="leftLine">
             <li><span>비대면 거래</span></li>
             <li>필요에 따라 물품 보관함을 이용해 비대면 거래를 이용할 수 있습니다.</li>
@@ -134,7 +134,7 @@ require_once('modules/db.php');
           <div class="imgbox_3"><img src="img\locker.png" alt=""></div>
         </div>
 
-        <div class="textBox_1 right">
+        <div class="textBox_1">
           <div class="imgbox_3"><img src="img\time.png" alt=""></div>
           <ul class="rightLine">
             <li><span>도착시간</span></li>
@@ -142,7 +142,7 @@ require_once('modules/db.php');
           </ul>
         </div>
 
-        <div class="textBox_1 left">
+        <div class="textBox_1">
           <ul class="leftLine">
             <li><span>지하철역 거래</span></li>
             <li>인증받은 주변 역을 중심으로 품목들을 볼 수 있고, 호선을 선택하여 다양한 물품들을 검색할 수 있습니다.</li>
@@ -150,16 +150,13 @@ require_once('modules/db.php');
           <div class="imgbox_3"><img src="img\train.png" alt=""></div>
         </div>
 
-        <div class="textBox_1 right">
+        <div class="textBox_1">
           <div class="imgbox_3"><img src="img\shield.png" alt=""></div>
           <ul class="rightLine">
             <li><span>안전거래</span></li>
             <li>실시간으로 물건을 직접 보고 거래하여 안전하게 거래를 이용할 수 있습니다.</li>
           </ul>
         </div>
-        <div class="clear"></div>
-
-
 
       </div>
 
@@ -169,21 +166,52 @@ require_once('modules/db.php');
     <!-- 푸터박스 -->
     <div id="footer_box">
       <div id="information_box">
+        <ul id="firstUl">
+          <li>
+            <div class="textStyle_2">
+              <span>상호</span> (주)메트로켓  <span>대표자명</span> 박제봉<br>
+              <span>사업자등록번호</span> 000-00-00000 <span>통신판매업신고번호</span> 제0000-성남-0000호<br>
+              <span>연락처</span> 00-000-0000  <span>팩스</span> 000-0000-0000  <span>이메일</span> jebong@metrocket.com<br>
+              <span>주소</span> 경기도 성남시 수정구 단대동 산성대로437번길 7  지하주차장&nbsp
+            </div>
+          </li>
+
+          <li>
+            <ul class="secondUl_1">
+              <li>상품등록</li>
+              <li>내 상품</li>
+              <li>채팅</li>
+              <li>프로필</li>
+            </ul>
+          </li>
+
+          <li>
+            <ul class="secondUl_2">
+              <li>이용약관</li>
+              <li><a>개인정보처리방침</a></li>
+            </ul>
+          </li>
+
+          <li>
+            <ul class="secondUl_3">
+              <li><img src="img/facebook.png" alt=""></li>
+              <li><img src="img/instagram.png" alt=""></li>
+              <li><img src="img/twitter.png" alt=""></li>
+              <li><img src="img/blog.png" alt=""></li>
+            </ul>
+          </li>
+
+          <li class="text" style="border-top: solid #5e5956 1px;margin:4.0rem 0;">
+            <div class="imgbox_4"><img src="img/metroket_footer.png" alt=""></div>
+          </li>
+        </ul>
 
       </div>
       <div class="line">
 
       </div>
-      <div class="imgbox_1">
 
-
-      </div>
     </div>
-
-
-
-
-
 
 
     <!-- <div>

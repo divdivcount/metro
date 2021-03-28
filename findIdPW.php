@@ -34,11 +34,11 @@
                   <div class="inputbox">
                     <div class="textbox"><div class="bluedot">*</div>이메일</div>
                       <!-- 이메일 폼 부분 재구성함 수정 요함  -->
-              					<input type="text" id="fitst_email" name="" value="" > <div style="font-family:'NotoSansKR_m';color:#3b3b3b;">@</div>
-              					<input type="text" id="second_email" name="" value="">
+              					<input type="text" class="first_email" name="" value="" > <div style="font-family:'NotoSansKR_m';color:#3b3b3b;">@</div>
+              					<input type="text" class="second_email" name="" value="">
 
                         <!-- 이메일 선택 select 박스 -->
-              					<select id="selbox" onchange="email()" class="" name="">
+              					<select class="selbox" onchange="email(0)" class="" name="">
               						<option value="direct">직접입력</option>
               						<option value="naver.com">naver.com</option>
               						<option value="gmail.com">gmail.com</option>
@@ -63,24 +63,24 @@
                   <!-- 이름 -->
                   <div class="inputbox">
                     <div class="textbox"><div class="bluedot">*</div>이름</div>
-                    <input type="text" id ="userName" name="userName" class="input-field_2" required>
+                    <input type="text"  name="userName" class="input-field_2" required>
                   </div>
 
                   <!-- 아이디 -->
                   <div class="inputbox">
                     <div class="textbox"><div class="bluedot">*</div>아이디</div>
-                    <input type="text" id ="userId" name="userId" class="input-field_2" required>
+                    <input type="text"  name="userId" class="input-field_2" required>
                   </div>
 
                   <!-- 이메일 -->
                   <div class="inputbox">
                     <div class="textbox"><div class="bluedot">*</div>이메일</div>
                       <!-- 이메일 폼 부분 재구성함 수정 요함  -->
-              					<input type="text" id="fitst_email" name="" value="" > <div style="font-family:'NotoSansKR_m';color:#3b3b3b;">@</div>
-              					<input type="text" id="second_email" name="" value="">
+              					<input type="text" class="first_email" name="" value="" > <div style="font-family:'NotoSansKR_m';color:#3b3b3b;">@</div>
+              					<input type="text" class="second_email" name="" value="">
 
                         <!-- 이메일 선택 select 박스 -->
-              					<select id="selbox" onchange="email()" class="" name="">
+              					<select class="selbox" onchange="email(1)" class="" name="">
               						<option value="direct">직접입력</option>
               						<option value="naver.com">naver.com</option>
               						<option value="gmail.com">gmail.com</option>
@@ -123,13 +123,13 @@
       }
 
       // 이메일 선택 select 박스에 자동으로 텍스트 적용하는 함수
-      function email() {
-        var selbox= document.getElementById('selbox');
-        var secondText = document.getElementById('second_email');
+      function email(i) {
+        var selbox= document.getElementsByClassName('selbox');
+        var secondText = document.getElementsByClassName('second_email');
         var domainText ="";
-        if (selbox.selectedIndex > 0) {
-          domainText = selbox.options[selbox.selectedIndex].value;
-          secondText.value = domainText;
+        if (selbox.item(i).selectedIndex > 0) {
+          domainText = selbox.item(i).options[selbox.item(i).selectedIndex].value;
+          secondText.item(i).value = domainText;
         }else{
           secondText.value = "";
         }
