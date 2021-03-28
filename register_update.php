@@ -110,7 +110,7 @@ if ($result) {
 		$result = mysqli_query($conn, $sql);
 		mysqli_close($conn); // 데이터베이스 접속 종료
 
-		$certify_href = 'http://localhost/email_certify.php?&amp;mb_id='.$mb_id.'&amp;mb_md5='.$mb_md5; // 메일 인증 주소
+		$certify_href = 'https://metroket.kro.kr/email_certify.php?&amp;mb_id='.$mb_id.'&amp;mb_md5='.$mb_md5; // 메일 인증 주소
 
 		$subject = '인증확인 메일입니다.'; // 메일 제목
 
