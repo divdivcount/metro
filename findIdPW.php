@@ -131,7 +131,7 @@
           domainText = selbox.item(i).options[selbox.item(i).selectedIndex].value;
           secondText.item(i).value = domainText;
         }else{
-          secondText.value = "";
+          secondText.item(i).value = "";
         }
       }
 
