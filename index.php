@@ -15,66 +15,35 @@ require_once('modules/db.php');
     <!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script> -->
   </head>
   <body>
-    <!-- 최상단 로고 및 상단메뉴 -->
-    <div id="topMenu_box">
-      <?php
-          if(!(empty($_SESSION['ss_mb_id']) || empty($_SESSION['naver_mb_id']) || empty($_SESSION['kakao_mb_id']))){
-              echo "";
-          }else{
-            if(isset($_SESSION['ss_mb_id'])){
-              $mb_id = $_SESSION['ss_mb_id'];
-              $sql = " select * from member where mb_id = TRIM('$mb_id') ";
-              $result = mysqli_query($conn, $sql);
-              $mb = mysqli_fetch_assoc($result);
-              mysqli_close($conn); // 데이터베이스 접속 종료
-            }elseif(isset($_SESSION['naver_mb_id'])){
-              $om_id = $_SESSION['naver_mb_id'];
-              $sql = " select * from oauth_member where om_id = TRIM($om_id) ";
-              $result = mysqli_query($conn, $sql);
-              $naver = mysqli_fetch_assoc($result);
-              mysqli_close($conn); // 데이터베이스 접속 종료
-            }elseif(isset($_SESSION['kakao_mb_id'])){
-              $oms_id = $_SESSION['kakao_mb_id'];
-              $sql = " select * from oauth_member where om_id = TRIM($oms_id) ";
-              $result = mysqli_query($conn, $sql);
-              $kakao = mysqli_fetch_assoc($result);
-              mysqli_close($conn); // 데이터베이스 접속 종료
-            }
+    <?php
+        if(!(empty($_SESSION['ss_mb_id']) || empty($_SESSION['naver_mb_id']) || empty($_SESSION['kakao_mb_id']))){
+            echo "";
+        }else{
+          if(isset($_SESSION['ss_mb_id'])){
+            $mb_id = $_SESSION['ss_mb_id'];
+            $sql = " select * from member where mb_id = TRIM('$mb_id') ";
+            $result = mysqli_query($conn, $sql);
+            $mb = mysqli_fetch_assoc($result);
+            mysqli_close($conn); // 데이터베이스 접속 종료
+          }elseif(isset($_SESSION['naver_mb_id'])){
+            $om_id = $_SESSION['naver_mb_id'];
+            $sql = " select * from oauth_member where om_id = TRIM($om_id) ";
+            $result = mysqli_query($conn, $sql);
+            $naver = mysqli_fetch_assoc($result);
+            mysqli_close($conn); // 데이터베이스 접속 종료
+          }elseif(isset($_SESSION['kakao_mb_id'])){
+            $oms_id = $_SESSION['kakao_mb_id'];
+            $sql = " select * from oauth_member where om_id = TRIM($oms_id) ";
+            $result = mysqli_query($conn, $sql);
+            $kakao = mysqli_fetch_assoc($result);
+            mysqli_close($conn); // 데이터베이스 접속 종료
           }
+        }
+    ?>
 
-      ?>
-      <!-- 상단 로고 -->
-      <div class="imgbox_1">
-        <a href="index.php"><img src="img\mainlogo.png" alt=""></a>
-      </div>
+    <!-- 상단 메뉴 부분 -->
+    <?= require_once 'metrocket_header.php'; ?>
 
-      <!-- 상단 툴바 -->
-      <div id="topToolbar_box">
-        <?php
-          if(isset($mb['mb_num'])){
-            echo "<ul>"."&nbsp;<a href='./User_page.php'><li>상품등록</li></a>"."&nbsp;<a href='./User_page.php'><li>채팅</li></a>"."&nbsp;<a href='./User_page.php'><li>마이페이지</li></a>"."&nbsp;<a href='./logout.php'><li>로그아웃</li></a>"."</ul>";
-            // echo "일반 아이디";
-          }elseif(isset($naver['om_id'])){
-            echo "<ul>"."&nbsp;<a href='./User_page.php'><li>상품등록</li></a>"."&nbsp;<a href='./User_page.php'><li>채팅</li></a>"."&nbsp;<a href='./User_page.php'><li>마이페이지</li></a>"."&nbsp;<a href='./oauth_logout.php'><li>로그아웃</li></a>"."</ul>";
-            // echo "네이버 아이디";
-          }elseif(isset($kakao['om_id'])){
-            echo "<ul>"."&nbsp;<a href='./User_page.php'><li>상품등록</li></a>"."&nbsp;<a href='./User_page.php'><li>채팅</li></a>"."&nbsp;<a href='./User_page.php'><li>마이페이지</li></a>"."&nbsp;<a href='./oauth_logout.php'><li>로그아웃</li></a>"."</ul>";
-            // echo "카카오 아이디";
-          }
-          else {
-            echo "<ul><a href='./login.php'><li>login</li></a></ul>";
-          }
-         ?>
-        <!-- <ul>
-          <li>상품등록</li>
-          <li>내상품</li>
-          <li>채팅</li>
-          <li>프로필</li>
-        </ul> -->
-      </div>
-
-
-    </div>
 
     <!-- 메인 배너이미지 부분 -->
     <div id="bannerImg_box">
@@ -137,7 +106,8 @@ require_once('modules/db.php');
           <div class="imgbox_3"><img src="img\time.png" alt=""></div>
           <ul class="rightLine">
             <li><span>도착시간</span></li>
-            <li>메트로켓은 출발시간에 맞춰서 도착시간을 알려줍니다.</li>          </ul>
+            <li>메트로켓은 출발시간에 맞춰서 도착시간을 알려줍니다.</li>
+          </ul>
         </div>
 
         <div class="textBox_1">
@@ -158,56 +128,9 @@ require_once('modules/db.php');
 
       </div>
 
-
     </div>
 
-    <!-- 푸터박스 -->
-    <div id="footer_box">
-      <div id="information_box">
-
-        <div class="item">
-          <span>상호</span> (주)메트로켓  <span>대표자명</span> 박제봉<br>
-          <span>사업자등록번호</span> 000-00-00000 <span>통신판매업신고번호</span> 제0000-성남-0000호<br>
-          <span>연락처</span> 00-000-0000  <span>팩스</span> 000-0000-0000  <span>이메일</span> jebong@metrocket.com<br>
-          <span>주소</span> 경기도 성남시 수정구 단대동 산성대로437번길 7  지하주차장
-        </div>
-
-        <div class="item">
-          <ul class="secondUl_1">
-            <li>상품등록</li>
-            <li>내 상품</li>
-            <li>채팅</li>
-            <li>프로필</li>
-          </ul>
-        </div>
-
-      <div class="item">
-        <ul class="secondUl_2">
-          <li>이용약관</li>
-          <li><a href="">개인정보처리방침</a></li>
-        </ul>
-      </div>
-
-      <div class="item">
-
-          <img src="img/facebook.png" alt="">
-          <img src="img/instagram.png" alt="">
-          <img src="img/twitter.png" alt="">
-          <img src="img/blog.png" alt="">
-
-      </div>
-
-
-
-
-      </div>
-        <div class="imgbox_4"><img src="img/metroket_footer.png" alt=""></div>
-
-      <div class="line">
-
-      </div>
-
-    </div>
+    <?= require_once 'metrocket_footer.php'; ?>
 
 
     <!-- <div>

@@ -1,0 +1,32 @@
+#topMenu_box{
+  width: 100%;
+  height: 14.0rem;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+}
+#topToolbar_box{
+  margin-right: 10%;
+}
+#topToolbar_box ul{
+  list-style: none;
+  display: flex;
+}
+#topToolbar_box li{
+  text-decoration: none;
+  padding: 0.8rem 1.2rem;
+  font-size: 2.0rem;
+  color:#707070
+}
+.imgbox_1 {
+  margin-left: 10%;
+}
+@media only screen and (max-width: 768px) {
+  #topMenu_box{
+    flex-direction: column;
+  }
+  #topMenu_box .imgbox_1{
+    margin: 2.0rem auto;
+  }
+}
