@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    <link rel="stylesheet" href="css\css.metrocket_footer.css">
+    <link rel="stylesheet" href="css\css_metrocket_footer.css">
   </head>
   <body>
     <!-- 푸터박스 -->

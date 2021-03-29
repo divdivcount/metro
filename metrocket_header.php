@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    <link rel="stylesheet" href="css\css.metrocket_header.css">
+    <link rel="stylesheet" href="css\css_metrocket_header.css">
   </head>
   <body>
     <!-- 최상단 로고 및 상단메뉴 -->

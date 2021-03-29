@@ -6,7 +6,7 @@ require_once('modules/db.php');
   <head>
     <meta charset="utf-8">
     <title>매트로켓</title>
-    <link rel="stylesheet" href="css/css.index.css">
+    <link rel="stylesheet" href="css/css_index.css">
     <link rel="stylesheet" href="css/css_noamlfont.css">
     <link rel="stylesheet" href="css/bxslider-4-4.2.12/src/css/jquery.bxslider.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -42,7 +42,7 @@ require_once('modules/db.php');
     ?>
 
     <!-- 상단 메뉴 부분 -->
-    <?= require_once 'metrocket_header.php'; ?>
+    <?php require_once 'metrocket_header.php'; ?>
 
 
     <!-- 메인 배너이미지 부분 -->
@@ -129,8 +129,7 @@ require_once('modules/db.php');
       </div>
 
     </div>
-
-    <?= require_once 'metrocket_footer.php'; ?>
+    <?php require_once 'metrocket_footer.php';?>
 
 
     <!-- <div>
