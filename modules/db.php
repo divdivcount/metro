@@ -5,6 +5,7 @@
 	require_once('modules/oauth_dao.php');
 	require_once('modules/dbconn.php');
 	require_once('modules/strequ.php');
+	require_once('modules/product_dao.php');
 	class ProLogin extends MetroDAO {
 		private $session = false;
 		private function PasswordVerify($id, $pw) {

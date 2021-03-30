@@ -49,11 +49,8 @@ class MetroDAO {
     $this->openDB();
     if($where){
 			$query = $this->db->prepare("select $select from $this->quTable where $where");
-		}else if($this->quTable == "member"){
-			$query = $this->db->prepare("select mb_num from $this->quTable");
-		}
-    else{
-			$query = $this->db->prepare("select id, name, manufacturer, info, date_format(date,'%Y-%m'), price, file from $this->quTable");
+		}else{
+			$query = $this->db->prepare("select p.*, i.in_hit, pi.pr_img, l.l_name, m.mb_line_station from product p left outer join interest i ON p.pr_id = i.pr_id left outer join product_img pi ON p.pr_id = pi.pr_id left outer join line l ON p.l_id = l.l_id left outer join member m ON p.mb_id = m.mb_num where p.mb_id = $mb_id order by $this->quTableId asc limit :start, :viewLen");
 		}
     $query->execute();
     $fetch = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -242,21 +239,18 @@ if($fname != '') {
 
 
 	//페이지 내이션
-  	public function SelectPageLength($cPage, $viewLen, $s_value) {
+  	public function SelectPageLength($cPage, $viewLen, $mb_id) {
 		$this->openDB();
-	if (empty($s_value)){
-		$query = $this->db->prepare("select count(*) from $this->quTable");
-    } else {
-		$where_field = ($this->quTable == "puhistory") ? "pr_now" : "name";
-		$query = $this->db->prepare("select count(*) from $this->quTable where $where_field like :s_value");
-		if(isset($s_value)){
-			$query = $this->db->prepare("select count(*) from $this->quTable where $where_field like :s_value");
-			if($this->quTable == "consulting"){
-					$query = $this->db->prepare("select count(*) from $this->quTable");
-			}
+		if(!$mb_id){
+			// echo "select count(*) from $this->quTable";
+			$query = $this->db->prepare("select count(*) from $this->quTable");
+		}else{
+			// echo "select count(*) from $this->quTable where mb_id = $mb_id";
+			$query = $this->db->prepare("select count(*) from $this->quTable where mb_id = $mb_id");
 		}
-		$query->bindValue(":s_value", "%$s_value%",  PDO::PARAM_STR);
-	}
+
+		$query->bindValue(":s_value", $mb_id,  PDO::PARAM_STR);
+
     $query->execute();
 		$fetch = $query->fetch(PDO::FETCH_ASSOC);
 		$countLen = $fetch['count(*)'];
@@ -287,29 +281,17 @@ if($fname != '') {
 
 	}
 
-	public function SelectPageList($cPage, $viewLen,$s_value, $where = null) {
+	public function SelectPageList($cPage, $viewLen,$mb_id) {
 		$start = ($cPage * $viewLen) - $viewLen;
-		if($this->quTable == "cpu" || $this->quTable == "mainboard" || $this->quTable == "cases" || $this->quTable == "power" || $this->quTable == "memory" || $this->quTable == "odd" ||  $this->quTable == "cooler" ||
-		$this->quTable == "storage" || $this->quTable == "graphicscard"){
-				if($s_value){
-					$sql= "select id, name, manufacturer, info, date_format(date,'%Y-%m'),price, file from $this->quTable  where name  like  :s_value or manufacturer like :s_value order by $this->quTableId asc limit :start, :viewLen";
-				}else{
-					$sql= "select id, name, manufacturer, info, date_format(date,'%Y-%m'),price, file from $this->quTable  order by $this->quTableId asc limit :start, :viewLen";
-				}
-		}else{
-				if($this->quTable == "consulting"){
-					if($where){
-						$sql = "select * from $this->quTable where $where order by $this->quTableId desc limit $start, $viewLen";
-					}else{
-						$sql= "select * from $this->quTable order by $this->quTableId desc limit $start, $viewLen";
-					}
-				}
-		}
+		// echo $start;
+		// echo $viewLen;
+		$sql=	"select p.*, i.in_hit, pi.pr_img, l.l_name, m.mb_line_station from product p left outer join interest i ON p.pr_id = i.pr_id left outer join product_img pi ON p.pr_id = pi.pr_id left outer join line l ON p.l_id = l.l_id left outer join member m ON p.mb_id = m.mb_num where p.mb_id = :mb_id order by $this->quTableId asc limit :start, :viewLen";
+		// echo "select p.*, i.in_hit, pi.pr_img, l.l_name, m.mb_line_station from product p left outer join interest i ON p.pr_id = i.pr_id left outer join product_img pi ON p.pr_id = pi.pr_id left outer join line l ON p.l_id = l.l_id left outer join member m ON p.mb_id = m.mb_num where p.mb_id = $mb_id order by $this->quTableId asc limit :start, :viewLen";
 		$this->openDB();
 		$query = $this->db->prepare($sql);
 		$query->bindValue(":start", $start, PDO::PARAM_INT);
 		$query->bindValue(":viewLen", $viewLen, PDO::PARAM_INT);
-		if($s_value)$query->bindValue(":s_value", "%$s_value%",  PDO::PARAM_STR);
+		$query->bindValue(":mb_id", $mb_id,  PDO::PARAM_INT);
 		// if($start_s_value)$query->bindValue(":start_s_value", "%$start_s_value%",  PDO::PARAM_STR);
 
 		$query->execute();
