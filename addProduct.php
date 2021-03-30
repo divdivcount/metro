@@ -15,10 +15,10 @@
 
 
     <div id = "wrapContainer_Box">
-      <div class="radius_box">
+      <div id="pageTitle_box" class="radius_box">
 
-        <div class="title_box">
-          <h2><d>*</d>상품등록하기</h2>
+        <div class="title_box" style="justify-content: space-between;">
+          <h2 style="font-size:2.8rem">상품등록하기</h2>
 
           <!-- php 나 스크립트로 뜨게 해야하는 부분 추후 수정 -->
           <span>인증역:0호선 0000역</span>
@@ -26,8 +26,8 @@
 
       </div>
 
-      <!--  -->
-      <div class="radius_box">
+      <!-- 제목 입력 부분 -->
+      <div id="insertTitle_box" class="radius_box" >
 
         <div class="title_box">
           <h2><d>*</d>제목입력</h2>
@@ -35,37 +35,56 @@
         </div>
 
         <div class="content_box">
-
+          <input class="w3-input" type="text">
+          <!-- php 추가예정  -->
+          <div id="checkTextSize">0/100</div>
         </div>
 
       </div>
 
-      <!--  -->
-      <div class="radius_box">
+      <!-- 판매가 책정 부분 -->
+      <div id="insertPrice_box" class="radius_box">
 
         <div class="title_box">
           <h2><d>*</d>판매가</h2>
         </div>
 
         <div class="content_box">
-
+          <input class="w3-input" type="text">
+          &#8361;
         </div>
       </div>
 
-      <!--  -->
-      <div class="radius_box">
+      <!-- 카테고리 선택 부분 -->
+      <div id="insertCategory_box" class="radius_box">
         <div class="title_box">
           <h2><d>*</d>카테고리 설정 </h2>
           <span> 원하시는 카테고리를 설정해 주세요.</span>
         </div>
 
         <div class="content_box">
-
+          <div class="categoryGrid_box">
+            <label><input type="radio" class="test" name="category" value="디지털/가전">디지털/가전</label>
+            <label><input type="radio" class="test" name="category" value="가구/인테리어">가구/인테리어</label>
+            <label><input type="radio" class="test" name="category" value="유아동/유아도서">유아동/유아도서</label>
+            <label><input type="radio" class="test" name="category" value="생활/가공식품">생활/가공식품</label>
+            <label><input type="radio" class="test" name="category" value="스포츠/레저">스포츠/레저</label>
+            <label><input type="radio" class="test" name="category" value="여성잡화">여성잡화</label>
+            <label><input type="radio" class="test" name="category" value="여성의류">여성의류</label>
+            <label><input type="radio" class="test" name="category" value="디지털/가전">디지털/가전</label>
+            <label><input type="radio" class="test" name="category" value="남성패션/잡화">남성패션/잡화</label>
+            <label><input type="radio" class="test" name="category" value="게임/취미">게임/취미</label>
+            <label><input type="radio" class="test" name="category" value="반려동물용품">반려동물용품</label>
+            <label><input type="radio" class="test" name="category" value="도서/티켓/음반">도서/티켓/음반</label>
+            <label><input type="radio" class="test" name="category" value="식물">식물</label>
+            <label><input type="radio" class="test" name="category" value="기타 중고물품">기타 중고물품</label>
+            <label><input type="radio" class="test" name="category" value="뷰티/미용">뷰티/미용</label>
+          </div>
         </div>
       </div>
 
-      <!--  -->
-      <div class="radius_box">
+      <!-- 상품이미지 업로드 부분 -->
+      <div id="insertImg_box" class="radius_box">
         <div class="title_box">
           <h2><d>*</d>상품이미지 </h2>
           <span> 최소 1개 이상의 이미지를 업로드 해주세요</span>
@@ -76,7 +95,8 @@
         </div>
       </div>
 
-      <div class="radius_box">
+      <!-- 상세설명 작성 부분  -->
+      <div id="insertText_box" class="radius_box">
 
         <div class="title_box">
           <h2><d>*</d>상세설명</h2>

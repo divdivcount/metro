@@ -4,7 +4,7 @@ body {
   padding: 0;
   width:100%;
   height:100%;
-  background-color:#F5F6F7;
+  background-color:#f0f0f0;
   position: relative;
   font-family: "NotoSansKR_r";
 }
@@ -21,13 +21,41 @@ a{text-decoration: none;}
   display: flex;
   flex-direction: column;
   margin-bottom: 50px;
+  box-shadow: 5px 5px 20px 0 rgba(200, 200, 200, 0.16);
  }
 .title_box{
-  border-bottom: solid 2px #F5F6F7;
+  border-bottom: solid 0.3rem #F5F6F7;
   display: flex;
   align-items: center;
 }
-.content_box{}
+.title_box d{color:#0099ff}
+.title_box h2{font-family: "NotoSansKR_r";font-size: 2.5rem;}
+.title_box span{font-family: "NotoSansKR_r";margin-left: 1.0rem;font-size: 1.7rem;color:#a7a7a7}
+.content_box{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  outline: none;
+  font-family: "NotoSansKR_r";
+}
+.test{width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden;}
+
+.categoryGrid_box input[type="checkbox"]:checked + label:before{
+  color:WHITE;
+}
+
+input[type=checkbox]+label {
+	font-weight: normal;
+}
+input[type=checkbox]:checked+label {
+	font-weight: bold;
+}
+
+#insertTitle_box .w3-input{outline: none;background-color:white!important;border-bottom:none!important;width:100%;}
+#insertPrice_box .w3-input{outline: none;background-color:white!important;border-bottom:none;}
+
+#insertTitle_box .content_box{border-bottom: 2px solid #a7a7a7;}
+#insertPrice_box .content_box{border-bottom: 2px solid #a7a7a7;width:35%;}
 
 @media only screen and (min-width: 1920px) {
   body{
