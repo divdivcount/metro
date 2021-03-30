@@ -1,6 +1,6 @@
 html{font-size: 10px;}
 body {
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
   width:100%;
   height:100%;
@@ -34,12 +34,31 @@ body {
 #selectMetro_box .find_item{width: 20%;}
 #selectMetro_box .w3-button{width: 20%!important;height: 7.0rem!important;margin-right:11%!important;}
 #selectMetro_box .w3-input{outline: none;background-color:#f9f9f9!important;border-bottom: 3px solid #a5a5a5;}
-#selectMetro_box .w3-select{background-color:#f9f9f9!important;border-bottom: 3px solid #a5a5a5;}
+#selectMetro_box .w3-select{outline: none;background-color:#f9f9f9!important;border-bottom: 3px solid #a5a5a5;}
 #selectMetro_box .find_item:nth-child(1){margin-left:11%}
-#mainContent_box {}
 
-#icon_box{
+#mainContent_box {
+  width: 43%;
+  margin: 20% auto 18.0rem auto;
+  font-family: "NotoSansKR_r";
+  font-size: 2.3rem;
+  color: #707070;
 }
+#icon_box{
+  margin: 15% 0;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 3fr 3fr 3fr;
+  text-align: center;
+  justify-items:center;
+  row-gap:15%;
+  column-gap:auto;
+}
+#icon_box .icon_item {
+  display: flex;
+  flex-direction: column;
+}
+#icon_box span{margin-top: 2rem;}
 #slideImg_box{
   width: 100%;
   position: relative;
@@ -67,6 +86,7 @@ body {
 .titleText_1{
   text-align: center;
   font-size: 4.5rem;
+  color: #444444;
 }
 .textStyle_1{
   text-align: center;

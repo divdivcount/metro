@@ -100,6 +100,37 @@ require_once('modules/db.php');
       <!-- 아이콘 들어오는 부분 -->
       <div id="icon_box">
 
+        <div class="icon_item">
+          <img src="img\electric-appliance.png" alt="">
+          <span>디지털/가전</span>
+        </div>
+
+        <div class="icon_item">
+          <img src="img\sofa.png" alt="">
+          <span>가구/인테리어</span>
+        </div>
+
+        <div class="icon_item">
+          <img src="img\bicycle (1).png" alt="">
+          <span>스포츠/레전</span>
+        </div>
+
+        <div class="icon_item">
+          <img src="img\fashion.png" alt="">
+          <span>패션/잡화</span>
+        </div>
+
+        <div class="icon_item">
+          <img src="img\games.png" alt="">
+          <span>게임/취미</span>
+        </div>
+
+        <div class="icon_item">
+          <img src="img\pawprint.png" alt="">
+          <span>반려동물용품</span>
+        </div>
+
+
       </div>
     </div>
 
@@ -188,7 +219,7 @@ require_once('modules/db.php');
 
   });
 
-
+  // 자동완성부분 ajax
   // var link = 'http://localhost/index.php?'
   //
   // $("#testInput").autocomplete({
