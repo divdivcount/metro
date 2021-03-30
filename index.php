@@ -5,15 +5,15 @@ require_once('modules/db.php');
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>매트로켓</title>
     <link rel="stylesheet" href="css/css_index.css">
     <link rel="stylesheet" href="css/css_noamlfont.css">
     <link rel="stylesheet" href="css/bxslider-4-4.2.12/src/css/jquery.bxslider.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="css/bxslider-4-4.2.12/src/js/jquery.bxslider.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script> -->
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   </head>
   <body>
     <?php
@@ -40,6 +40,8 @@ require_once('modules/db.php');
             mysqli_close($conn); // 데이터베이스 접속 종료
           }
         }
+        $sql = " select * from line";
+        $result = mysqli_query($conn, $sql);
     ?>
 
     <!-- 상단 메뉴 부분 -->
@@ -53,9 +55,13 @@ require_once('modules/db.php');
       <div id="selectMetro_box">
         <div class="find_item">
           <span>호선을 선택해 주세요.</span>
-          <select class="w3-select" name="option">
-            <option value="1호선">1호선</option>
-            <option value="2호선">2호선</option>
+          <select id= "da" class="w3-select" name="option">
+            <?php
+            while ($row = mysqli_fetch_assoc($result)) {
+            ?>
+            <option value="<?=$row["l_id"]?>"><?=$row["l_name"]?></option>
+          <?php } ?>
+            <!-- <option value="2호선">2호선</option>
             <option value="3호선">3호선</option>
             <option value="4호선">4호선</option>
             <option value="5호선">5호선</option>
@@ -76,15 +82,26 @@ require_once('modules/db.php');
             <option value="경강선">경강선</option>
             <option value="우이신설">우이신설</option>
             <option value="서해선">서해선</option>
-            <option value="김포골드">김포골드</option>
+            <option value="김포골드">김포골드</option> -->
             <!-- php  -->
           </select>
         </div>
 
         <div class="find_item">
           <span>지하철역을 입력해주세요.</span>
-
-          <div style="display:flex"><input class="w3-input" type="text"><div style="width:1.3rem;margin:auto"><img src="img\loupe.png" alt=""></div></div>
+          <script type="text/javascript">
+          $(function() {
+              //autocomplete
+              var da = document.getElementById('da').value;
+              $(".auto").autocomplete({
+                  source: "autosearch.php",
+                  minLength: 1,
+                  select:da
+              });
+          });
+          alter(da);
+          </script>
+          <div style="display:flex"><input class="w3-input auto" value='' type="text"><div style="width:1.3rem;margin:auto"><img src="img\loupe.png" alt=""></div></div>
         </div>
 
         <button type="button" class="w3-button w3-blue w3-ripple w3-round-xxxlarge" name="button">물건보러가기</button>
@@ -138,7 +155,7 @@ require_once('modules/db.php');
     <div id="slideImg_box">
 
       <!-- 나중에 php로 동적으로 이미지나오게 작업예정 -->
-      <div class="slider">
+      <div class="bxslider">
         <div><img src="img\slideimg_1.png" alt=""></div>
         <div><img src="img\slideimg_2.png" alt=""></div>
         <div><img src="img\slideimg_3.png" alt=""></div>
@@ -212,14 +229,16 @@ require_once('modules/db.php');
   <script>
   //슬라이드 이미지
   $(document).ready(function(){
-    $('.slider').bxSlider({
-      auto: true, speed: 500, pause: 4000, mode:'fade', autoControls: true, pager:true,
+    $('.bxslider').bxSlider( {
+        mode: 'horizontal',// 가로 방향 수평 슬라이드
+        speed: 500,        // 이동 속도를 설정
+        pager: true,      // 현재 위치 페이징 표시 여부 설정
+        moveSlides: 1,     // 슬라이드 이동시 개수
+        auto: true,        // 자동 실행 여부
+        autoHover: false,   // 마우스 호버시 정지 여부
+        controls: true    // 이전 다음 버튼 노출 여부
     });
-
-
-
-
-  });
+});
 
   // 자동완성부분 ajax
   // var link = 'http://localhost/index.php?'
