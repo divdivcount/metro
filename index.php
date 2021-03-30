@@ -9,6 +9,7 @@ require_once('modules/db.php');
     <link rel="stylesheet" href="css/css_index.css">
     <link rel="stylesheet" href="css/css_noamlfont.css">
     <link rel="stylesheet" href="css/bxslider-4-4.2.12/src/css/jquery.bxslider.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="css/bxslider-4-4.2.12/src/js/jquery.bxslider.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,7 +51,43 @@ require_once('modules/db.php');
       <img src="img\banner.png" class="imgbox_2">
       <!-- 이중select box 로 지하철역 선택하는 부분 -->
       <div id="selectMetro_box">
+        <div class="find_item">
+          <span>호선을 선택해 주세요.</span>
+          <select class="w3-select" name="option">
+            <option value="1호선">1호선</option>
+            <option value="2호선">2호선</option>
+            <option value="3호선">3호선</option>
+            <option value="4호선">4호선</option>
+            <option value="5호선">5호선</option>
+            <option value="6호선">6호선</option>
+            <option value="7호선">7호선</option>
+            <option value="8호선">8호선</option>
+            <option value="9호선">9호선</option>
+            <option value="	인천1호선">	인천1호선</option>
+            <option value="인천2호선">인천2호선</option>
+            <option value="신분당">신분당</option>
+            <option value="경의중앙선">경의중앙선</option>
+            <option value="경춘선">경춘선</option>
+            <option value="수인분당">수인분당</option>
+            <option value="공항">공항</option>
+            <option value="의정부">의정부</option>
+            <option value="에버라인">에버라인</option>
+            <option value="자기부상">자기부상</option>
+            <option value="경강선">경강선</option>
+            <option value="우이신설">우이신설</option>
+            <option value="서해선">서해선</option>
+            <option value="김포골드">김포골드</option>
+            <!-- php  -->
+          </select>
+        </div>
 
+        <div class="find_item">
+          <span>지하철역을 입력해주세요.</span>
+
+          <div style="display:flex"><input class="w3-input" type="text"><div style="width:1.3rem;margin:auto"><img src="img\loupe.png" alt=""></div></div>
+        </div>
+
+        <button type="button" class="w3-button w3-blue w3-ripple w3-round-xxxlarge" name="button">물건보러가기</button>
       </div>
     </div>
 

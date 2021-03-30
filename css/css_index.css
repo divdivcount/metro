@@ -13,7 +13,10 @@ body {
   position: relative;
 }
 #selectMetro_box{
-  background-color: #00ff00;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f9f9f9;
   box-shadow: 10px 10px 50px 0 rgba(0, 0, 0, 0.16);
   width: 71%;
   height: 45%;
@@ -23,9 +26,18 @@ body {
   left: 50%;
   transform:translate(-50%,82%);
   border-radius: 30px;
+  font-family: "NotoSansKR_r";
+  font-size:2.3rem;
 }
-#mainContent_box{
-}
+
+#selectMetro_box span{font-size:1.8rem;color: #a1a1a1;}
+#selectMetro_box .find_item{width: 20%;}
+#selectMetro_box .w3-button{width: 20%!important;height: 7.0rem!important;margin-right:11%!important;}
+#selectMetro_box .w3-input{outline: none;background-color:#f9f9f9!important;border-bottom: 3px solid #a5a5a5;}
+#selectMetro_box .w3-select{background-color:#f9f9f9!important;border-bottom: 3px solid #a5a5a5;}
+#selectMetro_box .find_item:nth-child(1){margin-left:11%}
+#mainContent_box {}
+
 #icon_box{
 }
 #slideImg_box{
