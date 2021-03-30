@@ -197,6 +197,8 @@ require_once('modules/db.php');
       </div>
 
     </div>
+
+    <!-- 푸터 부분  -->
     <?php require_once 'metrocket_footer.php';?>
 
 
