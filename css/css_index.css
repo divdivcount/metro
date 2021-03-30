@@ -139,6 +139,8 @@ a{text-decoration: none;}
   body{
     width: 1920px;
     margin: 0 auto;
+    left: 50%;
+    transform:translateX(-50%);
   }
 }
 @media only screen and (max-width: 1024px) {
