@@ -14,6 +14,7 @@ require_once('modules/db.php');
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://unpkg.com/hangul-js" type="text/javascript"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <style>
       .ui-helper-hidden-accessible{display:none;}
@@ -80,31 +81,80 @@ require_once('modules/db.php');
                       var optVal = $(this).find(":selected").val();
                       //alert(optVal);
                       $.post('autosearch.php',{optVal:optVal}, function(data) {
-                            $('#auto').autocomplete({ // autocomplete 구현 시작부
-                                source : $.parseJSON(data), //source 는 자동완성의 대상
-                                select : function(event, ui) { // item 선택 시 이벤트
-                                    console.log(ui.item);
-                                },
-                                focus : function(event, ui) { // 포커스 시 이벤트
-                                    return false;
-                                },
-                                minLength : 1, // 최소 글자 수
-                                autoFocus : true, // true로 설정 시 메뉴가 표시 될 때, 첫 번째 항목에 자동으로 초점이 맞춰짐
-                                classes : { // 위젯 요소에 추가 할 클래스를 지정
-                                    'ui-autocomplete' : 'highlight'
-                                },
-                                delay : 500, // 입력창에 글자가 써지고 나서 autocomplete 이벤트 발생될 떄 까지 지연 시간(ms)
-                                disable : false, // 해당 값 true 시, 자동완성 기능 꺼짐
-                                position : { my :'right top', at : 'right bottom'}, // 제안 메뉴의 위치를 식별
-                                close : function(event) { // 자동완성 창 닫아질 때의 이벤트
-                                    console.log(event);
-                                }
-                            })
-                      })
+                        let source = $.map($.parseJSON(data), function(item) { //json[i] 번째 에 있는게 item 임.
+                					chosung = "";
+                					//Hangul.d(item, true) 을 하게 되면 item이 분해가 되어서
+                					//["ㄱ", "ㅣ", "ㅁ"],["ㅊ", "ㅣ"],[" "],["ㅂ", "ㅗ", "ㄲ"],["ㅇ", "ㅡ", "ㅁ"],["ㅂ", "ㅏ", "ㅂ"]
+                					//으로 나오는데 이중 0번째 인덱스만 가지고 오면 초성이다.
+                					full = Hangul.disassemble(item).join("").replace(/ /gi, "");	//공백제거된 ㄱㅣㅁㅊㅣㅂㅗㄲㅇㅡㅁㅂㅏㅂ
+                					Hangul.d(item, true).forEach(function(strItem, index) {
+
+                						if(strItem[0] != " "){	//띄어 쓰기가 아니면
+                							chosung += strItem[0];//초성 추가
+
+                						}
+                					});
+
+
+                					return {
+                						label : chosung + "|" + (item).replace(/ /gi, "") +"|" + full, //실제 검색어랑 비교 대상 ㄱㅊㅂㅇㅂ|김치볶음밥|ㄱㅣㅁㅊㅣㅂㅗㄲㅇㅡㅁㅂㅏㅂ 이 저장된다.
+                						value : item, //김치 볶음밥
+                						chosung : chosung,	//ㄱㅊㅂㅇㅂ,
+                						full : full
+                					}
+                				});
+                        $("#auto").autocomplete({
+                        					source : source,	// source 는 자동 완성 대상
+                        					select : function(event, ui) {	//아이템 선택시
+                        						console.log(ui.item.label + " 선택 완료");
+
+                        					},
+                        					focus : function(event, ui) {	//포커스 가면
+                        						return false;//한글 에러 잡기용도로 사용됨
+                        					},
+                        // 					search : function( value, event ) {
+                        // // 						value.delegateTarget.value
+                        // // 						input = value.delegateTarget.value;
+
+                        // 						//$( "#searchInput" ).autocomplete( "search", Hangul.disassemble(input).join("").replace(/ /gi, "") );
+                        // // 		 				return Hangul.disassemble(input).join("").replace(/ /gi, "");
+                        // 					}
+
+                        }).autocomplete( "instance" )._renderItem = function( ul, item ) {
+                				//.autocomplete( "instance" )._renderItem 설절 부분이 핵심
+                			      return $( "<li>" )	//기본 tag가 li로 되어 있음
+                			        .append( "<div>" + item.value + "</div>" )	//여기에다가 원하는 모양의 HTML을 만들면 UI가 원하는 모양으로 변함.
+                			        .appendTo( ul );	//웹 상으로 보이는 건 정상적인 "김치 볶음밥" 인데 내부에서는 ㄱㅊㅂㅇㅂ,김치 볶음밥 에서 검색을 함.
+                			   };
+
+                            // $('#auto').autocomplete({ // autocomplete 구현 시작부
+                            //     source : $.parseJSON(data), //source 는 자동완성의 대상
+                            //     select : function(event, ui) { // item 선택 시 이벤트
+                            //         console.log(ui.item);
+                            //     },
+                            //     focus : function(event, ui) { // 포커스 시 이벤트
+                            //         return false;
+                            //     },
+                            //     minLength : 1, // 최소 글자 수
+                            //     autoFocus : true, // true로 설정 시 메뉴가 표시 될 때, 첫 번째 항목에 자동으로 초점이 맞춰짐
+                            //     classes : { // 위젯 요소에 추가 할 클래스를 지정
+                            //         'ui-autocomplete' : 'highlight'
+                            //     },
+                            //     delay : 500, // 입력창에 글자가 써지고 나서 autocomplete 이벤트 발생될 떄 까지 지연 시간(ms)
+                            //     disable : false, // 해당 값 true 시, 자동완성 기능 꺼짐
+                            //     position : { my :'right top', at : 'right bottom'}, // 제안 메뉴의 위치를 식별
+                            //     close : function(event) { // 자동완성 창 닫아질 때의 이벤트
+                            //         console.log(event);
+                            //     }
+                            // })
+                  })
                 }
               })
             });
-
+            $("#auto").on("keyup",function(){	//검색창에 뭔가가 입력될 때마다
+        		input = $("#auto").val();	//입력된 값 저장
+        		$( "#auto" ).autocomplete( "search", Hangul.disassemble(input).join("").replace(/ /gi, "") );	//자모 분리후 띄어쓰기 삭제
+        		})
           </script>
           <div style="display:flex"><input id="auto" class="w3-input highlight" value='' type="text"><div style="width:1.3rem;margin:auto"><img src="img\loupe.png" alt=""></div></div>
         </div>
