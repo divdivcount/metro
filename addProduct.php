@@ -16,7 +16,6 @@
 
     <div id = "wrapContainer_Box">
       <div id="pageTitle_box" class="radius_box">
-
         <div class="title_box" style="justify-content: space-between;">
           <h2 style="font-size:2.8rem">상품등록하기</h2>
 
@@ -25,6 +24,9 @@
         </div>
 
       </div>
+
+      <!-- 폼  -->
+      <form class="" action="addProduct.php" method="get">
 
       <!-- 제목 입력 부분 -->
       <div id="insertTitle_box" class="radius_box" >
@@ -71,7 +73,6 @@
             <label><input type="radio" class="test" name="category" value="스포츠/레저">스포츠/레저</label>
             <label><input type="radio" class="test" name="category" value="여성잡화">여성잡화</label>
             <label><input type="radio" class="test" name="category" value="여성의류">여성의류</label>
-            <label><input type="radio" class="test" name="category" value="디지털/가전">디지털/가전</label>
             <label><input type="radio" class="test" name="category" value="남성패션/잡화">남성패션/잡화</label>
             <label><input type="radio" class="test" name="category" value="게임/취미">게임/취미</label>
             <label><input type="radio" class="test" name="category" value="반려동물용품">반려동물용품</label>
@@ -91,6 +92,24 @@
         </div>
 
         <div class="content_box">
+          <div class="imgGrid_box">
+            <div class="img_Item">
+              <span><d>*</d>메인 이미지</span>
+              <img class ="productImg" src="img\add_img.png" alt="">
+            </div>
+
+            <div class="img_Item">
+              <span>추가 이미지</span>
+              <img class ="productImg" src="img\add_img.png" alt="">
+            </div>
+
+            <div class="img_Item"><img class ="productImg" src="img\add_img.png" alt=""></div>
+            <div class="img_Item"><img class ="productImg" src="img\add_img.png" alt=""></div>
+            <div class="img_Item"><img class ="productImg" src="img\add_img.png" alt=""></div>
+            <div class="img_Item"><img class ="productImg" src="img\add_img.png" alt=""></div>
+            <input type="file" id="real-input" name="image" class="image_inputType_file" accept="img/*" style="display:none" required multiple>
+
+          </div>
 
         </div>
       </div>
@@ -103,17 +122,56 @@
         </div>
 
         <div class="content_box">
-
+          <textarea name="text" rows="10" cols="80" style="width:100%" placeholder="내용을 작성해 상품을 소개해 주세요."></textarea>
         </div>
 
       </div>
 
-      <div class="btn_box">
-
+    <div class="btn_box">
+      <input class="w3-button w3-blue w3-round-large" type="submit" name="" value="완료">
+      <input class="w3-button w3-round-large" type="button" name="" value="취소">
       </div>
+
+      </form>
+      <!-- 폼끝  -->
 
     </div>
     <!-- 푸터 부분  -->
     <?php require_once 'metrocket_footer.php';?>
   </body>
+  <script type="text/javascript">
+    //const browseBtn = document.querySelector('.img_Item');
+    const img_Item = document.getElementsByClassName('img_Item');
+    const realInput = document.getElementById('real-input');
+    const productImg = document.getElementsByClassName('productImg');
+    var img = document.getElementById('test');
+    for (var i = 0; i < 5; i++) {
+      img_Item.item(i).addEventListener('click',()=>{
+       realInput.click();
+     });
+    }
+
+
+    realInput.addEventListener('change',function(){
+      if (this.files.length > 6) {
+        alert('사진은 6장만 등록이 가능합니다');
+        realInput.value="";
+      }
+
+      for (var i = 0; i < this.files.length; i++) {
+        if(this.files[i].type!='image/jpeg' && this.files[i].type!='image/png') {
+          alert('jpg 및 png 이미지를 업로드해주세요');
+          realInput.value="";
+        }else{
+          productImg.item(i).src=URL.createObjectURL(this.files[i]);
+        }
+      }
+    })
+
+
+
+
+
+
+  </script>
 </html>
