@@ -14,6 +14,10 @@ require_once('modules/db.php');
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <style>
+      .ui-helper-hidden-accessible{display:none;}
+    </style>
   </head>
   <body>
     <?php
@@ -55,53 +59,54 @@ require_once('modules/db.php');
       <div id="selectMetro_box">
         <div class="find_item">
           <span>호선을 선택해 주세요.</span>
-          <select id= "da" class="w3-select" name="option">
+          <select name="ctg_name" id="selectID" class="w3-select">
+            <option value="">선택</option>
             <?php
             while ($row = mysqli_fetch_assoc($result)) {
             ?>
             <option value="<?=$row["l_id"]?>"><?=$row["l_name"]?></option>
-          <?php } ?>
-            <!-- <option value="2호선">2호선</option>
-            <option value="3호선">3호선</option>
-            <option value="4호선">4호선</option>
-            <option value="5호선">5호선</option>
-            <option value="6호선">6호선</option>
-            <option value="7호선">7호선</option>
-            <option value="8호선">8호선</option>
-            <option value="9호선">9호선</option>
-            <option value="	인천1호선">	인천1호선</option>
-            <option value="인천2호선">인천2호선</option>
-            <option value="신분당">신분당</option>
-            <option value="경의중앙선">경의중앙선</option>
-            <option value="경춘선">경춘선</option>
-            <option value="수인분당">수인분당</option>
-            <option value="공항">공항</option>
-            <option value="의정부">의정부</option>
-            <option value="에버라인">에버라인</option>
-            <option value="자기부상">자기부상</option>
-            <option value="경강선">경강선</option>
-            <option value="우이신설">우이신설</option>
-            <option value="서해선">서해선</option>
-            <option value="김포골드">김포골드</option> -->
-            <!-- php  -->
+          <?php }
+          ?>
           </select>
         </div>
 
         <div class="find_item">
           <span>지하철역을 입력해주세요.</span>
           <script type="text/javascript">
-          $(function() {
-              //autocomplete
-              var da = document.getElementById('da').value;
-              $(".auto").autocomplete({
-                  source: "autosearch.php",
-                  minLength: 1,
-                  select:da
-              });
-          });
-          alter(da);
+
+          $(document).ready(function(){ // html 문서를 다 읽어들인 후
+              $('#selectID').on('change', function(){
+                  if(this.value !== ""){
+                      var optVal = $(this).find(":selected").val();
+                      //alert(optVal);
+                      $.post('autosearch.php',{optVal:optVal}, function(data) {
+                            $('#auto').autocomplete({ // autocomplete 구현 시작부
+                                source : $.parseJSON(data), //source 는 자동완성의 대상
+                                select : function(event, ui) { // item 선택 시 이벤트
+                                    console.log(ui.item);
+                                },
+                                focus : function(event, ui) { // 포커스 시 이벤트
+                                    return false;
+                                },
+                                minLength : 1, // 최소 글자 수
+                                autoFocus : true, // true로 설정 시 메뉴가 표시 될 때, 첫 번째 항목에 자동으로 초점이 맞춰짐
+                                classes : { // 위젯 요소에 추가 할 클래스를 지정
+                                    'ui-autocomplete' : 'highlight'
+                                },
+                                delay : 500, // 입력창에 글자가 써지고 나서 autocomplete 이벤트 발생될 떄 까지 지연 시간(ms)
+                                disable : false, // 해당 값 true 시, 자동완성 기능 꺼짐
+                                position : { my :'right top', at : 'right bottom'}, // 제안 메뉴의 위치를 식별
+                                close : function(event) { // 자동완성 창 닫아질 때의 이벤트
+                                    console.log(event);
+                                }
+                            })
+                      })
+                }
+              })
+            });
+
           </script>
-          <div style="display:flex"><input class="w3-input auto" value='' type="text"><div style="width:1.3rem;margin:auto"><img src="img\loupe.png" alt=""></div></div>
+          <div style="display:flex"><input id="auto" class="w3-input highlight" value='' type="text"><div style="width:1.3rem;margin:auto"><img src="img\loupe.png" alt=""></div></div>
         </div>
 
         <button type="button" class="w3-button w3-blue w3-ripple w3-round-xxxlarge" name="button">물건보러가기</button>
