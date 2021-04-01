@@ -15,6 +15,8 @@ require_once('modules/db.php');
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://unpkg.com/hangul-js" type="text/javascript"></script>
+    <link rel="stylesheet" href="css/css_metrocket_header.css">
+    <link rel="stylesheet" href="css/css_metrocket_footer.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <style>
       .ui-helper-hidden-accessible{display:none;}
@@ -23,34 +25,29 @@ require_once('modules/db.php');
   <body>
     <?php
         if(!(empty($_SESSION['ss_mb_id']) || empty($_SESSION['naver_mb_id']) || empty($_SESSION['kakao_mb_id']))){
-            echo "";
+            echo "123";
         }else{
           if(isset($_SESSION['ss_mb_id'])){
             $mb_id = $_SESSION['ss_mb_id'];
             $sql = " select * from member where mb_id = TRIM('$mb_id') ";
             $result = mysqli_query($conn, $sql);
             $mb = mysqli_fetch_assoc($result);
-            mysqli_close($conn); // 데이터베이스 접속 종료
           }elseif(isset($_SESSION['naver_mb_id'])){
             $om_id = $_SESSION['naver_mb_id'];
             $sql = " select * from oauth_member where om_id = TRIM($om_id) ";
             $result = mysqli_query($conn, $sql);
             $naver = mysqli_fetch_assoc($result);
-            mysqli_close($conn); // 데이터베이스 접속 종료
           }elseif(isset($_SESSION['kakao_mb_id'])){
             $oms_id = $_SESSION['kakao_mb_id'];
             $sql = " select * from oauth_member where om_id = TRIM($oms_id) ";
             $result = mysqli_query($conn, $sql);
             $kakao = mysqli_fetch_assoc($result);
-            mysqli_close($conn); // 데이터베이스 접속 종료
           }
         }
-        $sql = " select * from line";
-        $result = mysqli_query($conn, $sql);
     ?>
 
     <!-- 상단 메뉴 부분 -->
-    <?php require_once 'metrocket_header.php'; ?>
+    <?php require_once('metrocket_header.php'); ?>
 
 
     <!-- 메인 배너이미지 부분 -->
@@ -63,10 +60,13 @@ require_once('modules/db.php');
           <select name="ctg_name" id="selectID" class="w3-select">
             <option value="">선택</option>
             <?php
+            $sql = " select * from line";
+            $result = mysqli_query($conn, $sql);
             while ($row = mysqli_fetch_assoc($result)) {
             ?>
             <option value="<?=$row["l_id"]?>"><?=$row["l_name"]?></option>
           <?php }
+          mysqli_close($conn);
           ?>
           </select>
         </div>
@@ -112,41 +112,12 @@ require_once('modules/db.php');
                         					focus : function(event, ui) {	//포커스 가면
                         						return false;//한글 에러 잡기용도로 사용됨
                         					},
-                        // 					search : function( value, event ) {
-                        // // 						value.delegateTarget.value
-                        // // 						input = value.delegateTarget.value;
-
-                        // 						//$( "#searchInput" ).autocomplete( "search", Hangul.disassemble(input).join("").replace(/ /gi, "") );
-                        // // 		 				return Hangul.disassemble(input).join("").replace(/ /gi, "");
-                        // 					}
-
                         }).autocomplete( "instance" )._renderItem = function( ul, item ) {
                 				//.autocomplete( "instance" )._renderItem 설절 부분이 핵심
                 			      return $( "<li>" )	//기본 tag가 li로 되어 있음
                 			        .append( "<div>" + item.value + "</div>" )	//여기에다가 원하는 모양의 HTML을 만들면 UI가 원하는 모양으로 변함.
                 			        .appendTo( ul );	//웹 상으로 보이는 건 정상적인 "김치 볶음밥" 인데 내부에서는 ㄱㅊㅂㅇㅂ,김치 볶음밥 에서 검색을 함.
                 			   };
-
-                            // $('#auto').autocomplete({ // autocomplete 구현 시작부
-                            //     source : $.parseJSON(data), //source 는 자동완성의 대상
-                            //     select : function(event, ui) { // item 선택 시 이벤트
-                            //         console.log(ui.item);
-                            //     },
-                            //     focus : function(event, ui) { // 포커스 시 이벤트
-                            //         return false;
-                            //     },
-                            //     minLength : 1, // 최소 글자 수
-                            //     autoFocus : true, // true로 설정 시 메뉴가 표시 될 때, 첫 번째 항목에 자동으로 초점이 맞춰짐
-                            //     classes : { // 위젯 요소에 추가 할 클래스를 지정
-                            //         'ui-autocomplete' : 'highlight'
-                            //     },
-                            //     delay : 500, // 입력창에 글자가 써지고 나서 autocomplete 이벤트 발생될 떄 까지 지연 시간(ms)
-                            //     disable : false, // 해당 값 true 시, 자동완성 기능 꺼짐
-                            //     position : { my :'right top', at : 'right bottom'}, // 제안 메뉴의 위치를 식별
-                            //     close : function(event) { // 자동완성 창 닫아질 때의 이벤트
-                            //         console.log(event);
-                            //     }
-                            // })
                   })
                 }
               })
@@ -271,7 +242,7 @@ require_once('modules/db.php');
     </div>
 
     <!-- 푸터 부분  -->
-    <?php require_once 'metrocket_footer.php';?>
+    <?php require_once('metrocket_footer.php');?>
 
 
     <!-- <div>

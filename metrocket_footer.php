@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-    <link rel="stylesheet" href="css\css_metrocket_footer.css">
-  </head>
-  <body>
-    <!-- 푸터박스 -->
-    <div id="footer_box">
+<div id="footer_box">
       <div id="information_box">
 
         <div class="item">
@@ -43,5 +34,3 @@
       </div>
         <div class="imgbox_4"><img src="img/metroket_footer.png" alt=""></div>
     </div>
-  </body>
-</html>

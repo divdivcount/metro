@@ -1,48 +1,61 @@
 <?php
 require_once("modules/db.php");
+$mb_id = Get("mb",0);
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 <link rel="stylesheet" href="css/css_my_one_page.css">
 <link rel="stylesheet" href="css/css_noamlfont.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-<!-- <script>
-	$(function(){
-		if(${msg ne null}){
-			alert('${msg}');
-		};
-
-		if($("#pwForm").submit(function(){
-			if($("#pw").val() !== $("#pw2").val()){
-				alert("비밀번호가 다릅니다.");
-				$("#pw").val("").focus();
-				$("#pw2").val("");
-				return false;
-			}else if ($("#pw").val().length < 8) {
-				alert("비밀번호는 8자 이상으로 설정해야 합니다.");
-				$("#pw").val("").focus();
-				return false;
-			}else if($.trim($("#pw").val()) !== $("#pw").val()){
-				alert("공백은 입력이 불가능합니다.");
-				return false;
-			}
-		}));
-	})
-</script> -->
+<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<link rel="stylesheet" href="css/css_metrocket_header.css">
+<link rel="stylesheet" href="css/css_metrocket_footer.css">
 <style>
-
+.click_box{
+  width:100%;
+}
 </style>
 </head>
 <body>
   <!-- 상단 메뉴 부분 -->
-  <?php require_once 'metrocket_header.php';?>
+  <?php
+      if(empty($mb_id)){
+        echo "<script>alert('로그인을 해주세요');</script>";
+        echo "<script>location.replace('./login.php');</script>";
+      }
+      else{
+  ?>
+  <!-- 최상단 로고 및 상단메뉴 -->
+      <div id="topMenu_box">
+        <!-- 상단 로고 -->
+        <div class="imgbox_1">
+          <a href="index.php"><img src="img\mainlogo.png" alt=""></a>
+        </div>
 
+        <!-- 상단 툴바 -->
+        <div id="topToolbar_box">
+          <?php
+            if(isset($mb_id)){
+              echo "<ul>"."&nbsp;<a href='./User_page.php'><li>상품등록</li></a>"."&nbsp;<a href='./User_page.php'><li>채팅</li></a>"."&nbsp;<a href='./My_one_page.php?mb=$mb_id'><li>마이페이지</li></a>"."&nbsp;<a href='./logout.php'><li>로그아웃</li></a>"."</ul>";
+              // echo "일반 아이디";
+            }elseif(isset($mb_id)){
+              echo "<ul>"."&nbsp;<a href='./User_page.php'><li>상품등록</li></a>"."&nbsp;<a href='./User_page.php'><li>채팅</li></a>"."&nbsp;<a href='./My_one_page.php?mb=$om_id'><li>마이페이지</li></a>"."&nbsp;<a href='./oauth_logout.php'><li>로그아웃</li></a>"."</ul>";
+              // echo "네이버 아이디";
+            }elseif(isset($mb_id)){
+              echo "<ul>"."&nbsp;<a href='./User_page.php'><li>상품등록</li></a>"."&nbsp;<a href='./User_page.php'><li>채팅</li></a>"."&nbsp;<a href='./My_one_page.php?mb=$oms_id'><li>마이페이지</li></a>"."&nbsp;<a href='./oauth_logout.php'><li>로그아웃</li></a>"."</ul>";
+              // echo "카카오 아이디";
+            }
+            else {
+              echo "<ul><a href='./login.php'><li>login</li></a></ul>";
+            }
+           ?>
+        </div>
+      </div>
 	<div class="w3-content w3-container w3-margin-top">
 
     <!-- 유저정보  차후 php 작업 필요 -->
@@ -62,50 +75,13 @@ require_once("modules/db.php");
        <button type="button" class="w3-button w3-round" name="main_button" onclick = "location.href = '#' " >구매 상품</button>
     </div>
 
-    <iframe src="" width="" height="" >
-  		<div class="w3-container">
-          <h3 class="h3">회원정보 수정</h3>
-  			<div>
-          <div class="img_center">
-            <img class="w3-circle" src="img/google@3x.png" style="width:50px">
-          </div>
-          <form id="pwForm" action="member_pw_change.php" method="post">
-            <p>
-                <span>아이디</span><input class="input_id" type="text" id="id" name="id" readonly value="${ member.id }">
-            </p>
-            <p>
-              <label>*현재 비밀번호</label>
-              <input class="input_password" id="old_pw" name="old_pw" type="password" required>
-            </p>
-            <p>
-              <label>*새 비밀번호</label>
-              <input class="input_new_password" name="pw" type="password" required>
-            </p>
-            <label>*비밀번호 확인</label>
-              <input class="input_new_exisit_password" type="text" name="pw2" type="password" required>
-          </form>
-            <p>
-              <label>이름</label>
-              <input class="input_name" type="text" id="email" name="name" value="${ member.email }"  readonly required>
-            </p>
-            <p>
-              <label>이메일</label>
-              <input class="input_email" type="text" id="email" name="email" value="${ member.email }"  readonly required>
-            </p>
-            <p>
-              <label>*주변 역 설정하기</label>
-              <input class="input_station" type="text" id="pw2" required>	<button type="submit" id="joinBtn" class="w3-button w3-tiny w3-light-gray w3-round">역 검색</button>
-            </p>
-            <p class="w3-center">
-              <button type="submit" id="joinBtn" class="w3-button  w3-blue w3-ripple w3-margin-top w3-round">비밀번호 변경</button>
-              <button type="button" id="joinBtn" class="w3-button w3-dark-gray w3-ripple w3-margin-top w3-round">회원 탈퇴</button>
-            </p>
-  			</div>
-  		</div>
-    </iframe>
+    <div class="click_box">
+							<iframe style="float:left;" frameborder="0"  id="main_frame" src="member_update.php?mb=<?=$mb_id?>" height="1030px" width="100%"></iframe>
+		</div>
 	</div>
 
   <!-- 하단 메뉴 부분 -->
   <?php require_once 'metrocket_footer.php';?>
 </body>
 </html>
+<?php } ?>
