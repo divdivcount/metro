@@ -48,7 +48,10 @@ a{text-decoration: none;}
   grid-gap:1.0rem;
   grid-template-columns: repeat(7, 1fr);
 }
+.categorylabel{cursor: pointer;color: #3b3b3b}
+#selectedCategory{color: blue;}
 .test{width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden;}
+
 
 .imgGrid_box{
   width: 100%;
@@ -58,13 +61,18 @@ a{text-decoration: none;}
   grid-gap:1.0rem;
   grid-template-columns: repeat(6, 1fr);
 }
-.imgGrid_box .img_Item{overflow: hidden;}
+.imgGrid_box .img_Item{}
 .imgGrid_box .img_Item img{width: 100%;max-height: 200px;}
-#insertTitle_box .w3-input{outline: none;background-color:white!important;border-bottom:none!important;width:100%;}
+#insertTitle_box .w3-input{outline: none;background-color:white!important;border-bottom:none!important;width: 90%}
 #insertPrice_box .w3-input{outline: none;background-color:white!important;border-bottom:none;}
 
-#insertTitle_box .content_box{border-bottom: 2px solid #a7a7a7;}
+#insertTitle_box .content_box{border-bottom: 2px solid #a7a7a7;justify-content: space-between;}
 #insertPrice_box .content_box{border-bottom: 2px solid #a7a7a7;width:35%;}
+
+
+#insertText_box .content_box{flex-direction:column;align-items:flex-end;;border:solid 0.1rem #a7a7a7;margin-top:2.0rem}
+#insertText_box textarea{outline:none;border:none;}
+#check_explainTextCount {margin-right: 0.5rem;}
 
 .btn_box{
   width: 100%;
