@@ -3,6 +3,8 @@
   <head>
     <link rel="stylesheet" href="css/css_addProduct.css">
     <link rel="stylesheet" href="css/css_noamlfont.css">
+    <link rel="stylesheet" href="css/css_metrocket_footer.css">
+    <link rel="stylesheet" href="css/css_metrocket_header.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -94,12 +96,12 @@
 
         <div class="content_box">
           <div class="imgGrid_box">
-            <div class="img_Item"><img class ="productImg" src="img\add_img.png" alt=""></div>
-            <div class="img_Item"><img class ="productImg" src="img\add_img.png" alt=""></div>
-            <div class="img_Item"><img class ="productImg" src="img\add_img.png" alt=""></div>
-            <div class="img_Item"><img class ="productImg" src="img\add_img.png" alt=""></div>
-            <div class="img_Item"><img class ="productImg" src="img\add_img.png" alt=""></div>
-            <div class="img_Item"><img class ="productImg" src="img\add_img.png" alt=""></div>
+            <div class="img_Item" style="background-image:url('../img/add_img.png')"></div>
+            <div class="img_Item" style="background-image:url('../img/add_img.png')"></div>
+            <div class="img_Item" style="background-image:url('../img/add_img.png')"></div>
+            <div class="img_Item" style="background-image:url('../img/add_img.png')"></div>
+            <div class="img_Item" style="background-image:url('../img/add_img.png')"></div>
+            <div class="img_Item" style="background-image:url('../img/add_img.png')"></div>
             <input type="file" id="real-input" name="image[]" class="image_inputType_file" accept="img/*" style="display:none" required multiple>
 
           </div>
@@ -155,7 +157,9 @@
       }
 
       for (var i = 0; i < 6; i++) {
-        productImg.item(i).src ="img/add_img.png";
+        img_Item.item(i).style.background = 'url("img/add_img.png")';
+        img_Item.item(i).style.backgroundSize ='100% 100%';
+        img_Item.item(i).style.backgroundRepeat ="no-repeat";
       }
 
       for (var i = 0; i < this.files.length; i++) {
@@ -163,8 +167,12 @@
           alert('jpg 및 png 이미지를 업로드해주세요');
           realInput.value="";
         }else{
-
-          productImg.item(i).src=URL.createObjectURL(this.files[i]);
+          var url =""
+          url = URL.createObjectURL(this.files[i]);
+          img_Item.item(i).style.background = 'url(' + url + ')';
+          img_Item.item(i).style.backgroundSize ='100% 100%';
+          img_Item.item(i).style.backgroundRepeat ="no-repeat";
+          alert(url);
         }
       }
     })
