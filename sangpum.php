@@ -1,6 +1,7 @@
 <?php
     require_once('modules/db.php');
     $dao = new Product;
+    $pid = Get('p', 1);
 
     if(isset($_SESSION['ss_mb_id'])){
       $mb_ids = $_SESSION['ss_mb_id'];
@@ -8,6 +9,7 @@
       $result = mysqli_query($conn, $sql);
       $mb = mysqli_fetch_assoc($result);
       $mb_id = $mb['mb_num'];
+      echo  $mb_id;
     }elseif(isset($_SESSION['naver_mb_id'])){
       $mb_ids = $_SESSION['naver_mb_id'];
       $sql = " SELECT * FROM oauth_member WHERE om_id = $mb_ids ";
@@ -166,8 +168,8 @@
         			// 	$result = $dao->SelectPageLength($pid, 10, $s_value, $start_s_value);
         			//   $list = $dao->SelectPageList($result['current'], 10,$s_value, $start_s_value);
         			// }else{
-        			$result = $dao->SelectPageLength($pid, 4, $mb_id);
-        			$list = $dao->SelectPageList($result['current'], 4,$mb_id);
+        			$result = $dao->SelectPageLength($pid, 2, $mb_id);
+        			$list = $dao->SelectPageList($result['current'], 2,$mb_id);
         		// }
         	} catch (PDOException $e) {
         	  $result = null;
@@ -195,9 +197,18 @@
         </div>
       <?php endforeach ?>
       <div class="w3-center">
+          <?php
+          if($result['start'] < $result['current'] ) :?>
+            <a class="abtn" href="sangpum.php?p=<?=($pid - 1)?>">&lt;</a>
+          <?php endif ?>
+
           <?php for($i=$result['start']; $i<=$result['end']; $i++): ?>
-            <a class="abtn <?php if($i === (int)$result['current']) echo 'current' ?>" href="?var=<?=$link?>&p=<?= $i ?>&s_value=<?=$s_value?>"><?= $i ?></a>
+            <a class="abtn <?php if($i === (int)$result['current']) echo 'current' ?>" href="?p=<?= $i ?>"><?= $i ?></a>
           <?php endfor ?>
+
+          <?php if( $result['end'] > $result['current']) : ?>
+            <a class="abtn" href="sangpum.php?p=<?=($pid + 1)?>">&gt;</a>
+          <?php endif ?>
         </div>
 			</div>
 		</div>
