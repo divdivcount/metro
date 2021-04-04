@@ -38,7 +38,7 @@
 	$profileResponse = curl_exec ($ch);
 	$status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 	curl_close ($ch);
-	var_dump($profileResponse); // Kakao API 서버로 부터 받아온 값
+	// var_dump($profileResponse); // Kakao API 서버로 부터 받아온 값
   $profileResponse = json_decode($profileResponse);
   $userid = $profileResponse->id;
 
@@ -51,7 +51,8 @@
   if ($om_id == $userid) {
 
     $update = $oauth->Om_token_update($accessToken, $userid); // 로그인
-    $_SESSION['kakao_mb_id'] = $userid;
+    $mb_company = 'kakao';
+    $_SESSION['kakao_mb_id'] = $mb_company.$userid;
     if(isset($_SESSION['kakao_mb_id'])) { // 세션이 있다면 로그인 확인 페이지로 이동
       echo "<script>alert('로그인 되었습니다.');</script>";
       echo "<script>location.replace('./login.php');</script>";
@@ -64,7 +65,6 @@
     $mb_name = $profileResponse->properties->nickname;
     $mb_email = $profileResponse->kakao_account->email;
     $mb_profile_image = $profileResponse->properties->profile_image;
-    $mb_nickname = "null";
     $mb_company = 'kakao';
     // echo "<br>".$mb_uid."<br>";
     // echo $mb_token."<br>";
@@ -79,7 +79,7 @@
       $mb_email = "메일을 선택 하지 않으셨습니다.";
     }
     $OauthObj = $oauth->Om_insert($mb_uid,$mb_token,$mb_name,$mb_nickname,$mb_email,$mb_profile_image,$mb_company);
-    $_SESSION['kakao_mb_id'] = $mb_uid;
+    $_SESSION['kakao_mb_id'] = $mb_company.$mb_uid;
     if(isset($_SESSION['kakao_mb_id'])) { // 세션이 있다면 로그인 확인 페이지로 이동
       echo "<script>alert('로그인 되었습니다.');</script>";
       echo "<script>location.replace('./login.php');</script>";

@@ -1,5 +1,6 @@
 <?php
 require_once('modules/db.php');
+echo $_SESSION['naver_mb_id'];
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -34,11 +35,14 @@ require_once('modules/db.php');
             $mb = mysqli_fetch_assoc($result);
           }elseif(isset($_SESSION['naver_mb_id'])){
             $om_id = $_SESSION['naver_mb_id'];
+            $om_id = substr($om_id, 5);
             $sql = " select * from oauth_member where om_id = TRIM($om_id) ";
             $result = mysqli_query($conn, $sql);
             $naver = mysqli_fetch_assoc($result);
           }elseif(isset($_SESSION['kakao_mb_id'])){
             $oms_id = $_SESSION['kakao_mb_id'];
+            $oms_id = substr($oms_id, 5);
+            echo $oms_id;
             $sql = " select * from oauth_member where om_id = TRIM($oms_id) ";
             $result = mysqli_query($conn, $sql);
             $kakao = mysqli_fetch_assoc($result);

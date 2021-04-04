@@ -1,6 +1,36 @@
 <?php
 require_once("modules/db.php");
-$mb_id = Get("mb", 0);
+if(isset($_SESSION['ss_mb_id'])){
+  $mb_ids = $_SESSION['ss_mb_id'];
+  $sql = " SELECT * FROM member WHERE mb_id = '$mb_ids' ";
+  $result = mysqli_query($conn, $sql);
+  $mb = mysqli_fetch_assoc($result);
+  $mb_id = $mb['mb_num'];
+  echo  $mb_id;
+}elseif(isset($_SESSION['naver_mb_id'])){
+  $mb_ids = $_SESSION['naver_mb_id'];
+  $mb_ids = substr($mb_ids, 5);
+  $sql = " SELECT * FROM oauth_member WHERE om_id = $mb_ids ";
+  $result = mysqli_query($conn, $sql);
+  $om = mysqli_fetch_assoc($result);
+  $mb_id = $om['om_id'];
+  echo  $mb_id;
+}elseif(isset($_SESSION['kakao_mb_id'])){
+  $mb_ids = $_SESSION['kakao_mb_id'];
+  $mb_ids = substr($mb_ids, 5);
+  $sql = " SELECT * FROM oauth_member WHERE om_id = $mb_ids ";
+  $result = mysqli_query($conn, $sql);
+  $om = mysqli_fetch_assoc($result);
+  $mb_id = $om['om_id'];
+  echo  $mb_id;
+}else{
+  ?>
+  <script>
+    alter("어느것도 로그인되지 않았습니다.");
+    location.replace("./index.php");
+  </script>
+  <?php
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -20,31 +50,36 @@ $mb_id = Get("mb", 0);
 </style>
 </head>
 <body>
+<?php
+// echo $mb["mb_id"] ? $mb["mb_id"] : $om["om_id"];
+// echo $mb["mb_name"] ? $mb["mb_name"] : $om["om_nickname"];
+// echo $mb["mb_email"] ? $mb["mb_email"] : $om["om_email"];
+?>
 <div class="w3-container">
     <h3 class="h3">회원정보 수정</h3>
   <div>
-    <form id="pwForm" class="p_container_margin" action="member_pw_change.php" method="post">
+    <form id="pwForm" class="p_container_margin" action="register_update.php" method="post">
       <p>
-          <span>아이디</span><input class="input_id" type="text" id="id" name="id" readonly value="">
+          <span>아이디</span><input class="input_id" type="text" id="id" name="id" readonly value="<?= $mb["mb_id"] ? $mb["mb_id"] : $om["om_id"] ?>">
       </p>
       <p>
         <label>*현재 비밀번호</label>
-        <input class="input_password" id="old_pw" name="old_pw" type="password" required>
+        <input class="input_password" id="old_pw" name="old_pw" type="password" <?php echo ($mb["mb_id"] ? "" : "readonly") ?> required >
       </p>
       <p>
         <label>*새 비밀번호</label>
-        <input class="input_new_password" name="pw" type="password" required>
+        <input class="input_new_password" name="pw" type="password" <?php echo ($mb["mb_id"] ? "" : "readonly") ?> required>
       </p >
       <label>*비밀번호 확인</label>
-        <input class="input_new_exisit_password" type="text" name="pw2" type="password" required>
+        <input class="input_new_exisit_password" name="pw2" type="password" <?php echo ($mb["mb_id"] ? "" : "readonly") ?> required>
     </form>
       <p class="p_container_margin">
         <label>이름</label>
-        <input class="input_name" type="text" id="name" name="name" value=""  readonly required>
+        <input class="input_name" type="text" id="name" name="name" value="<?=$mb["mb_name"] ? $mb["mb_name"] : $om["om_nickname"] ?>"  readonly required>
       </p>
       <p class="p_container_margin">
         <label>이메일</label>
-        <input class="input_email" type="text" id="email" name="email" value=""  readonly required>
+        <input class="input_email" type="text" id="email" name="email" value="<?=$mb["mb_email"] ? $mb["mb_email"] : $om["om_email"] ?>"  readonly required>
       </p>
       <p class="p_container_margin">
         <label>*주변 역 설정하기</label>
