@@ -1,4 +1,4 @@
-html{font-size: 10px!important;}
+html,body{font-size: 10px!important;}
 body {
   margin: 0 auto;
   padding: 0;
@@ -64,16 +64,22 @@ a{text-decoration: none;}
 }
 .imgGrid_box .img_Item{width: 100%;height:100%;background-size:100% 100%;background-repeat:no-repeat;}
 
-#insertTitle_box .w3-input{outline: none;background-color:white!important;border-bottom:none!important;width: 90%}
-#insertPrice_box .w3-input{outline: none;background-color:white!important;border-bottom:none;}
-
 #insertTitle_box .content_box{border-bottom: 2px solid #a7a7a7;justify-content: space-between;}
-#insertPrice_box .content_box{border-bottom: 2px solid #a7a7a7;width:35%;}
+#insertTitle_box .w3-input{outline: none;background-color:white!important;border-bottom:none!important;width: 90%}
+
+
+#insertPrice_box .w3-input{font-size:1.7rem;outline: none;background-color:white!important;border-bottom:none;}
+#insertPrice_box .priceInput_box{align-items: center;display: flex;border-bottom: 2px solid #a7a7a7;width:35%;}
+#insertPrice_box .content_box{width: 100%;display: flex;justify-content:space-between;}
 
 
 #insertText_box .content_box{flex-direction:column;align-items:flex-end;;border:solid 0.1rem #a7a7a7;margin-top:2.0rem}
 #insertText_box textarea{outline:none;border:none;}
 #check_explainTextCount {margin-right: 0.5rem;}
+
+.priceCheck_box{display: flex;align-items: center;}
+.priceCheck_on{font-size: 1.7rem;color:#3b3b3b;}
+.priceCheck_off{font-size: 1.7rem;color:#a7a7a7;}
 
 .btn_box{
   width: 100%;
@@ -101,21 +107,21 @@ a{text-decoration: none;}
 }
 @media only screen and (max-width: 1024px) {
   #wrapContainer_Box{width: 85%;margin: 10rem auto;}
-  html{font-size: 9px;}
+  html,body{font-size: 9px!important;}
   .imgGrid_box{grid-template-columns: repeat(3, 1fr); grid-auto-rows: 200px;grid-gap:3.0rem;}
 }
 @media only screen and (max-width: 768px) {
   #wrapContainer_Box{width: 90%;margin: 10rem auto;}
-  html{font-size: 8px;}
+  html,body{font-size: 8px!important;}
 }
 @media only screen and (max-width: 540px) {
-  html{font-size: 8px;}
+  html,body{font-size: 8px!important;}
   .imgGrid_box{grid-auto-rows: 130px}
 }
 @media only screen and (max-width: 414px) {
-  html{font-size: 7px;}
+  html,body{font-size: 7px!important;}
   .imgGrid_box{grid-auto-rows: 100px}
 }
 @media only screen and (max-width: 340px) {
-  html{font-size: 7px;}
+  html,body{font-size: 7px!important;}
 }

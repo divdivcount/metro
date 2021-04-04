@@ -54,9 +54,15 @@
         </div>
 
         <div class="content_box">
-          <input id ="price" name="price" class="w3-input" type="text" placeholder="숫자만 입력해주세요." onkeyup="inputNumberFormat(this)">
-          &#8361;
+          <div class="priceInput_box">
+            <input id ="price" name="price" class="w3-input" type="text" placeholder="숫자만 입력해주세요." onkeyup="inputNumberFormat(this)">
+            &#8361;
+          </div>
 
+          <div class="priceCheck_box">
+            <img id="priceCheckImg" src="img/priceCheckOnBtn.png" alt="" onclick="checkPricepNegotiation();">
+            <p id="priceCheckText" class="priceCheck_on">가격흥정가능</p>
+          </div>
         </div>
       </div>
 
@@ -215,13 +221,6 @@
      });
     }
 
-    //
-    // $('#price').keyup(function (e) {
-    //   var content = $(this).val();
-    //   alert($('#price').value);
-    //   $('#price').value = content.toLocaleString( 'ko-KR', { style: 'currency', currency: 'KRW' } );
-    // })
-
     function inputNumberFormat(obj) {
     obj.value = comma(uncomma(obj.value));
     }
@@ -235,5 +234,20 @@
     }
 
 
+    //가격흥정가능 버튼 on off 제어
+    function checkPricepNegotiation() {
+      var priceCheckImg = document.getElementById('priceCheckImg');
+      var priceCheckText = document.getElementById('priceCheckText');
+
+      if (priceCheckText.className == "priceCheck_on"){
+        priceCheckImg.src = "img/priceCheckOffBtn.png";
+        priceCheckText.className = "priceCheck_off"
+      }
+      else {
+        priceCheckImg.src ="img/priceCheckOnBtn.png";
+        priceCheckText.className = "priceCheck_on"
+      }
+
+    }
   </script>
 </html>
