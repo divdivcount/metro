@@ -18,7 +18,7 @@ switch ($mode) {
 		$title = "회원수정";
     break;
 }
-
+$mb_now_password = $_POST['old_pw'];
 $mb_password = $_POST['mb_password']; // 첫번째 입력 패스워드
 $mb_password_re	= $_POST['mb_password_re']; // 두번째 입력 패스워드
 $mb_name = $_POST['mb_name']; // 이름
@@ -28,7 +28,21 @@ $mb_datetime = date('Y-m-d H:i:s', time()); // 가입일
 $mb_modify_datetime	= date('Y-m-d H:i:s', time()); // 수정일
 $mb_email = $mb_email_one.'@'.$mb_email_two;
 
-
+$sql = " SELECT mb_password FROM member WHERE mb_id = '$mb_id'"; // 입력한 비밀번호를 MySQL password() 함수를 이용해 암호화해서 가져옴
+$result = mysqli_query($conn, $sql);
+$mb_pw = mysqli_fetch_assoc($result);
+$mb_pws = $mb_pw["mb_password"];
+$sql = " SELECT PASSWORD('$mb_now_password') AS pass "; // 입력한 비밀번호를 MySQL password() 함수를 이용해 암호화해서 가져옴
+$result = mysqli_query($conn, $sql);
+$rows = mysqli_fetch_assoc($result);
+$mbs_password = $rows['pass'];
+// echo $mbs_password."<br>";
+// echo $mb_pw["mb_password"];
+if($mb_pw["mb_password"] != $mbs_password){
+	echo "<script>alert('현재 비밀번호가 일치하지 않습니다.');</script>";
+	echo "<script>location.replace('./member_update.php');</script>";
+	exit;
+}
 if (!$mb_id) {
 	echo "<script>alert('아이디가 넘어오지 않았습니다.');</script>";
 	echo "<script>location.replace('./register.php');</script>";
@@ -83,16 +97,17 @@ if($mode == "insert") { // 신규 등록 상태
 
 	$sql = " INSERT INTO member
 				SET mb_id = '$mb_id',
+				mb_image = 'img/normal_profile.png',
 					 mb_password = '$mb_password',
 					 mb_name = '$mb_name',
 					 mb_email = '$mb_email',
 					 mb_datetime = '$mb_datetime' ";
 	$result = mysqli_query($conn, $sql);
 
-} else if ($mode == "modify") { // 회원 수정 상태
+} else if ($mode == "modify") {
+ // 회원 수정 상태
 	$sql = " UPDATE member
 				SET mb_password = '$mb_password',
-					 mb_email = '$mb_email',
 					 mb_modify_datetime = '$mb_modify_datetime'
 			 WHERE mb_id = '$mb_id' ";
 	$result = mysqli_query($conn, $sql);
@@ -128,7 +143,7 @@ if ($result) {
 	}
 if($mode == "modify") {
 	echo "<script>alert('".$title."이 완료 되었습니다.');</script>";
-	echo "<script>location.replace('./User_basket.php');</script>";
+	echo "<script>location.replace('./member_update.php');</script>";
 }
 
 	exit;

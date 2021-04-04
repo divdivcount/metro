@@ -1,3 +1,7 @@
+<?php
+  require_once("modules/db.php");
+  /* ky : 내일 작업 예정입니다 건들지 말아주세요*/
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>

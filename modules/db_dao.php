@@ -241,13 +241,10 @@ if($fname != '') {
 	//페이지 내이션
   	public function SelectPageLength($cPage, $viewLen, $mb_id) {
 		$this->openDB();
-		if(!$mb_id){
-			// echo "select count(*) from $this->quTable";
-			$query = $this->db->prepare("select count(*) from $this->quTable");
-		}else{
+	
 			// echo "select count(*) from $this->quTable where mb_id = $mb_id";
 			$query = $this->db->prepare("select count(*) from $this->quTable where mb_id = $mb_id");
-		}
+
 
 		$query->bindValue(":s_value", $mb_id,  PDO::PARAM_STR);
 

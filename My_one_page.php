@@ -25,7 +25,7 @@ require_once("modules/db.php");
   <?php
     if(empty($_SESSION['ss_mb_id']) && empty($_SESSION['naver_mb_id']) && empty($_SESSION['kakao_mb_id']) ){
       echo "<script>alert('로그인을 해주세요');</script>";
-    
+
     }else{
   ?>
   <!-- 최상단 로고 및 상단메뉴 -->
@@ -84,7 +84,7 @@ require_once("modules/db.php");
         <img class="w3-circle" src="<?=$mb['mb_image'] ? $mb['mb_image'] : $om['om_image_url'] ?>" >
         <img src="img/camera.png" style="position:absolute;left:70%;top:70%;" alt="">
       </div>
-        <div class="user_name"><?=$om['om_nickname']?></div>
+        <div class="user_name"><?=$om['om_nickname'] ? $om['om_nickname'] : $mb['mb_name']?></div>
     </div>
 
     <!-- 메인 버튼 -->
