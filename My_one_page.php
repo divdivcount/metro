@@ -25,7 +25,7 @@ require_once("modules/db.php");
   <?php
     if(empty($_SESSION['ss_mb_id']) && empty($_SESSION['naver_mb_id']) && empty($_SESSION['kakao_mb_id']) ){
       echo "<script>alert('로그인을 해주세요');</script>";
-      echo $_SESSION['naver_mb_id'];
+    
     }else{
   ?>
   <!-- 최상단 로고 및 상단메뉴 -->

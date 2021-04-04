@@ -1,6 +1,5 @@
 <?php
 require_once('modules/db.php');
-echo $_SESSION['naver_mb_id'];
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
