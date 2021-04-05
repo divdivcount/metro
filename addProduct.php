@@ -78,12 +78,12 @@
         </div>
 
         <div class="content_box">
-          <input id ="titleText" class="w3-input" type="text" name="title" required>
+          <input id ="titleText" class="w3-input" type="text" name="title" placeholder="제목을 입력해주세요."required>
           <input type="hidden" name="line" value="<?=$lines?>" required>
           <input type="hidden" name="mb" value="<?=$mb["mb_num"]?>">
           <input type="hidden" name="om" value="<?=$om["om_id"]?>">
           <!-- php 추가예정  -->
-          <div id="check_TitleCount">0/100</div>
+          <div id="check_TitleCount"><span>0</span> / 100</div>
         </div>
 
       </div>
@@ -166,8 +166,8 @@
         </div>
 
         <div class="content_box">
-          <textarea id ="explainText" name="explainText" rows="16" cols="80" style="width:100%; resize: none"; placeholder="내용을 작성해 상품을 소개해 주세요."></textarea>
-          <div id="check_explainTextCount">0 / 1000</div>
+          <textarea id ="explainText" name="explainText" rows="14" cols="80" style="width:100%; resize: none"; placeholder="내용을 작성해 상품을 소개해 주세요."></textarea>
+          <div id="check_explainTextCount"><span>0</span> / 1000</div>
         </div>
 
       </div>
@@ -230,24 +230,24 @@
     // 글자수 카운트 (상세설명쪽)
     $('#explainText').keyup(function (e){
     var content = $(this).val();
-    $('#check_explainTextCount').html(content.length+" / 1000");    //글자수 실시간 카운팅
+    $('#check_explainTextCount').html("<span>"+content.length+"</span> / 1000");    //글자수 실시간 카운팅
 
       if (content.length > 1000){
           alert("최대 1000자까지 입력 가능합니다.");
           $(this).val(content.substring(0, 1000));
-          $('#check_explainTextCount').html("1000 / 1000");
+          $('#check_explainTextCount').html("<span>1000</span> / 1000");
       }
     });
 
     // 글자수 카운트 (제목쪽)
     $('#titleText').keyup(function (e){
     var content = $(this).val();
-    $('#check_TitleCount').html(content.length+" / 100");    //글자수 실시간 카운팅
+    $('#check_TitleCount').html("<span>"+content.length+"</span> / 100");    //글자수 실시간 카운팅
 
       if (content.length > 100){
           alert("최대 100자까지 입력 가능합니다.");
           $(this).val(content.substring(0, 100));
-          $('#check_TitleCount').html("100 / 100");
+          $('#check_TitleCount').html("<span>100</span> / 100");
       }
     });
 
