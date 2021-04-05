@@ -3,6 +3,11 @@
     $dao = new Product;
     $pid = Get('p', 1);
 
+  if(empty($_SESSION['ss_mb_id']) && empty($_SESSION['naver_mb_id']) && empty($_SESSION['kakao_mb_id']) ){
+        echo "<script>alert('로그인을 해주세요');</script>";
+        echo "<script>location.replace('./login.php');</script>";
+  }else{
+
     if(isset($_SESSION['ss_mb_id'])){
       $mb_ids = $_SESSION['ss_mb_id'];
       $sql = " SELECT * FROM member WHERE mb_id = '$mb_ids' ";
@@ -191,7 +196,7 @@
             <li class="clear"></li>
             <li class="price_text"><?= $row['pr_price'] ?></li>
             <li class="clear"></li>
-            <li class="star_text"><span style="float:left;"><img src="img\little_star.png" /></span><?= $row['in_hit'] ?><span class="station_text"><?= $row['l_name'] ?><?= $row['mb_line_station'] ?></span></li>
+            <li class="star_text"><span style="float:left;"><img src="img\little_star.png" /></span><?= $row['in_hit'] ?><span class="station_text"><?= $row['mb_line_station'] ?></span></li>
           </div>
           </ul>
         </div>
@@ -234,3 +239,4 @@
   </script>
 </body>
 </html>
+<?php } ?>

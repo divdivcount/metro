@@ -2,6 +2,11 @@
   require_once("modules/db.php");
   /* ky : 내일 작업 예정입니다 건들지 말아주세요*/
 ?>
+<?php
+  if(empty($_SESSION['ss_mb_id']) && empty($_SESSION['naver_mb_id']) && empty($_SESSION['kakao_mb_id']) ){
+    echo "<script>alert('로그인을 해주세요');</script>";
+  }else{
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -17,7 +22,32 @@
   </head>
   <body>
     <!-- 상단 메뉴 부분 -->
-    <?php require_once 'metrocket_header.php'; ?>
+    <?php
+        if(!(empty($_SESSION['ss_mb_id']) || empty($_SESSION['naver_mb_id']) || empty($_SESSION['kakao_mb_id']))){
+            echo "123";
+        }else{
+          if(isset($_SESSION['ss_mb_id'])){
+            $mb_id = $_SESSION['ss_mb_id'];
+            $sql = " select * from member where mb_id = TRIM('$mb_id') ";
+            $result = mysqli_query($conn, $sql);
+            $mb = mysqli_fetch_assoc($result);
+          }elseif(isset($_SESSION['naver_mb_id'])){
+            $om_id = $_SESSION['naver_mb_id'];
+            $om_id = substr($om_id, 5);
+            $sql = " select * from oauth_member where om_id = TRIM($om_id) ";
+            $result = mysqli_query($conn, $sql);
+            $om = mysqli_fetch_assoc($result);
+          }elseif(isset($_SESSION['kakao_mb_id'])){
+            $oms_id = $_SESSION['kakao_mb_id'];
+            $oms_id = substr($oms_id, 5);
+            echo $oms_id;
+            $sql = " select * from oauth_member where om_id = TRIM($oms_id) ";
+            $result = mysqli_query($conn, $sql);
+            $om = mysqli_fetch_assoc($result);
+          }
+        }
+    ?>
+    <?php require_once('metrocket_header.php'); ?>
 
 
     <div id = "wrapContainer_Box">
@@ -26,13 +56,13 @@
           <h2 style="font-size:2.8rem">상품등록하기</h2>
 
           <!-- php 나 스크립트로 뜨게 해야하는 부분 추후 수정 -->
-          <span>인증역:0호선 0000역</span>
+          <span><?= $mb["mb_line_station"] ? $mb["mb_line_station"] : $om["om_line_station"]?></span>
         </div>
 
       </div>
 
       <!-- 폼  -->
-      <form class="" action="addProduct.php" method="post">
+      <form class="" action="addProduct_check.php" method="post">
 
       <!-- 제목 입력 부분 -->
       <div id="insertTitle_box" class="radius_box" >
@@ -43,7 +73,7 @@
         </div>
 
         <div class="content_box">
-          <input id ="titleText" class="w3-input" type="text" name="title">
+          <input id ="titleText" class="w3-input" type="text" name="title" required>
           <!-- php 추가예정  -->
           <div id="check_TitleCount">0/100</div>
         </div>
@@ -59,13 +89,14 @@
 
         <div class="content_box">
           <div class="priceInput_box">
-            <input id ="price" name="price" class="w3-input" type="text" placeholder="숫자만 입력해주세요." onkeyup="inputNumberFormat(this)">
+            <input id ="price" name="price" class="w3-input" type="text" placeholder="숫자만 입력해주세요." onkeyup="inputNumberFormat(this)" required>
             &#8361;
           </div>
 
           <div class="priceCheck_box">
             <img id="priceCheckImg" src="img/priceCheckOnBtn.png" alt="" onclick="checkPricepNegotiation();">
             <p id="priceCheckText" class="priceCheck_on">가격흥정가능</p>
+            <input id="price_check" type="hidden" name="price_checking" value="1">
           </div>
         </div>
       </div>
@@ -242,16 +273,20 @@
     function checkPricepNegotiation() {
       var priceCheckImg = document.getElementById('priceCheckImg');
       var priceCheckText = document.getElementById('priceCheckText');
+      var price_check = document.getElementById('price_check');
 
       if (priceCheckText.className == "priceCheck_on"){
         priceCheckImg.src = "img/priceCheckOffBtn.png";
         priceCheckText.className = "priceCheck_off"
+        price_check.value = "2";
       }
       else {
         priceCheckImg.src ="img/priceCheckOnBtn.png";
         priceCheckText.className = "priceCheck_on"
+        price_check.value = "1";
       }
 
     }
   </script>
 </html>
+<?php } ?>

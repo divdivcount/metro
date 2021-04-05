@@ -1,5 +1,11 @@
 <?php
 require_once("modules/db.php");
+  if(empty($_SESSION['ss_mb_id']) && empty($_SESSION['naver_mb_id']) && empty($_SESSION['kakao_mb_id']) ){
+    echo "<script>alert('로그인을 해주세요');</script>";
+    echo "<script>location.replace('./login.php');</script>";
+  }else{
+?>
+<?php
 if(isset($_SESSION['ss_mb_id'])){
   $mb_ids = $_SESSION['ss_mb_id'];
   $sql = " SELECT * FROM member WHERE mb_id = '$mb_ids' ";
@@ -94,3 +100,4 @@ if(isset($_SESSION['ss_mb_id'])){
 </div>
 </body>
 </html>
+<?php } ?>

@@ -241,7 +241,7 @@ if($fname != '') {
 	//페이지 내이션
   	public function SelectPageLength($cPage, $viewLen, $mb_id) {
 		$this->openDB();
-	
+
 			// echo "select count(*) from $this->quTable where mb_id = $mb_id";
 			$query = $this->db->prepare("select count(*) from $this->quTable where mb_id = $mb_id");
 
@@ -282,7 +282,7 @@ if($fname != '') {
 		$start = ($cPage * $viewLen) - $viewLen;
 		// echo $start;
 		// echo $viewLen;
-		$sql=	"select p.*, i.in_hit, pi.pr_img, l.l_name, m.mb_line_station from product p left outer join interest i ON p.pr_id = i.pr_id left outer join product_img pi ON p.pr_id = pi.pr_id left outer join line l ON p.l_id = l.l_id left outer join member m ON p.mb_id = m.mb_num where p.mb_id = :mb_id order by $this->quTableId asc limit :start, :viewLen";
+		$sql=	"select p.*, i.in_hit, pi.pr_img, m.mb_line_station from product p left outer join interest i ON p.pr_id = i.pr_id left outer join product_img pi ON p.pr_id = pi.pr_id left outer join line l ON p.l_id = l.l_id left outer join member m ON p.mb_id = m.mb_num where p.mb_id = :mb_id order by $this->quTableId asc limit :start, :viewLen";
 		// echo "select p.*, i.in_hit, pi.pr_img, l.l_name, m.mb_line_station from product p left outer join interest i ON p.pr_id = i.pr_id left outer join product_img pi ON p.pr_id = pi.pr_id left outer join line l ON p.l_id = l.l_id left outer join member m ON p.mb_id = m.mb_num where p.mb_id = $mb_id order by $this->quTableId asc limit :start, :viewLen";
 		$this->openDB();
 		$query = $this->db->prepare($sql);
