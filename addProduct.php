@@ -57,6 +57,11 @@
 
           <!-- php 나 스크립트로 뜨게 해야하는 부분 추후 수정 -->
           <span><?= $mb["mb_line_station"] ? $mb["mb_line_station"] : $om["om_line_station"]?></span>
+          <?php
+            $line = $mb["mb_line_station"] ? $mb["mb_line_station"] : $om["om_line_station"];
+            $lines = substr($line, 0 , 1);
+            // echo $lines;
+          ?>
         </div>
 
       </div>
@@ -74,6 +79,9 @@
 
         <div class="content_box">
           <input id ="titleText" class="w3-input" type="text" name="title" required>
+          <input type="hidden" name="line" value="<?=$lines?>" required>
+          <input type="hidden" name="mb" value="<?=$mb["mb_num"]?>">
+          <input type="hidden" name="om" value="<?=$om["om_id"]?>">
           <!-- php 추가예정  -->
           <div id="check_TitleCount">0/100</div>
         </div>
@@ -143,7 +151,7 @@
             <div class="img_Item" style="background-image:url('../img/add_img.png')"></div>
             <div class="img_Item" style="background-image:url('../img/add_img.png')"></div>
             <div class="img_Item" style="background-image:url('../img/add_img.png')"></div>
-            <input type="file" id="real-input" name="image[]" class="image_inputType_file" accept="img/*" style="display:none" required multiple>
+            <input type="file" id="real-input" name="files[]" class="image_inputType_file" onchange="imageURL(this)" accept="image/jpeg,image/png,image/gif" style="display:none" required multiple>
 
           </div>
 
@@ -165,7 +173,7 @@
       </div>
 
     <div class="btn_box">
-      <input class="w3-button w3-blue w3-round-large" type="submit" name="" value="완료">
+      <input class="w3-button w3-blue w3-round-large" type="submit" name="upload" value="완료">
       <input class="w3-button w3-round-large" type="button" name="" value="취소">
       </div>
 
@@ -287,6 +295,45 @@
       }
 
     }
+  </script>
+  <script type="text/javascript">
+  initImages();
+
+    function imageURL(input) {
+        initImages();
+        if (input.files && input.files.length>0) {
+          document.getElementsByName('upload')[0].disabled = false;
+          var onloadcallback = function(e) {
+            //document.getElementsByTagName('img')[0].setAttribute('src', e.target.result);
+            makeImage(e.target.result);
+          };
+
+          for(var i=0; i<input.files.length; i++) {
+            var reader = new FileReader();
+            reader.onload = onloadcallback;
+            reader.readAsDataURL(input.files[i]);
+          }
+        }
+      }
+
+      function initImages() {
+        document.getElementsByClassName('imgs')[0].innerHTML = '';
+        document.getElementsByName('upload')[0].disabled = true;
+      }
+
+      function makeImage(src) {
+        var box = document.createElement('div');
+        var obj = document.createElement('img');
+        var in1 = document.createElement('input');
+        in1.setAttribute('placeholder', '사진 설명을 입력');
+        in1.setAttribute('type', 'text');
+        in1.setAttribute('name', 'names[]');
+        obj.setAttribute('src', src);
+        var cnter = document.getElementsByClassName('imgs')[0];
+        box.appendChild(obj);
+        box.appendChild(in1);
+        cnter.appendChild(box);
+      }
   </script>
 </html>
 <?php } ?>

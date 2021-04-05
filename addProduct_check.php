@@ -5,14 +5,23 @@ require_once("modules/db.php");
 
 // Parameter
 // 호선과 역 둘로 나눠서 호선 id 가져와야함
-$descriptions = Post('names', null);
+$line = Post('line', null);
 $title = Post('title', null);
 $price = Post('price', null);
 $price_checking = Post('price_checking', null);
 $category = Post('category', null);
-$price = Post('price', null);
+$mb = Post('mb', null);
+$om = Post('om', null);
+$explainText = Post('explainText', null);
 // Functions
-
+echo $line."<br>";
+echo $title."<br>";
+echo $price."<br>";
+echo $price_checking."<br>";
+echo $category."<br>";
+echo $explainText."<br>";
+print_r($_FILES);
+echo $mb ? $mb : $om;
 // Process
 try {
   $productObj = new Product($DBconfig['dburl'], $DBconfig['dbid'], $DBconfig['dbpw'], $DBconfig['dbtable'], $DBconfig['dbtype']);
@@ -28,5 +37,5 @@ try {
   echo $e->getMessage();
   exit();
 }
-userGoNow('/gallery_list.php');
+// userGoNow('/gallery_list.php');
 ?>
