@@ -20,7 +20,6 @@ echo $price."<br>";
 echo $price_checking."<br>";
 echo $category."<br>";
 echo $explainText."<br>";
-print_r($_FILES);
 echo $mb ? $mb : $om;
 // Process
 try {
