@@ -60,14 +60,14 @@
           <?php
             $line = $mb["mb_line_station"] ? $mb["mb_line_station"] : $om["om_line_station"];
             $lines = substr($line, 0 , 1);
-            // echo $lines;
+            echo $lines;
           ?>
         </div>
 
       </div>
 
       <!-- 폼  -->
-      <form class="" action="addProduct_check.php" method="post">
+      <form class="" action="addProduct_check.php" method="post" enctype="multipart/form-data">
 
       <!-- 제목 입력 부분 -->
       <div id="insertTitle_box" class="radius_box" >
@@ -79,7 +79,7 @@
 
         <div class="content_box">
           <input id ="titleText" class="w3-input" type="text" name="title" placeholder="제목을 입력해주세요."required>
-          <input type="hidden" name="line" value="<?=$lines?>" required>
+          <input type="hidden" name="lines" value="<?=$lines?>">
           <input type="hidden" name="mb" value="<?=$mb["mb_num"]?>">
           <input type="hidden" name="om" value="<?=$om["om_id"]?>">
           <!-- php 추가예정  -->

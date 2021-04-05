@@ -372,7 +372,7 @@ if($fname != '') {
 	}
 
 //겔러리, 상담, 제품 등록
-	public function Upload($product=null,$fparam, $fnum, $datArray) {//$fnum 다중업로드 처리를 위해 id값
+	public function Upload($fparam, $fnum, $datArray) {//$fnum 다중업로드 처리를 위해 id값
 		if(!is_array($datArray)) throw new CommonException('잘못된 인수');//is_array($datArray) 배열검사
 		$farray = null;
 		if(is_string($fparam) && ($fparam != '')) {
@@ -421,6 +421,7 @@ if($fname != '') {
 
 		$this->openDB();
 		$query = $this->db->prepare("insert into $this->quTable ($dfield) values ($dvalue)"); //글 올리는 로직
+		// echo $query;
 		foreach($datArray as $key => $val) {
 			if(is_string($val)) { //변수 유형이 문자열인지 확인
 				$query->bindValue(":$key", $val);

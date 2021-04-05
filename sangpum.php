@@ -188,7 +188,7 @@
           <ul class="list">
           <li class="hidden check_field"><input type="checkbox" name="id[]" class="hidden" id="<?= $row['pr_id'] ?>" value=""></li>
           <li class="hidden"><?= $row['pr_id'] ?></li>
-          <li class="list-li w3-round image_box"><img src="<?= $row['pr_img'] ?>" width="100%" height="100%" /></li>
+          <li class="list-li w3-round image_box"><img src="files/<?= $row['pr_img'] ?>" width="100%" height="100%" /></li>
           <div class="text_field">
             <li class="name_field"><?= $row['pr_title'] ?></li>
             <li class="clear"></li>
