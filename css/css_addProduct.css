@@ -1,6 +1,5 @@
 html,body{font-size: 10px!important;}
 body {
-  margin: 0 auto;
   padding: 0;
   width:100%;
   height:100%;
@@ -52,7 +51,7 @@ a{text-decoration: none;}
   grid-gap:1.0rem;
   grid-template-columns: repeat(7, 1fr);
 }
-.categorylabel{cursor: pointer;color: #3b3b3b;font-size: 1.8rem;}
+.categorylabel{cursor: pointer;color: #3b3b3b;font-size: 1.6rem;}
 #selectedCategory{color: blue;}
 .test{width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden;}
 
@@ -93,15 +92,6 @@ a{text-decoration: none;}
 .btn_box input{width: 18.0rem;margin: 0 1.0rem}
 .btn_box input:nth-child(1){}
 .btn_box input:nth-child(2){background-color:#e3e3e3; }
-@media only screen and (min-width: 1920px) {
-  body{
-    width: 1920px;
-    margin: 0 auto;
-    left: 50%;
-    transform:translateX(-50%);
-  }
-}
-
 @media only screen and (min-width: 1920px) {
   body{
     width: 1920px;
