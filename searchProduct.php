@@ -44,10 +44,9 @@
 
         </div>
 
-        <!-- 호선 및 역별 선택 버튼 -->
+        <!-- 호선 선택 버튼 -->
         <div class="btn_box">
-          <input class="w3-button w3-blue w3-round-large" type="submit" name="" value="완료">
-          <input class="w3-button w3-round-large" type="button" name="" value="취소">
+          <input class="w3-button w3-round-large" type="button" name="" value="호선선택">
         </div>
       </div>
 
@@ -121,11 +120,10 @@
 
       <!-- 페이지 네이션 들어가는 부분 -->
       <div id="pagination">
-        <!-- 페이지 네이션 아마도 a 태그로 들어오겠지요? a 에 css 줬습니다 -->
-        <!-- 버튼은 일단 보류 왜냐하면 php 로 다루는게 좋을지 js 다룰건지 미정이므로 형님
-         코드에 편한대로   -->
-        <a href="#">1</a>
-        <a href="#">2</a>
+        <ul>
+          <li><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+        </ul>
       </div>
 
     </div>
