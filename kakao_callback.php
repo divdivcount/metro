@@ -78,7 +78,7 @@
     }else{
       $mb_email = "메일을 선택 하지 않으셨습니다.";
     }
-    $OauthObj = $oauth->Om_insert($mb_uid,$mb_token,$mb_name,$mb_nickname,$mb_email,$mb_profile_image,$mb_company);
+    $OauthObj = $oauth->Om_insert($mb_uid,$mb_token,$mb_name,$mb_email,$mb_profile_image,$mb_company);
     $_SESSION['kakao_mb_id'] = $mb_company.$mb_uid;
     if(isset($_SESSION['kakao_mb_id'])) { // 세션이 있다면 로그인 확인 페이지로 이동
       echo "<script>alert('로그인 되었습니다.');</script>";

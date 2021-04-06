@@ -16,21 +16,21 @@ class Product extends MetroDAO {
     //   else return null;
     // }
     public function ProductAll($title, $om, $mb) {
-      echo "-----------------------------"."<br>";
-      echo $title."<br>";
-      echo $om."<br>";
-      echo $mb."<br>";
-      echo "-----------------------------"."<br>";
+      // echo "-----------------------------"."<br>";
+      // echo $title."<br>";
+      // echo $om."<br>";
+      // echo $mb."<br>";
+      // echo "-----------------------------"."<br>";
       // 회원 출력
       if($om == ''){
         $om = 'null';
-        echo $om."<br>";
-      }elseif($mb = ''){
+        // echo $om."<br>";
+      }elseif($mb == ''){
         $mb = 'null';
-        echo $mb."<br>";
+        // echo $mb."<br>";
       }
       $this->openDB();
-      $query = $this->db->prepare("select * from $this->quTable where pr_title = '$title' and mb_id=$mb or om_id = $om");
+      $query = $this->db->prepare("select * from $this->quTable where pr_title = '$title' and mb_id=$mb or om_id = '$om'");
       $query -> bindValue(":title", $title, PDO::PARAM_STR);
       $query->execute();
       $fetch = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -40,20 +40,20 @@ class Product extends MetroDAO {
       else return null;
     }
     public function Product_title_search($title, $om, $mb) {
-      echo "-----------------------------"."<br>";
-      echo $title."<br>";
-      echo $om."<br>";
-      echo $mb."<br>";
-      echo "-----------------------------"."<br>";
+      // echo "-----------------------------"."<br>";
+      // echo $title."<br>";
+      // echo $om."<br>";
+      // echo $mb."<br>";
+      // echo "-----------------------------"."<br>";
       // 회원 출력
       if($om == ''){
         $om = 'null';
-      }elseif($mb = ''){
+      }elseif($mb == ''){
         $mb = 'null';
       }
       // 회원 출력
       $this->openDB();
-      $query = $this->db->prepare("select * from $this->quTable where pr_title = '$title' and mb_id=$mb or om_id = $om");
+      $query = $this->db->prepare("select * from $this->quTable where pr_title = '$title' and mb_id=$mb or om_id = '$om'");
       $query -> bindValue(":title", $title, PDO::PARAM_STR);
       $query->execute();
       $fetch = $query->fetchAll(PDO::FETCH_ASSOC);

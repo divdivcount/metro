@@ -66,10 +66,10 @@ if($status_code == 200) {
       // echo $mb_nickname."<br>";
       // echo $mb_email."<br>";
       // echo $mb_profile_image."<br>";
-      $OauthObj = $oauth->Om_insert($mb_uid,$mb_token,$mb_name,$mb_nickname,$mb_email,$mb_profile_image,$mb_company);
+      $OauthObj = $oauth->Om_insert($mb_uid,$mb_token,$mb_nickname,$mb_email,$mb_profile_image,$mb_company);
       // 멤버 DB에 토큰과 회원정보를 넣고 로그인
       $_SESSION['naver_mb_id'] = $mb_company.$mb_uid;
-      echo $_SESSION['naver_mb_id'];
+      // echo $_SESSION['naver_mb_id'];
       if(isset($_SESSION['naver_mb_id'])) { // 세션이 있다면 로그인 확인 페이지로 이동
       	echo "<script>alert('로그인 되었습니다.');</script>";
       	echo "<script>location.replace('./login.php');</script>";

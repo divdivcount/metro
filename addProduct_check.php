@@ -38,7 +38,7 @@ try {
 }
 $ftime = time();
 $pm = ($mb ? $mb : $om).$title."val".$ftime;
-echo $pm;
+// echo $pm;
 // echo $pr_img_id ;
 
 
@@ -56,10 +56,10 @@ echo $pm;
         // echo $i."<br>";
         if($i == 0){
           $y = 'y';
-          echo $y;
+          // echo $y;
         }else{
           $y = 'n';
-          echo $y;
+          // echo $y;
         }
         $productIMG = new Primg();
         $productIMG->Upload('files', $i, ['pr_img_id'=>$pm, "main_check" => $y]);
@@ -70,5 +70,5 @@ echo $pm;
   echo $e->getMessage();
   exit();
 }
-// userGoNow('My_one_page.php');
+userGoNow('My_one_page.php');
 ?>

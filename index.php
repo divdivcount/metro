@@ -41,7 +41,7 @@ require_once('modules/db.php');
           }elseif(isset($_SESSION['kakao_mb_id'])){
             $oms_id = $_SESSION['kakao_mb_id'];
             $oms_id = substr($oms_id, 5);
-            echo $oms_id;
+            // echo $oms_id;
             $sql = " select * from oauth_member where om_id = TRIM($oms_id) ";
             $result = mysqli_query($conn, $sql);
             $om = mysqli_fetch_assoc($result);

@@ -5,7 +5,7 @@
     protected $quTable = 'oauth_member';
     protected $quTableId = 'om_id';
 
-    public function Om_insert($mb_uid,$mb_token,$mb_name,$mb_nickname,$mb_email,$mb_profile_image,$mb_company) {
+    public function Om_insert($mb_uid,$mb_token,$mb_nickname,$mb_email,$mb_profile_image,$mb_company) {
       $this->openDB();
       $query = $this->db->prepare("insert into $this->quTable values (:mb_uid, :mb_email, :mb_nickname, :mb_profile_image, :mb_token,:mb_company,null,null,null)");
       $query -> bindValue(":mb_uid", $mb_uid, PDO::PARAM_STR);
@@ -14,7 +14,6 @@
       $query -> bindValue(":mb_profile_image", $mb_profile_image, PDO::PARAM_STR);
       $query -> bindValue(":mb_token", $mb_token, PDO::PARAM_STR);
       $query -> bindValue(":mb_company", $mb_company, PDO::PARAM_STR);
-      var_dump($query);
       $query->execute();
     }
 
@@ -39,6 +38,7 @@
           return $query->execute();
         }
 
+        
 
     public function Om_Delete($om_id) {
     try{

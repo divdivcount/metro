@@ -10,10 +10,10 @@
         <?php
           if(isset($mb['mb_num'])){
             echo "<ul>"."&nbsp;<a href='./addProduct.php'><li>상품등록</li></a>"."&nbsp;<a href='./User_page.php'><li>채팅</li></a>"."&nbsp;<a href='My_one_page.php'><li>마이페이지</li></a>"."&nbsp;<a href='./logout.php'><li>로그아웃</li></a>"."</ul>";
-            echo "일반 아이디";
+            // echo "일반 아이디";
           }elseif(isset($om['om_id'])){
             echo "<ul>"."&nbsp;<a href='./addProduct.php'><li>상품등록</li></a>"."&nbsp;<a href='./User_page.php'><li>채팅</li></a>"."&nbsp;<a href='My_one_page.php'><li>마이페이지</li></a>"."&nbsp;<a href='./oauth_logout.php'><li>로그아웃</li></a>"."</ul>";
-            echo "네이버 아이디";
+            // echo "네이버 아이디";
           }else {
             echo "<ul><a href='./login.php'><li>login</li></a></ul>";
           }

@@ -14,7 +14,8 @@ switch ($mode) {
 		$title = "회원가입";
         break;
     case 'modify' :
-        $mb_id = $_SESSION['ss_mb_id'];
+        $mb_id = ($_SESSION['ss_mb_id'] ? $_SESSION['ss_mb_id'] :
+								 ($_SESSION['naver_mb_id'] ? $_SESSION['naver_mb_id'] : $_SESSION['kakao_mb_id']));
 		$title = "회원수정";
     break;
 }
@@ -28,6 +29,8 @@ $mb_datetime = date('Y-m-d H:i:s', time()); // 가입일
 $mb_modify_datetime	= date('Y-m-d H:i:s', time()); // 수정일
 $mb_email = $mb_email_one.'@'.$mb_email_two;
 
+
+
 $sql = " SELECT mb_password FROM member WHERE mb_id = '$mb_id'"; // 입력한 비밀번호를 MySQL password() 함수를 이용해 암호화해서 가져옴
 $result = mysqli_query($conn, $sql);
 $mb_pw = mysqli_fetch_assoc($result);
@@ -38,6 +41,8 @@ $rows = mysqli_fetch_assoc($result);
 $mbs_password = $rows['pass'];
 // echo $mbs_password."<br>";
 // echo $mb_pw["mb_password"];
+
+
 if($mb_pw["mb_password"] != $mbs_password){
 	echo "<script>alert('현재 비밀번호가 일치하지 않습니다.');</script>";
 	echo "<script>location.replace('./member_update.php');</script>";
@@ -111,6 +116,10 @@ if($mode == "insert") { // 신규 등록 상태
 					 mb_modify_datetime = '$mb_modify_datetime'
 			 WHERE mb_id = '$mb_id' ";
 	$result = mysqli_query($conn, $sql);
+
+
+
+
 }
 
 if ($result) {

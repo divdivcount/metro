@@ -12,7 +12,7 @@ if(isset($_SESSION['ss_mb_id'])){
   $result = mysqli_query($conn, $sql);
   $mb = mysqli_fetch_assoc($result);
   $mb_id = $mb['mb_num'];
-  echo  $mb_id;
+  // echo  $mb_id;
 }elseif(isset($_SESSION['naver_mb_id'])){
   $mb_ids = $_SESSION['naver_mb_id'];
   $mb_ids = substr($mb_ids, 5);
@@ -20,7 +20,7 @@ if(isset($_SESSION['ss_mb_id'])){
   $result = mysqli_query($conn, $sql);
   $om = mysqli_fetch_assoc($result);
   $mb_id = $om['om_id'];
-  echo  $mb_id;
+  // echo  $mb_id;
 }elseif(isset($_SESSION['kakao_mb_id'])){
   $mb_ids = $_SESSION['kakao_mb_id'];
   $mb_ids = substr($mb_ids, 5);
@@ -28,7 +28,7 @@ if(isset($_SESSION['ss_mb_id'])){
   $result = mysqli_query($conn, $sql);
   $om = mysqli_fetch_assoc($result);
   $mb_id = $om['om_id'];
-  echo  $mb_id;
+  // echo  $mb_id;
 }else{
   ?>
   <script>
@@ -48,7 +48,10 @@ if(isset($_SESSION['ss_mb_id'])){
 <link rel="stylesheet" href="css/css_noamlfont.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://unpkg.com/hangul-js" type="text/javascript"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <style>
   .w3-container{background-color: #fff;}
   .button_contatiner_margin{padding-top: 88px; padding-bottom: 190px;}
@@ -116,7 +119,10 @@ if(isset($_SESSION['ss_mb_id'])){
       </p>
       </form>
 
-      <form  id="selectMetro_box" action="My_one_page.php" method="post">
+      <form  id="selectMetro_box" action="station_update.php" method="post">
+        <input type="hidden" name="mode" value="modify">
+        <input type="hidden" name="mbs_id"  value="<?= $mb["mb_id"] ? $mb["mb_id"] : 'null' ?>">
+        <input type="hidden" name="om_id"  value="<?= $om["om_id"] ? $om["om_id"] : 'null' ?>">
         <div id="bothFind_item">
 
         <div class="find_item">
@@ -191,17 +197,17 @@ if(isset($_SESSION['ss_mb_id'])){
             $( "#auto" ).autocomplete( "search", Hangul.disassemble(input).join("").replace(/ /gi, "") );	//자모 분리후 띄어쓰기 삭제
             })
           </script>
-          <div style="display:flex"><input id="auto" class="w3-input highlight" value='' type="text"><div style="width:1.3rem;margin:auto"><img src="img\loupe.png" alt=""></div></div>
+          <div style="display:flex"><input id="auto" class="w3-input highlight" name="station" value='' type="text"><div style="width:1.3rem;margin:auto"><img src="img\loupe.png" alt=""></div></div>
         </div>
 
       </div>
 
-      <button type="submit" id ="close_pop" class="w3-button w3-blue w3-ripple w3-round-xxlarge" name="button">물건보러가기</button>
+      <button type="submit" id ="close_pop" class="w3-button w3-blue w3-ripple w3-round-xxlarge" name="button">등록</button>
       </form>
 
       <p class="p_container_margin">
         <label>*주변 역 설정하기</label>
-        <input class="input_station" type="text" id="pw2" required>	<button type="submit" id="joinBtn" class="w3-button w3-tiny w3-light-gray w3-round">역 검색</button>
+        <input class="input_station" type="text" id="pw2" value="<?=$mb['line_station'] ? $mb['line_station'] : $om['line_station']?>" required>	<button type="submit" id="joinBtn" class="w3-button w3-tiny w3-light-gray w3-round">역 검색</button>
       </p>
       <p class="w3-center button_contatiner_margin">
         <button type="submit" id="joinBtn" class="w3-button  w3-blue w3-ripple w3-margin-top w3-round" onclick="document.getElementById('pwForm').submit();">비밀번호 변경</button>

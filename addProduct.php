@@ -24,7 +24,7 @@
     <!-- 상단 메뉴 부분 -->
     <?php
         if(!(empty($_SESSION['ss_mb_id']) || empty($_SESSION['naver_mb_id']) || empty($_SESSION['kakao_mb_id']))){
-            echo "123";
+            // echo "123";
         }else{
           if(isset($_SESSION['ss_mb_id'])){
             $mb_id = $_SESSION['ss_mb_id'];
@@ -40,7 +40,7 @@
           }elseif(isset($_SESSION['kakao_mb_id'])){
             $oms_id = $_SESSION['kakao_mb_id'];
             $oms_id = substr($oms_id, 5);
-            echo $oms_id;
+            // echo $oms_id;
             $sql = " select * from oauth_member where om_id = TRIM($oms_id) ";
             $result = mysqli_query($conn, $sql);
             $om = mysqli_fetch_assoc($result);
@@ -56,11 +56,11 @@
           <h2 style="font-size:2.8rem">상품등록하기</h2>
 
           <!-- php 나 스크립트로 뜨게 해야하는 부분 추후 수정 -->
-          <span><?= $mb["mb_line_station"] ? $mb["mb_line_station"] : $om["om_line_station"]?></span>
+          <span><?= $mb["line_station"] ? $mb["line_station"] : $om["line_station"]?></span>
           <?php
-            $line = $mb["mb_line_station"] ? $mb["mb_line_station"] : $om["om_line_station"];
-            $lines = substr($line, 0 , 1);
-            echo $lines;
+            $line = $mb["line_station"] ? $mb["line_station"] : $om["line_station"];
+            $lines = (int)filter_var($line, FILTER_SANITIZE_NUMBER_INT);
+            // echo $lines;
           ?>
         </div>
 

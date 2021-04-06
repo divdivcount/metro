@@ -477,6 +477,15 @@ if($fname != '') {
 		// exit;
 		return $last_id;
   }
-
+	public function mbom_line_station_update($om_id,$mb_id, $om_line_station) {
+				$this->openDB();
+				if($mb_id != 'null'){
+					$query = $this->db->prepare("update $this->quTable set line_station = '$om_line_station' where mb_id='$mb_id'");
+				}elseif($om_id != 'null'){
+					$query = $this->db->prepare("update $this->quTable set line_station = '$om_line_station' where om_id='$om_id'");
+					var_dump($query);
+				}
+				$query->execute();
+			}
 }
 ?>
