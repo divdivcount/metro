@@ -46,6 +46,7 @@
             $om = mysqli_fetch_assoc($result);
           }
         }
+
     ?>
     <?php require_once('metrocket_header.php'); ?>
 
@@ -58,9 +59,18 @@
           <!-- php 나 스크립트로 뜨게 해야하는 부분 추후 수정 -->
           <span><?= $mb["line_station"] ? $mb["line_station"] : $om["line_station"]?></span>
           <?php
+          //85
             $line = $mb["line_station"] ? $mb["line_station"] : $om["line_station"];
-            $lines = (int)filter_var($line, FILTER_SANITIZE_NUMBER_INT);
+            $pieces = explode("&nbsp;", $line);
+            $linesa = $pieces[0];
+            // echo $linesa;
+            $sql = "select l_id from line where l_name = '$linesa'";
+            $result = mysqli_query($conn, $sql);
+            $line = mysqli_fetch_assoc($result);
+            $line["l_id"];
+            $lines = $line["l_id"];
             // echo $lines;
+
           ?>
         </div>
 

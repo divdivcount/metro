@@ -483,7 +483,7 @@ if($fname != '') {
 					$query = $this->db->prepare("update $this->quTable set line_station = '$om_line_station' where mb_id='$mb_id'");
 				}elseif($om_id != 'null'){
 					$query = $this->db->prepare("update $this->quTable set line_station = '$om_line_station' where om_id='$om_id'");
-					var_dump($query);
+					// var_dump($query);
 				}
 				$query->execute();
 			}
