@@ -13,6 +13,7 @@ $category = Post('category', null);
 $mb = Post('mb', null);
 $om = Post('om', null);
 $explainText = Post('explainText', null);
+$a = 0;
 // Functions
 // echo $line."<br>";
 // echo $title."<br>";
@@ -24,19 +25,27 @@ $explainText = Post('explainText', null);
 // echo $om."<br>";
 // Process
 try {
+
   //제품을 먼저 추가 하고 pr_id를 불러 이미지 추가해야
   $productObj = new Product();
   $results = $productObj->Product_title_search($title,$om,$mb);
+  // echo $pr_img_id."<br>";
   foreach ($results as $rows) {
     // echo $rows['pr_title']."<br>";
     if($rows['pr_title'] == $title){
       userGoto("이미 한번 입력된 제목 입니다.", "addProduct.php");
     }
-  }
-  $productObj->Upload('', 0, ['ca_name'=>$category,'mb_id'=>$mb,'om_id'=>$om,'l_id'=>$line,'pr_title'=>$title,'pr_price'=>$price ,'pr_explanation'=>$explainText, 'pr_check'=>$price_checking]);
+}
+$ftime = time();
+$pm = ($mb ? $mb : $om).$title."val".$ftime;
+echo $pm;
+// echo $pr_img_id ;
+
+
+  $productObj->Upload('', 0, ['ca_name'=>$category,'mb_id'=>$mb,'om_id'=>$om,'l_id'=>$line,'pr_title'=>$title,'pr_price'=>$price ,'pr_explanation'=>$explainText, 'pr_check'=>$price_checking,'pr_img_id'=>$pm]);
   $result = $productObj->ProductAll($title,$om,$mb);
   foreach ($result as $row) {
-    $pr = $row['pr_id'];
+    $pr = $row['pr_img_id'];
   }
 
   if($pr) {
@@ -45,9 +54,15 @@ try {
     for($i=0; $i<count($_FILES['files']['name']); $i++) {
       if($_FILES['files']['type'][$i] == 'image/jpeg' || $_FILES['files']['type'][$i] == 'image/png' || $_FILES['files']['type'][$i] == 'image/gif') {
         // echo $i."<br>";
-
+        if($i == 0){
+          $y = 'y';
+          echo $y;
+        }else{
+          $y = 'n';
+          echo $y;
+        }
         $productIMG = new Primg();
-        $productIMG->Upload('files', $i, ['pr_id'=>$pr]);
+        $productIMG->Upload('files', $i, ['pr_img_id'=>$pm, "main_check" => $y]);
       }
     }
   }
@@ -55,5 +70,5 @@ try {
   echo $e->getMessage();
   exit();
 }
-userGoNow('My_one_page.php');
+// userGoNow('My_one_page.php');
 ?>
