@@ -22,12 +22,25 @@ p{margin: 0}
 /* 슬라이드 */
 
 #slideImg_box{}
-.bx-wrapper{margin-bottom: 20px}
+.bx-wrapper{margin-bottom: 20px;margin-top: 20px;border: none;border-radius: 10px; box-shadow: 4px 4px 3px #000 inset; }
+.bx-wrapper img{border-radius: 10px;}
+.bx-wrapper .bx-pager{bottom:0;top: 80%;background:linear-gradient(to top, black, transparent);padding-top:0;display: flex;align-items: center;justify-content: center;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px}
+
+.bx-wrapper .bx-pager.bx-default-pager a:hover,
+.bx-wrapper .bx-pager.bx-default-pager a.active,
+.bx-wrapper .bx-pager.bx-default-pager a:focus {
+  background: #fff;
+}
+.bx-wrapper .bx-pager.bx-default-pager a {background: #bebebe;}
+
+.bx-viewport{border-radius: 10px}
+.bxslider img{border-radius: 10px;}
+.bx-pager .bx-default-pager{}
 /* 슬라이드 */
 
 #productInfo_title{
   width: 100%;
-  height:24.0rem;
+  height:auto;
   padding: 2.0rem;
   display: flex;
   flex-direction: column;
@@ -41,19 +54,31 @@ p{margin: 0}
   background-color: white;
   font-size: 2.0rem;
   color:#3b3b3b;
+  overflow:scroll;
 }
 
 
-.otherProduct_title{width: 100%;margin:5.0rem 0;font-size: 3.0rem;color: #444444;}
+.otherProduct_title h3{width: 100%;margin:5.0rem 0;font-size: 3.0rem;color: #444444;font-family: "NotoSansKR_m";}
 .otherProduct_gridBox{
+  flex-wrap: wrap;
   display: grid;
   width: 100%;
-  grid-column-gap: minmax(1.0rem,6.0rem)
+  grid-template-columns: repeat(4,1fr);
+  justify-items: center;
 }
-.otherProduct_content{width: 230px;height: 330px;}
-.otherProduct_content_img{width: 100%;height:230px;background-color:gray;}
+.otherProduct_content{width: 230px;height: 360px;}
+.otherProduct_content_img{width: 100%;height:69%;background-color:gray;box-shadow: 3px 3px 6px 0 rgba(0, 0, 0, 0.16);}
 .otherProduct_content_img img{width: 100%;height:100%}
-.otherProduct_content_text{width: 100%;height: 95px;margin-top: 5px;background-color: white;}
+.otherProduct_content_text{width: 100%;height:29%;display: flex;flex-direction: column;margin-top: 5px;padding: 1.0rem;background-color: white;box-shadow: 3px 3px 6px 0 rgba(0, 0, 0, 0.16);}
+.otherProduct_content_text_title_line{width: 100%;font-family: "NotoSansKR_m";font-size: 1.3rem;color: #5b5b5b;}
+.otherProduct_content_text_price_line{width: 100%;font-family: "NotoSansKR_m";font-size: 1.3rem;color: #5b5b5b;}
+.otherProduct_content_text_station_line{width: 100%;font-family: "NotoSansKR_r";font-size: 1.0rem;color: #5e5956;}
+.otherProduct_content_text_category_line{width: 100%;display: flex;justify-content: space-between;}
+.otherProduct_content_text_category_line span{font-family: "NotoSansKR_t";font-size: 0.8rem;color: #7d7d7d;}
+
+
+
+
 
 /* 문제의 그 곳  */
 
@@ -92,20 +117,47 @@ p{margin: 0}
     transform:translateX(-50%);
   }
 }
+@media only screen and (max-width: 1700px) {
+  #wrapContainer_Box{width: 65%;}
 @media only screen and (max-width: 1440px) {
+  html,body{font-size: 9px!important;}
+  #wrapContainer_Box{width: 70%;}
+  .otherProduct_content{width: 184px;height: 288px;}
+}
+@media only screen and (max-width: 1366px) {
+  html,body{font-size: 9px!important;}
+  .otherProduct_content{width: 161px;height: 252px;}
 }
 @media only screen and (max-width: 1024px) {
-  html,body{font-size: 9px!important;}
+  html,body{font-size: 8px!important;}
+  #wrapContainer_Box{width: 80%;}
+  .otherProduct_content{width: 138px;height: 216px;}
+  .otherProduct_content_img{height:65%;}
+  .otherProduct_content_text{;height:34%;}
 }
 @media only screen and (max-width: 768px) {
   html,body{font-size: 8px!important;}
+  #wrapContainer_Box{width: 90%;}
+  .otherProduct_content{width: 126.5px;height: 198px;}
 }
 @media only screen and (max-width: 540px) {
-  html,body{font-size: 8px!important;}
+  html,body{font-size: 7px!important;}
+  .otherProduct_content:nth-child(4){display:none;}
+  .otherProduct_gridBox{grid-template-columns: repeat(3,1fr);}
 }
 @media only screen and (max-width: 425px) {
-  html,body{font-size: 8px!important;}
-}
-@media only screen and (max-width: 340px) {
   html,body{font-size: 7px!important;}
+  .otherProduct_content{width: 115px;height: 200px;}
+  .otherProduct_content_img{height:60%;}
+  .otherProduct_content_text{;height:39%;}
+}
+@media only screen and (max-width: 375px) {
+  html,body{font-size: 6px!important;}
+  .otherProduct_content{width: 95px;height: 190px;}
+  .otherProduct_content_img{height:50%;}
+  .otherProduct_content_text{;height:49%;}
+}
+
+@media only screen and (max-width: 340px) {
+
 }

@@ -152,25 +152,307 @@
 
       <!-- 다른 상품 소개 타이틀 -->
       <div class="otherProduct_title"><h3>이 상품과 비슷한 상품</h3></div>
-
       <!-- 상품 그리드 박스 -->
+      <!-- 다른 상품들 노출되는 부분임 -->
       <div class="otherProduct_gridBox">
 
-        <!-- 상품 정보  -->
+        <!-- 기타 상품 정보  -->
+        <!-- 이형식으로 쭉 클래스 긴건 애교로 -->
         <div class="otherProduct_content">
+
           <!-- 이미지 부분 -->
           <div class="otherProduct_content_img radiusTop">
             <img src="img/games.png" alt="">
           </div>
+
           <!-- 상품 내용 -->
           <div class="otherProduct_content_text radiusBottom">
-            test
+
+            <!-- 제목 -->
+            <div class="otherProduct_content_text_title_line">
+              <span>김치냉장고 이사로 급처</span>
+            </div>
+
+            <!-- 가격 -->
+            <div class="otherProduct_content_text_price_line">
+              <span>150,000</span>
+            </div>
+
+            <!-- 역 위치 -->
+            <div class="otherProduct_content_text_station_line">
+              <span>8호선 단대오거리역</span>
+            </div>
+
+            <!-- 카테고리 및 관심 수 부분  -->
+            <div class="otherProduct_content_text_category_line">
+              <span>디지털/가전</span>
+              <span>관심7</span>
+            </div>
+
           </div>
         </div>
-      </div>
 
+        <!-- 기타 상품 정보  -->
+        <!-- 이형식으로 쭉 클래스 긴건 애교로 -->
+        <div class="otherProduct_content">
 
+          <!-- 이미지 부분 -->
+          <div class="otherProduct_content_img radiusTop">
+            <img src="img/games.png" alt="">
+          </div>
 
+          <!-- 상품 내용 -->
+          <div class="otherProduct_content_text radiusBottom">
+
+            <!-- 제목 -->
+            <div class="otherProduct_content_text_title_line">
+              <span>김치냉장고 이사로 급처</span>
+            </div>
+
+            <!-- 가격 -->
+            <div class="otherProduct_content_text_price_line">
+              <span>150,000</span>
+            </div>
+
+            <!-- 역 위치 -->
+            <div class="otherProduct_content_text_station_line">
+              <span>8호선 단대오거리역</span>
+            </div>
+
+            <!-- 카테고리 및 관심 수 부분  -->
+            <div class="otherProduct_content_text_category_line">
+              <span>디지털/가전</span>
+              <span>관심7</span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 기타 상품 정보  -->
+        <!-- 이형식으로 쭉 클래스 긴건 애교로 -->
+        <div class="otherProduct_content">
+
+          <!-- 이미지 부분 -->
+          <div class="otherProduct_content_img radiusTop">
+            <img src="img/games.png" alt="">
+          </div>
+
+          <!-- 상품 내용 -->
+          <div class="otherProduct_content_text radiusBottom">
+
+            <!-- 제목 -->
+            <div class="otherProduct_content_text_title_line">
+              <span>김치냉장고 이사로 급처</span>
+            </div>
+
+            <!-- 가격 -->
+            <div class="otherProduct_content_text_price_line">
+              <span>150,000</span>
+            </div>
+
+            <!-- 역 위치 -->
+            <div class="otherProduct_content_text_station_line">
+              <span>8호선 단대오거리역</span>
+            </div>
+
+            <!-- 카테고리 및 관심 수 부분  -->
+            <div class="otherProduct_content_text_category_line">
+              <span>디지털/가전</span>
+              <span>관심7</span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 기타 상품 정보  -->
+        <!-- 이형식으로 쭉 클래스 긴건 애교로 -->
+        <div class="otherProduct_content">
+
+          <!-- 이미지 부분 -->
+          <div class="otherProduct_content_img radiusTop">
+            <img src="img/games.png" alt="">
+          </div>
+
+          <!-- 상품 내용 -->
+          <div class="otherProduct_content_text radiusBottom">
+
+            <!-- 제목 -->
+            <div class="otherProduct_content_text_title_line">
+              <span>김치냉장고 이사로 급처</span>
+            </div>
+
+            <!-- 가격 -->
+            <div class="otherProduct_content_text_price_line">
+              <span>150,000</span>
+            </div>
+
+            <!-- 역 위치 -->
+            <div class="otherProduct_content_text_station_line">
+              <span>8호선 단대오거리역</span>
+            </div>
+
+            <!-- 카테고리 및 관심 수 부분  -->
+            <div class="otherProduct_content_text_category_line">
+              <span>디지털/가전</span>
+              <span>관심7</span>
+            </div>
+
+          </div>
+        </div>
+
+      </div><!-- 그리드 박스의 끝  -->
+
+      <!-- 다른 상품 소개 타이틀 -->
+      <div class="otherProduct_title"><h3>판매자의 다른상품</h3></div>
+      <!-- 상품 그리드 박스 -->
+      <!-- 다른 상품들 노출되는 부분임 -->
+      <div class="otherProduct_gridBox">
+
+        <!-- 기타 상품 정보  -->
+        <!-- 이형식으로 쭉 클래스 긴건 애교로 -->
+        <div class="otherProduct_content">
+
+          <!-- 이미지 부분 -->
+          <div class="otherProduct_content_img radiusTop">
+            <img src="img/games.png" alt="">
+          </div>
+
+          <!-- 상품 내용 -->
+          <div class="otherProduct_content_text radiusBottom">
+
+            <!-- 제목 -->
+            <div class="otherProduct_content_text_title_line">
+              <span>김치냉장고 이사로 급처</span>
+            </div>
+
+            <!-- 가격 -->
+            <div class="otherProduct_content_text_price_line">
+              <span>150,000</span>
+            </div>
+
+            <!-- 역 위치 -->
+            <div class="otherProduct_content_text_station_line">
+              <span>8호선 단대오거리역</span>
+            </div>
+
+            <!-- 카테고리 및 관심 수 부분  -->
+            <div class="otherProduct_content_text_category_line">
+              <span>디지털/가전</span>
+              <span>관심7</span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 기타 상품 정보  -->
+        <!-- 이형식으로 쭉 클래스 긴건 애교로 -->
+        <div class="otherProduct_content">
+
+          <!-- 이미지 부분 -->
+          <div class="otherProduct_content_img radiusTop">
+            <img src="img/games.png" alt="">
+          </div>
+
+          <!-- 상품 내용 -->
+          <div class="otherProduct_content_text radiusBottom">
+
+            <!-- 제목 -->
+            <div class="otherProduct_content_text_title_line">
+              <span>김치냉장고 이사로 급처</span>
+            </div>
+
+            <!-- 가격 -->
+            <div class="otherProduct_content_text_price_line">
+              <span>150,000</span>
+            </div>
+
+            <!-- 역 위치 -->
+            <div class="otherProduct_content_text_station_line">
+              <span>8호선 단대오거리역</span>
+            </div>
+
+            <!-- 카테고리 및 관심 수 부분  -->
+            <div class="otherProduct_content_text_category_line">
+              <span>디지털/가전</span>
+              <span>관심7</span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 기타 상품 정보  -->
+        <!-- 이형식으로 쭉 클래스 긴건 애교로 -->
+        <div class="otherProduct_content">
+
+          <!-- 이미지 부분 -->
+          <div class="otherProduct_content_img radiusTop">
+            <img src="img/games.png" alt="">
+          </div>
+
+          <!-- 상품 내용 -->
+          <div class="otherProduct_content_text radiusBottom">
+
+            <!-- 제목 -->
+            <div class="otherProduct_content_text_title_line">
+              <span>김치냉장고 이사로 급처</span>
+            </div>
+
+            <!-- 가격 -->
+            <div class="otherProduct_content_text_price_line">
+              <span>150,000</span>
+            </div>
+
+            <!-- 역 위치 -->
+            <div class="otherProduct_content_text_station_line">
+              <span>8호선 단대오거리역</span>
+            </div>
+
+            <!-- 카테고리 및 관심 수 부분  -->
+            <div class="otherProduct_content_text_category_line">
+              <span>디지털/가전</span>
+              <span>관심7</span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 기타 상품 정보  -->
+        <!-- 이형식으로 쭉 클래스 긴건 애교로 -->
+        <div class="otherProduct_content">
+
+          <!-- 이미지 부분 -->
+          <div class="otherProduct_content_img radiusTop">
+            <img src="img/games.png" alt="">
+          </div>
+
+          <!-- 상품 내용 -->
+          <div class="otherProduct_content_text radiusBottom">
+
+            <!-- 제목 -->
+            <div class="otherProduct_content_text_title_line">
+              <span>김치냉장고 이사로 급처</span>
+            </div>
+
+            <!-- 가격 -->
+            <div class="otherProduct_content_text_price_line">
+              <span>150,000</span>
+            </div>
+
+            <!-- 역 위치 -->
+            <div class="otherProduct_content_text_station_line">
+              <span>8호선 단대오거리역</span>
+            </div>
+
+            <!-- 카테고리 및 관심 수 부분  -->
+            <div class="otherProduct_content_text_category_line">
+              <span>디지털/가전</span>
+              <span>관심7</span>
+            </div>
+
+          </div>
+        </div>
+
+      </div><!-- 그리드 박스의 끝  -->
     </div>
     <!-- 푸터 부분  -->
     <?php require_once 'metrocket_footer.php';?>
