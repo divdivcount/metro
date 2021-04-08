@@ -239,15 +239,20 @@ if($fname != '') {
 
 
 	//페이지 내이션
-  	public function SelectPageLength($cPage, $viewLen, $mb_id) {
-		$this->openDB();
+  	public function SelectPageLength($cPage, $viewLen, $mb_id, $om_id) {
+			$this->openDB();
+		if($mb_id != 'null'){
+			$om_id = null;
+			$query = $this->db->prepare("select count(*) from $this->quTable where mb_id = :mb_id and om_id is :om_id");
 
-			// echo "select count(*) from $this->quTable where mb_id = $mb_id";
-			$query = $this->db->prepare("select count(*) from $this->quTable where mb_id = $mb_id");
-
-
-		$query->bindValue(":s_value", $mb_id,  PDO::PARAM_STR);
-
+		}elseif($om_id != 'null'){
+			$mb_id = null;
+			$query = $this->db->prepare("select count(*) from $this->quTable where om_id = :om_id and mb_id is :mb_id");
+		}else{
+			echo "none";
+		}
+		$query->bindValue(":mb_id", $mb_id,  PDO::PARAM_STR);
+		$query->bindValue(":om_id", $om_id,  PDO::PARAM_STR);
     $query->execute();
 		$fetch = $query->fetch(PDO::FETCH_ASSOC);
 		$countLen = $fetch['count(*)'];
@@ -278,17 +283,25 @@ if($fname != '') {
 
 	}
 
-	public function SelectPageList($cPage, $viewLen,$mb_id) {
+	public function SelectPageList($cPage, $viewLen, $mb_id, $om_id) {
 		$start = ($cPage * $viewLen) - $viewLen;
 		// echo $start;
 		// echo $viewLen;
-		$sql=	"select p.*, i.in_hit, pi.pr_img, m.mb_line_station from product p left outer join interest i ON p.pr_id = i.pr_id left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join member m ON p.mb_id = m.mb_num where p.mb_id = :mb_id order by $this->quTableId asc limit :start, :viewLen";
-		// echo "select p.*, i.in_hit, pi.pr_img, l.l_name, m.mb_line_station from product p left outer join interest i ON p.pr_id = i.pr_id left outer join product_img pi ON p.pr_id = pi.pr_id left outer join line l ON p.l_id = l.l_id left outer join member m ON p.mb_id = m.mb_num where p.mb_id = $mb_id order by $this->quTableId asc limit :start, :viewLen";
+
+		if($mb_id != 'null'){
+			$om_id = null;
+			$sql =	"select p.*, i.in_hit, pi.pr_img, l.l_name, m.line_station from product p left outer join interest i ON p.pr_id = i.pr_id left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join member m ON p.mb_id = m.mb_num where p.mb_id = :mb_id and p.pr_img_id = pi.pr_img_id and pi.main_check = 'y' and p.om_id is :om_id order by $this->quTableId asc limit :start, :viewLen";
+		}elseif($om_id != 'null'){
+			$mb_id = null;
+			$sql = "select p.*, i.in_hit, pi.pr_img, l.l_name, om.line_station from product p left outer join interest i ON p.pr_id = i.pr_id left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join oauth_member om ON p.om_id = om.om_id where p.om_id = :om_id and p.pr_img_id = pi.pr_img_id and pi.main_check = 'y' and  p.mb_id is :mb_id order by $this->quTableId asc limit :start, :viewLen";
+		}
+
 		$this->openDB();
 		$query = $this->db->prepare($sql);
 		$query->bindValue(":start", $start, PDO::PARAM_INT);
 		$query->bindValue(":viewLen", $viewLen, PDO::PARAM_INT);
-		$query->bindValue(":mb_id", $mb_id,  PDO::PARAM_INT);
+		$query->bindValue(":mb_id", $mb_id,  PDO::PARAM_STR);
+		$query->bindValue(":om_id", $om_id,  PDO::PARAM_STR);
 		// if($start_s_value)$query->bindValue(":start_s_value", "%$start_s_value%",  PDO::PARAM_STR);
 
 		$query->execute();
