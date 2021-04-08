@@ -24,12 +24,14 @@ ul{list-style: none;}
 #pageTitle_box span{font-size: 1.6rem;color: #0099ff;}
 
 #search_box{
-  width: 80%;
+  width: 90%;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 2.5rem auto;
 }
+.search_icon{}
+.search_icon input{width: 100%;height:100%}
 
 #search_box #search_TextPart{
   margin-right: 1.0rem;
@@ -63,14 +65,14 @@ ul{list-style: none;}
   font-family: "NotoSansKR_m";
   font-size: 2.6rem;
   color: #5b5b5b;
-  width: 57%;
+  width: 70%;
   margin: 0 auto;
   align-items: center;
   justify-content: space-between;
 }
 
 .line  {
-  width: 29%;
+  width: 25%;
   height: 2px;
   margin:0px;
   background-color: #5b5b5b;
@@ -81,8 +83,8 @@ ul{list-style: none;}
   width: 100%;
   display: grid;
   grid-row-gap:5.0rem;
-  grid-column-gap: 4%;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-column-gap:1.0rem;
+  grid-template-columns: repeat(4,1fr);
 }
 
 /* info 박스아래 img박스및 test 박스가 있음 */
@@ -106,21 +108,13 @@ ul{list-style: none;}
   border-top-left-radius: 3.0rem;
 }
 
-.productInfo_box .productText_box{
-  padding: 10%;
-  width: 100%;
-  height: 35%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  border-bottom-right-radius: 3.0rem;
-  border-bottom-left-radius: 3.0rem;
-  box-shadow: 3px 3px 6px 0 rgba(0, 0, 0, 0.16);
-}
-.productInfo_box .productText_title{text-align: left;}
-.productInfo_box .productText_recommend{text-align: right;}
-.productInfo_box .productText_price{align-self:start;grid-column: 1/3;}
-.productInfo_box .productText_category{text-align: left;}
-.productInfo_box .productText_station{text-align: right;}
+
+.productText_box{width: 100%;height:29%;display: flex;flex-direction: column;margin-top: 5px;padding: 1.0rem;background-color: white;box-shadow: 3px 3px 6px 0 rgba(0, 0, 0, 0.16);border-bottom-left-radius: 10px;border-bottom-right-radius: 10px}
+.productText_box_title_line{width: 100%;font-family: "NotoSansKR_m";font-size: 1.3rem;color: #5b5b5b;}
+.productText_box_price_line{width: 100%;font-family: "NotoSansKR_m";font-size: 1.3rem;color: #5b5b5b;}
+.productText_box_station_line{width: 100%;font-family: "NotoSansKR_r";font-size: 1.0rem;color: #5e5956;}
+.productText_box_category_line{width: 100%;display: flex;justify-content: space-between;}
+.productText_box_category_line span{font-family: "NotoSansKR_t";font-size: 0.8rem;color: #7d7d7d;}
 
 #pagination{
   width: 100%;
@@ -175,34 +169,43 @@ ul{list-style: none;}
       transform:translateX(-50%);
     }
   }
-  @media only screen and (max-width: 1366px) {
+  @media only screen and (max-width: 1700px) {
+    #wrapContainer_Box{width: 75%;}
+  }
+  @media only screen and (max-width: 1440px) {
     html,body{font-size: 9px!important;}
     #wrapContainer_Box{width: 85%;}
-    #productTitle{ width: 75%;}
+    #productTitle{ width: 65%;}
     .productInfo_box{width: 208px;height: 320px;}
   }
   @media only screen and (max-width: 1024px) {
     html,body{font-size: 9px!important;}
     #productTitle{ width: 75%;}
+    #productGrid_box{grid-template-columns: repeat(3,1fr);}
+    .productInfo_box{}
   }
   @media only screen and (max-width: 768px) {
     html,body{font-size: 8px!important;}
     #wrapContainer_Box{width: 90%;}
     #productTitle{ width: 85%;}
-    #productGrid_box{grid-template-columns: 1fr 1fr;}
-    .productInfo_box{width: 260px;height: 400px;}
+    .search_icon{width: 45px;height:45px}
+    .productInfo_box{width: 156px;height: 240px;}
   }
   @media only screen and (max-width: 540px) {
-    html,body{font-size: 8px!important;}
-    .productInfo_box{width: 156px;height: 240px;}
+    html,body{font-size: 7px!important;}
     #productTitle{ width: 100%;}
+    .productInfo_box{width: 115px;height: 200px;}
+    .productInfo_box .productImg_box{height: 57.5%}
+    .productInfo_box .productText_box{height: 40%}
     .line  {width: 20%;}
   @media only screen and (max-width: 425px) {
     html,body{font-size: 7px!important;}
+    .productInfo_box{width: 95px;height: 190px;}
+    .productInfo_box .productImg_box{height: 50%}
+    .productInfo_box .productText_box{height: 49%}
   }
   @media only screen and (max-width: 375px) {
     html,body{font-size: 6px!important;}
-    .line  {width: 10%;}
   }
   @media only screen and (max-width: 320px) {
     html,body{font-size: 5px!important;}

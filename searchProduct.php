@@ -46,7 +46,8 @@ require_once('modules/db.php');
           </div>
 
           <!-- 검색버튼  -->
-          <input type="image" src="img/search_icon.png" name="" value="">
+          <div class="search_icon"><input type="image" src="img/search_icon.png" name="" value=""></div>
+
         </div>
 
         <!-- 역이나 호선 동적으로 나오는 부분 -->
@@ -169,8 +170,29 @@ require_once('modules/db.php');
           <!-- 상품 상세설명 -->
           <div class="productText_box">
 
+            <!-- 제목 -->
+            <div class="productText_box_title_line">
+              <span>김치냉장고 이사로 급처</span>
+            </div>
+
+            <!-- 가격 -->
+            <div class="productText_box_price_line">
+              <span>150,000</span>
+            </div>
+
+            <!-- 역 위치 -->
+            <div class="oproductText_box_station_line">
+              <span>8호선 단대오거리역</span>
+            </div>
+
+            <!-- 카테고리 및 관심 수 부분  -->
+            <div class="productText_box_category_line">
+              <span>디지털/가전</span>
+              <span>관심7</span>
+            </div>
           </div>
         </div>
+
         <!-- 상품 예시 샘플 php로 띄울거임 -->
         <div class="productInfo_box">
           <!-- 상품 이미지부분 -->
@@ -180,14 +202,29 @@ require_once('modules/db.php');
 
           <!-- 상품 상세설명 -->
           <div class="productText_box">
-            <div class="productText_title">제목</div>
-            <div class="productText_recommend"><img src="img/star.png" alt="">n</div> <!-- 추천수 php  -->
-            <div class="productText_price">가격</div>
-            <div class="productText_category">카테고리</div>
-            <div class="productText_station">위치</div>
+
+            <!-- 제목 -->
+            <div class="productText_box_title_line">
+              <span>김치냉장고 이사로 급처</span>
+            </div>
+
+            <!-- 가격 -->
+            <div class="productText_box_price_line">
+              <span>150,000</span>
+            </div>
+
+            <!-- 역 위치 -->
+            <div class="oproductText_box_station_line">
+              <span>8호선 단대오거리역</span>
+            </div>
+
+            <!-- 카테고리 및 관심 수 부분  -->
+            <div class="productText_box_category_line">
+              <span>디지털/가전</span>
+              <span>관심7</span>
+            </div>
           </div>
         </div>
-
 
         <!-- 상품 예시 샘플 php로 띄울거임 -->
         <div class="productInfo_box">
@@ -199,21 +236,127 @@ require_once('modules/db.php');
           <!-- 상품 상세설명 -->
           <div class="productText_box">
 
+            <!-- 제목 -->
+            <div class="productText_box_title_line">
+              <span>김치냉장고 이사로 급처</span>
+            </div>
+
+            <!-- 가격 -->
+            <div class="productText_box_price_line">
+              <span>150,000</span>
+            </div>
+
+            <!-- 역 위치 -->
+            <div class="oproductText_box_station_line">
+              <span>8호선 단대오거리역</span>
+            </div>
+
+            <!-- 카테고리 및 관심 수 부분  -->
+            <div class="productText_box_category_line">
+              <span>디지털/가전</span>
+              <span>관심7</span>
+            </div>
           </div>
         </div>
+
         <!-- 상품 예시 샘플 php로 띄울거임 -->
         <div class="productInfo_box">
           <!-- 상품 이미지부분 -->
           <div class="productImg_box">
-            <img src="img/banner.png" alt="">
+            <img src="img/chair@2x.png" alt="">
           </div>
 
           <!-- 상품 상세설명 -->
           <div class="productText_box">
 
+            <!-- 제목 -->
+            <div class="productText_box_title_line">
+              <span>김치냉장고 이사로 급처</span>
+            </div>
+
+            <!-- 가격 -->
+            <div class="productText_box_price_line">
+              <span>150,000</span>
+            </div>
+
+            <!-- 역 위치 -->
+            <div class="oproductText_box_station_line">
+              <span>8호선 단대오거리역</span>
+            </div>
+
+            <!-- 카테고리 및 관심 수 부분  -->
+            <div class="productText_box_category_line">
+              <span>디지털/가전</span>
+              <span>관심7</span>
+            </div>
           </div>
         </div>
 
+        <!-- 상품 예시 샘플 php로 띄울거임 -->
+        <div class="productInfo_box">
+          <!-- 상품 이미지부분 -->
+          <div class="productImg_box">
+            <img src="img/chair@2x.png" alt="">
+          </div>
+
+          <!-- 상품 상세설명 -->
+          <div class="productText_box">
+
+            <!-- 제목 -->
+            <div class="productText_box_title_line">
+              <span>김치냉장고 이사로 급처</span>
+            </div>
+
+            <!-- 가격 -->
+            <div class="productText_box_price_line">
+              <span>150,000</span>
+            </div>
+
+            <!-- 역 위치 -->
+            <div class="oproductText_box_station_line">
+              <span>8호선 단대오거리역</span>
+            </div>
+
+            <!-- 카테고리 및 관심 수 부분  -->
+            <div class="productText_box_category_line">
+              <span>디지털/가전</span>
+              <span>관심7</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 상품 예시 샘플 php로 띄울거임 -->
+        <div class="productInfo_box">
+          <!-- 상품 이미지부분 -->
+          <div class="productImg_box">
+            <img src="img/chair@2x.png" alt="">
+          </div>
+
+          <!-- 상품 상세설명 -->
+          <div class="productText_box">
+
+            <!-- 제목 -->
+            <div class="productText_box_title_line">
+              <span>김치냉장고 이사로 급처</span>
+            </div>
+
+            <!-- 가격 -->
+            <div class="productText_box_price_line">
+              <span>150,000</span>
+            </div>
+
+            <!-- 역 위치 -->
+            <div class="oproductText_box_station_line">
+              <span>8호선 단대오거리역</span>
+            </div>
+
+            <!-- 카테고리 및 관심 수 부분  -->
+            <div class="productText_box_category_line">
+              <span>디지털/가전</span>
+              <span>관심7</span>
+            </div>
+          </div>
+        </div>
       </div>
 
 

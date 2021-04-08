@@ -16,6 +16,7 @@ body {
   text-align: center;
   margin-top: 7.5rem;
 }
+.profile_box img{ width: 100%;}
 .profile_box .user_name{
   margin-top: 2.4rem;
   font-size: 3.0rem;
@@ -23,6 +24,7 @@ body {
 .prfileImg_box{
   margin: 0 auto;
   width: 160px;
+  height: 160px;
   position: relative;
 }
 .mainBtn_box{
@@ -46,16 +48,19 @@ body {
   background: WHITE;
 }
 
-.input_id{border:none; width:50%; margin-left: 17.5%;}
-.input_name{border:none; width:50%; margin-left: 18.5%;}
-.input_email{border:none; width:50%; margin-left: 17%;}
-.input_password{border:none; border-bottom: 1px solid; width:50%; margin-left: 11%;}
-.input_new_password{border:none; border-bottom: 1px solid; width:50%; margin-left: 12.7%;}
-.input_new_exisit_password{border: none; border-bottom: 1px solid; width:50%; margin-left: 11%;}
-.input_station{border: none; border-bottom: 1px solid; width:20%; margin-left: 9%;}
+.input_id{border:none;}
+.input_name{border:none;}
+.input_email{border:none;}
+.input_password{border:none; border-bottom: 1px solid;}
+.input_new_password{border:none; border-bottom: 1px solid;}
+.input_new_exisit_password{border: none; border-bottom: 1px solid;}
+.input_station{border: none; border-bottom: 1px solid;}
 .img_center{width:100%; text-align: center;}
 .h3{font-size: 30px;}
-label{width:20%;}
+
+#station input{}
+#station button{}
+label{}
 
 @media only screen and (min-width: 1920px) {
   body{

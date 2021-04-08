@@ -55,16 +55,28 @@ if(isset($_SESSION['ss_mb_id'])){
 <style>
   .w3-container{background-color: #fff;}
   .button_contatiner_margin{padding-top: 88px; padding-bottom: 190px;}
-  .p_container_margin{margin-bottom: 50px; margin-left: 70px;}
-
+  .p_container_margin{}
+  #userInfo_box{
+    width: 85%;
+    display: grid;
+    margin: 0 auto;
+    grid-template-columns: minmax(150px ,20%) minmax(200px,1fr);
+    grid-row-gap:1.0rem;
+  }
+  .input_id ,.input_name, .input_email,.input_password,.input_new_password,.input_new_exisit_password,#station{
+    width: 100%;
+    max-width: 300px;
+  }
   #selectMetro_box{
     display: none;
+    flex-direction: column;
     align-items: center;
     justify-content: space-around;
     background-color: #f9f9f9;
     box-shadow: 10px 10px 50px 0 rgba(0, 0, 0, 0.16);
     width: 100%;
-    height: 200px;
+    height: auto;
+    padding: 1.0rem;
     z-index: 1;
     position: absolute;
     top: 50%;
@@ -75,14 +87,15 @@ if(isset($_SESSION['ss_mb_id'])){
     font-size:2.3rem;
   }
 
-
+  #selectMetro_box .title_line{width: 100%;display: flex;justify-content: space-between;}
+  #selectMetro_box .input_line{display: flex;justify-content: space-between;}
   #selectMetro_box span{font-size:1.8rem;color: #a1a1a1;}
-  #selectMetro_box .find_item{width: 40%;border-bottom: 3px solid #a5a5a5;}
-  #selectMetro_box .w3-button{width:auto;height: 7.0rem;font-family: "NotoSansKR_r";}
+  #selectMetro_box .find_item{width: 45%;border-bottom: 3px solid #a5a5a5;}
+  #selectMetro_box .w3-button{width:20%;height: 7.0rem;font-family: "NotoSansKR_r";}
   #selectMetro_box .w3-input{outline: none;background-color:#f9f9f9!important;border: none;}
   #selectMetro_box .w3-select{outline: none;background-color:#f9f9f9!important;border: none;}
   #selectMetro_box .find_item:nth-child(1){}
-  #selectMetro_box #bothFind_item{display: flex;width: 60%;flex-direction: row;justify-content: space-between;align-items: center;}
+  #selectMetro_box #bothFind_item{display: flex;width: 75%;flex-direction: row;justify-content: space-between;align-items: center;}
 </style>
 </head>
 <body>
@@ -92,37 +105,51 @@ if(isset($_SESSION['ss_mb_id'])){
 // echo $mb["mb_email"] ? $mb["mb_email"] : $om["om_email"];
 ?>
 <div class="w3-container">
-    <h3 class="h3">회원정보 수정</h3>
-  <div>
-    <form id="pwForm" name="frm1" class="p_container_margin" action="register_update.php" method="post">
-      <p>
-          <input type="hidden" name="mode" value="modify">
-          <span>아이디</span><input class="input_id" type="text" id="id" name="id" readonly value="<?= $mb["mb_id"] ? $mb["mb_id"] : $om["om_id"] ?>">
-      </p>
-      <p>
-        <label>*현재 비밀번호</label>
-        <input class="input_password" id="old_pw" name="old_pw" type="password" <?php echo ($mb["mb_id"] ? "" : "readonly") ?> required >
-      </p>
-      <p>
-        <label>*새 비밀번호</label>
-        <input class="input_new_password" name="mb_password" type="password" <?php echo ($mb["mb_id"] ? "" : "readonly") ?> required>
-      </p >
-      <label>*비밀번호 확인</label>
-        <input class="input_new_exisit_password" name="mb_password_re" type="password" <?php echo ($mb["mb_id"] ? "" : "readonly") ?> required>
-      <p>
-        <label>이름</label>
-        <input class="input_name" type="text" id="name" name="mb_name" value="<?=$mb["mb_name"] ? $mb["mb_name"] : $om["om_nickname"] ?>"  readonly required>
-      </p>
-      <p>
-        <label>이메일</label>
-        <input class="input_email" type="text" id="email" name="mb_email" value="<?=$mb["mb_email"] ? $mb["mb_email"] : $om["om_email"] ?>"  readonly required>
-      </p>
-      </form>
+  <h3 class="h3">회원정보 수정</h3>
 
-      <form  id="selectMetro_box" action="station_update.php" method="post">
-        <input type="hidden" name="mode" value="modify">
-        <input type="hidden" name="mbs_id"  value="<?= $mb["mb_id"] ? $mb["mb_id"] : 'null' ?>">
-        <input type="hidden" name="om_id"  value="<?= $om["om_id"] ? $om["om_id"] : 'null' ?>">
+
+  <form id="pwForm" name="frm1" class="p_container_margin" action="register_update.php" method="post">
+    <div id="userInfo_box">
+
+      <span>아이디<input type="hidden" name="mode" value="modify"></span>
+      <input class="input_id" type="text" id="id" name="id" readonly value="<?= $mb["mb_id"] ? $mb["mb_id"] : $om["om_id"] ?>">
+
+      <label>*현재 비밀번호</label>
+      <input class="input_password" id="old_pw" name="old_pw" type="password" <?php echo ($mb["mb_id"] ? "" : "readonly") ?> required >
+
+      <label>*새 비밀번호</label>
+      <input class="input_new_password" name="mb_password" type="password" <?php echo ($mb["mb_id"] ? "" : "readonly") ?> required>
+
+      <label>*비밀번호 확인</label>
+      <input class="input_new_exisit_password" name="mb_password_re" type="password" <?php echo ($mb["mb_id"] ? "" : "readonly") ?> required>
+
+      <label>이름</label>
+      <input class="input_name" type="text" id="name" name="mb_name" value="<?=$mb["mb_name"] ? $mb["mb_name"] : $om["om_nickname"] ?>"  readonly required>
+
+      <label>이메일</label>
+      <input class="input_email" type="text" id="email" name="mb_email" value="<?=$mb["mb_email"] ? $mb["mb_email"] : $om["om_email"] ?>"  readonly required>
+
+      <label>*주변 역 설정하기</label>
+      <div id="station" style="display:flex;justify-content: space-between;"><input class="input_station" type="text" id="pw2" value="<?=$mb['line_station'] ? $mb['line_station'] : $om['line_station']?>" required>	<button type="submit" id="joinBtn" class="w3-button w3-tiny w3-light-gray w3-round">역 검색</button></div>
+
+
+      </div>
+    </form>
+
+
+
+    <form  id="selectMetro_box" action="station_update.php" method="post">
+      <input type="hidden" name="mode" value="modify">
+      <input type="hidden" name="mbs_id"  value="<?= $mb["mb_id"] ? $mb["mb_id"] : 'null' ?>">
+      <input type="hidden" name="om_id"  value="<?= $om["om_id"] ? $om["om_id"] : 'null' ?>">
+
+      <div class="title_line">
+        <h2>가제 : 역등록</h2>
+        <div class="cloaseBtn"><img src="img/twitter.png" class="close_pop"></div>
+      </div>
+
+      <div class="input_line">
+
         <div id="bothFind_item">
 
         <div class="find_item">
@@ -200,20 +227,20 @@ if(isset($_SESSION['ss_mb_id'])){
           <div style="display:flex"><input id="auto" class="w3-input highlight" name="station" value='' type="text"><div style="width:1.3rem;margin:auto"><img src="img\loupe.png" alt=""></div></div>
         </div>
 
+        </div>
+
+        <button type="submit" class="w3-button w3-blue w3-ripple w3-round-xxlarge close_pop" name="button">등록</button>
       </div>
 
-      <button type="submit" id ="close_pop" class="w3-button w3-blue w3-ripple w3-round-xxlarge" name="button">등록</button>
-      </form>
 
-      <p class="p_container_margin">
-        <label>*주변 역 설정하기</label>
-        <input class="input_station" type="text" id="pw2" value="<?=$mb['line_station'] ? $mb['line_station'] : $om['line_station']?>" required>	<button type="submit" id="joinBtn" class="w3-button w3-tiny w3-light-gray w3-round">역 검색</button>
-      </p>
-      <p class="w3-center button_contatiner_margin">
-        <button type="submit" id="joinBtn" class="w3-button  w3-blue w3-ripple w3-margin-top w3-round" onclick="document.getElementById('pwForm').submit();">비밀번호 변경</button>
-        <button type="button" id="joinBtn" class="w3-button w3-dark-gray w3-ripple w3-margin-top w3-round">회원 탈퇴</button>
-      </p>
-  </div>
+
+  </form>
+
+    <p class="w3-center button_contatiner_margin">
+      <button type="submit" id="joinBtn" class="w3-button  w3-blue w3-ripple w3-margin-top w3-round" onclick="document.getElementById('pwForm').submit();">비밀번호 변경</button>
+      <button type="button" id="joinBtn" class="w3-button w3-dark-gray w3-ripple w3-margin-top w3-round">회원 탈퇴</button>
+    </p>
+
 </div>
 </body>
 <script type="text/javascript">
@@ -230,7 +257,7 @@ $(document).ready(function(){
     });
   }
   function close_pop(){
-    $('#close_pop').click(function(){
+    $('.close_pop').click(function(){
       $('#selectMetro_box').css({'display':'none'});
     });
   }
