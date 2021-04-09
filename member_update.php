@@ -53,19 +53,29 @@ if(isset($_SESSION['ss_mb_id'])){
 <script src="https://unpkg.com/hangul-js" type="text/javascript"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <style>
-  .w3-container{background-color: #fff;}
-  .button_contatiner_margin{padding-top: 88px; padding-bottom: 190px;}
+  .w3-container{background-color: #fff;padding: 5.0rem 5.0rem;}
+  .w3-container .h3{font-size: 3.0rem; font-family: "NotoSansKR_r";margin-bottom: 3.0rem;}
+
+  .button_contatiner_margin{padding: 5.0rem 0;font-size: 2.0rem;}
+  .button_contatiner_margin .w3-button{width: 18.0rem;}
   .p_container_margin{}
+
+
   #userInfo_box{
+    font-family: "NotoSansKR_r";
+    font-size: 2.3rem;
     width: 85%;
     display: grid;
     margin: 0 auto;
-    grid-template-columns: minmax(150px ,20%) minmax(200px,1fr);
-    grid-row-gap:1.0rem;
+    grid-template-columns: minmax(200px ,30%) minmax(250px,1fr);
+    grid-row-gap:2.5rem;
+    justify-content: flex-end;
   }
-  .input_id ,.input_name, .input_email,.input_password,.input_new_password,.input_new_exisit_password,#station{
+
+
+  .input_id ,.input_name, .input_email,.input_password,.input_new_password,.input_new_exisit_password{
     width: 100%;
-    max-width: 300px;
+    max-width: 400px;
   }
   #selectMetro_box{
     display: none;
@@ -96,6 +106,10 @@ if(isset($_SESSION['ss_mb_id'])){
   #selectMetro_box .w3-select{outline: none;background-color:#f9f9f9!important;border: none;}
   #selectMetro_box .find_item:nth-child(1){}
   #selectMetro_box #bothFind_item{display: flex;width: 75%;flex-direction: row;justify-content: space-between;align-items: center;}
+
+  #station {width: 100%;}
+  #station input{max-width: 300px;}
+  #station button{font-size:1.5rem;color: #5e5956;width:9.0rem;}
 </style>
 </head>
 <body>
@@ -114,13 +128,13 @@ if(isset($_SESSION['ss_mb_id'])){
       <span>아이디<input type="hidden" name="mode" value="modify"></span>
       <input class="input_id" type="text" id="id" name="id" readonly value="<?= $mb["mb_id"] ? $mb["mb_id"] : $om["om_id"] ?>">
 
-      <label>*현재 비밀번호</label>
+      <label><span class="blue">*</span>현재 비밀번호</label>
       <input class="input_password" id="old_pw" name="old_pw" type="password" <?php echo ($mb["mb_id"] ? "" : "readonly") ?> required >
 
-      <label>*새 비밀번호</label>
+      <label><span class="blue">*</span>새 비밀번호</label>
       <input class="input_new_password" name="mb_password" type="password" <?php echo ($mb["mb_id"] ? "" : "readonly") ?> required>
 
-      <label>*비밀번호 확인</label>
+      <label><span class="blue">*</span>비밀번호 확인</label>
       <input class="input_new_exisit_password" name="mb_password_re" type="password" <?php echo ($mb["mb_id"] ? "" : "readonly") ?> required>
 
       <label>이름</label>
@@ -129,8 +143,8 @@ if(isset($_SESSION['ss_mb_id'])){
       <label>이메일</label>
       <input class="input_email" type="text" id="email" name="mb_email" value="<?=$mb["mb_email"] ? $mb["mb_email"] : $om["om_email"] ?>"  readonly required>
 
-      <label>*주변 역 설정하기</label>
-      <div id="station" style="display:flex;justify-content: space-between;"><input class="input_station" type="text" id="pw2" value="<?=$mb['line_station'] ? $mb['line_station'] : $om['line_station']?>" required>	<button type="submit" id="joinBtn" class="w3-button w3-tiny w3-light-gray w3-round">역 검색</button></div>
+      <label><span class="blue">*</span>주변 역 설정하기</label>
+      <div id="station" style="display:flex;"><input class="input_station" type="text" id="pw2" value="<?=$mb['line_station'] ? $mb['line_station'] : $om['line_station']?>" required>	<button type="submit" id="joinBtn" class="w3-button w3-light-gray w3-round">역 검색</button></div>
 
 
       </div>

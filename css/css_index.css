@@ -41,35 +41,100 @@ body {
 .ui-menu-item{font-size: 1.4rem;}
 
 #mainContent_box {
-  width: 50%;
+  position: relative;
+  width: 75%;
   margin: 30.0rem auto 18.0rem auto;
-  font-family: "NotoSansKR_r";
-  font-size: 2.3rem;
+  font-family: "NotoSansKR_m";
+  font-size: 1.8rem;
   color: #707070;
 }
-#icon_box{
+#main_tapmenu{
   margin: 0 auto;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  text-align: center;
-  justify-items:center;
-  row-gap:3.0rem;
-  column-gap:2.0rem;
-  column-gap:auto;
-}
-#icon_box .icon_item {
+  width: 400px;
   display: flex;
-  flex-direction: column;
+  justify-content: space-around;
+  margin-bottom: 5.0rem;
+
 }
-#icon_box .icon_item img{
-  width: 100%;
+.tapmenuItem{
+  color: #707070;
 }
-#icon_box span{margin-top: 2rem;}
-#slideImg_box{
+.tapmenuItem_target{
+  color: #3b3b3b;
+  border-bottom: solid 2px #0099ff;
+}
+.owl-carousel .owl-loaded .owl-drag{
   width: 100%;
   position: relative;
-  overflow: hidden;
+}
+.owl-stage-outer{
+  width: 100%;
+  margin: 0 0;
+}
+
+.customBtn{
+  display: flex;
+  justify-content:space-between;
+  width: 115%;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform:translateX(-50%);
+  z-index: 1;
+}
+.customPrevBtn ,.customNextBtn{
+  cursor: pointer;
+}
+
+
+
+/* info 박스아래 img박스및 test 박스가 있음 */
+.productInfo_box{
+  margin: 0 auto;
+  width: 260px;
+  height: 400px;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.productInfo_box .productImg_box{
+  width: 100%;
+  height: 65%;
+}
+.productInfo_box .productImg_box img{
+  width: 100%;
+  height: 100%;
+  border-top-right-radius: 3.0rem;
+  border-top-left-radius: 3.0rem;
+}
+
+
+.productText_box{width: 100%;height:29%;display: flex;flex-direction: column;margin-top: 5px;padding: 1.0rem;background-color: white;box-shadow: 3px 3px 6px 0 rgba(0, 0, 0, 0.16);border-bottom-left-radius: 10px;border-bottom-right-radius: 10px}
+.productText_box_title_line{width: 100%;font-family: "NotoSansKR_r";font-size: 2.3rem;color: #3b3b3b;text-align: center;}
+.productText_box_station_line{width: 100%;font-family: "NotoSansKR_t";font-size: 1.8rem;color: #707070;text-align: center;}
+.productText_box_price_line{width: 100%;font-family: "NotoSansKR_m";font-size: 1.8rem;color: #3b3b3b;text-align: center;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.slideImg_box{
+  width: 100%;
+  margin-top: 10.0rem;
+  position: relative;
+}
+.slideImg_box img{
+  width: 100%;
 }
 #slideImg_list{
   width: 100%;
@@ -84,14 +149,13 @@ body {
   margin: 0 auto;
   font-family: "NotoSansKR_r";
   display: grid;
-  grid-template-columns: 5fr 5fr;
-  grid-auto-rows: minmax(220px, auto);
-  grid-gap: 1rem;
-  width: 70%;
+  grid-template-columns: repeat(4,1fr);
+  width: 80%;
   text-align: center;
 }
 .titleText_1{
-  font-family: "NotoSansKR_r";
+  font-family: "NotoSansKR_m";
+  margin-top: 10.0rem;
   margin-bottom: 3.0rem;
   text-align: center;
   font-size: 4.5rem;
@@ -109,33 +173,29 @@ body {
   width: 100%;
 }
 .imgbox_3 {
-  width: 22%;
+  width: 25%;
 }
 
 .textBox_1{
-  padding: 0 auto;
   align-items: center;
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  justify-content:flex-start;
   margin: 0;
-  box-shadow: 5px 5px 30px 0 rgba(0, 0, 0, 0.16);
-  background-color: #ffffff;
+  padding: 0 3.0rem;
   font-family: "NotoSansKR_r";
 }
-.textBox_1 ul{
-  padding: 0px;
-  list-style: none;
-  width: 45%;
+.textBox_1:nth-child(2),.textBox_1:nth-child(3) {
+  border-right: 1px solid #707070;
+  border-left: 1px solid #707070;
 }
-.textBox_1 li{font-size: 1.6rem;color:#a7a7a7 }
-.textBox_1 span{font-size: 3.0rem;color:#707070}
+.textBox_1:nth-child(4){border-left: 1px solid #707070;}
+.textBox_1:nth-child(1){border-right: 1px solid #707070;}
+
+.textBox_1 span{font-size: 2.3rem;color:#3b3b3b; margin: 1.0rem;}
+.textBox_1 p{font-size: 1.8rem;color:#707070}
 .textBox_1 img {width:100%;}
-.textBox_1 .leftLine{
-  text-align: right;
-}
-.textBox_1 .rightLine{
-  text-align: left;
-}
+.blue_line{width:45px;height: 0px;border: solid 2px #0099ff; }
 
 .left{float: left;}
 .right{float: right;}
@@ -153,35 +213,44 @@ a{text-decoration: none;}
     #selectMetro_box{width: 85%;}
     #mainContent_box {margin-top: 20.0rem}
 }
-
 @media only screen and (max-width: 1024px) {
-  .imgbox_3 { width: 25%;}
   html,body{font-size: 9px!important;}
   #selectMetro_box{width: 90%;}
   #selectMetro_box .find_item{width: 45%;}
-  #mainContent_box {width: 65%;}
+  #mainContent_box {width:85%}
+  #explain_box{width: 90%}
 }
 @media only screen and (max-width: 768px) {
   html,body{font-size: 8px;}
   #selectMetro_box{flex-direction: column;height: 180px; top:0;left:0;position: inherit;margin: 0 auto;transform: none;margin-top: 5.0rem}
   #selectMetro_box #bothFind_item {width: 90%}
   #selectMetro_box .w3-button{width: 200px;}
-  #mainContent_box {width: 70%;margin-top: 10.0rem}
-  #explain_box{width: 85%}
+  #explain_box{grid-template-columns: 1fr 1fr;width: 80%;}
+  .textBox_1:nth-child(2),.textBox_1:nth-child(3) {border-right:none;border-left:none;}
+  .textBox_1:nth-child(4){border-left:none;}
+  .textBox_1:nth-child(1){border-right:none;}
+  .imgbox_3{width: 40%;}
 }
 @media only screen and (max-width: 540px) {
-  html,body{font-size: 8px!important;}
-  #mainContent_box {width: 80%;}
-  #explain_box{grid-template-columns: 10fr;}
+  html,body{font-size: 7px!important;}
+  #explain_box{width: 90%}
+  #main_tapmenu{width: 100%;}
   .bx-wrapper .bx-pager{padding: 0!important;}
+  .productInfo_box{width: 182px;height: 280px;}
 }
 @media only screen and (max-width: 425px) {
   html,body{font-size: 7px!important;}
   .titleText_1{font-size: 4.0rem;}
   #selectMetro_box .find_item{width: 47%;}
+  .productInfo_box{width: 169px;height: 300px;}
+  .productInfo_box .productImg_box{height: 56%}
+  .productText_box{height: 40%;}
 }
 
-@media only screen and (max-width: 340px) {
-  .text_box ul {width: 60%;}
+@media only screen and (max-width: 375px) {
   html,body{font-size: 7px!important;}
+  .textBox_1{padding: 0 0.5rem;}
+  .productInfo_box{width: 143px;height: 260px;}
+  .productInfo_box .productImg_box{height: 55%}
+  .productInfo_box .productText_box{height: 40%}
 }

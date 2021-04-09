@@ -1,4 +1,4 @@
-html{font-size: 10px;}
+html,body{font-size: 10px!important;}
 body {
   margin: 0;
   padding: 0;
@@ -16,7 +16,6 @@ body {
   text-align: center;
   margin-top: 7.5rem;
 }
-.profile_box img{ width: 100%;}
 .profile_box .user_name{
   margin-top: 2.4rem;
   font-size: 3.0rem;
@@ -56,10 +55,12 @@ body {
 .input_new_exisit_password{border: none; border-bottom: 1px solid;}
 .input_station{border: none; border-bottom: 1px solid;}
 .img_center{width:100%; text-align: center;}
-.h3{font-size: 30px;}
 
-#station input{}
-#station button{}
+
+
+.blue{color: blue;}
+
+
 label{}
 
 @media only screen and (min-width: 1920px) {
