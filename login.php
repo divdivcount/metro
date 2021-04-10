@@ -61,6 +61,8 @@ echo $_SESSION['naver_mb_id'];
 				</div>
 	</form>
 
+
+
 <?php } else { // 로그인 세션이 없을 경우 로그인 완료 화면 ?>
 	<?php
 	if(isset($_SESSION['ss_mb_id'])) {
@@ -69,14 +71,18 @@ echo $_SESSION['naver_mb_id'];
 		$result = mysqli_query($conn, $sql);
 		$mb = mysqli_fetch_assoc($result);
 		mysqli_close($conn); // 데이터베이스 접속 종료
-		userGoNow('index.php');
+	?>
+    <script type="text/javascript">
+      window.opener.location.reload();
+      window.close();
+    </script>
+  <?php
 	}elseif(isset($_SESSION['naver_mb_id'])) {
 		$naver_mb_id = $_SESSION['naver_mb_id'];
 		echo "123";
 		$sql = " select * from oauth_member where om_id = TRIM($naver_mb_id) ";
 		$result = mysqli_query($conn, $sql);
 		$naver = mysqli_fetch_assoc($result);
-
 		mysqli_close($conn); // 데이터베이스 접속 종료
 		userGoNow('index.php');
 	}elseif (isset($_SESSION['kakao_mb_id'])) {
@@ -94,6 +100,7 @@ echo $_SESSION['naver_mb_id'];
 
 
  } ?>
+
 
 	</body>
 </html>
