@@ -457,6 +457,34 @@ require_once('modules/db.php');
     </div> -->
   </body>
   <script>
+
+
+  var obj ={
+    nav:false,
+    loop: true,
+    dots: false,
+    autoplay:false,
+    rewind: true,
+    margin:0,
+    responsiveClass:true,
+    responsive:{
+       1800:{
+         items:4,
+         dots:true,
+         nav:true
+       },
+       1024:{ items:3},
+       0:{items:2,
+         dots:false,
+         nav:false
+       }
+    }
+  }
+
+  //올빼미캐러셀
+
+    //
+
   //슬라이드 이미지
   $(document).ready(function(){
     $('.bxslider').bxSlider( {
@@ -468,43 +496,20 @@ require_once('modules/db.php');
         autoHover: false,   // 마우스 호버시 정지 여부
         controls: true    // 이전 다음 버튼 노출 여부
     });
+    $(".owl-carousel").owlCarousel(obj);
 });
 
-  // 슬라이드
-  $(document).ready(function(){
-    $(".owl-carousel").owlCarousel();
-  });
-
-  //올빼미캐러셀
-  $(".owl-carousel").owlCarousel({
-    nav:false,
-    loop: true,
-    dots: false,
-    autoplay:false,
-    rewind: true,
-    autoplayTimeout: 2000,
-    margin:0, responsiveClass:true,
-    responsive:{
-      0:{items:2},
-      1024:{ items:3, loop:false },
-      1441:{ items:4, loop:false }
-    }
-  });
-
   var owl = $('.owl-carousel');
-owl.owlCarousel();
-// Go to the next item
-$('.customNextBtn').click(function() {
+  // Go to the next item
+  $('.customNextBtn').click(function() {
     owl.trigger('next.owl.carousel');
-})
-// Go to the previous item
-$('.customPrevBtn').click(function() {
+  })
+  // Go to the previous item
+  $('.customPrevBtn').click(function() {
     // With optional speed parameter
     // Parameters has to be in square bracket '[]'
     owl.trigger('prev.owl.carousel', [300]);
 })
-
-
 
 </script>
 </html>
