@@ -290,10 +290,10 @@ if($fname != '') {
 
 		if($mb_id != 'null'){
 			$om_id = null;
-			$sql =	"select p.*, i.in_hit, pi.pr_img, l.l_name, m.line_station from product p left outer join interest i ON p.pr_id = i.pr_id left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join member m ON p.mb_id = m.mb_num where p.mb_id = :mb_id and p.pr_img_id = pi.pr_img_id and pi.main_check = 'y' and p.om_id is :om_id order by $this->quTableId asc limit :start, :viewLen";
+			$sql =	"select p.*, (select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count , pi.pr_img, l.l_name, m.line_station from product p left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join member m ON p.mb_id = m.mb_num where p.mb_id = :mb_id and p.pr_img_id = pi.pr_img_id and pi.main_check = 'y' and p.om_id is :om_id order by $this->quTableId asc limit :start, :viewLen";
 		}elseif($om_id != 'null'){
 			$mb_id = null;
-			$sql = "select p.*, i.in_hit, pi.pr_img, l.l_name, om.line_station from product p left outer join interest i ON p.pr_id = i.pr_id left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join oauth_member om ON p.om_id = om.om_id where p.om_id = :om_id and p.pr_img_id = pi.pr_img_id and pi.main_check = 'y' and  p.mb_id is :mb_id order by $this->quTableId asc limit :start, :viewLen";
+			$sql = "select p.*, (select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count, pi.pr_img, l.l_name, om.line_station from product p left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join oauth_member om ON p.om_id = om.om_id where p.om_id = :om_id and p.pr_img_id = pi.pr_img_id and pi.main_check = 'y' and  p.mb_id is :mb_id order by $this->quTableId asc limit :start, :viewLen";
 		}
 
 		$this->openDB();
