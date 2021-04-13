@@ -135,7 +135,7 @@ require_once('modules/db.php');
 
         </div>
 
-        <button type="submit" class="w3-button w3-blue w3-ripple w3-round-xxlarge" name="button">물건보러가기</button>
+        <button type="submit" class="w3-button w3-blue w3-ripple w3-round-xxlarge" >물건보러가기</button>
       </form>
     </div>
 

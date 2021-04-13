@@ -89,7 +89,7 @@ if($a == 0){
         </div>
 
 
-        <form  id="selectMetro_box" action="My_one_page.php" method="post">
+        <form  id="selectMetro_box" action="searchProduct.php" method="post">
           <div id="bothFind_item">
 
           <div class="find_item">
@@ -176,15 +176,14 @@ if($a == 0){
 
 			<?php
 				try {
-						// $start_s_value = empty($_REQUEST["start_s_value"]) ? "" : $_REQUEST["start_s_value"];
-						// $s_value = empty($_REQUEST["s_value"]) ? "" : $_REQUEST["s_value"];
-						// if($start_s_value){
-						// 	$result = $dao->SelectPageLength($pid, 10, $s_value, $start_s_value);
-						//   $list = $dao->SelectPageList($result['current'], 10,$s_value, $start_s_value);
-						// }else{
-						$result = $dao->SelectPageLength($pid, 2, $mb_id ? $mb_id : 'null', $om_id ? $om_id : 'null');
-						$list = $dao->SelectPageList($result['current'], 2, $mb_id ? $mb_id : 'null', $om_id ? $om_id : 'null');
-					// }
+						$s_value = empty($_REQUEST["s_value"]) ? "" : $_REQUEST["s_value"];
+						if($s_value){
+							$result = $dao->SelectPageLength($pid, 10, $ctg_name, $ctg_station, '');
+						  $list = $dao->SelectPageList($result['current'], 10,$ctg_name, $ctg_station, $s_value);
+						}else{
+						$result = $dao->SelectPageLength($pid, 10, $ctg_name, $ctg_station, '');
+						$list = $dao->SelectPageList($result['current'], 10, $ctg_name, $ctg_station, '');
+					}
 				} catch (PDOException $e) {
 					$result = null;
 					$list = null;
@@ -203,12 +202,12 @@ if($a == 0){
 
       <!-- 상품 목록 그리드 박스  -->
       <div id="productGrid_box">
-
+				<?php foreach ($list as $row) : ?>
         <!-- 상품 예시 샘플 php로 띄울거임 -->
         <div class="productInfo_box">
           <!-- 상품 이미지부분 -->
           <div class="productImg_box">
-            <img src="img/chair@2x.png" alt="">
+            <img src="files/<?=$row["pr_img"]?>" alt="">
           </div>
 
           <!-- 상품 상세설명 -->
@@ -216,41 +215,41 @@ if($a == 0){
 
             <!-- 제목 -->
             <div class="productText_box_title_line">
-              <span>김치냉장고 이사로 급처</span>
+              <span><?=$row["pr_title"]?></span>
             </div>
 
             <!-- 가격 -->
             <div class="productText_box_price_line">
-              <span>150,000</span>
+              <span><?=$row["pr_price"]?></span>
             </div>
 
             <!-- 역 위치 -->
             <div class="oproductText_box_station_line">
-              <span>8호선 단대오거리역</span>
+              <span><?=$row["line_name"]?> <?=$row["pr_station"]?></span>
             </div>
 
             <!-- 카테고리 및 관심 수 부분  -->
             <div class="productText_box_category_line">
-              <span>디지털/가전</span>
-              <span>관심7</span>
+              <span><?=$row["ca_name"]?></span>
+              <span>관심<?=$row["i_count"]?></span>
             </div>
           </div>
         </div>
-
-
+				<?php endforeach ?>
+			</div>
       <!-- 페이지 네이션 들어가는 부분 -->
       <div id="pagination">
 				<?php
 				if($result['start'] < $result['current'] ) :?>
-					<a class="abtn" href="searchProduct.php?p=<?=($pid - 1)?>">&lt;</a>
+					<a class="abtn" href="searchProduct.php?p=<?=($pid - 1)?>&ctg_station=<?=$ctg_station?>&ctg_name=<?=$ctg_name?>&s_value=<?=$s_value?>">&lt;</a>
 				<?php endif ?>
 
 				<?php for($i=$result['start']; $i<=$result['end']; $i++): ?>
-					<a class="abtn <?php if($i === (int)$result['current']) echo 'current' ?>" href="?p=<?= $i ?>&ctg_station=<?=$ctg_station?>&ctg_name=<?=$ctg_name?>"><?= $i ?></a>
+					<a class="abtn <?php if($i === (int)$result['current']) echo 'current' ?>" href="?p=<?= $i ?>&ctg_station=<?=$ctg_station?>&ctg_name=<?=$ctg_name?>&s_value=<?=$s_value?>"><?= $i ?></a>
 				<?php endfor ?>
 
 				<?php if( $result['end'] > $result['current']) : ?>
-					<a class="abtn" href="searchProduct.php?p=<?=($pid + 1)?>">&gt;</a>
+					<a class="abtn" href="searchProduct.php?p=<?=($pid + 1)?>&ctg_station=<?=$ctg_station?>&ctg_name=<?=$ctg_name?>&s_value=<?=$s_value?>">&gt;</a>
 				<?php endif ?>
       </div>
 

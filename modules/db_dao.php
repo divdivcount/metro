@@ -239,20 +239,30 @@ if($fname != '') {
 
 
 	//페이지 내이션
-  	public function SelectPageLength($cPage, $viewLen, $mb_id, $om_id) {
+  	public function SelectPageLength($cPage, $viewLen, $mb_id, $om_id, $category = null) {
 			$this->openDB();
-		if($mb_id != 'null'){
+		if($mb_id != 'null' && $om_id == 'null'){
 			$om_id = null;
 			$query = $this->db->prepare("select count(*) from $this->quTable where mb_id = :mb_id and om_id is :om_id");
-
-		}elseif($om_id != 'null'){
+			echo "dd";
+		}elseif($om_id != 'null' && $mb_id == 'null'){
 			$mb_id = null;
 			$query = $this->db->prepare("select count(*) from $this->quTable where om_id = :om_id and mb_id is :mb_id");
+			echo "????";
 		}else{
-			echo "none";
+			if($category){
+					$query = $this->db->prepare("select count(*) from $this->quTable where l_id = :mb_id and pr_station = :om_id and ca_name = :category");
+					echo "SelectPageLength1";
+					$query->bindValue(":category", $category,  PDO::PARAM_STR);
+			}else{
+				echo "SelectPageLength2";
+				$query = $this->db->prepare("select count(*) from $this->quTable where l_id = :mb_id and pr_station = :om_id");
+			}
+			// echo "??";
 		}
 		$query->bindValue(":mb_id", $mb_id,  PDO::PARAM_STR);
 		$query->bindValue(":om_id", $om_id,  PDO::PARAM_STR);
+
     $query->execute();
 		$fetch = $query->fetch(PDO::FETCH_ASSOC);
 		$countLen = $fetch['count(*)'];
@@ -283,17 +293,26 @@ if($fname != '') {
 
 	}
 
-	public function SelectPageList($cPage, $viewLen, $mb_id, $om_id) {
+	public function SelectPageList($cPage, $viewLen, $mb_id, $om_id, $s_value = null) {
 		$start = ($cPage * $viewLen) - $viewLen;
 		// echo $start;
 		// echo $viewLen;
 
-		if($mb_id != 'null'){
+		if($mb_id != 'null' && $om_id == 'null'){
 			$om_id = null;
 			$sql =	"select p.*, (select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count , pi.pr_img, l.l_name, m.line_station from product p left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join member m ON p.mb_id = m.mb_num where p.mb_id = :mb_id and p.pr_img_id = pi.pr_img_id and pi.main_check = 'y' and p.om_id is :om_id order by $this->quTableId asc limit :start, :viewLen";
-		}elseif($om_id != 'null'){
+		}elseif($om_id != 'null' && $mb_id == 'null'){
 			$mb_id = null;
 			$sql = "select p.*, (select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count, pi.pr_img, l.l_name, om.line_station from product p left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join oauth_member om ON p.om_id = om.om_id where p.om_id = :om_id and p.pr_img_id = pi.pr_img_id and pi.main_check = 'y' and  p.mb_id is :mb_id order by $this->quTableId asc limit :start, :viewLen";
+		}else{
+			if($s_value){
+				$sql = "select pr_title, pr_price, ca_name, (select l_name from line l where l.l_id = :mb_id ) as line_name, pr_station,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,(select pr_img from product_img pi where pi.pr_img_id = p.pr_img_id and pi.main_check = 'y') as pr_img  from product p  where l_id = :mb_id and pr_station = :om_id like :s_value order by $this->quTableId asc limit :start, :viewLen";
+				echo "SelectPageList1";
+			}else{
+				echo "SelectPageList2";
+				$sql = "select pr_title, pr_price, ca_name,  (select l_name from line l where l.l_id = :mb_id ) as line_name ,pr_station,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,(select pr_img from product_img pi where pi.pr_img_id = p.pr_img_id and pi.main_check = 'y') as pr_img  from product p  where l_id = :mb_id and pr_station = :om_id order by $this->quTableId asc limit :start, :viewLen";
+			}
+			// echo "???";
 		}
 
 		$this->openDB();
@@ -302,7 +321,7 @@ if($fname != '') {
 		$query->bindValue(":viewLen", $viewLen, PDO::PARAM_INT);
 		$query->bindValue(":mb_id", $mb_id,  PDO::PARAM_STR);
 		$query->bindValue(":om_id", $om_id,  PDO::PARAM_STR);
-		// if($start_s_value)$query->bindValue(":start_s_value", "%$start_s_value%",  PDO::PARAM_STR);
+		if($s_value)$query->bindValue(":s_value", "%$s_value%",  PDO::PARAM_STR);
 
 		$query->execute();
 		$fetch = $query->fetchAll(PDO::FETCH_ASSOC);
