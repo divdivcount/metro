@@ -1,7 +1,9 @@
 <?php
 require_once('modules/db.php');
-$ctg_name = Post("ctg_name", 0);
-$ctg_station = Post("ctg_station", 0);
+$dao = new Product;
+$pid = Get('p', 1);
+$ctg_name = Get("ctg_name", 0);
+$ctg_station = Get("ctg_station", 0);
 // echo $ctg_name;
 // echo $ctg_station;
 $sql = "select s.s_name, i.l_name  from station s, line i where s.l_id = $ctg_name";
@@ -172,14 +174,30 @@ if($a == 0){
       </div>
 
 
-
+			<?php
+				try {
+						// $start_s_value = empty($_REQUEST["start_s_value"]) ? "" : $_REQUEST["start_s_value"];
+						// $s_value = empty($_REQUEST["s_value"]) ? "" : $_REQUEST["s_value"];
+						// if($start_s_value){
+						// 	$result = $dao->SelectPageLength($pid, 10, $s_value, $start_s_value);
+						//   $list = $dao->SelectPageList($result['current'], 10,$s_value, $start_s_value);
+						// }else{
+						$result = $dao->SelectPageLength($pid, 2, $mb_id ? $mb_id : 'null', $om_id ? $om_id : 'null');
+						$list = $dao->SelectPageList($result['current'], 2, $mb_id ? $mb_id : 'null', $om_id ? $om_id : 'null');
+					// }
+				} catch (PDOException $e) {
+					$result = null;
+					$list = null;
+				 echo $e->getMessage();
+				}
+			?>
 
 
 
       <!-- n 호선 및  n 역 상품 타이틀 -->
       <div id="productTitle">
         <div class="line"></div>
-        <p><span><?= $station['l_name']?></span> 모든 최신매물</p>
+        <p><span><?= $station['l_name']?> <?=$ctg_station?>역</span> 모든 최신매물</p>
         <div class="line"></div>
       </div>
 
@@ -219,179 +237,21 @@ if($a == 0){
           </div>
         </div>
 
-        <!-- 상품 예시 샘플 php로 띄울거임 -->
-        <div class="productInfo_box">
-          <!-- 상품 이미지부분 -->
-          <div class="productImg_box">
-            <img src="img/chair@2x.png" alt="">
-          </div>
-
-          <!-- 상품 상세설명 -->
-          <div class="productText_box">
-
-            <!-- 제목 -->
-            <div class="productText_box_title_line">
-              <span>김치냉장고 이사로 급처</span>
-            </div>
-
-            <!-- 가격 -->
-            <div class="productText_box_price_line">
-              <span>150,000</span>
-            </div>
-
-            <!-- 역 위치 -->
-            <div class="oproductText_box_station_line">
-              <span>8호선 단대오거리역</span>
-            </div>
-
-            <!-- 카테고리 및 관심 수 부분  -->
-            <div class="productText_box_category_line">
-              <span>디지털/가전</span>
-              <span>관심7</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- 상품 예시 샘플 php로 띄울거임 -->
-        <div class="productInfo_box">
-          <!-- 상품 이미지부분 -->
-          <div class="productImg_box">
-            <img src="img/chair@2x.png" alt="">
-          </div>
-
-          <!-- 상품 상세설명 -->
-          <div class="productText_box">
-
-            <!-- 제목 -->
-            <div class="productText_box_title_line">
-              <span>김치냉장고 이사로 급처</span>
-            </div>
-
-            <!-- 가격 -->
-            <div class="productText_box_price_line">
-              <span>150,000</span>
-            </div>
-
-            <!-- 역 위치 -->
-            <div class="oproductText_box_station_line">
-              <span>8호선 단대오거리역</span>
-            </div>
-
-            <!-- 카테고리 및 관심 수 부분  -->
-            <div class="productText_box_category_line">
-              <span>디지털/가전</span>
-              <span>관심7</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- 상품 예시 샘플 php로 띄울거임 -->
-        <div class="productInfo_box">
-          <!-- 상품 이미지부분 -->
-          <div class="productImg_box">
-            <img src="img/chair@2x.png" alt="">
-          </div>
-
-          <!-- 상품 상세설명 -->
-          <div class="productText_box">
-
-            <!-- 제목 -->
-            <div class="productText_box_title_line">
-              <span>김치냉장고 이사로 급처</span>
-            </div>
-
-            <!-- 가격 -->
-            <div class="productText_box_price_line">
-              <span>150,000</span>
-            </div>
-
-            <!-- 역 위치 -->
-            <div class="oproductText_box_station_line">
-              <span>8호선 단대오거리역</span>
-            </div>
-
-            <!-- 카테고리 및 관심 수 부분  -->
-            <div class="productText_box_category_line">
-              <span>디지털/가전</span>
-              <span>관심7</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- 상품 예시 샘플 php로 띄울거임 -->
-        <div class="productInfo_box">
-          <!-- 상품 이미지부분 -->
-          <div class="productImg_box">
-            <img src="img/chair@2x.png" alt="">
-          </div>
-
-          <!-- 상품 상세설명 -->
-          <div class="productText_box">
-
-            <!-- 제목 -->
-            <div class="productText_box_title_line">
-              <span>김치냉장고 이사로 급처</span>
-            </div>
-
-            <!-- 가격 -->
-            <div class="productText_box_price_line">
-              <span>150,000</span>
-            </div>
-
-            <!-- 역 위치 -->
-            <div class="oproductText_box_station_line">
-              <span>8호선 단대오거리역</span>
-            </div>
-
-            <!-- 카테고리 및 관심 수 부분  -->
-            <div class="productText_box_category_line">
-              <span>디지털/가전</span>
-              <span>관심7</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- 상품 예시 샘플 php로 띄울거임 -->
-        <div class="productInfo_box">
-          <!-- 상품 이미지부분 -->
-          <div class="productImg_box">
-            <img src="img/chair@2x.png" alt="">
-          </div>
-
-          <!-- 상품 상세설명 -->
-          <div class="productText_box">
-
-            <!-- 제목 -->
-            <div class="productText_box_title_line">
-              <span>김치냉장고 이사로 급처</span>
-            </div>
-
-            <!-- 가격 -->
-            <div class="productText_box_price_line">
-              <span>150,000</span>
-            </div>
-
-            <!-- 역 위치 -->
-            <div class="oproductText_box_station_line">
-              <span>8호선 단대오거리역</span>
-            </div>
-
-            <!-- 카테고리 및 관심 수 부분  -->
-            <div class="productText_box_category_line">
-              <span>디지털/가전</span>
-              <span>관심7</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
 
       <!-- 페이지 네이션 들어가는 부분 -->
       <div id="pagination">
-        <ul>
-          <li><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-        </ul>
+				<?php
+				if($result['start'] < $result['current'] ) :?>
+					<a class="abtn" href="searchProduct.php?p=<?=($pid - 1)?>">&lt;</a>
+				<?php endif ?>
+
+				<?php for($i=$result['start']; $i<=$result['end']; $i++): ?>
+					<a class="abtn <?php if($i === (int)$result['current']) echo 'current' ?>" href="?p=<?= $i ?>&ctg_station=<?=$ctg_station?>&ctg_name=<?=$ctg_name?>"><?= $i ?></a>
+				<?php endfor ?>
+
+				<?php if( $result['end'] > $result['current']) : ?>
+					<a class="abtn" href="searchProduct.php?p=<?=($pid + 1)?>">&gt;</a>
+				<?php endif ?>
       </div>
 
     </div>
