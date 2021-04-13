@@ -450,16 +450,9 @@ require_once('modules/db.php');
     margin:0,
     responsiveClass:true,
     responsive:{
-       1800:{
-         items:4,
-         dots:true,
-         nav:true
-       },
-       1024:{ items:3},
-       0:{items:2,
-         dots:false,
-         nav:false
-       }
+       1800:{items:4,},
+       1024:{items:3},
+       0:{items:2}
     }
   }
 
