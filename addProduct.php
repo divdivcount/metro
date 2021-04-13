@@ -215,7 +215,6 @@
           img_Item.item(i).style.background = 'url(' + url + ')';
           img_Item.item(i).style.backgroundSize ='100% 100%';
           img_Item.item(i).style.backgroundRepeat ="no-repeat";
-          alert(url);
         }
       }
     })
