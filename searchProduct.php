@@ -1,5 +1,29 @@
 <?php
 require_once('modules/db.php');
+$ctg_name = Post("ctg_name", 0);
+$ctg_station = Post("ctg_station", 0);
+// echo $ctg_name;
+// echo $ctg_station;
+$sql = "select s.s_name, i.l_name  from station s, line i where s.l_id = $ctg_name";
+$result = mysqli_query($conn, $sql);
+$a = 0;
+while($station = mysqli_fetch_assoc($result)){
+	// print_r($station)."<br>";
+	if(array_search($ctg_station, $station) === false) {
+		$theVariable = "not";
+		// echo $theVariable."<br>";
+	}else{
+		$theVariable = "sure";
+		// echo $theVariable."<br>";
+		$a = 1;
+		break;
+	}
+}
+if($a == 0){
+	echo "<script>alert('입력을 잘못하셨거나 없는 역을 입력하셨습니다.');</script>";
+	echo "<script>location.replace('./index.php');</script>";
+	exit;
+}else{
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -10,11 +34,13 @@ require_once('modules/db.php');
     <link rel="stylesheet" href="css/css_metrocket_footer.css">
     <link rel="stylesheet" href="css/css_metrocket_header.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://unpkg.com/hangul-js" type="text/javascript"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+		<script src="https://unpkg.com/hangul-js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
     <style>
       .ui-helper-hidden-accessible{display:none;}
     </style>
@@ -75,7 +101,7 @@ require_once('modules/db.php');
               ?>
               <option value="<?=$row["l_id"]?>"><?=$row["l_name"]?></option>
             <?php }
-            mysqli_close($conn);
+             mysqli_close($conn);
             ?>
             </select>
           </div>
@@ -153,7 +179,7 @@ require_once('modules/db.php');
       <!-- n 호선 및  n 역 상품 타이틀 -->
       <div id="productTitle">
         <div class="line"></div>
-        <p><span>8호선</span> 모든 최신매물</p>
+        <p><span><?= $station['l_name']?></span> 모든 최신매물</p>
         <div class="line"></div>
       </div>
 
@@ -395,3 +421,4 @@ require_once('modules/db.php');
   });
   </script>
 </html>
+<?php }?>

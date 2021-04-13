@@ -6,6 +6,8 @@ require_once("modules/db.php");
 // Parameter
 // 호선과 역 둘로 나눠서 호선 id 가져와야함
 $line = Post('lines', null);
+// echo $line;
+$station = Post("station", null);
 $title = Post('title', null);
 $price = Post('price', null);
 $price_checking = Post('price_checking', null);
@@ -42,7 +44,7 @@ $pm = ($mb ? $mb : $om).$title."val".$ftime;
 // echo $pr_img_id ;
 
 
-  $productObj->Upload('', 0, ['ca_name'=>$category,'mb_id'=>$mb,'om_id'=>$om,'l_id'=>$line,'pr_title'=>$title,'pr_price'=>$price ,'pr_explanation'=>$explainText, 'pr_check'=>$price_checking,'pr_img_id'=>$pm]);
+  $productObj->Upload('', 0, ['ca_name'=>$category,'mb_id'=>$mb,'om_id'=>$om,'l_id'=>$line,'pr_station' => $station,'pr_title'=>$title,'pr_price'=>$price ,'pr_explanation'=>$explainText, 'pr_check'=>$price_checking,'pr_img_id'=>$pm]);
   $result = $productObj->ProductAll($title,$om,$mb);
   foreach ($result as $row) {
     $pr = $row['pr_img_id'];

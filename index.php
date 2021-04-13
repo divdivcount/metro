@@ -33,31 +33,6 @@ require_once('modules/db.php');
     </style>
   </head>
   <body>
-    <?php
-        if(!(empty($_SESSION['ss_mb_id']) || empty($_SESSION['naver_mb_id']) || empty($_SESSION['kakao_mb_id']))){
-            echo "123";
-        }else{
-          if(isset($_SESSION['ss_mb_id'])){
-            $mb_id = $_SESSION['ss_mb_id'];
-            $sql = " select * from member where mb_id = TRIM('$mb_id') ";
-            $result = mysqli_query($conn, $sql);
-            $mb = mysqli_fetch_assoc($result);
-          }elseif(isset($_SESSION['naver_mb_id'])){
-            $om_id = $_SESSION['naver_mb_id'];
-            $om_id = substr($om_id, 5);
-            $sql = " select * from oauth_member where om_id = TRIM($om_id) ";
-            $result = mysqli_query($conn, $sql);
-            $om = mysqli_fetch_assoc($result);
-          }elseif(isset($_SESSION['kakao_mb_id'])){
-            $oms_id = $_SESSION['kakao_mb_id'];
-            $oms_id = substr($oms_id, 5);
-            // echo $oms_id;
-            $sql = " select * from oauth_member where om_id = TRIM($oms_id) ";
-            $result = mysqli_query($conn, $sql);
-            $om = mysqli_fetch_assoc($result);
-          }
-        }
-    ?>
 
     <!-- 상단 메뉴 부분 -->
     <?php require_once('metrocket_header.php'); ?>
@@ -73,7 +48,7 @@ require_once('modules/db.php');
         <div><img src="img\slideimg_5.png" alt=""></div>
       </div>
       <!-- 이중select box 로 지하철역 선택하는 부분 -->
-        <form  id="selectMetro_box" action="index.php" method="post">
+        <form  id="selectMetro_box" action="searchProduct.php" method="post">
           <div id="bothFind_item">
 
           <div class="find_item">
@@ -148,7 +123,7 @@ require_once('modules/db.php');
           		$( "#auto" ).autocomplete( "search", Hangul.disassemble(input).join("").replace(/ /gi, "") );	//자모 분리후 띄어쓰기 삭제
           		})
             </script>
-            <div style="display:flex"><input id="auto" class="w3-input highlight" value='' type="text"><div style="width:1.3rem;margin:auto"><img src="img\loupe.png" alt=""></div></div>
+            <div style="display:flex"><input id="auto" class="w3-input highlight" name = "ctg_station"  type="text"><div style="width:1.3rem;margin:auto"><img src="img\loupe.png" alt=""></div></div>
           </div>
 
         </div>

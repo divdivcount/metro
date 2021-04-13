@@ -22,32 +22,6 @@
   </head>
   <body>
     <!-- 상단 메뉴 부분 -->
-    <?php
-        if(!(empty($_SESSION['ss_mb_id']) || empty($_SESSION['naver_mb_id']) || empty($_SESSION['kakao_mb_id']))){
-            // echo "123";
-        }else{
-          if(isset($_SESSION['ss_mb_id'])){
-            $mb_id = $_SESSION['ss_mb_id'];
-            $sql = " select * from member where mb_id = TRIM('$mb_id') ";
-            $result = mysqli_query($conn, $sql);
-            $mb = mysqli_fetch_assoc($result);
-          }elseif(isset($_SESSION['naver_mb_id'])){
-            $om_id = $_SESSION['naver_mb_id'];
-            $om_id = substr($om_id, 5);
-            $sql = " select * from oauth_member where om_id = TRIM($om_id) ";
-            $result = mysqli_query($conn, $sql);
-            $om = mysqli_fetch_assoc($result);
-          }elseif(isset($_SESSION['kakao_mb_id'])){
-            $oms_id = $_SESSION['kakao_mb_id'];
-            $oms_id = substr($oms_id, 5);
-            // echo $oms_id;
-            $sql = " select * from oauth_member where om_id = TRIM($oms_id) ";
-            $result = mysqli_query($conn, $sql);
-            $om = mysqli_fetch_assoc($result);
-          }
-        }
-
-    ?>
     <?php require_once('metrocket_header.php'); ?>
 
 
@@ -61,8 +35,10 @@
           <?php
           //85
             $line = $mb["line_station"] ? $mb["line_station"] : $om["line_station"];
+            // echo $line;
             $pieces = explode("&nbsp;", $line);
             $linesa = $pieces[0];
+            $stations = $pieces[1];
             // echo $linesa;
             $sql = "select l_id from line where l_name = '$linesa'";
             $result = mysqli_query($conn, $sql);
@@ -90,6 +66,7 @@
         <div class="content_box">
           <input id ="titleText" class="w3-input" type="text" name="title" placeholder="제목을 입력해주세요."required>
           <input type="hidden" name="lines" value="<?=$lines?>">
+          <input type="hidden" name="station" value="<?=$stations?>">
           <input type="hidden" name="mb" value="<?=$mb["mb_num"]?>">
           <input type="hidden" name="om" value="<?=$om["om_id"]?>">
           <!-- php 추가예정  -->

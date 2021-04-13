@@ -14,19 +14,21 @@
       $result = mysqli_query($conn, $sql);
       $mb = mysqli_fetch_assoc($result);
       $mb_id = $mb['mb_num'];
-      echo  $mb_id;
     }elseif(isset($_SESSION['naver_mb_id'])){
       $mb_ids = $_SESSION['naver_mb_id'];
+      $mb_ids = substr($mb_ids, 5);
       $sql = " SELECT * FROM oauth_member WHERE om_id = $mb_ids ";
       $result = mysqli_query($conn, $sql);
       $om = mysqli_fetch_assoc($result);
-      $mb_id = $om['om_id'];
+      $om_id = $om['om_id'];
+
     }elseif(isset($_SESSION['kakao_mb_id'])){
       $mb_ids = $_SESSION['kakao_mb_id'];
+      $mb_ids = substr($mb_ids, 5);
       $sql = " SELECT * FROM oauth_member WHERE om_id = $mb_ids ";
       $result = mysqli_query($conn, $sql);
       $om = mysqli_fetch_assoc($result);
-      $mb_id = $om['om_id'];
+      $om_id = $om['om_id'];
     }else{
       ?>
       <script>
@@ -35,7 +37,6 @@
       </script>
       <?php
     }
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -168,13 +169,13 @@
         <?php
         	try {
         			// $start_s_value = empty($_REQUEST["start_s_value"]) ? "" : $_REQUEST["start_s_value"];
-        		  $s_value = empty($_REQUEST["s_value"]) ? "" : $_REQUEST["s_value"];
+        		  // $s_value = empty($_REQUEST["s_value"]) ? "" : $_REQUEST["s_value"];
         			// if($start_s_value){
         			// 	$result = $dao->SelectPageLength($pid, 10, $s_value, $start_s_value);
         			//   $list = $dao->SelectPageList($result['current'], 10,$s_value, $start_s_value);
         			// }else{
-        			$result = $dao->SelectPageLength($pid, 2, $mb_id);
-        			$list = $dao->SelectPageList($result['current'], 2,$mb_id);
+        			$result = $dao->SelectPageLength($pid, 2, $mb_id ? $mb_id : 'null', $om_id ? $om_id : 'null');
+        			$list = $dao->SelectPageList($result['current'], 2, $mb_id ? $mb_id : 'null', $om_id ? $om_id : 'null');
         		// }
         	} catch (PDOException $e) {
         	  $result = null;
@@ -196,7 +197,7 @@
             <li class="clear"></li>
             <li class="price_text"><?= $row['pr_price'] ?></li>
             <li class="clear"></li>
-            <li class="star_text"><span style="float:left;"><img src="img\little_star.png" /></span><?= $row['in_hit'] ?><span class="station_text"><?= $row['mb_line_station'] ?></span></li>
+            <li class="star_text"><span style="float:left;"><img src="img\little_star.png" /></span><?=$row['i_count'] ?><span class="station_text"><?= $row['line_station'] ?></span></li>
           </div>
           </ul>
         </div>
