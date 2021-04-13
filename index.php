@@ -6,7 +6,6 @@ require_once('modules/db.php');
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>매트로켓</title>
 
     <!-- css -->
     <link rel="stylesheet" href="css/css_index.css">
@@ -19,6 +18,14 @@ require_once('modules/db.php');
     <link rel="stylesheet" href="css/OwlCarousel2-2.3.4/docs/assets/owlcarousel/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="css/OwlCarousel2-2.3.4/docs/assets/owlcarousel/assets/owl.theme.default.min.css">
 
+
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="apple-touch-icon" sizes="180x180" href="css/favicon_package_v0.16/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="css/favicon_package_v0.16/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="css/favicon_package_v0.16/favicon-16x16.png">
+    <link rel="manifest" href="css/favicon_package_v0.16/site.webmanifest">
+    <link rel="mask-icon" href="css/favicon_package_v0.16/safari-pinned-tab.svg" color="#5bbad5">
 
     <!-- js  -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -48,7 +55,7 @@ require_once('modules/db.php');
         <div><img src="img\slideimg_5.png" alt=""></div>
       </div>
       <!-- 이중select box 로 지하철역 선택하는 부분 -->
-        <form  id="selectMetro_box" action="searchProduct.php" method="post">
+        <form  id="selectMetro_box" action="searchProduct.php" method="get">
           <div id="bothFind_item">
 
           <div class="find_item">
