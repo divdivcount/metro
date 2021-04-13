@@ -118,7 +118,7 @@ if($mb_id && isset($_GET['mode']) == 'modify') { // 세션이 있고 회원수�
 				</div>
 
 				<div class="submitBtn_box">
-					<input type="hidden" name="mode" value="<?php echo $title ?>">
+					<input type="hidden" name="mode" value="<?= $mode ?>">
 					<input type="submit" class="submitBtn" value="회원가입 완료">
 				</div>
 
