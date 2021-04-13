@@ -183,7 +183,7 @@
         <input type="checkbox" id="check_all" value="">서비스 이용약관, 개인정보 수집 및 이용에 동의합니다.
       </div>
 
-      <div class="imgbox" onclick="checkAgeement()"><img src="img/register_continue.png"></div>
+      <div id="submitBtn_box"><button type="button" id="submitBtn" onclick="checkAgeement()">회원가입 계속</button></div>
 
     </div>
   </body>

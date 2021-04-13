@@ -1,3 +1,4 @@
+html, body {font-size: 10px;}
 body{
   margin: 0;
   padding: 0;
@@ -17,6 +18,7 @@ body{
   transform:translate(-50%,-50%);
   color: #a7a7a7;
 }
+#inputbox input[type=text]{background-color:none;}
 .imgbox {
   text-align: center;
 }
@@ -27,9 +29,6 @@ body{
 #boundarybox {
   width:100%;
   text-align: center;
-  font-family: "NotoSansKR_m";
-  font-size:1.45em;
-  color: ;
   margin:12px 0 12px 0;
   align-items: center;
   display:flex;
@@ -43,11 +42,12 @@ body{
 #id_check {
   font-family: "NotoSansKR_m";
   color: #a7a7a7;
-
+  font-size: 1.5rem;
 }
 .textbox{
+  display: flex;
   text-align: center;
-  align-items: center;
+  align-items: flex-end;
   width: 100%;
   overflow: hidden;
   font-size: 20px;
@@ -61,7 +61,7 @@ body{
   outline: none;
   background: none;
   color: #3b3b3b;
-  font-size: 18px;
+  font-size: 1.8rem;
   width: 80%;
   float: left;
   margin: 0 10px;
@@ -69,7 +69,7 @@ body{
 .textbox input::placeholder{
   font-family:"NotoSansKR_m";
   color: #a7a7a7;
-  font-size: 18px;
+  font-size: 1.8rem;
 }
 .textbox select{
   font-family:'NotoSansKR_r';
@@ -78,16 +78,10 @@ body{
   outline: none;
   background: none;
   color: #a7a7a7;
-  font-size: 15px;
+  font-size: 1.5rem;
   float: left;
   border-left: solid 1px #a7a7a7;
   padding-left: 5px;
-}
-.text_center{
-  color: #a7a7a7;
-  text-decoration: none;
-  margin: 12px auto 0 auto;
-  font-size: 1.15em;
 }
 .line  {
   width: 30%;
@@ -97,20 +91,44 @@ body{
 }
 .tite_1{
   width: 40%;
+  font-family: "NotoSansKR_m";
+  font-size:2.3rem;
+  color:#6d6d6d ;
 }
-
-
+.submitBtn_box{
+  text-align: center;
+  margin-top: 5.0rem;
+}
+.submitBtn{
+  width: 100%;
+  max-width: 400px;
+  height: 5.0rem;
+ color:#ffffff;
+ font-family: "NotoSansKR_m";
+ font-size: 1.8rem;
+ background: linear-gradient(to left, #bca8ff, #0090ff);
+ outline: none;
+ border: none;
+ border-radius: 20px;
+ cursor: pointer;
+}
+@media only screen and (max-width: 1440px) {
+  .login-box{width:60%;}
+  #inputbox{width: 70%;}
+}
 @media only screen and (max-width: 1024px) {
   .login-box{width:70%;}
   #inputbox{width: 80%;}
 }
 
 @media only screen and (max-width: 768px) {
-  .login-box{width: 70%;}
+  html,body{font-size: 9px;}
+  .login-box{width: 80%;}
   #inputbox {width: 100%;}
 }
 
 @media only screen and (max-width: 540px) {
+  html,body{font-size: 8px;}
   #boundarybox{ font-size:1.1em;}
   .line{width: 20%}
   .tite_1{width: 60%}
@@ -119,4 +137,10 @@ body{
   #fitst_email {width:40%}
   #second_email {width:35%}
   .textbox select{display: none;}
+}
+@media only screen and (max-width: 425px) {
+  html,body{font-size: 7px;}
+}
+@media only screen and (max-width: 360px) {
+  html,body{font-size: 6px;}
 }

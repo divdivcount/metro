@@ -100,7 +100,7 @@ if($mb_id && isset($_GET['mode']) == 'modify') { // 세션이 있고 회원수�
 
 				<!-- 이메일 -->
 				<div class="textbox">
-					<input type="text" id="fitst_email" name="mb_email" value="" placeholder="이메일"> <div style="float:left;font-family:'NotoSansKR_m';color:#3b3b3b;">@</div>
+					<input type="text" id="fitst_email" name="mb_email" value="" placeholder="이메일"> <div style="float:left;font-family:'NotoSansKR_m';color:#3b3b3b;"><span style="color:#a7a7a7">@</span></div>
 					<input type="text" id="second_email" name="mb_email_two" value="">
 
 					<!-- 이메일 선택 select 박스 -->
@@ -117,8 +117,9 @@ if($mb_id && isset($_GET['mode']) == 'modify') { // 세션이 있고 회원수�
 					</select>
 				</div>
 
-				<div class="imgbox">
-					<input type="image" src="img/register_complete.png" name="" value="<?php echo $title ?>">
+				<div class="submitBtn_box">
+					<input type="hidden" name="mode" value="<?php echo $title ?>">
+					<input type="submit" class="submitBtn" value="회원가입 완료">
 				</div>
 
 			</div>

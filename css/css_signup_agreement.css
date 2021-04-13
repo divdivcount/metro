@@ -1,30 +1,22 @@
-html, body {
-    margin: 0;
-    height: 100%;
-}
+html, body {font-size: 10px;}
 body{
   margin: 0;
   padding: 0;
   font-family: "NotoSansKR_m";
   color: #6d6d6d;
   width:100%;
-  height:100%;
   background-color:#F5F6F7;
   position: relative;
 }
 #signupbox{
   width: 42%;
-  height: 100%;
+  height: auto;
   text-align: left;
-  position: absolute;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  margin-top: 50px;
+  margin: 50px auto;
 }
 #boundarybox {
   text-align: center;
-  font-size:1.45em;
+  font-size:2.3rem;
   color: #6d6d6d;
   margin:12px 0 12px 0;
   align-items: center;
@@ -37,9 +29,26 @@ h3{
 .imgbox {
   text-align:center;
 }
+#submitBtn_box{
+  width: 100%;
+  text-align: center;
+}
+#submitBtn{
+  width: 100%;
+  max-width: 400px;
+  height: 5.0rem;
+ color:#ffffff;
+ font-family: "NotoSansKR_m";
+ font-size: 1.8rem;
+ background: linear-gradient(to left, #bca8ff, #0090ff);
+ outline: none;
+ border: none;
+ border-radius: 20px;
+ cursor: pointer;
+}
 .agreement {
   color:Black;
-  font-size:10px;
+  font-size:1.0rem;
   font-family: "NotoSansKR_t";
   width: 100%;
   height: 280px;
@@ -53,12 +62,12 @@ h3{
 .checkline {
   margin-bottom:30px;
   color: #848484;
-  font-size: 13px;
+  font-size: 1.3rem;
 }
 .both_checkline{
   margin-bottom:35px;
   color: #4a4a4a;
-  font-size: 13px;
+  font-size: 1.3rem;
   font-family:"NotoSansKR_b";
   text-decoration:underline 1px;
 }
@@ -77,16 +86,19 @@ h3{
   margin-right: 10px;
   background-color: #00b3ff;
 }
+@media only screen and (max-width: 1440px) {
+  #signupbox{width:60%;}
+}
 @media only screen and (max-width: 1024px) {
   #signupbox{width:70%;}
 }
 
 @media only screen and (max-width: 768px) {
-  #signupbox{width: 70%;}
+  #signupbox{width: 80%;}
 }
 
 @media only screen and (max-width: 540px) {
-  #boundarybox{ font-size:1.1em;}
+  #signupbox{width: 90%;}
   .line{width: 20%}
   .tite_1{width: 60%}
   .imgbox img{    width: 100%;  }

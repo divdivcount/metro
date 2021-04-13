@@ -39,15 +39,15 @@ echo $_SESSION['naver_mb_id'];
 				<input type="password" placeholder="비밀번호" name="mb_password">
 			</div>
 
-					<div class="imgbox">
-						<input type="image" id ="loginbtn" src="img/login.png">
+					<div class="submitBtn">
+						<input type="submit" id ="loginbtn" value="로그인">
 					</div>
 
 					<a class="text_center" href="findIdPW.php">아이디 / 비밀번호 찾기</a>
 
 					<div id="boundarybox">
 						<div class="line"></div>
-						<div style="width:20%;font-size:1.15em;" >또는</div>
+						<div style="width:20%;font-size:1.5rem;" >또는</div>
 						<div class="line"></div>
 					</div>
 

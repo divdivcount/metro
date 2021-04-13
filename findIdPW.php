@@ -41,7 +41,7 @@
                   <div class="inputbox">
                     <div class="textbox"><div class="bluedot">*</div>이메일</div>
                       <!-- 이메일 폼 부분 재구성함 수정 요함  -->
-              					<input type="text" class="first_email" name="first_email" value="" > <div style="font-family:'NotoSansKR_m';color:#3b3b3b;">@</div>
+              					<input type="text" class="first_email" name="first_email" value="" > <div style="font-family:'NotoSansKR_m';color:#3b3b3b;font-size: 1.8rem;">@</div>
               					<input type="text" class="second_email" name="second_email" value="">
 
                         <!-- 이메일 선택 select 박스 -->
@@ -59,8 +59,8 @@
                   </div>
 
                   <!-- 아이디 찾기 버튼 -->
-                  <div class="imgbox">
-                    <input type="image" src="img/findid_btn.png" class="submit">
+                  <div class="submitBtn_box">
+                    <input type="submit" class="submitBtn" value="아이디 찾기">
                   </div>
                 </form>
 
@@ -83,7 +83,7 @@
                   <div class="inputbox">
                     <div class="textbox"><div class="bluedot">*</div>이메일</div>
                       <!-- 이메일 폼 부분 재구성함 수정 요함  -->
-              					<input type="text" class="first_email" name="first_email" value="" > <div style="font-family:'NotoSansKR_m';color:#3b3b3b;">@</div>
+              					<input type="text" class="first_email" name="first_email" value="" > <div style="font-family:'NotoSansKR_m';color:#3b3b3b;font-size: 1.8rem;">@</div>
               					<input type="text" class="second_email" name="second_email" value="">
 
                         <!-- 이메일 선택 select 박스 -->
@@ -101,8 +101,8 @@
                   </div>
 
                   <!-- 비밀번호 찾기 버튼 -->
-                  <div class="imgbox">
-                    <input type="image" src="img/findpw_btn.png" class="submit">
+                  <div class="submitBtn_box">
+                    <input type="submit" class="submitBtn" value="비밀번호 찾기">
                   </div>
                 </form>
 
