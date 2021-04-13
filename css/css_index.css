@@ -32,7 +32,7 @@ body {
 
 #selectMetro_box span{font-size:1.8rem;color: #a1a1a1;}
 #selectMetro_box .find_item{width: 40%;border-bottom: 3px solid #a5a5a5;}
-#selectMetro_box .w3-button{width:auto;height: 7.0rem;font-family: "NotoSansKR_r";}
+#selectMetro_box .w3-button{width:auto;height: 7.0rem;font-family: "NotoSansKR_r";outline: none;}
 #selectMetro_box .w3-input{outline: none;background-color:#f9f9f9!important;border: none;}
 #selectMetro_box .w3-select{outline: none;background-color:#f9f9f9!important;border: none;}
 #selectMetro_box .find_item:nth-child(1){}
