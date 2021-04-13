@@ -84,7 +84,12 @@ echo $_SESSION['naver_mb_id'];
 		$result = mysqli_query($conn, $sql);
 		$naver = mysqli_fetch_assoc($result);
 		mysqli_close($conn); // 데이터베이스 접속 종료
-		userGoNow('index.php');
+    ?>
+      <script type="text/javascript">
+        window.opener.location.reload();
+        window.close();
+      </script>
+    <?php
 	}elseif (isset($_SESSION['kakao_mb_id'])) {
 		$kakao_mb_id = $_SESSION['kakao_mb_id'];
 
@@ -93,7 +98,12 @@ echo $_SESSION['naver_mb_id'];
 		$kakao = mysqli_fetch_assoc($result);
 
 		mysqli_close($conn); // 데이터베이스 접속 종료
-		userGoNow('index.php');
+    ?>
+      <script type="text/javascript">
+        window.opener.location.reload();
+        window.close();
+      </script>
+    <?php
 	}else{
 		echo "통과하지 못했어";
 	}

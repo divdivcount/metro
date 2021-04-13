@@ -67,7 +67,7 @@ if($a == 0){
           <div id="search_TextPart">
 
             <select class="w3-select" name="">
-              <option>나는찬규가좋아</option>
+              <option></option>
             </select>
 
             <input type="text" name="" value="">
