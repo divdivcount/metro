@@ -16,31 +16,6 @@
   </head>
   <body>
     <!-- 상단 메뉴 부분 -->
-    <?php
-        if(!(empty($_SESSION['ss_mb_id']) || empty($_SESSION['naver_mb_id']) || empty($_SESSION['kakao_mb_id']))){
-            echo "123";
-        }else{
-          if(isset($_SESSION['ss_mb_id'])){
-            $mb_id = $_SESSION['ss_mb_id'];
-            $sql = " select * from member where mb_id = TRIM('$mb_id') ";
-            $result = mysqli_query($conn, $sql);
-            $mb = mysqli_fetch_assoc($result);
-          }elseif(isset($_SESSION['naver_mb_id'])){
-            $om_id = $_SESSION['naver_mb_id'];
-            $om_id = substr($om_id, 5);
-            $sql = " select * from oauth_member where om_id = TRIM($om_id) ";
-            $result = mysqli_query($conn, $sql);
-            $om = mysqli_fetch_assoc($result);
-          }elseif(isset($_SESSION['kakao_mb_id'])){
-            $oms_id = $_SESSION['kakao_mb_id'];
-            $oms_id = substr($oms_id, 5);
-            echo $oms_id;
-            $sql = " select * from oauth_member where om_id = TRIM($oms_id) ";
-            $result = mysqli_query($conn, $sql);
-            $om = mysqli_fetch_assoc($result);
-          }
-        }
-    ?>
     <?php require_once('metrocket_header.php'); ?>
     <div id="wrapContainer_Box">
       <div id="pageTitle_box" class="radius_box">

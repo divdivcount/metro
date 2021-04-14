@@ -4,9 +4,10 @@ $dao = new Product;
 $pid = Get('p', 1);
 $ctg_name = Get("ctg_name", 0);
 $ctg_station = Get("ctg_station", 0);
-// echo $ctg_name;
-// echo $ctg_station;
-$sql = "select s.s_name, i.l_name  from station s, line i where s.l_id = $ctg_name";
+// echo $ctg_name."호선"."<br>";
+// echo $ctg_station."역"."<br>";
+
+$sql = "select s.s_name, i.l_name  from station s, line i where i.l_id = $ctg_name";
 $result = mysqli_query($conn, $sql);
 $a = 0;
 while($station = mysqli_fetch_assoc($result)){
@@ -61,20 +62,31 @@ if($a == 0){
       <div id="pageTitle_box" class="radius_box">
         <h2>중고품목 매물보기</h2>
         <span>카테고리를 활용해 매물을 검색해 보세요</span>
-
+				<form action="searchProduct.php" method="get">
         <!-- 검색관련 input 박스 -->
         <div id="search_box">
           <div id="search_TextPart">
+						<!-- form css -->
 
-            <select class="w3-select" name="">
-              <option></option>
-            </select>
-
-            <input type="text" name="" value="">
+	            <select class="w3-select" name="category">
+								<option value="">선택</option>
+								<?php
+								$sql = " select * from category order by ca_id";
+								$result = mysqli_query($conn, $sql);
+								while ($row = mysqli_fetch_assoc($result)) {
+								?>
+								<option value="<?=$row["ca_name"]?>"><?=$row["ca_name"]?></option>
+							<?php }
+							?>
+	            </select>
+							<input type="hidden" name="ctg_name" value="<?=$ctg_name?>">
+							<input type="hidden" name="ctg_station" value="<?=$ctg_station?>">
+	            <input type="text" name="s_value">
           </div>
-
+</form>
           <!-- 검색버튼  -->
-          <div class="search_icon"><input type="image" src="img/search_icon.png" name="" value=""></div>
+          <div class="search_icon"><input type="submit" value ="" style="background-image: url('img/search_icon.png'); background-size: 100% 100%; background-position:  0px 0px;
+    background-repeat: no-repeat; border:none; width:58px; height:58px;"></div>
 
         </div>
 
@@ -89,7 +101,7 @@ if($a == 0){
         </div>
 
 
-        <form  id="selectMetro_box" action="searchProduct.php" method="post">
+        <form  id="selectMetro_box" action="searchProduct.php" method="get">
           <div id="bothFind_item">
 
           <div class="find_item">
@@ -164,12 +176,12 @@ if($a == 0){
               $( "#auto" ).autocomplete( "search", Hangul.disassemble(input).join("").replace(/ /gi, "") );	//자모 분리후 띄어쓰기 삭제
               })
             </script>
-            <div style="display:flex"><input id="auto" class="w3-input highlight" value='' type="text"><div style="width:1.3rem;margin:auto"><img src="img\loupe.png" alt=""></div></div>
+            <div style="display:flex"><input id="auto" class="w3-input highlight" name="ctg_station" value='' type="text"><div style="width:1.3rem;margin:auto"><img src="img\loupe.png" alt=""></div></div>
           </div>
 
         </div>
 
-        <button type="submit" id ="close_pop" class="w3-button w3-blue w3-ripple w3-round-xxlarge" name="button">물건보러가기</button>
+        <button type="submit" id ="close_pop" class="w3-button w3-blue w3-ripple w3-round-xxlarge">물건보러가기</button>
         </form>
       </div>
 
@@ -177,9 +189,18 @@ if($a == 0){
 			<?php
 				try {
 						$s_value = empty($_REQUEST["s_value"]) ? "" : $_REQUEST["s_value"];
+						$category = empty($_REQUEST["category"]) ? "" : $_REQUEST["category"];
+						// echo $s_value."검색어"."<br>";
+						// echo $category."카테고리"."<br>";
 						if($s_value){
 							$result = $dao->SelectPageLength($pid, 10, $ctg_name, $ctg_station, '');
 						  $list = $dao->SelectPageList($result['current'], 10,$ctg_name, $ctg_station, $s_value);
+						}elseif($category){
+							$result = $dao->SelectPageLength($pid, 10, $ctg_name, $ctg_station, $category);
+						  $list = $dao->SelectPageList($result['current'], 10,$ctg_name, $ctg_station, '', $category);
+						}elseif($s_value && $category){
+							$result = $dao->SelectPageLength($pid, 10, $ctg_name, $ctg_station, $category);
+						  $list = $dao->SelectPageList($result['current'], 10,$ctg_name, $ctg_station, $s_value, $category);
 						}else{
 						$result = $dao->SelectPageLength($pid, 10, $ctg_name, $ctg_station, '');
 						$list = $dao->SelectPageList($result['current'], 10, $ctg_name, $ctg_station, '');
