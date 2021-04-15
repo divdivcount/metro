@@ -1,3 +1,10 @@
+<?php
+require_once('modules/db.php');
+$dao = new Product;
+$pr_id = Get("id", 0);
+$pr_title = Get("title",0);
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>

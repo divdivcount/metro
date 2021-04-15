@@ -307,16 +307,16 @@ if($fname != '') {
 		}else{
 			if($s_value){
 				// echo "SelectPageList1";
-				$sql = "select pr_title, pr_price, ca_name, (select l_name from line l where l.l_id = :mb_id ) as line_name, pr_station,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,(select pr_img from product_img pi where pi.pr_img_id = p.pr_img_id and pi.main_check = 'y') as pr_img  from product p  where l_id = :mb_id and pr_station = :om_id and pr_title like :s_value order by $this->quTableId asc limit :start, :viewLen";
+				$sql = "select pr_id,pr_title, pr_price, ca_name, (select l_name from line l where l.l_id = :mb_id ) as line_name, pr_station,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,(select pr_img from product_img pi where pi.pr_img_id = p.pr_img_id and pi.main_check = 'y') as pr_img  from product p  where l_id = :mb_id and pr_station = :om_id and pr_title like :s_value order by $this->quTableId asc limit :start, :viewLen";
 			}elseif($category){
 				// echo "SelectPageList3";
-				$sql = "select pr_title, pr_price, ca_name, (select l_name from line l where l.l_id = :mb_id ) as line_name, pr_station,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,(select pr_img from product_img pi where pi.pr_img_id = p.pr_img_id and pi.main_check = 'y') as pr_img  from product p  where l_id = :mb_id and pr_station = :om_id and p.ca_name = :category order by $this->quTableId asc limit :start, :viewLen";
+				$sql = "select pr_id,pr_title, pr_price, ca_name, (select l_name from line l where l.l_id = :mb_id ) as line_name, pr_station,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,(select pr_img from product_img pi where pi.pr_img_id = p.pr_img_id and pi.main_check = 'y') as pr_img  from product p  where l_id = :mb_id and pr_station = :om_id and p.ca_name = :category order by $this->quTableId asc limit :start, :viewLen";
 			}elseif($s_value && $category){
 				// echo "SelectPageList4";
-				$sql = "select pr_title, pr_price, ca_name, (select l_name from line l where l.l_id = :mb_id ) as line_name, pr_station,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,(select pr_img from product_img pi where pi.pr_img_id = p.pr_img_id and pi.main_check = 'y') as pr_img  from product p  where l_id = :mb_id and pr_station = :om_id and pr_title and ca_name = :category and pr_title like :s_value order by $this->quTableId asc limit :start, :viewLen";
+				$sql = "select pr_id,pr_title, pr_price, ca_name, (select l_name from line l where l.l_id = :mb_id ) as line_name, pr_station,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,(select pr_img from product_img pi where pi.pr_img_id = p.pr_img_id and pi.main_check = 'y') as pr_img  from product p  where l_id = :mb_id and pr_station = :om_id and pr_title and ca_name = :category and pr_title like :s_value order by $this->quTableId asc limit :start, :viewLen";
 			}else{
 				// echo "SelectPageList2";
-				$sql = "select pr_title, pr_price, ca_name,  (select l_name from line l where l.l_id = :mb_id ) as line_name ,pr_station,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,(select pr_img from product_img pi where pi.pr_img_id = p.pr_img_id and pi.main_check = 'y') as pr_img  from product p  where l_id = :mb_id and pr_station = :om_id order by $this->quTableId asc limit :start, :viewLen";
+				$sql = "select pr_id,pr_title, pr_price, ca_name,  (select l_name from line l where l.l_id = :mb_id ) as line_name ,pr_station,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,(select pr_img from product_img pi where pi.pr_img_id = p.pr_img_id and pi.main_check = 'y') as pr_img  from product p  where l_id = :mb_id and pr_station = :om_id order by $this->quTableId asc limit :start, :viewLen";
 			}
 			// echo "???";
 		}

@@ -225,7 +225,7 @@ if($a == 0){
       <div id="productGrid_box">
 				<?php foreach ($list as $row) : ?>
         <!-- 상품 예시 샘플 php로 띄울거임 -->
-        <div class="productInfo_box">
+        <a href="searchProduct_detail.php?id=<?=$row['pr_id']?>&title=<?=$row['pr_title']?>"><div class="productInfo_box">
           <!-- 상품 이미지부분 -->
           <div class="productImg_box">
             <img src="files/<?=$row["pr_img"]?>" alt="">
@@ -255,7 +255,7 @@ if($a == 0){
               <span>관심<?=$row["i_count"]?></span>
             </div>
           </div>
-        </div>
+        </div></a>
 				<?php endforeach ?>
 			</div>
       <!-- 페이지 네이션 들어가는 부분 -->
