@@ -77,3 +77,24 @@ label{}
     margin: 0 auto!important;
   }
 }
+@media only screen and (max-width: 1440px) {
+  .w3-content {width: 80%!important;}
+}
+@media only screen and (max-width: 1024px) {
+  html,body{font-size: 9px!important;}
+  .w3-content {width: 85%!important;}
+}
+@media only screen and (max-width: 768px) {
+  html,body{font-size: 8px!important;}
+  .w3-content {width: 90%!important;}
+  #userInfo_box{width: 100%;}
+}
+@media only screen and (max-width: 540px) {
+  html,body{font-size: 7px!important;}
+}
+@media only screen and (max-width: 425px) {
+
+}
+@media only screen and (max-width: 360px) {
+  html,body{font-size: 6px!important;}
+}

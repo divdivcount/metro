@@ -78,15 +78,14 @@ if(isset($_SESSION['ss_mb_id'])){
     max-width: 400px;
   }
   #selectMetro_box{
+    width: 80%;
+    height: 260px;
     display: none;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
     background-color: #f9f9f9;
     box-shadow: 10px 10px 50px 0 rgba(0, 0, 0, 0.16);
-    width: 100%;
-    height: auto;
-    padding: 1.0rem;
+    padding: 1.0rem 2.0rem;
     z-index: 1;
     position: absolute;
     top: 50%;
@@ -97,8 +96,8 @@ if(isset($_SESSION['ss_mb_id'])){
     font-size:2.3rem;
   }
 
-  #selectMetro_box .title_line{width: 100%;display: flex;justify-content: space-between;}
-  #selectMetro_box .input_line{display: flex;justify-content: space-between;}
+  #selectMetro_box .title_line{width: 100%;display: flex;justify-content: flex-end;}
+  #selectMetro_box .input_line{display: flex;justify-content: space-between;height: 80%;align-items: center;}
   #selectMetro_box span{font-size:1.8rem;color: #a1a1a1;}
   #selectMetro_box .find_item{width: 45%;border-bottom: 3px solid #a5a5a5;}
   #selectMetro_box .w3-button{width:20%;height: 7.0rem;font-family: "NotoSansKR_r";}
@@ -107,9 +106,37 @@ if(isset($_SESSION['ss_mb_id'])){
   #selectMetro_box .find_item:nth-child(1){}
   #selectMetro_box #bothFind_item{display: flex;width: 75%;flex-direction: row;justify-content: space-between;align-items: center;}
 
-  #station {width: 100%;}
-  #station input{max-width: 300px;}
-  #station button{font-size:1.5rem;color: #5e5956;width:9.0rem;}
+  .cloaseBtn{cursor: pointer;}
+
+  #station {width: 100%;display: flex;}
+  #station input{max-width: 300px;width: 70%;}
+  #station button{font-size:1.5rem;color: #5e5956;min-width: 80px;height: auto;}
+
+
+  @media only screen and (min-width: 1920px) {
+  }
+  @media only screen and (max-width: 1440px) {
+  }
+  @media only screen and (max-width: 1024px) {
+  }
+  @media only screen and (max-width: 768px) {
+    #userInfo_box{width: 100%;}
+  }
+  @media only screen and (max-width: 540px) {
+    #userInfo_box{grid-template-columns: 40% 60%;}
+  }
+  @media only screen and (max-width: 425px) {
+    .w3-container{background-color: #fff;padding: 3.0rem 3.0rem;}
+    #userInfo_box{grid-template-columns: 45% 55%;}
+    #station {flex-direction: column;}
+    #station input{max-width: 300px;width: 100%;}
+    #station button{max-width: 100px;margin: 2.0rem 0 0 auto ;}
+  }
+  @media only screen and (max-width: 360px) {
+    .button_contatiner_margin .w3-button{width: 18rem}
+  }
+
+
 </style>
 </head>
 <body>
@@ -158,8 +185,7 @@ if(isset($_SESSION['ss_mb_id'])){
       <input type="hidden" name="om_id"  value="<?= $om["om_id"] ? $om["om_id"] : 'null' ?>">
 
       <div class="title_line">
-        <h2>가제 : 역등록</h2>
-        <div class="cloaseBtn"><img src="img/twitter.png" class="close_pop"></div>
+        <div class="cloaseBtn"><img src="img/cancle.png" class="close_pop"></div>
       </div>
 
       <div class="input_line">
@@ -251,8 +277,8 @@ if(isset($_SESSION['ss_mb_id'])){
   </form>
 
     <p class="w3-center button_contatiner_margin">
-      <button type="submit" id="joinBtn" class="w3-button  w3-blue w3-ripple w3-margin-top w3-round" onclick="document.getElementById('pwForm').submit();">비밀번호 변경</button>
-      <button type="button" id="joinBtn" class="w3-button w3-dark-gray w3-ripple w3-margin-top w3-round">회원 탈퇴</button>
+      <button type="submit" class="w3-button  w3-blue w3-ripple w3-margin-top w3-round" onclick="document.getElementById('pwForm').submit();">비밀번호 변경</button>
+      <button type="button" class="w3-button w3-dark-gray w3-ripple w3-margin-top w3-round">회원 탈퇴</button>
     </p>
 
 </div>

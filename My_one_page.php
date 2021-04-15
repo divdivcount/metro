@@ -55,7 +55,7 @@ require_once("modules/db.php");
   ?>
   <!-- 최상단 로고 및 상단메뉴 -->
       <?php require_once('metrocket_header.php') ?>
-	<div class="w3-content w3-container w3-margin-top">
+	<div class="w3-content w3-container w3-margin-top" >
 
     <!-- 유저정보  차후 php 작업 필요 -->
     <div class="profile_box">
@@ -67,18 +67,22 @@ require_once("modules/db.php");
     </div>
 
     <!-- 메인 버튼 -->
+
     <div class="mainBtn_box">
        <button type="button" class="w3-button w3-round" name="main_button" onclick = "changeIframeUrl('member_update.php')" >회원 정보</button>
        <button type="button" class="w3-button w3-round" name="main_button" onclick = "changeIframeUrl('sangpum.php')" >판매 상품</button>
        <button type="button" class="w3-button w3-round" name="main_button" onclick = "changeIframeUrl()" >관심 상품</button>
        <button type="button" class="w3-button w3-round" name="main_button" onclick = "changeIframeUrl()">구매 상품</button>
     </div>
+
     <form name="nan" method="post" target="mbs">
       <input type="hidden" name="mba" value="<?=$mb_id?>">
     </form>
+
     <div class="click_box">
 							<iframe style="float:left;" frameborder="0"  id="main_frame" src="member_update.php" height="1030px" width="100%"></iframe>
 		</div>
+
 	</div>
   <script>
   function changeIframeUrl(url){

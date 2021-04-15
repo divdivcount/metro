@@ -19,7 +19,8 @@
   text-decoration: none;
   padding: 0.8rem 1.2rem;
   font-size: 2.0rem;
-  color:#707070
+  color:#707070;
+  cursor: pointer;
 }
 .imgbox_1 {
   margin-left: 10%;
