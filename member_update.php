@@ -171,7 +171,8 @@ if(isset($_SESSION['ss_mb_id'])){
       <input class="input_email" type="text" id="email" name="mb_email" value="<?=$mb["mb_email"] ? $mb["mb_email"] : $om["om_email"] ?>"  readonly required>
 
       <label><span class="blue">*</span>주변 역 설정하기</label>
-      <div id="station" style="display:flex;"><input class="input_station" type="text" id="pw2" value="<?=$mb['line_station'] ? $mb['line_station'] : $om['line_station']?>" required>	<button type="submit" id="joinBtn" class="w3-button w3-light-gray w3-round">역 검색</button></div>
+      <div id="station" style="display:flex;"><input class="input_station" type="text" id="pw2" value="<?=$mb['line_station'] ? $mb['line_station'] : $om['line_station']?>" required>
+      <input class="w3-button w3-light-gray w3-round" type="button" id="joinBtn" value="역 검색"> </div>
 
 
       </div>
@@ -269,7 +270,7 @@ if(isset($_SESSION['ss_mb_id'])){
 
         </div>
 
-        <button type="submit" class="w3-button w3-blue w3-ripple w3-round-xxlarge close_pop" name="button">등록</button>
+        <button type="submit" class="w3-button w3-blue w3-ripple w3-round-xxlarge close_pop">등록</button>
       </div>
 
 
@@ -277,7 +278,7 @@ if(isset($_SESSION['ss_mb_id'])){
   </form>
 
     <p class="w3-center button_contatiner_margin">
-      <button type="submit" class="w3-button  w3-blue w3-ripple w3-margin-top w3-round" onclick="document.getElementById('pwForm').submit();">비밀번호 변경</button>
+      <button class="w3-button  w3-blue w3-ripple w3-margin-top w3-round" onclick="document.getElementById('pwForm').submit();">비밀번호 변경</button>
       <button type="button" class="w3-button w3-dark-gray w3-ripple w3-margin-top w3-round">회원 탈퇴</button>
     </p>
 

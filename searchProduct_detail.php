@@ -3,6 +3,11 @@ require_once('modules/db.php');
 $dao = new Product;
 $pr_id = Get("id", 0);
 $pr_title = Get("title",0);
+try{
+  $result = $dao->searchProduct_detail($pr_id, $pr_title);
+}catch(PDOException $e){
+    echo $e;
+  }
 ?>
 
 <!DOCTYPE html>
@@ -20,6 +25,12 @@ $pr_title = Get("title",0);
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="css/favicon_package_v0.16/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="css/favicon_package_v0.16/favicon.ico">
+    <!-- <link rel="icon" type="image/png" sizes="16x16" href="css/favicon_package_v0.16/favicon-16x16.png"> -->
+    <link rel="manifest" href="css/favicon_package_v0.16/site.webmanifest">
+    <link rel="mask-icon" href="css/favicon_package_v0.16/safari-pinned-tab.svg" color="#5bbad5">
   </head>
   <body>
     <!-- 상단 메뉴 부분 -->
@@ -30,17 +41,21 @@ $pr_title = Get("title",0);
         <span>채팅하기를 이용해 판매자와 대화할 수 있습니다.</span>
       </div>
       <!-- 슬라이드 이미지 -->
+      <?php foreach ($result as $row) : ?>
+      <?php
+
+        $pr_imgs = $row["pr_img"];
+        $pr_img = explode(",", $pr_imgs);
+        // var_dump($pr_img);
+      ?>
       <div id="slideImg_box">
         <!-- 나중에 php로 동적으로 이미지나오게 작업예정 -->
-        <div class="bxslider">
-          <div><img src="img\slideimg_1.png" alt=""></div>
-          <div><img src="img\slideimg_2.png" alt=""></div>
-          <div><img src="img\slideimg_3.png" alt=""></div>
-          <div><img src="img\slideimg_4.png" alt=""></div>
-          <div><img src="img\slideimg_5.png" alt=""></div>
-        </div>
-      </div>
 
+        <div class="bxslider">
+          <?php for($img = 0; $img < count($pr_img); $img++) { ?><div><img src="files\<?= $pr_img[$img] ?>" alt="" ></div><?php } ?>
+        </div>
+
+      </div>
       <!-- 상품 및 유저 정보 + 부가기능 부분  -->
       <div id="productInfo_title" class="radiusTop">
 
@@ -50,16 +65,16 @@ $pr_title = Get("title",0);
           <div class="userProfile">
             <!-- 사람사진 -->
             <div class="profileImg">
-              <img src="" alt="">
+              <img src="<?= $row["profile_img"] ?>" alt="">
             </div>
 
             <!-- 이름이랑 호선  -->
             <div class="pr_namestation">
-              <p>김첨지</p>
+              <p><?= $row["profile_name"] ?></p>
 
               <div class="imgPlusText">
                 <div class="img_box"><img src="img/maps-and-flags.png" alt=""></div>
-                <span>8호선 단대오거리 </span>
+                <span><?= $row["profile_station"] ?></span>
               </div>
 
             </div>
@@ -74,19 +89,19 @@ $pr_title = Get("title",0);
 
         <!-- 두번째줄 -->
         <div class="productTitle_line">
-          <p>김치냉장고 이사로 급처</p>
+          <p><?= $row["pr_title"] ?></p>
         </div>
 
         <!-- 세번째줄  -->
         <div class="productPrice_line">
           <div class="imgPlusText">
             <div class="img_box"><img src="img/tag.png" alt=""></div>
-            <span>150,000원</span>
+            <span><?= $row["pr_price"] ?>원</span>
           </div>
 
           <!-- 가격제안 가능여부 -->
           <div class="checkPricepNegotiation">
-            가격제안가능
+            <?php if($row["pr_check"] == 1){echo "가격제안 가능";}else{} ?>
           </div>
         </div>
 
@@ -95,7 +110,7 @@ $pr_title = Get("title",0);
 
           <!-- 카테고리 내용 -->
           <div class="pr_category">
-            카테고리 내용
+            <?= $row["ca_name"] ?> · 관심 <?= $row["i_count"] ?>
           </div>
 
           <div id="extraBtn_box">
@@ -122,15 +137,13 @@ $pr_title = Get("title",0);
       <!-- 상품 설명  -->
       <div id="productInfo_text" class="radiusBottom">
         <p>
-          삼성 아삭아삭 김치 냉장고예요. 2011년 구매했어요~작동 잘되요.<br>
-          김치통 2개 같이 드려요.<br>
-          <br>
-          무게.부피 때문에 직접 가져가셔야해요.<br>
-          1층까지는 내려드려요~ 저녁 6시 이후에 거래가능.<br>
-          <br>
-          교환.환불은 불가해요.<br>
+          <?= $row["pr_explanation"] ?>
         </p>
       </div>
+    <?php endforeach ?>
+    <!-- 댓글이 들어가야하는 부분입니다. -->
+
+
 
       <!-- 다른 상품 소개 타이틀 -->
       <div class="otherProduct_title"><h3>이 상품과 비슷한 상품</h3></div>
