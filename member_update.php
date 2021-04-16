@@ -45,6 +45,7 @@ if(isset($_SESSION['ss_mb_id'])){
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="css/css_my_one_page.css">
+<link rel="stylesheet" href="css/css_member_update.css">
 <link rel="stylesheet" href="css/css_noamlfont.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -52,92 +53,6 @@ if(isset($_SESSION['ss_mb_id'])){
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://unpkg.com/hangul-js" type="text/javascript"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<style>
-  .w3-container{background-color: #fff;padding: 5.0rem 5.0rem;}
-  .w3-container .h3{font-size: 3.0rem; font-family: "NotoSansKR_r";margin-bottom: 3.0rem;}
-
-  .button_contatiner_margin{padding: 5.0rem 0;font-size: 2.0rem;}
-  .button_contatiner_margin .w3-button{width: 18.0rem;}
-  .p_container_margin{}
-
-
-  #userInfo_box{
-    font-family: "NotoSansKR_r";
-    font-size: 2.3rem;
-    width: 85%;
-    display: grid;
-    margin: 0 auto;
-    grid-template-columns: minmax(200px ,30%) minmax(250px,1fr);
-    grid-row-gap:2.5rem;
-    justify-content: flex-end;
-  }
-
-
-  .input_id ,.input_name, .input_email,.input_password,.input_new_password,.input_new_exisit_password{
-    width: 100%;
-    max-width: 400px;
-  }
-  #selectMetro_box{
-    width: 80%;
-    height: 260px;
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    background-color: #f9f9f9;
-    box-shadow: 10px 10px 50px 0 rgba(0, 0, 0, 0.16);
-    padding: 1.0rem 2.0rem;
-    z-index: 1;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform:translate(-50%,-50%);
-    border-radius: 30px;
-    font-family: "NotoSansKR_r";
-    font-size:2.3rem;
-  }
-
-  #selectMetro_box .title_line{width: 100%;display: flex;justify-content: flex-end;}
-  #selectMetro_box .input_line{display: flex;justify-content: space-between;height: 80%;align-items: center;}
-  #selectMetro_box span{font-size:1.8rem;color: #a1a1a1;}
-  #selectMetro_box .find_item{width: 45%;border-bottom: 3px solid #a5a5a5;}
-  #selectMetro_box .w3-button{width:20%;height: 7.0rem;font-family: "NotoSansKR_r";}
-  #selectMetro_box .w3-input{outline: none;background-color:#f9f9f9!important;border: none;}
-  #selectMetro_box .w3-select{outline: none;background-color:#f9f9f9!important;border: none;}
-  #selectMetro_box .find_item:nth-child(1){}
-  #selectMetro_box #bothFind_item{display: flex;width: 75%;flex-direction: row;justify-content: space-between;align-items: center;}
-
-  .cloaseBtn{cursor: pointer;}
-
-  #station {width: 100%;display: flex;}
-  #station input{max-width: 300px;width: 70%;}
-  #station button{font-size:1.5rem;color: #5e5956;min-width: 80px;height: auto;}
-
-
-  @media only screen and (min-width: 1920px) {
-  }
-  @media only screen and (max-width: 1440px) {
-  }
-  @media only screen and (max-width: 1024px) {
-  }
-  @media only screen and (max-width: 768px) {
-    #userInfo_box{width: 100%;}
-  }
-  @media only screen and (max-width: 540px) {
-    #userInfo_box{grid-template-columns: 40% 60%;}
-  }
-  @media only screen and (max-width: 425px) {
-    .w3-container{background-color: #fff;padding: 3.0rem 3.0rem;}
-    #userInfo_box{grid-template-columns: 45% 55%;}
-    #station {flex-direction: column;}
-    #station input{max-width: 300px;width: 100%;}
-    #station button{max-width: 100px;margin: 2.0rem 0 0 auto ;}
-  }
-  @media only screen and (max-width: 360px) {
-    .button_contatiner_margin .w3-button{width: 18rem}
-  }
-
-
-</style>
 </head>
 <body>
 <?php
@@ -147,7 +62,6 @@ if(isset($_SESSION['ss_mb_id'])){
 ?>
 <div class="w3-container">
   <h3 class="h3">회원정보 수정</h3>
-
 
   <form id="pwForm" name="frm1" class="p_container_margin" action="register_update.php" method="post">
     <div id="userInfo_box">
@@ -279,12 +193,13 @@ if(isset($_SESSION['ss_mb_id'])){
 
     <p class="w3-center button_contatiner_margin">
       <button class="w3-button  w3-blue w3-ripple w3-margin-top w3-round" onclick="document.getElementById('pwForm').submit();">비밀번호 변경</button>
-      <button type="button" class="w3-button w3-dark-gray w3-ripple w3-margin-top w3-round">회원 탈퇴</button>
+      <button type="button" class="w3-button w3-dark-gray w3-ripple w3-margin-top w3-round" onclick = "parent.changeIframeUrl('delete_userInfo.php')">회원 탈퇴</button>
     </p>
 
 </div>
 </body>
 <script type="text/javascript">
+
 $(document).ready(function(){
   popup();
 

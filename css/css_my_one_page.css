@@ -32,8 +32,6 @@ body {
 }
 .prfileImg_box .camera_btn {
 }
-
-
 .mainBtn_box{
   display: flex;
   justify-content: space-between;
@@ -46,6 +44,7 @@ body {
   font-size: 1.8rem;
   padding: 1.8rem 0;
   background-color: #e6e6e6;
+  outline: none;
 }
 .mainBtn_box .w3-button:hover{
    background-color: white!important;
@@ -54,22 +53,7 @@ body {
 .mainBtn_box .w3-button:nth-child(1){
   background: WHITE;
 }
-
-.input_id{border:none;}
-.input_name{border:none;}
-.input_email{border:none;}
-.input_password{border:none; border-bottom: 1px solid;}
-.input_new_password{border:none; border-bottom: 1px solid;}
-.input_new_exisit_password{border: none; border-bottom: 1px solid;}
-.input_station{border: none; border-bottom: 1px solid;}
-.img_center{width:100%; text-align: center;}
-
-
-
 .blue{color: blue;}
-
-
-label{}
 
 @media only screen and (min-width: 1920px) {
   body{

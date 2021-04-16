@@ -85,9 +85,20 @@ require_once("modules/db.php");
 
 	</div>
   <script>
-  function changeIframeUrl(url){
-      document.getElementById("main_frame").src = url;
-		}
+    function changeIframeUrl(url){
+        document.getElementById("main_frame").src = url;
+  		}
+
+    var mainBtn = document.getElementsByClassName('w3-button w3-round');
+    for (var i = 0; i < 4; i++) {
+
+      mainBtn.item(i).addEventListener('click',(event)=>{
+        for (var j = 0; j < 4; j++) {
+            mainBtn.item(j).style.background='#e6e6e6';
+        }
+        event.target.style.background='#fff';
+     });
+    }
   </script>
   <!-- 하단 메뉴 부분 -->
   <?php require_once 'metrocket_footer.php';?>
