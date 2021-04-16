@@ -300,10 +300,10 @@ if($fname != '') {
 
 		if($mb_id != 'null' && $om_id == 'null'){
 			$om_id = null;
-			$sql =	"select p.*, (select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count , pi.pr_img, l.l_name, m.line_station from product p left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join member m ON p.mb_id = m.mb_num where p.mb_id = :mb_id and p.pr_img_id = pi.pr_img_id and pi.main_check = 'y' and p.om_id is :om_id order by $this->quTableId asc limit :start, :viewLen";
+			$sql =	"select p.pr_title,p.pr_status,p.pr_price,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,pi.pr_img,l.l_name,p.pr_station from product p left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join member m ON p.mb_id = m.mb_num where p.mb_id = :mb_id and p.pr_img_id = pi.pr_img_id and pi.main_check = 'y' and p.om_id is :om_id order by $this->quTableId asc limit :start, :viewLen";
 		}elseif($om_id != 'null' && $mb_id == 'null'){
 			$mb_id = null;
-			$sql = "select p.*, (select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count, pi.pr_img, l.l_name, om.line_station from product p left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join oauth_member om ON p.om_id = om.om_id where p.om_id = :om_id and p.pr_img_id = pi.pr_img_id and pi.main_check = 'y' and  p.mb_id is :mb_id order by $this->quTableId asc limit :start, :viewLen";
+			$sql = "select p.pr_title,p.pr_status,p.pr_price, (select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count, pi.pr_img, l.l_name, p.pr_station from product p left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join oauth_member om ON p.om_id = om.om_id where p.om_id = :om_id and p.pr_img_id = pi.pr_img_id and pi.main_check = 'y' and  p.mb_id is :mb_id order by $this->quTableId asc limit :start, :viewLen";
 		}else{
 			if($s_value){
 				// echo "SelectPageList1";
@@ -530,9 +530,42 @@ if($fname != '') {
 	public function searchProduct_detail($p_id, $p_title) {
     $this->openDB();
     $query = $this->db->prepare("
-		select group_concat(pr_img) as pr_img, (case when p.mb_id then (select mb_image from member m where p.mb_id = m.mb_num) when p.om_id then (select om_image_url from oauth_member o where o.om_id = p.om_id) else null end) as profile_img, (case when p.mb_id then (select m.mb_name from member m where p.mb_id = m.mb_num) when p.om_id then (select o.om_nickname from oauth_member o where o.om_id = p.om_id) else null end) as profile_name, (case when p.mb_id then (select m.line_station from member m where p.mb_id = m.mb_num) when p.om_id then (select o.line_station from oauth_member o where o.om_id = p.om_id) else null end) as profile_station, p.pr_title, p.ca_name, p.pr_status, p.pr_price, (select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count, p.pr_explanation from product_img pi, product p where p.pr_id = :p_id and p.pr_title = :title and pi.pr_img_id = p.pr_img_id group by pr_id");
+		select om_id,mb_id,group_concat(pr_img) as pr_img, l_id ,pr_station,(case when p.mb_id then (select mb_image from member m where p.mb_id = m.mb_num) when p.om_id then (select om_image_url from oauth_member o where o.om_id = p.om_id) else null end) as profile_img, (case when p.mb_id then (select m.mb_name from member m where p.mb_id = m.mb_num) when p.om_id then (select o.om_nickname from oauth_member o where o.om_id = p.om_id) else null end) as profile_name, (case when p.mb_id then (select m.line_station from member m where p.mb_id = m.mb_num) when p.om_id then (select o.line_station from oauth_member o where o.om_id = p.om_id) else null end) as profile_station, p.pr_title, p.ca_name, p.pr_status, p.pr_price, (select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count, p.pr_explanation from product_img pi, product p where p.pr_id = :p_id and p.pr_title = :title and pi.pr_img_id = p.pr_img_id group by pr_id");
     $query -> bindValue(":p_id", $p_id, PDO::PARAM_INT);
     $query -> bindValue(":title", $p_title, PDO::PARAM_STR);
+    $query->execute();
+    $fetch = $query->fetchAll(PDO::FETCH_ASSOC);
+		// var_dump($fetch);
+    if($fetch){
+      return $fetch;
+    }
+    else return null;
+  }
+
+
+	public function same_searchProduct($l_id, $pr_station, $ca_name) {
+    $this->openDB();
+    $query = $this->db->prepare("
+		select pr_id, pr_title, pr_price, ca_name, (select l_name from line l where l.l_id = :l_id ) as line_name, pr_station,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,(select pr_img from product_img pi where pi.pr_img_id = p.pr_img_id and pi.main_check = 'y') as pr_img from product p where l_id = :l_id and pr_station = :pr_station and p.ca_name = :ca_name order by RAND(p.pr_title) asc limit 0, 4");
+		$query -> bindValue(":l_id", $l_id, PDO::PARAM_INT);
+		$query -> bindValue(":pr_station", $pr_station, PDO::PARAM_STR);
+    $query -> bindValue(":ca_name", $ca_name, PDO::PARAM_STR);
+    $query->execute();
+    $fetch = $query->fetchAll(PDO::FETCH_ASSOC);
+		// var_dump($fetch);
+    if($fetch){
+      return $fetch;
+    }
+    else return null;
+  }
+
+	public function panpeja_searchProduct($mb_id, $om_id, $l_id) {
+    $this->openDB();
+    $query = $this->db->prepare("
+		select pr_id, pr_title, pr_price, ca_name, (select l_name from line l where l.l_id = :l_id ) as line_name, pr_station,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,(select pr_img from product_img pi where pi.pr_img_id = p.pr_img_id and pi.main_check = 'y') as pr_img from product p where l_id = :l_id and pr_station = :pr_station and p.ca_name = :ca_name order by RAND(p.pr_title) asc limit 0, 4");
+		$query -> bindValue(":l_id", $l_id, PDO::PARAM_INT);
+		$query -> bindValue(":pr_station", $pr_station, PDO::PARAM_STR);
+    $query -> bindValue(":ca_name", $ca_name, PDO::PARAM_STR);
     $query->execute();
     $fetch = $query->fetchAll(PDO::FETCH_ASSOC);
 		// var_dump($fetch);

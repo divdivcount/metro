@@ -142,6 +142,7 @@ try{
           <?= $row["pr_explanation"] ?>
         </p>
       </div>
+      <?php $sameProduct = $dao->same_searchProduct($row["l_id"],$row["pr_station"],$row["ca_name"])?>
     <?php endforeach ?>
     <!-- 댓글이 들어가야하는 부분입니다. -->
 
@@ -155,11 +156,12 @@ try{
 
         <!-- 기타 상품 정보  -->
         <!-- 이형식으로 쭉 클래스 긴건 애교로 -->
-        <div class="otherProduct_content">
+        <?php foreach ($sameProduct as $rows) : ?>
+        <a href="searchProduct_detail.php?id=<?=$rows['pr_id']?>&title=<?=$rows['pr_title']?>"><div class="otherProduct_content">
 
           <!-- 이미지 부분 -->
           <div class="otherProduct_content_img radiusTop">
-            <img src="img/games.png" alt="">
+            <img src="files/<?=$rows["pr_img"]?>" alt="">
           </div>
 
           <!-- 상품 내용 -->
@@ -167,135 +169,29 @@ try{
 
             <!-- 제목 -->
             <div class="otherProduct_content_text_title_line">
-              <span>김치냉장고 이사로 급처</span>
+              <span><?=$rows["pr_title"]?></span>
             </div>
 
             <!-- 가격 -->
             <div class="otherProduct_content_text_price_line">
-              <span>150,000</span>
+              <span><?=$rows["pr_price"]?></span>
             </div>
 
             <!-- 역 위치 -->
             <div class="otherProduct_content_text_station_line">
-              <span>8호선 단대오거리역</span>
+              <span><?=$rows["line_name"]?> <?=$rows["pr_station"]?></span>
             </div>
 
             <!-- 카테고리 및 관심 수 부분  -->
             <div class="otherProduct_content_text_category_line">
-              <span>디지털/가전</span>
-              <span>관심7</span>
+              <span><?=$rows["ca_name"]?></span>
+              <span>관심<?=$rows["i_count"]?></span>
             </div>
 
           </div>
-        </div>
+        </div></a>
+      <?php endforeach ?>
 
-        <!-- 기타 상품 정보  -->
-        <!-- 이형식으로 쭉 클래스 긴건 애교로 -->
-        <div class="otherProduct_content">
-
-          <!-- 이미지 부분 -->
-          <div class="otherProduct_content_img radiusTop">
-            <img src="img/games.png" alt="">
-          </div>
-
-          <!-- 상품 내용 -->
-          <div class="otherProduct_content_text radiusBottom">
-
-            <!-- 제목 -->
-            <div class="otherProduct_content_text_title_line">
-              <span>김치냉장고 이사로 급처</span>
-            </div>
-
-            <!-- 가격 -->
-            <div class="otherProduct_content_text_price_line">
-              <span>150,000</span>
-            </div>
-
-            <!-- 역 위치 -->
-            <div class="otherProduct_content_text_station_line">
-              <span>8호선 단대오거리역</span>
-            </div>
-
-            <!-- 카테고리 및 관심 수 부분  -->
-            <div class="otherProduct_content_text_category_line">
-              <span>디지털/가전</span>
-              <span>관심7</span>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- 기타 상품 정보  -->
-        <!-- 이형식으로 쭉 클래스 긴건 애교로 -->
-        <div class="otherProduct_content">
-
-          <!-- 이미지 부분 -->
-          <div class="otherProduct_content_img radiusTop">
-            <img src="img/games.png" alt="">
-          </div>
-
-          <!-- 상품 내용 -->
-          <div class="otherProduct_content_text radiusBottom">
-
-            <!-- 제목 -->
-            <div class="otherProduct_content_text_title_line">
-              <span>김치냉장고 이사로 급처</span>
-            </div>
-
-            <!-- 가격 -->
-            <div class="otherProduct_content_text_price_line">
-              <span>150,000</span>
-            </div>
-
-            <!-- 역 위치 -->
-            <div class="otherProduct_content_text_station_line">
-              <span>8호선 단대오거리역</span>
-            </div>
-
-            <!-- 카테고리 및 관심 수 부분  -->
-            <div class="otherProduct_content_text_category_line">
-              <span>디지털/가전</span>
-              <span>관심7</span>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- 기타 상품 정보  -->
-        <!-- 이형식으로 쭉 클래스 긴건 애교로 -->
-        <div class="otherProduct_content">
-
-          <!-- 이미지 부분 -->
-          <div class="otherProduct_content_img radiusTop">
-            <img src="img/games.png" alt="">
-          </div>
-
-          <!-- 상품 내용 -->
-          <div class="otherProduct_content_text radiusBottom">
-
-            <!-- 제목 -->
-            <div class="otherProduct_content_text_title_line">
-              <span>김치냉장고 이사로 급처</span>
-            </div>
-
-            <!-- 가격 -->
-            <div class="otherProduct_content_text_price_line">
-              <span>150,000</span>
-            </div>
-
-            <!-- 역 위치 -->
-            <div class="otherProduct_content_text_station_line">
-              <span>8호선 단대오거리역</span>
-            </div>
-
-            <!-- 카테고리 및 관심 수 부분  -->
-            <div class="otherProduct_content_text_category_line">
-              <span>디지털/가전</span>
-              <span>관심7</span>
-            </div>
-
-          </div>
-        </div>
 
       </div><!-- 그리드 박스의 끝  -->
 

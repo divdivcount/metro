@@ -197,7 +197,7 @@
             <li class="clear"></li>
             <li class="price_text"><?= $row['pr_price'] ?></li>
             <li class="clear"></li>
-            <li class="star_text"><span style="float:left;"><img src="img\little_star.png" /></span><?=$row['i_count'] ?><span class="station_text"><?= $row['line_station'] ?></span></li>
+            <li class="star_text"><span style="float:left;"><img src="img\little_star.png" /></span><?=$row['i_count'] ?><span class="station_text"><?= $row['l_name'] ?> <?= $row['pr_station'] ?></span></li>
           </div>
           </ul>
         </div>
