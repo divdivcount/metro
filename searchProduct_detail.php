@@ -4,7 +4,7 @@ $dao = new Product;
 $pr_id = Get("id", 0);
 $pr_title = Get("title",0);
 try{
-  $result = $dao->searchProduct_detail($pr_id, $pr_title);
+  $imgdao = $dao->searchProduct_detail($pr_id, $pr_title);
 }catch(PDOException $e){
     echo $e;
   }
@@ -41,13 +41,15 @@ try{
         <span>채팅하기를 이용해 판매자와 대화할 수 있습니다.</span>
       </div>
       <!-- 슬라이드 이미지 -->
-      <?php foreach ($result as $row) : ?>
+      <?php foreach ($imgdao as $row) : ?>
       <?php
 
         $pr_imgs = $row["pr_img"];
         $pr_img = explode(",", $pr_imgs);
         // var_dump($pr_img);
+        // print_r( $row);
       ?>
+
       <div id="slideImg_box">
         <!-- 나중에 php로 동적으로 이미지나오게 작업예정 -->
 

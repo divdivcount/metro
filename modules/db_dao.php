@@ -535,6 +535,7 @@ if($fname != '') {
     $query -> bindValue(":title", $p_title, PDO::PARAM_STR);
     $query->execute();
     $fetch = $query->fetchAll(PDO::FETCH_ASSOC);
+		// var_dump($fetch);
     if($fetch){
       return $fetch;
     }
