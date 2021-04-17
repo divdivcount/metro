@@ -559,16 +559,14 @@ if($fname != '') {
     else return null;
   }
 
-	public function panpeja_searchProduct($mb_id, $om_id, $l_id) {
+	public function panpeja_searchProduct($mb_id, $om_id) {
     $this->openDB();
     $query = $this->db->prepare("
-		select pr_id, pr_title, pr_price, ca_name, (select l_name from line l where l.l_id = :l_id ) as line_name, pr_station,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,(select pr_img from product_img pi where pi.pr_img_id = p.pr_img_id and pi.main_check = 'y') as pr_img from product p where l_id = :l_id and pr_station = :pr_station and p.ca_name = :ca_name order by RAND(p.pr_title) asc limit 0, 4");
-		$query -> bindValue(":l_id", $l_id, PDO::PARAM_INT);
-		$query -> bindValue(":pr_station", $pr_station, PDO::PARAM_STR);
-    $query -> bindValue(":ca_name", $ca_name, PDO::PARAM_STR);
+		select pr_id, pr_title, pr_price, ca_name, (select l_name from line l where l.l_id = p.l_id ) as line_name, pr_station,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,(select pr_img from product_img pi where pi.pr_img_id = p.pr_img_id and pi.main_check = 'y') as pr_img from product p where (case when p.mb_id = :mb_id then p.mb_id = p.mb_id when p.om_id = :om_id then p.om_id = p.om_id else null end) order by RAND(p.pr_title) asc limit 0, 4");
+		$query -> bindValue(":mb_id", $mb_id, PDO::PARAM_INT);
+    $query -> bindValue(":om_id", $om_id, PDO::PARAM_INT);
     $query->execute();
     $fetch = $query->fetchAll(PDO::FETCH_ASSOC);
-		// var_dump($fetch);
     if($fetch){
       return $fetch;
     }

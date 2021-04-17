@@ -20,6 +20,16 @@ $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 $password = $row['pass'];
 
+// $sql = " SELECT * FROM member WHERE mb_id = '$mb_id' and mb_del = 'y' ";
+// $result = mysqli_query($conn, $sql);
+// $mb_del = mysqli_fetch_assoc($result);
+// 
+// if ($mb_del['mb_id']) {
+// 	echo "<script>alert('회원탈퇴한 아이디 입니다.');</script>";
+// 	echo "<script>location.replace('./login.php');</script>";
+// 	exit;
+// }
+
 if (!$mb['mb_id'] || !($password === $mb['mb_password'])) {
 	echo "<script>alert('가입된 회원아이디가 아니거나 비밀번호가 틀립니다.\\n비밀번호는 대소문자를 구분합니다.');</script>";
 	echo "<script>location.replace('./login.php');</script>";

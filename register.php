@@ -136,7 +136,7 @@ var engNum = /^[a-z0-9_]{4,12}$/;
 mb_id.onblur = function () {
 	if (!engNum.test(mb_id.value)) {
 		alert("아이디는 영어 소문자로 시작하는 4~12자 영문자 또는 숫자이어야 합니다.");
-		$("input[name=mb_id]").val()
+		$("input[name=mb_id]").val();
 		mb_id.value = null;
 		return;
 	}

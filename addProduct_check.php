@@ -26,6 +26,27 @@ $a = 0;
 // echo $mb ? $mb : $om."<br>";
 // echo $om."<br>";
 // Process
+if($line == null){
+  userGoto("역 등록이 되지 않았습니다.","My_one_page.php");
+  exit;
+}
+if($station == null){
+  userGoto("역 등록이 되지 않았습니다.","My_one_page.php");
+  exit;
+}
+if($title == null){
+  userGoto("상품 제목이 등록 되지 않았습니다.","addProduct.php");
+  exit;
+}
+if($category == null){
+  userGoto("카테고리가 체크 되지 않았습니다.","addProduct.php");
+  exit;
+}
+if($explainText == null){
+  userGoto("제품 설명란이 등록 되지 않았습니다.","addProduct.php");
+  exit;
+}
+
 try {
 
   //제품을 먼저 추가 하고 pr_id를 불러 이미지 추가해야
