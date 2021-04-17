@@ -102,6 +102,7 @@ require_once('modules/db.php');
 
 
       <div class="owl-carousel" id="owl-carousel">
+
       </div>
 
       <div class="customBtn">
@@ -169,9 +170,6 @@ require_once('modules/db.php');
     </div>
 
 
-    <img src="img/prev_black.png" alt=""> -->
-
-
     <!-- 푸터 부분  -->
     <?php require_once('metrocket_footer.php');?>
 
@@ -191,11 +189,12 @@ require_once('modules/db.php');
         autoHover: false,   // 마우스 호버시 정지 여부
         controls: true    // 이전 다음 버튼 노출 여부
     });
-    select_category(tapmenuItem.item(0).innerText);
+    load_category(tapmenuItem.item(0).innerText);
     // $(".owl-carousel").owlCarousel(obj);
   });
 
 
+  var test = 0;
   //태그에 함수 넣는부분
   for (var i = 0; i < 3; i++) {
 
@@ -207,10 +206,24 @@ require_once('modules/db.php');
       event.target.style.color='#3b3b3b';
       event.target.style.borderBottom='solid 2px #0099ff';
 
-      select_category(tapmenuItem.item(1).innerText);
-
+      select_category(event.target.innerText);
    });
 
+  }
+
+  function load_category(category) {
+    $.ajax({
+        url:'update_categoryItem.php', //request 보낼 서버의 경로
+        type:'post', // 메소드(get, post)
+        data:{category:category}, //보낼 데이터
+        success: function(data) {
+            $('#owl-carousel').html(data);
+            $("#owl-carousel").owlCarousel(obj);
+        },
+        error: function(err) {
+            //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
+        }
+    });
   }
 
     //카테고리 넘겨주는 ajax
@@ -221,9 +234,13 @@ require_once('modules/db.php');
           data:{category:category}, //보낼 데이터
           success: function(data) {
               //서버로부터 정상적으로 응답이 왔을 때 실행
-              $('#owl-carousel').html(data);
-              $('#owl-carousel').attr('class','owl-carousel');
-              $(".owl-carousel").owlCarousel(obj);
+              $('#owl-carousel').trigger('replace.owl.carousel', data).trigger('refresh.owl.carousel');
+              // $('#owl-carousel').attr('class','owl-carousel');
+              // $('#owl-carousel').html(data);
+              // $("#owl-carousel").owlCarousel(obj);
+              // $("#owl-carousel").removeClass();
+              // $("#owl-carousel").addClass("owl-carousel");
+
           },
           error: function(err) {
               //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
