@@ -128,6 +128,22 @@ if($mb_id && isset($_GET['mode']) == 'modify') { // 세션이 있고 회원수�
 </div>
 
 <script>
+
+// 아이디 숫자와 영문만 처리하는 함수
+var mb_id = document.getElementById('mb_id');
+var engNum = /^[a-z0-9_]{4,12}$/;
+
+mb_id.onblur = function () {
+	if (!engNum.test(mb_id.value)) {
+		alert("아이디는 영어 소문자로 시작하는 4~12자 영문자 또는 숫자이어야 합니다.");
+		$("input[name=mb_id]").val()
+		mb_id.value = null;
+		return;
+	}
+}
+
+
+
 function fregisterform_submit(f) { // submit 최종 폼체크
 
 	if (f.mb_id.value.length < 1) { // 회원아이디 검사
