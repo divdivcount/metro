@@ -76,60 +76,6 @@ require_once('modules/db.php');
 
           <div class="find_item">
             <span>지하철역을 입력해주세요.</span>
-            <script type="text/javascript">
-
-            $(document).ready(function(){ // html 문서를 다 읽어들인 후
-                $('#selectID').on('change', function(){
-                    if(this.value !== ""){
-                        var optVal = $(this).find(":selected").val();
-                        //alert(optVal);
-                        $.post('autosearch.php',{optVal:optVal}, function(data) {
-                          let source = $.map($.parseJSON(data), function(item) { //json[i] 번째 에 있는게 item 임.
-                  					chosung = "";
-                  					//Hangul.d(item, true) 을 하게 되면 item이 분해가 되어서
-                  					//["ㄱ", "ㅣ", "ㅁ"],["ㅊ", "ㅣ"],[" "],["ㅂ", "ㅗ", "ㄲ"],["ㅇ", "ㅡ", "ㅁ"],["ㅂ", "ㅏ", "ㅂ"]
-                  					//으로 나오는데 이중 0번째 인덱스만 가지고 오면 초성이다.
-                  					full = Hangul.disassemble(item).join("").replace(/ /gi, "");	//공백제거된 ㄱㅣㅁㅊㅣㅂㅗㄲㅇㅡㅁㅂㅏㅂ
-                  					Hangul.d(item, true).forEach(function(strItem, index) {
-
-                  						if(strItem[0] != " "){	//띄어 쓰기가 아니면
-                  							chosung += strItem[0];//초성 추가
-
-                  						}
-                  					});
-
-
-                  					return {
-                  						label : chosung + "|" + (item).replace(/ /gi, "") +"|" + full, //실제 검색어랑 비교 대상 ㄱㅊㅂㅇㅂ|김치볶음밥|ㄱㅣㅁㅊㅣㅂㅗㄲㅇㅡㅁㅂㅏㅂ 이 저장된다.
-                  						value : item,
-                  						chosung : chosung,
-                  						full : full
-                  					}
-                  				});
-                          $("#auto").autocomplete({
-                          					source : source,	// source 는 자동 완성 대상
-                          					select : function(event, ui) {	//아이템 선택시
-                          						console.log(ui.item.label + " 선택 완료");
-
-                          					},
-                          					focus : function(event, ui) {	//포커스 가면
-                          						return false;//한글 에러 잡기용도로 사용됨
-                          					},
-                          }).autocomplete( "instance" )._renderItem = function( ul, item ) {
-                  				//.autocomplete( "instance" )._renderItem 설절 부분이 핵심
-                  			      return $( "<li>" )	//기본 tag가 li로 되어 있음
-                  			        .append( "<div>" + item.value + "</div>" )	//여기에다가 원하는 모양의 HTML을 만들면 UI가 원하는 모양으로 변함.
-                  			        .appendTo( ul );	//웹 상으로 보이는 건 정상적인 "김치 볶음밥" 인데 내부에서는 ㄱㅊㅂㅇㅂ,김치 볶음밥 에서 검색을 함.
-                  			   };
-                    })
-                  }
-                })
-              });
-              $("#auto").on("keyup",function(){	//검색창에 뭔가가 입력될 때마다
-          		input = $("#auto").val();	//입력된 값 저장
-          		$( "#auto" ).autocomplete( "search", Hangul.disassemble(input).join("").replace(/ /gi, "") );	//자모 분리후 띄어쓰기 삭제
-          		})
-            </script>
             <div style="display:flex"><input id="auto" class="w3-input highlight" name = "ctg_station"  type="text"><div style="width:1.3rem;margin:auto"><img src="img\loupe.png" alt=""></div></div>
           </div>
 
@@ -146,8 +92,8 @@ require_once('modules/db.php');
       <div class="textStyle_1">인기 카테고리 별로 인기 매물을 확인해 보세요!</div>
 
       <div id="main_tapmenu">
-        <div class="tapmenuItem_target">디지털/가전</div>
-        <div class="tapmenuItem">가구/인테리어</div>
+        <div class="tapmenuItem">디지털/가전</div>
+        <div class="tapmenuItem">생활/가공식품</div>
         <div class="tapmenuItem">게임/취미</div>
       </div>
 
@@ -155,205 +101,7 @@ require_once('modules/db.php');
       <!-- 아이콘 들어오는 부분 -->
 
 
-      <div class="owl-carousel">
-
-        <!-- 상품 예시 샘플 php로 띄울거임 -->
-        <div class="productInfo_box">
-          <!-- 상품 이미지부분 -->
-          <div class="productImg_box">
-            <img src="img/add_img.png" alt="">
-          </div>
-
-          <!-- 상품 상세설명 -->
-          <div class="productText_box">
-
-            <!-- 제목 -->
-            <div class="productText_box_title_line">
-              <span>김치냉장고 이사로 급처</span>
-            </div>
-
-            <!-- 역 위치 -->
-            <div class="productText_box_station_line">
-              <span>8호선 단대오거리역</span>
-            </div>
-
-            <!-- 가격 -->
-            <div class="productText_box_price_line">
-              <span>150,000</span>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- 상품 예시 샘플 php로 띄울거임 -->
-        <div class="productInfo_box">
-          <!-- 상품 이미지부분 -->
-          <div class="productImg_box">
-            <img src="img/add_img.png" alt="">
-          </div>
-
-          <!-- 상품 상세설명 -->
-          <div class="productText_box">
-
-            <!-- 제목 -->
-            <div class="productText_box_title_line">
-              <span>김치냉장고 이사로 급처</span>
-            </div>
-
-            <!-- 역 위치 -->
-            <div class="productText_box_station_line">
-              <span>8호선 단대오거리역</span>
-            </div>
-
-            <!-- 가격 -->
-            <div class="productText_box_price_line">
-              <span>150,000</span>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- 상품 예시 샘플 php로 띄울거임 -->
-        <div class="productInfo_box">
-          <!-- 상품 이미지부분 -->
-          <div class="productImg_box">
-            <img src="img/add_img.png" alt="">
-          </div>
-
-          <!-- 상품 상세설명 -->
-          <div class="productText_box">
-
-            <!-- 제목 -->
-            <div class="productText_box_title_line">
-              <span>김치냉장고 이사로 급처</span>
-            </div>
-
-            <!-- 역 위치 -->
-            <div class="productText_box_station_line">
-              <span>8호선 단대오거리역</span>
-            </div>
-
-            <!-- 가격 -->
-            <div class="productText_box_price_line">
-              <span>150,000</span>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- 상품 예시 샘플 php로 띄울거임 -->
-        <div class="productInfo_box">
-          <!-- 상품 이미지부분 -->
-          <div class="productImg_box">
-            <img src="img/add_img.png" alt="">
-          </div>
-
-          <!-- 상품 상세설명 -->
-          <div class="productText_box">
-
-            <!-- 제목 -->
-            <div class="productText_box_title_line">
-              <span>김치냉장고 이사로 급처</span>
-            </div>
-
-            <!-- 역 위치 -->
-            <div class="productText_box_station_line">
-              <span>8호선 단대오거리역</span>
-            </div>
-
-            <!-- 가격 -->
-            <div class="productText_box_price_line">
-              <span>150,000</span>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- 상품 예시 샘플 php로 띄울거임 -->
-        <div class="productInfo_box">
-          <!-- 상품 이미지부분 -->
-          <div class="productImg_box">
-            <img src="img/add_img.png" alt="">
-          </div>
-
-          <!-- 상품 상세설명 -->
-          <div class="productText_box">
-
-            <!-- 제목 -->
-            <div class="productText_box_title_line">
-              <span>김치냉장고 이사로 급처</span>
-            </div>
-
-            <!-- 역 위치 -->
-            <div class="productText_box_station_line">
-              <span>8호선 단대오거리역</span>
-            </div>
-
-            <!-- 가격 -->
-            <div class="productText_box_price_line">
-              <span>150,000</span>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- 상품 예시 샘플 php로 띄울거임 -->
-        <div class="productInfo_box">
-          <!-- 상품 이미지부분 -->
-          <div class="productImg_box">
-            <img src="img/add_img.png" alt="">
-          </div>
-
-          <!-- 상품 상세설명 -->
-          <div class="productText_box">
-
-            <!-- 제목 -->
-            <div class="productText_box_title_line">
-              <span>김치냉장고 이사로 급처</span>
-            </div>
-
-            <!-- 역 위치 -->
-            <div class="productText_box_station_line">
-              <span>8호선 단대오거리역</span>
-            </div>
-
-            <!-- 가격 -->
-            <div class="productText_box_price_line">
-              <span>150,000</span>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- 상품 예시 샘플 php로 띄울거임 -->
-        <div class="productInfo_box">
-          <!-- 상품 이미지부분 -->
-          <div class="productImg_box">
-            <img src="img/add_img.png" alt="">
-          </div>
-
-          <!-- 상품 상세설명 -->
-          <div class="productText_box">
-
-            <!-- 제목 -->
-            <div class="productText_box_title_line">
-              <span>김치냉장고 이사로 급처</span>
-            </div>
-
-            <!-- 역 위치 -->
-            <div class="productText_box_station_line">
-              <span>8호선 단대오거리역</span>
-            </div>
-
-            <!-- 가격 -->
-            <div class="productText_box_price_line">
-              <span>150,000</span>
-            </div>
-
-          </div>
-        </div>
-
-
+      <div class="owl-carousel" id="owl-carousel">
       </div>
 
       <div class="customBtn">
@@ -420,9 +168,6 @@ require_once('modules/db.php');
 
     </div>
 
-    <!-- <button type="button" role="presentation" class="owl-prev">
-      <span aria-label="Prievious">a</span>
-    </button>
 
     <img src="img/prev_black.png" alt=""> -->
 
@@ -431,15 +176,113 @@ require_once('modules/db.php');
     <?php require_once('metrocket_footer.php');?>
 
 
-    <!-- <div>
-      <form class="" action="index.php" method="post">
-        <input type="text"  id="search_box"  placeholder="자동완성" />
-        <input type="submit"/>
-      </form>
-    </div> -->
   </body>
   <script>
+  const tapmenuItem = document.getElementsByClassName('tapmenuItem');
+  $(document).ready(function(){
 
+    //슬라이드 이미지
+    $('.bxslider').bxSlider( {
+        mode: 'horizontal',// 가로 방향 수평 슬라이드
+        speed: 500,        // 이동 속도를 설정
+        pager: true,      // 현재 위치 페이징 표시 여부 설정
+        moveSlides: 1,     // 슬라이드 이동시 개수
+        auto: true,        // 자동 실행 여부
+        autoHover: false,   // 마우스 호버시 정지 여부
+        controls: true    // 이전 다음 버튼 노출 여부
+    });
+    select_category(tapmenuItem.item(0).innerText);
+    // $(".owl-carousel").owlCarousel(obj);
+  });
+
+
+  //태그에 함수 넣는부분
+  for (var i = 0; i < 3; i++) {
+
+    tapmenuItem.item(i).addEventListener('click',(event)=>{
+      for (var j = 0; j < 3; j++) {
+          tapmenuItem.item(j).style.color='#707070';
+          tapmenuItem.item(j).style.borderBottom='none';
+      }
+      event.target.style.color='#3b3b3b';
+      event.target.style.borderBottom='solid 2px #0099ff';
+
+      select_category(tapmenuItem.item(1).innerText);
+
+   });
+
+  }
+
+    //카테고리 넘겨주는 ajax
+    function select_category(category) {
+      $.ajax({
+          url:'update_categoryItem.php', //request 보낼 서버의 경로
+          type:'post', // 메소드(get, post)
+          data:{category:category}, //보낼 데이터
+          success: function(data) {
+              //서버로부터 정상적으로 응답이 왔을 때 실행
+              $('#owl-carousel').html(data);
+              $('#owl-carousel').attr('class','owl-carousel');
+              $(".owl-carousel").owlCarousel(obj);
+          },
+          error: function(err) {
+              //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
+          }
+      });
+    }
+
+
+  $(document).ready(function(){ // html 문서를 다 읽어들인 후
+      $('#selectID').on('change', function(){
+          if(this.value !== ""){
+              var optVal = $(this).find(":selected").val();
+              //alert(optVal);
+              $.post('autosearch.php',{optVal:optVal}, function(data) {
+                let source = $.map($.parseJSON(data), function(item) { //json[i] 번째 에 있는게 item 임.
+                  chosung = "";
+                  //Hangul.d(item, true) 을 하게 되면 item이 분해가 되어서
+                  //["ㄱ", "ㅣ", "ㅁ"],["ㅊ", "ㅣ"],[" "],["ㅂ", "ㅗ", "ㄲ"],["ㅇ", "ㅡ", "ㅁ"],["ㅂ", "ㅏ", "ㅂ"]
+                  //으로 나오는데 이중 0번째 인덱스만 가지고 오면 초성이다.
+                  full = Hangul.disassemble(item).join("").replace(/ /gi, "");	//공백제거된 ㄱㅣㅁㅊㅣㅂㅗㄲㅇㅡㅁㅂㅏㅂ
+                  Hangul.d(item, true).forEach(function(strItem, index) {
+
+                    if(strItem[0] != " "){	//띄어 쓰기가 아니면
+                      chosung += strItem[0];//초성 추가
+
+                    }
+                  });
+
+
+                  return {
+                    label : chosung + "|" + (item).replace(/ /gi, "") +"|" + full, //실제 검색어랑 비교 대상 ㄱㅊㅂㅇㅂ|김치볶음밥|ㄱㅣㅁㅊㅣㅂㅗㄲㅇㅡㅁㅂㅏㅂ 이 저장된다.
+                    value : item,
+                    chosung : chosung,
+                    full : full
+                  }
+                });
+                $("#auto").autocomplete({
+                          source : source,	// source 는 자동 완성 대상
+                          select : function(event, ui) {	//아이템 선택시
+                            console.log(ui.item.label + " 선택 완료");
+
+                          },
+                          focus : function(event, ui) {	//포커스 가면
+                            return false;//한글 에러 잡기용도로 사용됨
+                          },
+                }).autocomplete( "instance" )._renderItem = function( ul, item ) {
+                //.autocomplete( "instance" )._renderItem 설절 부분이 핵심
+                    return $( "<li>" )	//기본 tag가 li로 되어 있음
+                      .append( "<div>" + item.value + "</div>" )	//여기에다가 원하는 모양의 HTML을 만들면 UI가 원하는 모양으로 변함.
+                      .appendTo( ul );	//웹 상으로 보이는 건 정상적인 "김치 볶음밥" 인데 내부에서는 ㄱㅊㅂㅇㅂ,김치 볶음밥 에서 검색을 함.
+                 };
+          })
+        }
+      })
+    });
+    $("#auto").on("keyup",function(){	//검색창에 뭔가가 입력될 때마다
+    input = $("#auto").val();	//입력된 값 저장
+    $( "#auto" ).autocomplete( "search", Hangul.disassemble(input).join("").replace(/ /gi, "") );	//자모 분리후 띄어쓰기 삭제
+    })
 
   var obj ={
     nav:false,
@@ -455,24 +298,6 @@ require_once('modules/db.php');
        0:{items:2}
     }
   }
-
-  //올빼미캐러셀
-
-    //
-
-  //슬라이드 이미지
-  $(document).ready(function(){
-    $('.bxslider').bxSlider( {
-        mode: 'horizontal',// 가로 방향 수평 슬라이드
-        speed: 500,        // 이동 속도를 설정
-        pager: true,      // 현재 위치 페이징 표시 여부 설정
-        moveSlides: 1,     // 슬라이드 이동시 개수
-        auto: true,        // 자동 실행 여부
-        autoHover: false,   // 마우스 호버시 정지 여부
-        controls: true    // 이전 다음 버튼 노출 여부
-    });
-    $(".owl-carousel").owlCarousel(obj);
-});
 
   var owl = $('.owl-carousel');
   // Go to the next item

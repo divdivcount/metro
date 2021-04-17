@@ -59,7 +59,7 @@ body {
 .tapmenuItem{
   color: #707070;
 }
-.tapmenuItem_target{
+.tapmenuItem:nth-child(1){
   color: #3b3b3b;
   border-bottom: solid 2px #0099ff;
 }
