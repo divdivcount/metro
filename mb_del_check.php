@@ -20,8 +20,7 @@
       $mb_dels = $mb_del->Member_Delete($mb_id);
     }elseif($om_id != 'null'){
       $om_del_select = $om_del->Om_select($om_id);
-      var_dump($om_del_select);
-      $om_dels = $om_del->Oauth_Delete($om_id);
+      $om_dels = $om_del->Oauth_Delete($om_id,$om_del_select["om_company"],$om_del_select["om_access_token"]);
     }
 
     echo "???";

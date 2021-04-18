@@ -68,7 +68,7 @@
                 echo "오류가 발생하였습니다. 네이버 내정보->보안설정->외부 사이트 연결에서 해당앱을 삭제하여 주십시오.";
                }
             }elseif($om_company == 'kakao'){
-              $access_token = 회원 토큰값;
+              $access_token = "회원 토큰값";
               $UNLINK_API_URL = "https://kapi.kakao.com/v1/user/unlink";
               $opts = array( CURLOPT_URL => $UNLINK_API_URL, CURLOPT_SSL_VERIFYPEER => false, CURLOPT_SSLVERSION => 1, CURLOPT_POST => true, CURLOPT_POSTFIELDS => false, CURLOPT_RETURNTRANSFER => true, CURLOPT_HTTPHEADER => array( "Authorization: Bearer " . $access_token ) );
               $curlSession = curl_init();
