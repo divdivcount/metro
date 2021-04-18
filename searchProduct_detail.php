@@ -1,9 +1,11 @@
 <?php
 require_once('modules/db.php');
-$dao = new Product;
-$pr_id = Get("id", 0);
-$pr_title = Get("title",0);
 try{
+  $dao = new Product;
+  $replyobject = new Reply;
+  $pr_id = Get("id", 0);
+  $pr_title = Get("title",0);
+  $replys = $replyobject->reply_select($pr_id);
   $imgdao = $dao->searchProduct_detail($pr_id, $pr_title);
 
 }catch(PDOException $e){
@@ -36,9 +38,8 @@ try{
   </head>
   <body>
     <!-- 상단 메뉴 부분 -->
-    <?php require_once('metrocket_header.php');
-    $replyobject = new Reply;
-    $replys = $replyobject->reply_select($pr_id);?>
+    <?php require_once('metrocket_header.php');?>
+
     <div id="wrapContainer_Box">
       <div id="pageTitle_box" class="radius_box">
         <h2>품목 상세보기</h2>
@@ -156,7 +157,8 @@ try{
         <h3 style="padding:10px 0 15px 0; border-bottom: solid 1px gray;">댓글목록</h3>
         <?php foreach ($replys as $reple) : ?>
           <div class="dat_view">
-            <div><b><?=$reple['mb_id'] ? $reple['mb_id'] : $reple['om_id'] ?></b></div>
+            <div><b><img src="<?=$reple['mb_img'] ? $reple['mb_img'] : "files/".$$reple['mb_img'] ?>"></b></div>
+            <div><b><?=$reple['mb_id']?></b></div>
             <div class="dap_to comt_edit"><?php echo nl2br("$reple[content]"); ?></div>
             <div class="rep_me dap_to"><?=$reple['date']?></div>
             <div class="rep_me rep_menu">
@@ -303,10 +305,9 @@ try{
           },
           success : function(data) {
           alert("댓글이 작성되었습니다");
-          // location.reload();
+          location.reload();
         },
         error : function(e){
-          alert(JSON.stringify(e));
           alert("로그인을 먼저 해주세요1");
           location.repleace("./login.php");
         }

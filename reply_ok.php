@@ -13,14 +13,14 @@ require_once("modules/db.php");
 
 
 
-	if($mb_id == null && $om_id == null){
+	if($mb_id == 'null' && $om_id == 'null'){
 		usergoto("로그인을 먼저 해주세요2","login.php");
 		exit;
 	}
-	echo $bno."<br>";
-	echo $mb_id."<br>";
-	echo $om_id."<br>";
-	echo $rep_con;
+	// echo $bno."<br>";
+	// echo $mb_id."<br>";
+	// echo $om_id."<br>";
+	// echo $rep_con;
 
 
 	$sql =  mq("insert into reply(pr_id,mb_id,om_id,content) values($bno,$mb_id,$om_id,'$rep_con')");
