@@ -87,6 +87,7 @@ body{
 #logoimg_box{
   width: 100%;
   text-align: center;
+  z-index: 10003;
 }
 #logoimg_box img{
   width: 100%;

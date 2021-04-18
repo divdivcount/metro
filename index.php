@@ -349,6 +349,6 @@ require_once('modules/db.php');
 
   document.querySelector(".openBtn").addEventListener("click", open);
   document.querySelector(".closeBtn").addEventListener("click", close);
-  document.querySelector(".bg").addEventListener("click", close);
+  // document.querySelector(".bg").addEventListener("click", close);
 </script>
 </html>
