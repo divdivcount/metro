@@ -11,7 +11,6 @@
       $this->openDB();
       $sql = "delete from member where mb_num=$mb_num";
       $query = $this->db->prepare($sql);
-      $query = $this->db->prepare($sql);
       $query->execute();
       ?>
       <script>

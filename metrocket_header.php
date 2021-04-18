@@ -35,7 +35,10 @@
         <?php
           if(isset($mb['mb_num'])){
             echo "<ul>"."&nbsp;";
-            if($mb["line_station"] || $om["line_station"] == null){
+            // echo $om["line_station"]."line_station";
+            // var_dump($mb["line_station"] == null );
+            // var_dump($om["line_station"] == null );
+            if($mb["line_station"] == null){
               echo "<a href='#' onclick='line_station()'><li>상품등록</li></a>";
             }else{
               echo "<a href='./addProduct.php'><li>상품등록</li></a>";
@@ -44,7 +47,9 @@
             // echo "일반 아이디";
           }elseif(isset($om['om_id'])){
             echo "<ul>"."&nbsp;";
-            if($mb["line_station"] || $om["line_station"] == null){
+            // var_dump($mb["line_station"] == null );
+            // var_dump($om["line_station"] == null );
+            if($om["line_station"] == null){
               echo "<a href='#' onclick='line_station()'><li>상품등록</li></a>";
             }else{
               echo "<a href='./addProduct.php'><li>상품등록</li></a>";

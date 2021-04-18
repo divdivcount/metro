@@ -129,7 +129,7 @@
 <body>
 	<div class="w3-content w3-container w3-margin-top">
 		<div class="w3-container w3-card-4">
-        <h3 class="h3">판매 내역</h3>
+        <h3 class="h3">관심 목록</h3>
 			<div>
 
 

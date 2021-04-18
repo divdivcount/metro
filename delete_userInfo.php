@@ -1,3 +1,11 @@
+<?php
+  require_once("modules/db.php");
+  $mb_id = Get("id", null);
+  $om_id = Get("oid", null);
+  echo $mb_id;
+  echo $om_id;
+  /* ky : 내일 작업 예정입니다 건들지 말아주세요*/
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
