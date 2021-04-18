@@ -5,16 +5,21 @@
     protected $quTable = 'member';
     protected $quTableId = 'mb_num';
 
-    public function Member_Delete($mb_num) {
+    public function Member_Delete($mb_id) {
     try{
       // 회원 탈퇴
       $this->openDB();
-      $sql = "delete from member where mb_num=$mb_num";
+      var_dump($mb_id != 'null');
+      var_dump($om_id == 'null');
+      if($mb_id != 'null'){
+        $sql = "delete from member where mb_id='$mb_id'";
+        echo "회원 탈퇴";
+      }
       $query = $this->db->prepare($sql);
       $query->execute();
       ?>
       <script>
-        alert("아이디가 삭제되었습니다.");
+        alert("지금까지 메트로켓을 사랑 해주셔서 감사합니다.");
         window.top.location.href = "../index.php";
       </script>
       <?php

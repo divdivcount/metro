@@ -38,24 +38,58 @@
           return $query->execute();
         }
 
-        
 
-    public function Om_Delete($om_id) {
-    try{
-      // 회원 탈퇴
-      $this->openDB();
-      $sql = "delete from $this->quTable where om_id=$om_id";
-      $query = $this->db->prepare($sql);
-      $query->execute();
-      ?>
-      <script>
-        alert("아이디가 삭제되었습니다.");
-        location.href = "../index.php";
-      </script>
-      <?php
-      }catch(PDOException $e){
-      exit($e ->getMessage());
-      }
-    }
+
+        public function Oauth_Delete($om_id, $om_company, $access) {
+        try{
+          // 회원 탈퇴
+          $this->openDB();
+          if($om_id != 'null'){
+            if($om_company == 'naver'){
+              define('NAVER_CLIENT_ID', '클라언트 아이디');
+              define('NAVER_CLIENT_SECRET', '클아이언트 시크릿'); // 네이버 접근 토큰 삭제
+              // 네이버 접근 토큰 삭제
+              $naver_curl = "https://nid.naver.com/oauth2.0/token?grant_type=delete&client_id=".NAVER_CLIENT_ID."&client_secret=".NAVER_CLIENT_SECRET."&access_token=".urlencode($mb['mb_sns_token'])."&service_provider=NAVER";
+              $is_post = false;
+              $ch = curl_init();
+              curl_setopt($ch, CURLOPT_URL, $naver_curl);
+              curl_setopt($ch, CURLOPT_POST, $is_post);
+              curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+              $response = curl_exec ($ch);
+              $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+              curl_close ($ch);
+              if($status_code == 200) {
+                $responseArr = json_decode($response, true);
+                // 멤버 DB에서 회원을 탈퇴해주고 로그아웃(세션, 쿠키 삭제)
+                if ($responseArr['result'] != 'success') {
+                  $sql = "delete from oauth_member where om_id='$om_id'";
+                }
+              } else {
+                echo "오류가 발생하였습니다. 네이버 내정보->보안설정->외부 사이트 연결에서 해당앱을 삭제하여 주십시오.";
+               }
+            }elseif($om_company == 'kakao'){
+              $access_token = 회원 토큰값;
+              $UNLINK_API_URL = "https://kapi.kakao.com/v1/user/unlink";
+              $opts = array( CURLOPT_URL => $UNLINK_API_URL, CURLOPT_SSL_VERIFYPEER => false, CURLOPT_SSLVERSION => 1, CURLOPT_POST => true, CURLOPT_POSTFIELDS => false, CURLOPT_RETURNTRANSFER => true, CURLOPT_HTTPHEADER => array( "Authorization: Bearer " . $access_token ) );
+              $curlSession = curl_init();
+              curl_setopt_array($curlSession, $opts);
+              $accessUnlinkJson = curl_exec($curlSession);
+              curl_close($curlSession);
+              $unlink_responseArr = json_decode($accessUnlinkJson, true);
+
+            }
+          }
+          $query = $this->db->prepare($sql);
+          $query->execute();
+          ?>
+          <script>
+            alert("지금까지 메트로켓을 사랑 해주셔서 감사합니다.");
+            window.top.location.href = "../index.php";
+          </script>
+          <?php
+          }catch(PDOException $e){
+          exit($e ->getMessage());
+          }
+        }
 
   }

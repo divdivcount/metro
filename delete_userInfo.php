@@ -1,9 +1,11 @@
 <?php
   require_once("modules/db.php");
-  $mb_id = Get("id", null);
-  $om_id = Get("oid", null);
+  $mb_id = Get("id", 'null');
+  $om_id = Get("oid", 'null');
   echo $mb_id;
   echo $om_id;
+  $reasons = new Reasons;
+  $reasons_del = $reasons->Reason_select();
   /* ky : 내일 작업 예정입니다 건들지 말아주세요*/
 ?>
 <!DOCTYPE html>
@@ -37,15 +39,19 @@
         탈퇴 후 개인정보는 바로 삭제됩니다.
       </p>
 
-      <form class="" action="" method="post">
-
+      <form class="" action="mb_del_check.php" method="post">
+        <input type="hidden" name="mb_id" value="<?=$mb_id?>">
+        <input type="hidden" name="om_id" value="<?=$om_id?>">
       <!-- 탈퇴사유 선태 select 박스 -->
       <div id="select_box">
-        <select class="w3-select" name="">
-          <option value="">찬규좋아</option>
-        </select>
-      </div>
 
+        <select class="w3-select" name="sau">
+          <?php foreach ($reasons_del as $reasons_a) :?>
+          <option value="<?=$reasons_a["reason_id"]?>"><?=$reasons_a["reasons_string"]?></option>
+          <?php endforeach ?>
+        </select>
+
+      </div>
       <div id="btn_box">
         <input type="submit" name="" value="탈퇴하기">
         <input type="button" name="" value="뒤로" onclick = "parent.changeIframeUrl('member_update.php')">
