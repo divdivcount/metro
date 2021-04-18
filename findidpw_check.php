@@ -54,7 +54,7 @@ if($mb_name && $mb_email){
 
   mailer('관리자', $mail_from, $mail_to, $subject, $content); // 메일 전송
   echo "<script>alert('".$title."이 완료 되었습니다.\\n신규가입의 경우 메일인증을 받으셔야 로그인 가능합니다.');</script>";
-  echo "<script>location.replace('./login.php');</script>";
+  echo "<script>location.replace('./index.php');</script>";
 }
 
 

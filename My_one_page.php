@@ -14,6 +14,7 @@ require_once("modules/db.php");
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 <link rel="stylesheet" href="css/css_metrocket_header.css">
 <link rel="stylesheet" href="css/css_metrocket_footer.css">
+
 <style>
 .click_box{
   width:100%;
@@ -25,7 +26,7 @@ require_once("modules/db.php");
   <?php
     if(empty($_SESSION['ss_mb_id']) && empty($_SESSION['naver_mb_id']) && empty($_SESSION['kakao_mb_id']) ){
       echo "<script>alert('로그인을 해주세요');</script>";
-      echo "<script>location.replace('./login.php');</script>";
+      echo "<script>location.replace('./index.php');</script>";
     }else{
   ?>
   <!-- 최상단 로고 및 상단메뉴 -->
@@ -63,7 +64,7 @@ require_once("modules/db.php");
         <img class="w3-circle" src="<?=$mb['mb_image'] ? $mb['mb_image'] : $om['om_image_url'] ?>" >
         <img src="img/camera.png" style="position:absolute;left:70%;top:70%;" alt="">
       </div>
-        <div class="user_name"><?=$om['om_nickname'] ? $om['om_nickname'] : $mb['mb_name']?></div>
+        <div class="user_name"><?=$mb['mb_name'] ? $mb['mb_name'] : $om['om_nickname']?></div>
     </div>
 
     <!-- 메인 버튼 -->
@@ -80,7 +81,7 @@ require_once("modules/db.php");
     </form>
 
     <div class="click_box">
-							<iframe style="float:left;" frameborder="0"  id="main_frame" src="member_update.php" height="1030px" width="100%"></iframe>
+							<iframe style="float:left;" frameborder="0"  id="main_frame" src="member_update.php" height="800px" width="100%"></iframe>
 		</div>
 
 	</div>

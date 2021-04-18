@@ -47,13 +47,13 @@ require_once('modules/db.php');
       <div class="test_modal">
 
         <div class="modalBox">
+
           <div class="closeBtn_box"><img src="img/cancle.png" class="closeBtn"></div>
 
           <!-- <button class="closeBtn">✖</button> -->
           <?php require_once('login.php'); ?>
-
-
         </div>
+
       </div>
     </div>
 

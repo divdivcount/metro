@@ -14,7 +14,7 @@ require_once("modules/db.php");
 
 
 	if($mb_id == 'null' && $om_id == 'null'){
-		usergoto("로그인을 먼저 해주세요2","login.php");
+		usergoto("로그인을 먼저 해주세요","index.php");
 		exit;
 	}
 	// echo $bno."<br>";

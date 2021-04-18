@@ -308,8 +308,8 @@ try{
           location.reload();
         },
         error : function(e){
-          alert("로그인을 먼저 해주세요1");
-          location.repleace("./login.php");
+          alert("로그인을 먼저 해주세요");
+          location.repleace("./index.php");
         }
         });
       })

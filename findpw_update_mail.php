@@ -24,7 +24,7 @@ require_once("modules/db.php");
             회원님의 성원에 보답하고자 더욱 더 열심히 하겠습니다.<br/>
             감사합니다.
         </p>
-        <a href="https://metroket.kro.kr/login.php" target="_blank" style="display:block;padding:30px 0;background:#484848;color:#fff;text-decoration:none;text-align:center">로그인 바로가기</a>
+        <a href="https://metroket.kro.kr/index.php" target="_blank" style="display:block;padding:30px 0;background:#484848;color:#fff;text-decoration:none;text-align:center">로그인 바로가기</a>
     </div>
 </div>
 

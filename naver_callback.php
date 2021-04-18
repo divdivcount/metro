@@ -48,7 +48,7 @@ if($status_code == 200) {
       $_SESSION['naver_mb_id'] = $mb_company.$mb_uid;
       if(isset($_SESSION['naver_mb_id'])) { // 세션이 있다면 로그인 확인 페이지로 이동
         echo "<script>alert('로그인 되었습니다.');</script>";
-        echo "<script>location.replace('./login.php');</script>";
+        echo "<script>location.replace('./index.php');</script>";
       }
       // }
     } // 회원정보가 없다면 회원가입
@@ -72,7 +72,7 @@ if($status_code == 200) {
       // echo $_SESSION['naver_mb_id'];
       if(isset($_SESSION['naver_mb_id'])) { // 세션이 있다면 로그인 확인 페이지로 이동
       	echo "<script>alert('로그인 되었습니다.');</script>";
-      	echo "<script>location.replace('./login.php');</script>";
+      	echo "<script>location.replace('./index.php');</script>";
       }
     }
   } else {

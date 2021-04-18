@@ -5,7 +5,7 @@
 
   if(empty($_SESSION['ss_mb_id']) && empty($_SESSION['naver_mb_id']) && empty($_SESSION['kakao_mb_id']) ){
         echo "<script>alert('로그인을 해주세요');</script>";
-        echo "<script>location.replace('./login.php');</script>";
+        echo "<script>location.replace('./index.php');</script>";
   }else{
 
     if(isset($_SESSION['ss_mb_id'])){

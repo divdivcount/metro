@@ -65,16 +65,7 @@
             alert("마이페이지에서 역 선택을 먼저 등록 해주세요.");
             location.replace("My_one_page.php");
           }
-         // 로그인  페이지 열기
-        function openLoginPage() {
-          var popupWidth = 1080;
-          var popupHeight = 650;
 
-          var popupX = Math.ceil(( window.screen.width - popupWidth )/2);
-          var popupY= Math.ceil(( window.screen.height - popupHeight )/2);
-
-          var add = open('login.php','테스트','width='+ popupWidth +', height='+ popupHeight +', left=' + popupX + ', top='+ popupY + ',location= 0,scrollbars =0,toolbar=0,resizeble=0,status=0,menubar=0');
-          }
 
 
          </script>
