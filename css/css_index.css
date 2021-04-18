@@ -109,24 +109,10 @@ body {
   border-top-left-radius: 3.0rem;
 }
 
-
 .productText_box{width: 100%;height:29%;display: flex;flex-direction: column;margin-top: 5px;padding: 1.0rem;background-color: white;box-shadow: 3px 3px 6px 0 rgba(0, 0, 0, 0.16);border-bottom-left-radius: 10px;border-bottom-right-radius: 10px}
 .productText_box_title_line{width: 100%;font-family: "NotoSansKR_r";font-size: 2.3rem;color: #3b3b3b;text-align: center;}
 .productText_box_station_line{width: 100%;font-family: "NotoSansKR_t";font-size: 1.8rem;color: #707070;text-align: center;}
 .productText_box_price_line{width: 100%;font-family: "NotoSansKR_m";font-size: 1.8rem;color: #3b3b3b;text-align: center;}
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .slideImg_box{
   width: 100%;
@@ -235,7 +221,7 @@ body {
        .modalBox {
          position: absolute;
          background-color: #fff;
-         width: 768px;
+         width: 700px;
          height: 700px;
          padding: 15px;
          z-index: 10001;
@@ -285,6 +271,7 @@ a{text-decoration: none;}
   .textBox_1:nth-child(2),.textBox_1:nth-child(3) {border-right:none;border-left:none;}
   .textBox_1:nth-child(4){border-left:none;}
   .textBox_1:nth-child(1){border-right:none;}
+  .modalBox {width: 80%;height: 80%;}
   .imgbox_3{width: 40%;}
 }
 @media only screen and (max-width: 540px) {
@@ -293,6 +280,7 @@ a{text-decoration: none;}
   #main_tapmenu{width: 100%;}
   .bx-wrapper .bx-pager{padding: 0!important;}
   .productInfo_box{width: 182px;height: 280px;}
+  .modalBox {width: 80%;height: 65%;}
 }
 @media only screen and (max-width: 425px) {
   html,body{font-size: 7px!important;}

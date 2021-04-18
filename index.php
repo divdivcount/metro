@@ -35,7 +35,6 @@ require_once('modules/db.php');
     <script src="https://unpkg.com/hangul-js" type="text/javascript"></script>
     <script src="css/OwlCarousel2-2.3.4/docs/assets/owlcarousel/owl.carousel.min.js"></script>
 
-
     <style>
       .ui-helper-hidden-accessible{display:none;}
     </style>
@@ -111,9 +110,6 @@ require_once('modules/db.php');
         <div class="tapmenuItem">생활/가공식품</div>
         <div class="tapmenuItem">게임/취미</div>
       </div>
-
-
-      <!-- 아이콘 들어오는 부분 -->
 
 
       <div class="owl-carousel" id="owl-carousel">

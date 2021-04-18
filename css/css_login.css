@@ -64,14 +64,15 @@ body{
 }
 #loginbtn{
   width: 100%;
- color:#ffffff;
- font-family: "NotoSansKR_m";
- font-size: 1.8rem;
- background: linear-gradient(to left, #bca8ff, #0090ff);
- outline: none;
- border: none;
- border-radius: 20px;
- cursor: pointer;
+  color:#ffffff;
+  font-family: "NotoSansKR_m";
+  font-size: 1.8rem;
+  background: linear-gradient(to left, #bca8ff, #0090ff);
+  outline: none;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  padding: 0.8rem 0;
 }
 .submitBtn{
   margin: 20px 0;
@@ -102,12 +103,11 @@ input::placeholder{
   opacity: 0.8;
 }
 @media only screen and (max-width: 1024px) {
-.container{width:55%;}
+  .container{width:55%;}
 }
 @media only screen and (max-width: 768px) {
-  .container{width: 55%;}
+  .container{width: 65%;}
 }
 @media only screen and (max-width: 540px) {
-  .imgbox input{    width: 100%;  }
-  .imgbox img{    width: 100%;  }
+  .container{width: 75%;}
 }
