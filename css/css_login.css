@@ -9,14 +9,13 @@ body{
   background-color:#F5F6F7;
   position: relative;
 }
+.container{
+  margin: 5.0rem auto;
+  width:55%;
+}
 .login-box{
-  width:37%;
-  height: 55%;
+  width:100%;
   text-align: center;
-  position: absolute;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
   color: #a7a7a7;
 }
 .textbox{
@@ -65,7 +64,6 @@ body{
 }
 #loginbtn{
   width: 100%;
-  height: 5.0rem;
  color:#ffffff;
  font-family: "NotoSansKR_m";
  font-size: 1.8rem;
@@ -85,6 +83,13 @@ body{
   align-items: center;
   display:flex;
 }
+#logoimg_box{
+  width: 100%;
+  text-align: center;
+}
+#logoimg_box img{
+  width: 100%;
+}
 #imgbox {
   text-align: center;
   margin-bottom: 10px;
@@ -97,10 +102,10 @@ input::placeholder{
   opacity: 0.8;
 }
 @media only screen and (max-width: 1024px) {
-.login-box{width:60%;}
+.container{width:55%;}
 }
 @media only screen and (max-width: 768px) {
-  .login-box{width: 70%;}
+  .container{width: 55%;}
 }
 @media only screen and (max-width: 540px) {
   .imgbox input{    width: 100%;  }

@@ -20,7 +20,7 @@ body {
   box-shadow: 10px 10px 50px 0 rgba(0, 0, 0, 0.16);
   width: 71%;
   height: 45%;
-  z-index: 1;
+  z-index: 10;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -80,7 +80,7 @@ body {
   top: 60%;
   left: 50%;
   transform:translateX(-50%);
-  z-index: 1;
+  z-index: 9;
 }
 .customPrevBtn ,.customNextBtn{
   cursor: pointer;
@@ -200,6 +200,62 @@ body {
 .left{float: left;}
 .right{float: right;}
 .clear{clear: both;}
+
+.closeBtn_box {
+  display: flex;
+  justify-content: flex-end;
+}
+.modal {
+         position: absolute;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+       }
+
+       .modal .bg {
+         width: 100%;
+         height: 100%;
+         background-color: rgba(0, 0, 0, 0.6);
+         z-index: 10000;
+       }
+
+       .test_modal{
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         position: fixed;
+         width: 100%;
+         height: 100%;
+       }
+
+       .modalBox {
+         position: absolute;
+         background-color: #fff;
+         width: 768px;
+         height: 700px;
+         padding: 15px;
+         z-index: 10001;
+       }
+
+       .modalBox button {
+         display: block;
+         width: 80px;
+         margin: 0 auto;
+       }
+
+       .hidden {
+         display: none;
+       }
+
+
+
+
+
+
 a{text-decoration: none;}
 @media only screen and (min-width: 1920px) {
   body{

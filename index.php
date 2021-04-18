@@ -18,6 +18,7 @@ require_once('modules/db.php');
     <link rel="stylesheet" href="css/OwlCarousel2-2.3.4/docs/assets/owlcarousel/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="css/OwlCarousel2-2.3.4/docs/assets/owlcarousel/assets/owl.theme.default.min.css">
 
+    <link href="css/css_login.css" rel="stylesheet" type="text/css">
 
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
@@ -40,10 +41,24 @@ require_once('modules/db.php');
     </style>
   </head>
   <body>
-
     <!-- 상단 메뉴 부분 -->
     <?php require_once('metrocket_header.php'); ?>
+    <div class="modal hidden">
+    <div class="bg">
+      <div class="test_modal">
 
+        <div class="modalBox">
+          <div class="closeBtn_box"><img src="img/cancle.png" class="closeBtn"></div>
+
+          <!-- <button class="closeBtn">✖</button> -->
+          <?php require_once('login.php'); ?>
+
+
+        </div>
+      </div>
+    </div>
+
+   </div>
 
     <!-- 메인 배너이미지 부분 -->
     <div id="bannerImg_box">
@@ -172,8 +187,6 @@ require_once('modules/db.php');
 
     <!-- 푸터 부분  -->
     <?php require_once('metrocket_footer.php');?>
-
-
   </body>
   <script>
   const tapmenuItem = document.getElementsByClassName('tapmenuItem');
@@ -328,5 +341,18 @@ require_once('modules/db.php');
     owl.trigger('prev.owl.carousel', [300]);
 })
 
+
+  //로그인 모달
+  const open = () => {
+    document.querySelector(".modal").classList.remove("hidden");
+  }
+
+  const close = () => {
+    document.querySelector(".modal").classList.add("hidden");
+  }
+
+  document.querySelector(".openBtn").addEventListener("click", open);
+  document.querySelector(".closeBtn").addEventListener("click", close);
+  document.querySelector(".bg").addEventListener("click", close);
 </script>
 </html>
