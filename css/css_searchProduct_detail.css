@@ -18,7 +18,7 @@ p{margin: 0}
 }
 #pageTitle_box h2{font-family: "NotoSansKR_m";font-size: 4.5rem;color:#3b3b3b}
 #pageTitle_box span{font-size: 1.6rem;color: #0099ff}
-
+#star_btn{cursor: pointer;}
 /* 슬라이드 */
 
 #slideImg_box{}
@@ -56,6 +56,22 @@ p{margin: 0}
   color:#3b3b3b;
   overflow:scroll;
 }
+#productInfo_text::-webkit-scrollbar {
+  margin-top: 0.5rem;
+  width: 8px;
+  height: 8px;
+  background: #ffffff;
+  }
+  #productInfo_text::-webkit-scrollbar-thumb{
+    border-radius: 3.5px;
+    background-color:#E1E5E9
+  }
+  #productInfo_text::-webkit-scrollbar-thumb:active {
+    background-color: #ced4da;
+  }
+  #productInfo_text::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
 
 
 .otherProduct_title h3{width: 100%;margin:5.0rem 0;font-size: 3.0rem;color: #444444;font-family: "NotoSansKR_m";}

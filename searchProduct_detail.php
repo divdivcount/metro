@@ -128,7 +128,7 @@ try{
             </div>
 
             <div class="imgPlusText">
-              <div class="img_box"><img src="img/star_19x19.png" alt=""></div>
+              <div class="img_box"><img src="img/star_19x19.png" id="star_btn" data-value="0 여기php" alt="" onclick="test()"></div>
               <span>관심등록</span>
             </div>
 
@@ -329,5 +329,20 @@ try{
       });
   });
 
+  //관심상품 클릭시 값넘어가는거
+  var star_btn = document.getElementById('star_btn');
+ //  star_btn.addEventListener('click',(event)=>{
+ //
+ // });
+function test() {
+
+  if (star_btn.dataset.value == "0") {
+    star_btn.src ="img/star_19x19.png";
+    star_btn.dataset.value = 1;
+  }else if (star_btn.dataset.value == "1") {
+    star_btn.src = "img/staroff_19x19.png";
+    star_btn.dataset.value = 0;
+  }
+}
   </script>
 </html>
