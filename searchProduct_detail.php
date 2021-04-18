@@ -5,8 +5,7 @@ $pr_id = Get("id", 0);
 $pr_title = Get("title",0);
 try{
   $imgdao = $dao->searchProduct_detail($pr_id, $pr_title);
-  $replyobject = new Reply;
-  $replys = $replyobject->reply_select($pr_id);
+
 }catch(PDOException $e){
     echo $e;
   }
@@ -37,7 +36,9 @@ try{
   </head>
   <body>
     <!-- 상단 메뉴 부분 -->
-    <?php require_once('metrocket_header.php'); ?>
+    <?php require_once('metrocket_header.php');
+    $replyobject = new Reply;
+    $replys = $replyobject->reply_select($pr_id);?>
     <div id="wrapContainer_Box">
       <div id="pageTitle_box" class="radius_box">
         <h2>품목 상세보기</h2>
@@ -155,7 +156,7 @@ try{
         <h3 style="padding:10px 0 15px 0; border-bottom: solid 1px gray;">댓글목록</h3>
         <?php foreach ($replys as $reple) : ?>
           <div class="dat_view">
-            <div><b><?=$reple['om_mb_id']?></b></div>
+            <div><b><?=$reple['mb_id'] ? $reple['mb_id'] : $reple['om_id'] ?></b></div>
             <div class="dap_to comt_edit"><?php echo nl2br("$reple[content]"); ?></div>
             <div class="rep_me dap_to"><?=$reple['date']?></div>
             <div class="rep_me rep_menu">
@@ -183,7 +184,8 @@ try{
 
           <div class="dat_ins">
             <input type="hidden" name="bno" class="bno" value="<?=$pr_id?>">
-            <input type="hidden" name="dat_user" id="dat_user" class="dat_user" value="<?=$mb["mb_id"] ? $mb["mb_id"] : $om["om_id"]?>">
+            <input type="hidden" name="mb_id" id="mb_id" class="mb_dat_user" value=<?=$mb["mb_num"] ? $mb["mb_num"] : 'null' ?>>
+            <input type="hidden" name="om_id" id="om_id" class="om_dat_user" value=<?=$om["om_id"] ? $om["om_id"] : 'null'?>>
             <div style="margin-top:10px;">
               <textarea name="content" class="rep_con" id="rep_con"></textarea>
               <button id="rep_btn" class="rep_btn">댓글</button>
@@ -295,15 +297,21 @@ try{
           type : "get",
           data : {
             "bno" : $(".bno").val(),
-            "dat_user" : $(".dat_user").val(),
-            "rep_con" : $(".rep_con").val(),
+            "mb_id" : $(".mb_dat_user").val(),
+            "om_id" : $(".om_dat_user").val(),
+            "rep_con" : $(".rep_con").val()
           },
           success : function(data) {
           alert("댓글이 작성되었습니다");
-          location.reload();
-          }
+          // location.reload();
+        },
+        error : function(e){
+          alert(JSON.stringify(e));
+          alert("로그인을 먼저 해주세요1");
+          location.repleace("./login.php");
+        }
         });
-      });
+      })
 
       $(".dat_del_btn").click(function() {
         $("#rep_modal_del").modal();

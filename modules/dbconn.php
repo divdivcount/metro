@@ -9,6 +9,10 @@ $conn = mysqli_connect($mysql_host, $mysql_user, $mysql_password, $mysql_db); //
 if (!$conn) { // 연결 오류 발생 시 스크립트 종료
     die("연결 실패: " . mysqli_connect_error());
 }
-
+function mq($sql)
+	{
+		global $conn;
+		return $conn->query($sql);
+	}
 session_start(); // 세션의 시작
 ?>
