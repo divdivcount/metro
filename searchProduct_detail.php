@@ -5,6 +5,8 @@ $pr_id = Get("id", 0);
 $pr_title = Get("title",0);
 try{
   $imgdao = $dao->searchProduct_detail($pr_id, $pr_title);
+  $replyobject = new Reply;
+  $replys = $replyobject->reply_select($pr_id);
 }catch(PDOException $e){
     echo $e;
   }
@@ -19,6 +21,7 @@ try{
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="css/css_searchProduct_detail.css">
     <link rel="stylesheet" href="css/css_noamlfont.css">
+    <link rel="stylesheet" href="css/reply.css">
     <link rel="stylesheet" href="css/css_metrocket_footer.css">
     <link rel="stylesheet" href="css/css_metrocket_header.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -142,12 +145,53 @@ try{
           <?= $row["pr_explanation"] ?>
         </p>
       </div>
-      <?php $sameProduct = $dao->same_searchProduct($row["l_id"],$row["pr_station"],$row["ca_name"])?>
-      <?php $panmejaProduct = $dao->panpeja_searchProduct($row["mb_id"]? $row["mb_id"] : 'null', $row["om_id"] ? $row["om_id"] : 'null' )?>
+      <?php $sameProduct = $dao->same_searchProduct($row["l_id"],$row["pr_station"],$row["ca_name"]);?>
+      <?php $panmejaProduct = $dao->panpeja_searchProduct($row["mb_id"]? $row["mb_id"] : 'null', $row["om_id"] ? $row["om_id"] : 'null' );?>
     <?php endforeach ?>
     <!-- 댓글이 들어가야하는 부분입니다. -->
+    <!-- 댓글 시작 -->
+    <div class="reply_container">
+      <div class="reply_view">
+        <h3 style="padding:10px 0 15px 0; border-bottom: solid 1px gray;">댓글목록</h3>
+        <?php foreach ($replys as $reple) : ?>
+          <div class="dat_view">
+            <div><b><?=$reple['om_mb_id']?></b></div>
+            <div class="dap_to comt_edit"><?php echo nl2br("$reple[content]"); ?></div>
+            <div class="rep_me dap_to"><?=$reple['date']?></div>
+            <div class="rep_me rep_menu">
+            </div>
+          </div>
 
+          <div class="modal fade" id="rep_modal_del">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title"><b>댓글 삭제</b></h4>
+                </div>
+                <div class="modal-body">
+                  <form method="get" id="modal_form" action="reply_delete.php">
+                    <input type="hidden" name="rno" value="<?=$reple['idx']?>" />
+                    <input type="hidden" name="b_no" value="<?=$pr_id?>">
+                    <input type="submit" class="btn btn-primary" value="확인" /></p>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
 
+        <?php endforeach ?>
+
+          <div class="dat_ins">
+            <input type="hidden" name="bno" class="bno" value="<?=$pr_id?>">
+            <input type="hidden" name="dat_user" id="dat_user" class="dat_user" value="<?=$mb["mb_id"] ? $mb["mb_id"] : $om["om_id"]?>">
+            <div style="margin-top:10px;">
+              <textarea name="content" class="rep_con" id="rep_con"></textarea>
+              <button id="rep_btn" class="rep_btn">댓글</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 댓글 끝 -->
 
       <!-- 다른 상품 소개 타이틀 -->
       <div class="otherProduct_title"><h3>이 상품과 비슷한 상품</h3></div>
@@ -192,8 +236,6 @@ try{
           </div>
         </div></a>
       <?php endforeach ?>
-
-
       </div><!-- 그리드 박스의 끝  -->
 
       <!-- 다른 상품 소개 타이틀 -->
@@ -246,6 +288,27 @@ try{
   </body>
   <script type="text/javascript">
     $(document).ready(function(){
+
+      $("#rep_btn").click(function() {
+        $.ajax({
+          url : "reply_ok.php",
+          type : "get",
+          data : {
+            "bno" : $(".bno").val(),
+            "dat_user" : $(".dat_user").val(),
+            "rep_con" : $(".rep_con").val(),
+          },
+          success : function(data) {
+          alert("댓글이 작성되었습니다");
+          location.reload();
+          }
+        });
+      });
+
+      $(".dat_del_btn").click(function() {
+        $("#rep_modal_del").modal();
+      });
+
       $('.bxslider').bxSlider( {
           mode: 'horizontal',// 가로 방향 수평 슬라이드
           speed: 500,        // 이동 속도를 설정
