@@ -55,7 +55,7 @@
     $_SESSION['kakao_mb_id'] = $mb_company.$userid;
     if(isset($_SESSION['kakao_mb_id'])) { // 세션이 있다면 로그인 확인 페이지로 이동
       echo "<script>alert('로그인 되었습니다.');</script>";
-      echo "<script>location.replace('./login.php');</script>";
+      echo "<script>location.replace('./index.php');</script>";
     }else{
       echo "안됌";
     }
@@ -82,7 +82,7 @@
     $_SESSION['kakao_mb_id'] = $mb_company.$mb_uid;
     if(isset($_SESSION['kakao_mb_id'])) { // 세션이 있다면 로그인 확인 페이지로 이동
       echo "<script>alert('로그인 되었습니다.');</script>";
-      echo "<script>location.replace('./login.php');</script>";
+      echo "<script>location.replace('./index.php');</script>";
     }else{
       echo "안됌";
     }

@@ -1,6 +1,6 @@
 <?php
 // Load Modules
-require_once("modules/db.php");
+require_once('modules/db.php');
 require_once('modules/notification.php');
 ?>
 <?php
@@ -61,12 +61,12 @@ $naver_apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code&cli
     $sql = " select * from member where mb_id = TRIM('$mb_id') ";
     $result = mysqli_query($conn, $sql);
     $mb = mysqli_fetch_assoc($result);
-    mysqli_close($conn); // 데이터베이스 접속 종료
+    // mysqli_close($conn); // 데이터베이스 접속 종료
   ?>
     <script type="text/javascript">
-      window.opener.location.reload();
-      window.close();
+      document.querySelector(".modal").classList.add("hidden");
     </script>
+
   <?php
   }elseif(isset($_SESSION['naver_mb_id'])) {
     $naver_mb_id = $_SESSION['naver_mb_id'];
@@ -74,12 +74,12 @@ $naver_apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code&cli
     $sql = " select * from oauth_member where om_id = TRIM($naver_mb_id) ";
     $result = mysqli_query($conn, $sql);
     $naver = mysqli_fetch_assoc($result);
-    mysqli_close($conn); // 데이터베이스 접속 종료
+    // mysqli_close($conn); // 데이터베이스 접속 종료
     ?>
       <script type="text/javascript">
-        window.opener.location.reload();
-        window.close();
+        document.querySelector(".modal").classList.add("hidden");
       </script>
+
     <?php
   }elseif (isset($_SESSION['kakao_mb_id'])) {
     $kakao_mb_id = $_SESSION['kakao_mb_id'];
@@ -88,11 +88,10 @@ $naver_apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code&cli
     $result = mysqli_query($conn, $sql);
     $kakao = mysqli_fetch_assoc($result);
 
-    mysqli_close($conn); // 데이터베이스 접속 종료
+    // mysqli_close($conn); // 데이터베이스 접속 종료
     ?>
       <script type="text/javascript">
-        window.opener.location.reload();
-        window.close();
+      document.querySelector(".modal").classList.add("hidden");
       </script>
     <?php
   }else{

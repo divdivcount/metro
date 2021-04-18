@@ -78,8 +78,9 @@ require_once('modules/db.php');
               <option value="">선택</option>
               <?php
               $sql = " select * from line";
-              $result = mysqli_query($conn, $sql);
-              while ($row = mysqli_fetch_assoc($result)) {
+              $station_result = mysqli_query($conn, $sql);  //여기
+
+              while ($row = mysqli_fetch_assoc($station_result)) { //여기
               ?>
               <option value="<?=$row["l_id"]?>"><?=$row["l_name"]?></option>
             <?php }
@@ -259,6 +260,18 @@ require_once('modules/db.php');
 
 
   $(document).ready(function(){ // html 문서를 다 읽어들인 후
+    function login_open() {
+      document.querySelector(".modal").classList.remove("hidden");
+    }
+    function login_close() {
+      document.querySelector(".modal").classList.add("hidden");
+    }
+
+    if (document.querySelector(".openBtn")) {
+      document.querySelector(".openBtn").addEventListener("click", login_open);
+    }
+    document.querySelector(".closeBtn").addEventListener("click", login_close);
+
       $('#selectID').on('change', function(){
           if(this.value !== ""){
               var optVal = $(this).find(":selected").val();
@@ -304,6 +317,8 @@ require_once('modules/db.php');
           })
         }
       })
+
+
     });
     $("#auto").on("keyup",function(){	//검색창에 뭔가가 입력될 때마다
     input = $("#auto").val();	//입력된 값 저장
@@ -339,16 +354,9 @@ require_once('modules/db.php');
 
 
   //로그인 모달
-  const open = () => {
-    document.querySelector(".modal").classList.remove("hidden");
-  }
 
-  const close = () => {
-    document.querySelector(".modal").classList.add("hidden");
-  }
 
-  document.querySelector(".openBtn").addEventListener("click", open);
-  document.querySelector(".closeBtn").addEventListener("click", close);
+
   // document.querySelector(".bg").addEventListener("click", close);
 </script>
 </html>
