@@ -19,8 +19,14 @@
     if($mb_id != 'null'){
       $mb_dels = $mb_del->Member_Delete($mb_id);
     }elseif($om_id != 'null'){
+      echo "???";
       $om_del_select = $om_del->Om_select($om_id);
-      $om_dels = $om_del->Oauth_Delete($om_id,$om_del_select["om_company"],$om_del_select["om_access_token"]);
+      foreach ($om_del_select as $om_del_selects) {
+        echo $om_del_selects["om_company"];
+        echo $om_del_selects["om_access_token"];
+        $om_dels = $om_del->Oauth_Delete($om_id,$om_del_selects["om_company"],$om_del_selects["om_access_token"]);
+      }
+
     }
 
     echo "???";

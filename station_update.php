@@ -42,7 +42,11 @@ if($a == 0){
 		// echo "mb"."<br>";
 		$dao = new Member();
 		$dao->mbom_line_station_update($om_id,$mbs_id,$om_line_station);
-		echo "<script>location.replace('./member_update.php');</script>";
+		?>
+		<script>
+					window.top.location.href = "../My_one_page.php";
+		</script>
+		<?php
 	}elseif($om_id != "null"){
 		// echo $mbs_id."<br>";
 		// echo $om_id."<br>";
