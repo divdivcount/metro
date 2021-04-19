@@ -25,20 +25,27 @@
 }
 .imgbox_1 {
   margin-left: 10%;
+  text-align: center;
 }
-
+.imgbox_1 img{width: 100%}
 
 
 
 a{text-decoration: none;}
 @media only screen and (max-width: 768px) {
   #topToolbar_box{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
     margin:0;
+    margin-bottom: 1.0rem;
   }
   #topMenu_box{
+    height: auto;
     flex-direction: column;
   }
   #topMenu_box .imgbox_1{
     margin: 2.0rem auto;
   }
+  .imgbox_1 img{width: 75%}
 }

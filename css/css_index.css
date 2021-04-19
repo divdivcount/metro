@@ -198,7 +198,6 @@ body {
          justify-content: center;
          align-items: center;
        }
-
        .modal .bg {
          width: 100%;
          height: 100%;
@@ -220,8 +219,8 @@ body {
          position: absolute;
          background-color: #fff;
          width: 700px;
-         height: 700px;
-         padding: 15px;
+         height: 600px;
+         padding: 2.0rem;
          z-index: 10002;
        }
        .closeBtn_box {
@@ -257,6 +256,7 @@ a{text-decoration: none;}
   #selectMetro_box{flex-direction: column;height: 180px; top:0;left:0;position: inherit;margin: 0 auto;transform: none;margin-top: 5.0rem}
   #selectMetro_box #bothFind_item {width: 90%}
   #selectMetro_box .w3-button{width: 200px;}
+  #mainContent_box {margin-top: 10.0rem}
   #explain_box{grid-template-columns: 1fr 1fr;width: 80%;}
   .textBox_1:nth-child(2),.textBox_1:nth-child(3) {border-right:none;border-left:none;}
   .textBox_1:nth-child(4){border-left:none;}
@@ -286,4 +286,9 @@ a{text-decoration: none;}
   .productInfo_box{width: 143px;height: 260px;}
   .productInfo_box .productImg_box{height: 55%}
   .productInfo_box .productText_box{height: 40%}
+}
+
+
+@media only screen and (max-height: 700px) {
+  .modalBox {height: auto;}
 }

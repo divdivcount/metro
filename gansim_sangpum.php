@@ -124,6 +124,14 @@
   .h3{color:#3b3b3b; font-family: "NotoSansKR"}
   .star{width: 10%;float: right; text-align: right;}
   .clear{clear:both;}
+
+  #controlBtn_box{
+    display: flex;
+    justify-content: space-between;
+  }
+  #reviseProduct_btn, #completeSale_btn, #deleteProduct_btn{
+
+  }
 </style>
 </head>
 <body>
@@ -141,6 +149,8 @@
           <div class="text_field">
             <li class="name_field">i7-9세대 중고컴퓨터/ 144hz 중고모니터...</li>
             <li class="star"><img src="img/bin_star.png" /></li>
+
+
             <li class="clear"></li>
             <script>
               $(document).ready(function(){
@@ -169,6 +179,13 @@
             <!-- <li class="sation_text">8호선 수진역</li> -->
             <!-- <li class="list-li date_text">등록일시 :</li> -->
           </div>
+          <li>
+            <div class="controlBtn_box" data-sell_check = "0">
+              <button type="button" data-test ="0" class="reviseProduct_btn w3-button w3-blue w3-round">수정하기</button>
+              <button type="button" class="completeSale_btn w3-button w3-light-grey w3-round" onclick="completeSale(this)">판매완료</button>
+              <button type="button" class="deleteProduct_btn w3-button w3-dark-grey w3-round">삭제하기</button>
+            </div>
+          </li>
           </ul>
         </div>
 
@@ -177,4 +194,53 @@
 		</div>
 	</div>
 </body>
+<script type="text/javascript">
+
+  //   판매여부에따라 버튼 출력 방식
+  var reviseProduct_btn = document.getElementsByClassName('reviseProduct_btn');
+  var completeSale_btn = document.getElementsByClassName('completeSale_btn');
+  var deleteProduct_btn =   document.getElementsByClassName('deleteProduct_btn');
+  var controlBtn_box = document.getElementsByClassName('controlBtn_box');
+
+  window.onload = function() {
+    for (var i = 0; i < controlBtn_box.length; i++) {
+      if (controlBtn_box.item(i).dataset.sell_check == "0") { //판매 완료가 false(0)이면  삭제버튼 감추기
+        completeSale_btn.item(i).style.display="block";
+        reviseProduct_btn.item(i).style.display="block";
+        deleteProduct_btn.item(i).style.display="none";
+      }else if (controlBtn_box.item(i).dataset.sell_check == "1") { //판매 완료가 true(1)이면  수정 및 판매완료 버튼 감추기
+        completeSale_btn.item(i).style.display="none";
+        reviseProduct_btn.item(i).style.display="none";
+        deleteProduct_btn.item(i).style.display="block";
+      }
+    }
+  };
+
+  //판매완료시 버튼처리 부분
+  function completeSale(e) {
+
+    e.style.display ="none";
+    var parent = e.parentNode;
+    alert(parent.dataset.sell_check);
+    var child =parent.childNodes;
+    alert(child[1].dataset.test);
+
+    // e.previousSibling.style.display ="block";
+    // var btn_list=e.parentNode.childNodes;
+    // alert(btn_list[0].dataset.test);
+    // btn_list[0].style.display ="none";
+    // btn_list[1].style.display ="none";
+    // btn_list[2].style.display ="block";
+    // e.parentNode.childNodes.style.display ="none";
+    // e.parentNode.getElementsByClassName('deleteProduct_btn').style.display ="block";
+    //
+    //
+    //
+    // reviseProduct_btn.item(i).style.display="none";
+    // completeSale_btn.item(i).style.display="none";
+    // deleteProduct_btn.item(i).style.display="block";
+  }
+
+
+</script>
 </html>
