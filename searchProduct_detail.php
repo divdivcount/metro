@@ -1,13 +1,15 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 require_once('modules/db.php');
 try{
   $dao = new Product;
   $replyobject = new Reply;
+  $interest = new Interest;
   $pr_id = Get("id", 0);
   $pr_title = Get("title",0);
   $replys = $replyobject->reply_select($pr_id);
   $imgdao = $dao->searchProduct_detail($pr_id, $pr_title);
-
 }catch(PDOException $e){
     echo $e;
   }
@@ -39,7 +41,6 @@ try{
   <body>
     <!-- 상단 메뉴 부분 -->
     <?php require_once('metrocket_header.php');?>
-
     <div id="wrapContainer_Box">
       <div id="pageTitle_box" class="radius_box">
         <h2>품목 상세보기</h2>
@@ -47,8 +48,8 @@ try{
       </div>
       <!-- 슬라이드 이미지 -->
       <?php foreach ($imgdao as $row) : ?>
-      <?php
 
+      <?php
         $pr_imgs = $row["pr_img"];
         $pr_img = explode(",", $pr_imgs);
         // var_dump($pr_img);
@@ -128,7 +129,7 @@ try{
             </div>
 
             <div class="imgPlusText">
-              <div class="img_box"><img src="img/star_19x19.png" id="star_btn" data-value="0 여기php" alt="" onclick="test()"></div>
+              <div class="img_box"><img src="img/staroff_19x19.png" id="star_btn" data-value="0" alt="" onclick="test()"></div>
               <span>관심등록</span>
             </div>
 
@@ -155,9 +156,11 @@ try{
     <div class="reply_container">
       <div class="reply_view">
         <h3 style="padding:10px 0 15px 0; border-bottom: solid 1px gray;">댓글목록</h3>
+        <?php if(isset($replys)) : ?>
         <?php foreach ($replys as $reple) : ?>
+
           <div class="dat_view">
-            <div><b><img src="<?=$reple['mb_img'] ? $reple['mb_img'] : "files/".$$reple['mb_img'] ?>"></b></div>
+            <div><b><img src="<?=$reple['mb_img'] ? $reple['mb_img'] : "files/".$reple['mb_img'] ?>"></b></div>
             <div><b><?=$reple['mb_id']?></b></div>
             <div class="dap_to comt_edit"><?php echo nl2br("$reple[content]"); ?></div>
             <div class="rep_me dap_to"><?=$reple['date']?></div>
@@ -183,11 +186,12 @@ try{
           </div>
 
         <?php endforeach ?>
+        <?php endif?>
 
           <div class="dat_ins">
             <input type="hidden" name="bno" class="bno" value="<?=$pr_id?>">
-            <input type="hidden" name="mb_id" id="mb_id" class="mb_dat_user" value=<?=$mb["mb_num"] ? $mb["mb_num"] : 'null' ?>>
-            <input type="hidden" name="om_id" id="om_id" class="om_dat_user" value=<?=$om["om_id"] ? $om["om_id"] : 'null'?>>
+            <input type="hidden" name="mb_id" id="mb_id" class="mb_dat_user" value=<?=isset($mb) ? $mb["mb_num"] : 'null' ?>>
+            <input type="hidden" name="om_id" id="om_id" class="om_dat_user" value=<?=isset($om) ? $om["om_id"] : 'null'?>>
             <div style="margin-top:10px;">
               <textarea name="content" class="rep_con" id="rep_con"></textarea>
               <button id="rep_btn" class="rep_btn">댓글</button>
@@ -289,60 +293,75 @@ try{
     </div>
     <!-- 푸터 부분  -->
     <?php require_once 'metrocket_footer.php';?>
-  </body>
-  <script type="text/javascript">
-    $(document).ready(function(){
+    <script type="text/javascript">
+      $(document).ready(function(){
 
-      $("#rep_btn").click(function() {
-        $.ajax({
-          url : "reply_ok.php",
-          type : "get",
-          data : {
-            "bno" : $(".bno").val(),
-            "mb_id" : $(".mb_dat_user").val(),
-            "om_id" : $(".om_dat_user").val(),
-            "rep_con" : $(".rep_con").val()
+        $("#rep_btn").click(function() {
+          $.ajax({
+            url : "reply_ok.php",
+            type : "get",
+            data : {
+              "bno" : $(".bno").val(),
+              "mb_id" : $(".mb_dat_user").val(),
+              "om_id" : $(".om_dat_user").val(),
+              "rep_con" : $(".rep_con").val()
+            },
+            success : function(data) {
+            alert("댓글이 작성되었습니다");
+            location.reload();
           },
-          success : function(data) {
-          alert("댓글이 작성되었습니다");
-          location.reload();
-        },
-        error : function(e){
-          alert("로그인을 먼저 해주세요");
-          location.repleace("./index.php");
-        }
+          error : function(e){
+            alert("로그인을 먼저 해주세요");
+            location.repleace("./index.php");
+          }
+          });
+        })
+
+        $(".dat_del_btn").click(function() {
+          $("#rep_modal_del").modal();
         });
-      })
 
-      $(".dat_del_btn").click(function() {
-        $("#rep_modal_del").modal();
-      });
+        $('.bxslider').bxSlider( {
+            mode: 'horizontal',// 가로 방향 수평 슬라이드
+            speed: 500,        // 이동 속도를 설정
+            pager: true,      // 현재 위치 페이징 표시 여부 설정
+            moveSlides: 1,     // 슬라이드 이동시 개수
+            auto: true,        // 자동 실행 여부
+            autoHover: false,   // 마우스 호버시 정지 여부
+            controls: true    // 이전 다음 버튼 노출 여부
+        });
+    });
 
-      $('.bxslider').bxSlider( {
-          mode: 'horizontal',// 가로 방향 수평 슬라이드
-          speed: 500,        // 이동 속도를 설정
-          pager: true,      // 현재 위치 페이징 표시 여부 설정
-          moveSlides: 1,     // 슬라이드 이동시 개수
-          auto: true,        // 자동 실행 여부
-          autoHover: false,   // 마우스 호버시 정지 여부
-          controls: true    // 이전 다음 버튼 노출 여부
-      });
-  });
+    //관심상품 클릭시 값넘어가는거
+    var star_btn = document.getElementById('star_btn');
+   //  star_btn.addEventListener('click',(event)=>{
+   //
+   // });
+  function test() {
+    alert('별표 클릭됨 ^오^');
+    if (star_btn.dataset.value == "0") {
+      star_btn.src ="img/star_19x19.png";
+      star_btn.dataset.value = 1;
+    }else if (star_btn.dataset.value == "1") {
+      star_btn.src = "img/staroff_19x19.png";
+      star_btn.dataset.value = 0;
+    }
+    <?php /*아래에 있는 걸 AJAX로 고쳐야 함*/ ?>
+    <?php //  $inter = $interest->in_select($pr_id,isset($mb) ? $mb["mb_num"] : 14, isset($om) ? $om["om_id"] : 'null'); ?>
 
-  //관심상품 클릭시 값넘어가는거
-  var star_btn = document.getElementById('star_btn');
- //  star_btn.addEventListener('click',(event)=>{
- //
- // });
-function test() {
 
-  if (star_btn.dataset.value == "0") {
-    star_btn.src ="img/star_19x19.png";
-    star_btn.dataset.value = 1;
-  }else if (star_btn.dataset.value == "1") {
-    star_btn.src = "img/staroff_19x19.png";
-    star_btn.dataset.value = 0;
+      <?php /*
+      if($inter == null){
+        $inters = $interest->in_insert($pr_id,isset($mb) ? $mb["mb_num"] : 14, isset($om) ? $om["om_id"] : 'null', 1);
+      }else{
+        $inters = $interest->in_update($pr_id,isset($mb) ? $mb["mb_num"] : 14, isset($om) ? $om["om_id"] : 'null', 1);
+      }
+      */ ?>
+
+
+      <?php  // $inters = $interest->in_update($pr_id,isset($mb) ? $mb["mb_num"] : 14, isset($om) ? $om["om_id"] : 'null', 0); ?>
   }
-}
-  </script>
+    </script>
+  </body>
+
 </html>

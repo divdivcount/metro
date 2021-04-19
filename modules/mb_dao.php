@@ -9,8 +9,8 @@
     try{
       // 회원 탈퇴
       $this->openDB();
-      var_dump($mb_id != 'null');
-      var_dump($om_id == 'null');
+      // var_dump($mb_id != 'null');
+      // var_dump($om_id == 'null');
       if($mb_id != 'null'){
         $sql = "delete from member where mb_id='$mb_id'";
         echo "회원 탈퇴";

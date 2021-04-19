@@ -42,11 +42,8 @@ if($a == 0){
 		// echo "mb"."<br>";
 		$dao = new Member();
 		$dao->mbom_line_station_update($om_id,$mbs_id,$om_line_station);
-		?>
-		<script>
-					window.top.location.href = "../My_one_page.php";
-		</script>
-		<?php
+		echo "<script>parent.document.location.reload();</script>";
+		// echo "<script>location.replace('./member_update.php');</script>";
 	}elseif($om_id != "null"){
 		// echo $mbs_id."<br>";
 		// echo $om_id."<br>";
@@ -54,7 +51,7 @@ if($a == 0){
 		// echo "om"."<br>";
 		$dao = new Oauths();
 		$dao->mbom_line_station_update($om_id,$mbs_id,$om_line_station);
-		echo "<script>location.replace('./member_update.php');</script>";
+		echo "<script>parent.document.location.reload();</script>";
 	}else{
 		echo $mbs_id."<br>";
 		echo $om_id."<br>";

@@ -9,6 +9,7 @@
 	require_once('modules/product_dao.php');
 	require_once('modules/mem_del_reasons_dao.php');
 	require_once('modules/product_image_dao.php');
+	require_once('modules/interest_dao.php');
 
 	class ProLogin extends MetroDAO {
 		private $session = false;
