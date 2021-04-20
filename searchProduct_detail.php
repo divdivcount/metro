@@ -339,7 +339,7 @@ try{
      //
      // });
     function test() {
-      let values ="";
+      let values =star_btn.dataset.value;
       if (star_btn.dataset.value == 0) {
         $.ajax({
             url:'update_categoryItem.php', //request 보낼 서버의 경로
