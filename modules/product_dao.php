@@ -30,7 +30,7 @@ class Product extends MetroDAO {
         // echo $mb."<br>";
       }
       $this->openDB();
-      $query = $this->db->prepare("select * from $this->quTable where pr_title = '$title' and mb_id=$mb or om_id = '$om'");
+      $query = $this->db->prepare("select * from $this->quTable where pr_title = '$title' and mb_id=$mb or om_id = '$om' and pr_block = 1");
       $query -> bindValue(":title", $title, PDO::PARAM_STR);
       $query->execute();
       $fetch = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -53,7 +53,7 @@ class Product extends MetroDAO {
       }
       // 회원 출력
       $this->openDB();
-      $query = $this->db->prepare("select * from $this->quTable where pr_title = '$title' and mb_id=$mb or om_id = '$om'");
+      $query = $this->db->prepare("select * from $this->quTable where pr_title = '$title' and mb_id=$mb or om_id = '$om' and pr_block = 1");
       $query -> bindValue(":title", $title, PDO::PARAM_STR);
       $query->execute();
       $fetch = $query->fetchAll(PDO::FETCH_ASSOC);
