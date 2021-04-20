@@ -129,6 +129,7 @@ try{
             </div>
 
             <div class="imgPlusText">
+              <!-- 여기 관심등록 -->
               <div class="img_box"><img src="img/staroff_19x19.png" id="star_btn" data-value="0" alt="" onclick="test()"></div>
               <span>관심등록</span>
             </div>
@@ -338,13 +339,36 @@ try{
    //
    // });
   function test() {
-    //alert('별표 클릭됨 ^오^');
     if (star_btn.dataset.value == "0") {
-      star_btn.src ="img/star_19x19.png";
-      star_btn.dataset.value = 1;
+
+      let values = star_btn.dataset.value = 1;
+      $.ajax({
+          url:'update_categoryItem.php', //request 보낼 서버의 경로
+          type:'post', // 메소드(get, post)
+          data:{values:values}, //보낼 데이터
+          success: function(data) {
+              //서버로부터 정상적으로 응답이 왔을 때 실행
+              star_btn.src ="img/star_19x19.png";
+          },
+          error: function(err) {
+              //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
+          }
+      });
+    }
     }else if (star_btn.dataset.value == "1") {
-      star_btn.src = "img/staroff_19x19.png";
-      star_btn.dataset.value = 0;
+      let values = star_btn.dataset.value = 0;
+      $.ajax({
+          url:'update_categoryItem.php', //request 보낼 서버의 경로
+          type:'post', // 메소드(get, post)
+          data:{values:values}, //보낼 데이터
+          success: function(data) {
+              //서버로부터 정상적으로 응답이 왔을 때 실행
+              star_btn.src = "img/staroff_19x19.png";
+          },
+          error: function(err) {
+              //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
+          }
+      });
     }
     <?php /*아래에 있는 걸 AJAX로 고쳐야 함*/ ?>
     <?php //  $inter = $interest->in_select($pr_id,isset($mb) ? $mb["mb_num"] : 14, isset($om) ? $om["om_id"] : 'null'); ?>
