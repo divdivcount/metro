@@ -192,7 +192,7 @@ try{
             <input type="hidden" name="bno" class="bno" value="<?=$pr_id?>">
             <input type="hidden" name="mb_id" id="mb_id" class="mb_dat_user" value=<?=isset($mb) ? $mb["mb_num"] : 'null' ?>>
             <input type="hidden" name="om_id" id="om_id" class="om_dat_user" value=<?=isset($om) ? $om["om_id"] : 'null'?>>
-            <div style="margin-top:10px;">
+            <div class="replyInsert_box" style="margin-top:10px;">
               <textarea name="content" class="rep_con" id="rep_con"></textarea>
               <button id="rep_btn" class="rep_btn">댓글</button>
             </div>

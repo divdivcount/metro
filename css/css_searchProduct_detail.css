@@ -23,7 +23,7 @@ p{margin: 0}
 
 #slideImg_box{}
 .bx-wrapper{margin-bottom: 20px;margin-top: 20px;border: none;border-radius: 10px; box-shadow: 4px 4px 3px #000 inset; }
-.bx-wrapper img{border-radius: 10px;}
+.bx-wrapper img{border-radius: 10px;height: 550px;}
 .bx-wrapper .bx-pager{bottom:0;top: 80%;background:linear-gradient(to top, black, transparent);padding-top:0;display: flex;align-items: center;justify-content: center;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px}
 
 .bx-wrapper .bx-pager.bx-default-pager a:hover,
@@ -86,10 +86,37 @@ p{margin: 0}
 .otherProduct_content_img{width: 100%;height:69%;background-color:gray;box-shadow: 3px 3px 6px 0 rgba(0, 0, 0, 0.16);}
 .otherProduct_content_img img{width: 100%;height:100%}
 .otherProduct_content_text{width: 100%;height:29%;display: flex;flex-direction: column;margin-top: 5px;padding: 1.0rem;background-color: white;box-shadow: 3px 3px 6px 0 rgba(0, 0, 0, 0.16);}
-.otherProduct_content_text_title_line{width: 100%;font-family: "NotoSansKR_m";font-size: 1.3rem;color: #5b5b5b;}
-.otherProduct_content_text_price_line{width: 100%;font-family: "NotoSansKR_m";font-size: 1.3rem;color: #5b5b5b;}
-.otherProduct_content_text_station_line{width: 100%;font-family: "NotoSansKR_r";font-size: 1.0rem;color: #5e5956;}
-.otherProduct_content_text_category_line{width: 100%;display: flex;justify-content: space-between;}
+.otherProduct_content_text_title_line{width: 100%;font-family: "NotoSansKR_m";font-size: 1.3rem;color: #5b5b5b;
+overflow : hidden;
+text-overflow : ellipsis;
+height : 1.9rem; /*(대신 height를 설정해준다. 텍스트 크기에 맞춰 height가 1줄인 경우를 생각하자.) */
+word-wrap : brek-word;
+display : -webkit-box;
+-webkit-line-clamp : 1; /*(줄 개수를 설정한다. 만약 2줄이상이라면 height와 해당 값을 수정한다.) */
+-webkit-box-orient: vertical;}
+.otherProduct_content_text_price_line{width: 100%;font-family: "NotoSansKR_m";font-size: 1.3rem;color: #5b5b5b;
+overflow : hidden;
+text-overflow : ellipsis;
+height : 1.9rem; /*(대신 height를 설정해준다. 텍스트 크기에 맞춰 height가 1줄인 경우를 생각하자.) */
+word-wrap : brek-word;
+display : -webkit-box;
+-webkit-line-clamp : 1; /*(줄 개수를 설정한다. 만약 2줄이상이라면 height와 해당 값을 수정한다.) */
+-webkit-box-orient: vertical;}
+.otherProduct_content_text_station_line{width: 100%;font-family: "NotoSansKR_r";font-size: 1.0rem;color: #5e5956;
+overflow : hidden;
+text-overflow : ellipsis;
+height : 1.5rem; /*(대신 height를 설정해준다. 텍스트 크기에 맞춰 height가 1줄인 경우를 생각하자.) */
+word-wrap : brek-word;
+display : -webkit-box;
+-webkit-line-clamp : 1; /*(줄 개수를 설정한다. 만약 2줄이상이라면 height와 해당 값을 수정한다.) */
+-webkit-box-orient: vertical;}
+.otherProduct_content_text_category_line{width: 100%;display: flex;justify-content: space-between;overflow : hidden;
+text-overflow : ellipsis;
+height : 1.5rem; /*(대신 height를 설정해준다. 텍스트 크기에 맞춰 height가 1줄인 경우를 생각하자.) */
+word-wrap : brek-word;
+display : -webkit-box;
+-webkit-line-clamp : 1; /*(줄 개수를 설정한다. 만약 2줄이상이라면 height와 해당 값을 수정한다.) */
+-webkit-box-orient: vertical;}
 .otherProduct_content_text_category_line span{font-family: "NotoSansKR_t";font-size: 0.8rem;color: #7d7d7d;}
 
 
@@ -100,6 +127,8 @@ p{margin: 0}
 
 .userProfile_line{display: flex;justify-content: space-between;align-items: center;margin-bottom: 1.0rem}
   .userProfile{display: flex;}
+    .profileImg{width: 50px;height: 50px;}
+    .profileImg img{width: 100%;height:100%;}
     .pr_namestation{display: flex;flex-direction: column;}
       .pr_namestation p{font-size: 2.0rem;color: #3b3b3b}
       .pr_namestation span{font-size: 1.5rem;color: #5b5b5b}

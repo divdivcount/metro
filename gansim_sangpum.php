@@ -180,11 +180,17 @@
             <!-- <li class="list-li date_text">등록일시 :</li> -->
           </div>
           <li>
+
+
+            <!-- 여기 건들이면 큰일남 할때 언급좀  -->
             <div class="controlBtn_box" data-sell_check = "0">
               <button type="button" data-test ="0" class="reviseProduct_btn w3-button w3-blue w3-round">수정하기</button>
               <button type="button" class="completeSale_btn w3-button w3-light-grey w3-round" onclick="completeSale(this)">판매완료</button>
               <button type="button" class="deleteProduct_btn w3-button w3-dark-grey w3-round">삭제하기</button>
             </div>
+            <!--  여기 건들이면 큰일남 할때 언급좀  -->
+
+
           </li>
           </ul>
         </div>
@@ -218,27 +224,13 @@
 
   //판매완료시 버튼처리 부분
   function completeSale(e) {
-
     e.style.display ="none";
     var parent = e.parentNode;
-    alert(parent.dataset.sell_check);
+    // alert(parent.dataset.sell_check);
     var child =parent.childNodes;
-    alert(child[1].dataset.test);
-
-    // e.previousSibling.style.display ="block";
-    // var btn_list=e.parentNode.childNodes;
-    // alert(btn_list[0].dataset.test);
-    // btn_list[0].style.display ="none";
-    // btn_list[1].style.display ="none";
-    // btn_list[2].style.display ="block";
-    // e.parentNode.childNodes.style.display ="none";
-    // e.parentNode.getElementsByClassName('deleteProduct_btn').style.display ="block";
-    //
-    //
-    //
-    // reviseProduct_btn.item(i).style.display="none";
-    // completeSale_btn.item(i).style.display="none";
-    // deleteProduct_btn.item(i).style.display="block";
+    // alert(child[1].dataset.test);
+    child[1].style.display ="none";
+    child[5].style.display ="block";
   }
 
 
