@@ -9,7 +9,6 @@ try{
   $pr_id = Get("id", 0);
   $pr_title = Get("title",0);
   $replys = $replyobject->reply_select($pr_id);
-  $imgdao = $dao->searchProduct_detail($pr_id, $pr_title);
 }catch(PDOException $e){
     echo $e;
   }
@@ -46,6 +45,7 @@ try{
         <h2>품목 상세보기</h2>
         <span>채팅하기를 이용해 판매자와 대화할 수 있습니다.</span>
       </div>
+      <?php $imgdao = $dao->searchProduct_detail(isset($mb) ? $mb["mb_num"] : 'null', isset($om) ? $om["om_id"] : 'null',$pr_id, $pr_title); ?>
       <!-- 슬라이드 이미지 -->
       <?php foreach ($imgdao as $row) : ?>
 
@@ -130,7 +130,7 @@ try{
 
             <div class="imgPlusText">
               <!-- 여기 관심등록 -->
-              <div class="img_box"><img src="img/staroff_19x19.png" id="star_btn" data-value="0" alt="" onclick="test()"></div>
+              <div class="img_box"> <img src="<?php if($row["mem_i_check"] == 0){echo "img/staroff_19x19.png";}elseif($row["mem_i_check"] == 1){echo "img/star_19x19.png";} ?>" id="star_btn" data-value="<?=$row["mem_i_check"] ? $row["mem_i_check"] : 0 ?>" alt="" onclick="test()"></div>
               <span>관심등록</span>
             </div>
 
@@ -340,26 +340,31 @@ try{
      // });
     function test() {
       let values =star_btn.dataset.value;
+      let pr_id = "<?= $pr_id ?>";
+      let mb_id = "<?= isset($mb) ? $mb["mb_num"] : 'null' ?>";
+      let om_id = "<?= isset($om) ? $om["om_id"] : 'null' ?>";
       if (star_btn.dataset.value == 0) {
         $.ajax({
-            url:'update_categoryItem.php', //request 보낼 서버의 경로
+            url:'search_detail_ajax.php', //request 보낼 서버의 경로
             type:'post', // 메소드(get, post)
-            data:{values:values}, //보낼 데이터
+            data:{values:"0", pr_id : pr_id, mb_id:mb_id,om_id:om_id}, //보낼 데이터
             success: function(data) {
                 //서버로부터 정상적으로 응답이 왔을 때 실행
+                $('#star_btn').html(data);
                 star_btn.src ="img/star_19x19.png";
                 star_btn.dataset.value = 1;
             },
             error: function(err) {
-                //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
+              alert("관심 상품을 등록하기 위해서 로그인을 먼저 해주세요");
+              history.back();
             }
         });
       }
       else if (star_btn.dataset.value == 1) {
         $.ajax({
-            url:'update_categoryItem.php', //request 보낼 서버의 경로
+            url:'search_detail_ajax.php', //request 보낼 서버의 경로
             type:'post', // 메소드(get, post)
-            data:{values:values}, //보낼 데이터
+            data:{values:"1", pr_id : pr_id, mb_id:mb_id,om_id:om_id}, //보낼 데이터
             success: function(data) {
                 //서버로부터 정상적으로 응답이 왔을 때 실행
                 star_btn.src = "img/staroff_19x19.png";
@@ -367,6 +372,8 @@ try{
             },
             error: function(err) {
                 //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
+                alert("관심 상품을 등록하기 위해서 로그인을 먼저 해주세요");
+                history.back();
             }
         });
       }

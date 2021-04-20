@@ -65,7 +65,7 @@ $pm = ($mb ? $mb : $om).$title."val".$ftime;
 // echo $pr_img_id ;
 
 
-  $productObj->Upload('', 0, ['ca_name'=>$category,'mb_id'=>$mb,'om_id'=>$om,'l_id'=>$line,'pr_station' => $station,'pr_title'=>$title,'pr_price'=>$price ,'pr_explanation'=>$explainText, 'pr_check'=>$price_checking,'pr_img_id'=>$pm]);
+  $productObj->Upload('', 0, ['ca_name'=>$category,'mb_id'=>$mb,'om_id'=>$om,'l_id'=>$line,'pr_station' => $station,'pr_title'=>$title,'pr_price'=>$price ,'pr_explanation'=>$explainText, 'pr_check'=>$price_checking,'pr_img_id'=>$pm, 'pr_block'=>'1']);
   $result = $productObj->ProductAll($title,$om,$mb);
   foreach ($result as $row) {
     $pr = $row['pr_img_id'];
