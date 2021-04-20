@@ -338,7 +338,7 @@ try{
    //
    // });
   function test() {
-    alert('별표 클릭됨 ^오^');
+    //alert('별표 클릭됨 ^오^');
     if (star_btn.dataset.value == "0") {
       star_btn.src ="img/star_19x19.png";
       star_btn.dataset.value = 1;
