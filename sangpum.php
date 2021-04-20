@@ -174,8 +174,8 @@
         			// 	$result = $dao->SelectPageLength($pid, 10, $s_value, $start_s_value);
         			//   $list = $dao->SelectPageList($result['current'], 10,$s_value, $start_s_value);
         			// }else{
-        			$result = $dao->SelectPageLength($pid, 3, $mb_id ? $mb_id : 'null', $om_id ? $om_id : 'null','');
-        			$list = $dao->SelectPageList($result['current'], 3, $mb_id ? $mb_id : 'null', $om_id ? $om_id : 'null','');
+        			$result = $dao->SelectPageLength($pid, 3, isset($mb_id) ? $mb_id : 'null', isset($om_id) ? $om_id : 'null','');
+        			$list = $dao->SelectPageList($result['current'], 3, isset($mb_id) ? $mb_id : 'null', isset($om_id) ? $om_id : 'null','');
         		// }
         	} catch (PDOException $e) {
         	  $result = null;
