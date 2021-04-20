@@ -11,8 +11,10 @@ border-bottom: solid 1px gray;
 }
 .dat_ins {
 margin-top:50px;
-display: flex;
-justify-content: space-between;
+}
+.replyInsert_box{
+  display: flex;
+  justify-content: space-between;
 }
 .dat_edit_t{
 width:520px;
@@ -25,7 +27,6 @@ width:700px;
 height: 56px;
 }
 .rep_btn {
-position: absolute;
 width:100px;
 height:56px;
 font-size:16px;

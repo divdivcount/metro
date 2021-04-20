@@ -335,56 +335,56 @@ try{
 
     //관심상품 클릭시 값넘어가는거
     var star_btn = document.getElementById('star_btn');
-   //  star_btn.addEventListener('click',(event)=>{
-   //
-   // });
-  function test() {
-    if (star_btn.dataset.value == "0") {
-
-      let values = star_btn.dataset.value = 1;
-      $.ajax({
-          url:'update_categoryItem.php', //request 보낼 서버의 경로
-          type:'post', // 메소드(get, post)
-          data:{values:values}, //보낼 데이터
-          success: function(data) {
-              //서버로부터 정상적으로 응답이 왔을 때 실행
-              star_btn.src ="img/star_19x19.png";
-          },
-          error: function(err) {
-              //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
-          }
-      });
-    }
-    }else if (star_btn.dataset.value == "1") {
-      let values = star_btn.dataset.value = 0;
-      $.ajax({
-          url:'update_categoryItem.php', //request 보낼 서버의 경로
-          type:'post', // 메소드(get, post)
-          data:{values:values}, //보낼 데이터
-          success: function(data) {
-              //서버로부터 정상적으로 응답이 왔을 때 실행
-              star_btn.src = "img/staroff_19x19.png";
-          },
-          error: function(err) {
-              //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
-          }
-      });
-    }
-    <?php /*아래에 있는 걸 AJAX로 고쳐야 함*/ ?>
-    <?php //  $inter = $interest->in_select($pr_id,isset($mb) ? $mb["mb_num"] : 14, isset($om) ? $om["om_id"] : 'null'); ?>
-
-
-      <?php /*
-      if($inter == null){
-        $inters = $interest->in_insert($pr_id,isset($mb) ? $mb["mb_num"] : 14, isset($om) ? $om["om_id"] : 'null', 1);
-      }else{
-        $inters = $interest->in_update($pr_id,isset($mb) ? $mb["mb_num"] : 14, isset($om) ? $om["om_id"] : 'null', 1);
+     //  star_btn.addEventListener('click',(event)=>{
+     //
+     // });
+    function test() {
+      let values ="";
+      if (star_btn.dataset.value == 0) {
+        $.ajax({
+            url:'update_categoryItem.php', //request 보낼 서버의 경로
+            type:'post', // 메소드(get, post)
+            data:{values:values}, //보낼 데이터
+            success: function(data) {
+                //서버로부터 정상적으로 응답이 왔을 때 실행
+                star_btn.src ="img/star_19x19.png";
+                star_btn.dataset.value = 1;
+            },
+            error: function(err) {
+                //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
+            }
+        });
       }
-      */ ?>
+      else if (star_btn.dataset.value == 1) {
+        $.ajax({
+            url:'update_categoryItem.php', //request 보낼 서버의 경로
+            type:'post', // 메소드(get, post)
+            data:{values:values}, //보낼 데이터
+            success: function(data) {
+                //서버로부터 정상적으로 응답이 왔을 때 실행
+                star_btn.src = "img/staroff_19x19.png";
+                star_btn.dataset.value = 0;
+            },
+            error: function(err) {
+                //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
+            }
+        });
+      }
+      <?php /*아래에 있는 걸 AJAX로 고쳐야 함*/ ?>
+      <?php //  $inter = $interest->in_select($pr_id,isset($mb) ? $mb["mb_num"] : 14, isset($om) ? $om["om_id"] : 'null'); ?>
 
 
-      <?php  // $inters = $interest->in_update($pr_id,isset($mb) ? $mb["mb_num"] : 14, isset($om) ? $om["om_id"] : 'null', 0); ?>
-  }
+        <?php /*
+        if($inter == null){
+          $inters = $interest->in_insert($pr_id,isset($mb) ? $mb["mb_num"] : 14, isset($om) ? $om["om_id"] : 'null', 1);
+        }else{
+          $inters = $interest->in_update($pr_id,isset($mb) ? $mb["mb_num"] : 14, isset($om) ? $om["om_id"] : 'null', 1);
+        }
+        */ ?>
+
+
+        <?php  // $inters = $interest->in_update($pr_id,isset($mb) ? $mb["mb_num"] : 14, isset($om) ? $om["om_id"] : 'null', 0); ?>
+    }
     </script>
   </body>
 
