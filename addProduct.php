@@ -1,10 +1,16 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
   require_once("modules/db.php");
   /* ky : 내일 작업 예정입니다 건들지 말아주세요*/
+  $pr_ida = Post("pr_ida", null);
+  $mb_ida = Post("mb_ida", 'null');
+  $om_ida = Post("om_ida", 'null');
 ?>
 <?php
   if(empty($_SESSION['ss_mb_id']) && empty($_SESSION['naver_mb_id']) && empty($_SESSION['kakao_mb_id']) ){
     echo "<script>alert('로그인을 해주세요');</script>";
+    exit;
   }else{
 ?>
 <!DOCTYPE html>
@@ -38,10 +44,10 @@
           <h2 style="font-size:2.8rem">상품등록하기</h2>
 
           <!-- php 나 스크립트로 뜨게 해야하는 부분 추후 수정 -->
-          <span><?= $mb["line_station"] ? $mb["line_station"] : $om["line_station"]?></span>
+          <span><?= isset($mb) ? $mb["line_station"] : $om["line_station"]?></span>
           <?php
           //85
-            $line = $mb["line_station"] ? $mb["line_station"] : $om["line_station"];
+            $line = isset($mb) ? $mb["line_station"] : $om["line_station"];
             // echo $line;
             $pieces = explode("&nbsp;", $line);
             $linesa = $pieces[0];
@@ -60,9 +66,25 @@
       </div>
 
       <!-- 폼  -->
-      <form class="" action="addProduct_check.php" method="post" enctype="multipart/form-data">
+      <?php
 
+      if($pr_ida > 0 && ($mb_ida ? $mb_ida : $om_ida)) : ?>
+        <?php
+          try{
+
+            $update_select = new Product;
+            $update_selects = $update_select->Product_update_search($pr_ida,$mb_ida,$om_ida);
+          }catch(PDOException $e){
+            echo $e;
+          }
+        ?>
+      <form class="" action="addProduct_check.php" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="pr_ida" value="<?=$pr_ida?>" >
+        <input type="hidden" name="mb_ida" value="<?=$mb_ida?>" >
+        <input type="hidden" name="om_ida" value="<?=$om_ida?>" >
+        <input type="hidden" name="mode" value="modify">
       <!-- 제목 입력 부분 -->
+      <?php foreach ($update_selects as $u_select) : ?>
       <div id="insertTitle_box" class="radius_box" >
 
         <div class="title_box">
@@ -71,11 +93,9 @@
         </div>
 
         <div class="content_box">
-          <input id ="titleText" class="w3-input" type="text" name="title" placeholder="제목을 입력해주세요."required>
+          <input id ="titleText" class="w3-input" type="text" name="title" value="<?=$u_select["pr_title"] ? $u_select["pr_title"] : ""?>" placeholder="제목을 입력해주세요."required>
           <input type="hidden" name="lines" value="<?=$lines?>">
           <input type="hidden" name="station" value="<?=$stations?>">
-          <input type="hidden" name="mb" value="<?=$mb["mb_num"]?>">
-          <input type="hidden" name="om" value="<?=$om["om_id"]?>">
           <!-- php 추가예정  -->
           <div id="check_TitleCount"><span>0</span> / 100</div>
         </div>
@@ -91,14 +111,14 @@
 
         <div class="content_box">
           <div class="priceInput_box">
-            <input id ="price" name="price" class="w3-input" type="text" placeholder="숫자만 입력해주세요." onkeyup="inputNumberFormat(this)" required>
+            <input id ="price" name="price" class="w3-input" type="text" value="<?= $u_select["pr_price"] ? $u_select["pr_price"] : "" ?>" placeholder="숫자만 입력해주세요." onkeyup="inputNumberFormat(this)" required>
             &#8361;
           </div>
 
           <div class="priceCheck_box">
             <img id="priceCheckImg" src="img/priceCheckOnBtn.png" alt="" onclick="checkPricepNegotiation();">
             <p id="priceCheckText" class="priceCheck_on">가격흥정가능</p>
-            <input id="price_check" type="hidden" name="price_checking" value="1">
+            <input id="price_check" type="hidden" name="price_checking" value="<?php if($u_select["pr_check"] == 1){echo "1";}elseif($u_select["pr_check"] == 2){echo "2";} ?>">
           </div>
         </div>
       </div>
@@ -112,20 +132,20 @@
 
         <div class="content_box">
           <div class="categoryGrid_box">
-            <label id="" class="categorylabel"><input type="radio" class="test" name="category" value="디지털/가전">디지털/가전</label>
-            <label id="" class="categorylabel"><input type="radio" class="test" name="category" value="가구/인테리어">가구/인테리어</label>
-            <label id="" class="categorylabel"><input type="radio" class="test" name="category" value="유아동/유아도서">유아동/유아도서</label>
-            <label id="" class="categorylabel"><input type="radio" class="test" name="category" value="생활/가공식품">생활/가공식품</label>
-            <label id="" class="categorylabel"><input type="radio" class="test" name="category" value="스포츠/레저">스포츠/레저</label>
-            <label id="" class="categorylabel"><input type="radio" class="test" name="category" value="여성잡화">여성잡화</label>
-            <label id="" class="categorylabel"><input type="radio" class="test" name="category" value="여성의류">여성의류</label>
-            <label id="" class="categorylabel"><input type="radio" class="test" name="category" value="남성패션/잡화">남성패션/잡화</label>
-            <label id="" class="categorylabel"><input type="radio" class="test" name="category" value="게임/취미">게임/취미</label>
-            <label id="" class="categorylabel"><input type="radio" class="test" name="category" value="반려동물용품">반려동물용품</label>
-            <label id="" class="categorylabel"><input type="radio" class="test" name="category" value="도서/티켓/음반">도서/티켓/음반</label>
-            <label id="" class="categorylabel"><input type="radio" class="test" name="category" value="식물">식물</label>
-            <label id="" class="categorylabel"><input type="radio" class="test" name="category" value="기타 중고물품">기타 중고물품</label>
-            <label id="" class="categorylabel"><input type="radio" class="test" name="category" value="뷰티/미용">뷰티/미용</label>
+            <label id="" class="categorylabel" <?php if($u_select["ca_name"] == '디지털/가전'){echo 'style="color: rgb(0, 153, 255)"';}else{echo "123";} ?>><input type="radio" class="test" name="category" value="디지털/가전">디지털/가전</label>
+            <label id="" class="categorylabel" <?php if($u_select["ca_name"] == '가구/인테리어'){echo 'style="color: rgb(0, 153, 255)"';}else{}?> ><input type="radio" class="test" name="category" value="가구/인테리어">가구/인테리어</label>
+            <label id="" class="categorylabel" <?php if($u_select["ca_name"] == '유아동/유아도서'){echo 'style="color: rgb(0, 153, 255)"';}else{}?>><input type="radio" class="test" name="category" value="유아동/유아도서">유아동/유아도서</label>
+            <label id="" class="categorylabel" <?php if($u_select["ca_name"] == '생활/가공식품'){echo 'style="color: rgb(0, 153, 255)"';}else{}?> ><input type="radio" class="test" name="category" value="생활/가공식품">생활/가공식품</label>
+            <label id="" class="categorylabel" <?php if($u_select["ca_name"] == '스포츠/레저'){echo 'style="color: rgb(0, 153, 255)"';}else{} ?>><input type="radio" class="test" name="category" value="스포츠/레저">스포츠/레저</label>
+            <label id="" class="categorylabel" <?php if($u_select["ca_name"] == '여성잡화'){echo 'style="color: rgb(0, 153, 255)"';}else{} ?> ><input type="radio" class="test" name="category" value="여성잡화">여성잡화</label>
+            <label id="" class="categorylabel" <?php if($u_select["ca_name"] == '여성의류'){echo 'style="color: rgb(0, 153, 255)"';}else{} ?> ><input type="radio" class="test" name="category" value="여성의류">여성의류</label>
+            <label id="" class="categorylabel" <?php if($u_select["ca_name"] == '남성패션/잡화'){echo 'style="color: rgb(0, 153, 255)"';}else{}?> ><input type="radio" class="test" name="category" value="남성패션/잡화">남성패션/잡화</label>
+            <label id="" class="categorylabel" <?php if($u_select["ca_name"] == '게임/취미'){echo 'style="color: rgb(0, 153, 255)"';}else{} ?>><input type="radio" class="test" name="category" value="게임/취미">게임/취미</label>
+            <label id="" class="categorylabel" <?php if($u_select["ca_name"] == '반려동물용품'){echo 'style="color: rgb(0, 153, 255)"';}else{} ?>><input type="radio" class="test" name="category" value="반려동물용품">반려동물용품</label>
+            <label id="" class="categorylabel" <?php if($u_select["ca_name"] == '도서/티켓/음반'){echo 'style="color: rgb(0, 153, 255)"';}else{}?>><input type="radio" class="test" name="category" value="도서/티켓/음반">도서/티켓/음반</label>
+            <label id="" class="categorylabel" <?php if($u_select["ca_name"] == '식물'){echo 'style="color: rgb(0, 153, 255)"';}else{} ?>><input type="radio" class="test" name="category" value="식물">식물</label>
+            <label id="" class="categorylabel" <?php if($u_select["ca_name"] == '기타 중고물품'){echo 'style="color: rgb(0, 153, 255)"';}else{}?> ><input type="radio" class="test" name="category" value="기타 중고물품">기타 중고물품</label>
+            <label id="" class="categorylabel" <?php if($u_select["ca_name"] == '뷰티/미용'){echo 'style="color: rgb(0, 153, 255)"';}else{} ?>><input type="radio" class="test" name="category" value="뷰티/미용">뷰티/미용</label>
           </div>
         </div>
       </div>
@@ -136,17 +156,27 @@
           <h2><d>*</d>상품이미지 </h2>
           <span> 최소 1장 이상의 이미지를 업로드 해주세요 (최대 6장 이하 업로드 가능)</span>
         </div>
-
+        <?php
+        $pr_imgs = $u_select["pr_img"];
+        $pr_img = explode(",", $pr_imgs);
+        ?>
         <div class="content_box">
           <div class="imgGrid_box">
-            <div class="img_Item" style="background-image:url('../img/add_img.png')"></div>
-            <div class="img_Item" style="background-image:url('../img/add_img.png')"></div>
-            <div class="img_Item" style="background-image:url('../img/add_img.png')"></div>
-            <div class="img_Item" style="background-image:url('../img/add_img.png')"></div>
-            <div class="img_Item" style="background-image:url('../img/add_img.png')"></div>
-            <div class="img_Item" style="background-image:url('../img/add_img.png')"></div>
+            <?php
+            for($img = 0; $img < 6; $img++) {
+                if($img < count($pr_img)){
+                  ?>
+                  <div class="img_Item" style='background-image:url(<?= $pr_img[$img] ? "../files/$pr_img[$img]" : "../img/add_img.png" ?>)'></div>
+                  <?php
+                }else{
+                  ?>
+                    <div class="img_Item" style='background-image:url("../img/add_img.png")'></div>
+                  <?php
+                }
+              ?>
+              <input type="hidden" name="filesa[]" value="<?= $pr_img[$img] ?>">
+            <?php } ?>
             <input type="file" id="real-input" name="files[]" class="image_inputType_file" onchange="imageURL(this)" accept="image/jpeg,image/png,image/gif" style="display:none" required multiple>
-
           </div>
 
         </div>
@@ -160,20 +190,136 @@
         </div>
 
         <div class="content_box">
-          <textarea id ="explainText" name="explainText" rows="14" cols="80" style="width:100%; resize: none"; placeholder="내용을 작성해 상품을 소개해 주세요."></textarea>
+          <textarea id ="explainText" name="explainText" rows="14" cols="80" style="width:100%; resize: none;"  placeholder="내용을 작성해 상품을 소개해 주세요."><?= $u_select["pr_explanation"] ? $u_select["pr_explanation"] : '' ?></textarea>
           <div id="check_explainTextCount"><span>0</span> / 1000</div>
         </div>
 
       </div>
 
     <div class="btn_box">
-      <input class="w3-button w3-blue w3-round-large" type="submit" name="upload" value="완료">
+      <input class="w3-button w3-blue w3-round-large" type="submit" name="upload" value="수정 완료">
       <input class="w3-button w3-round-large" type="button" name="" value="취소">
+      <input class="w3-button w3-darkgray w3-round-large" type="button" name="" value="삭제">
       </div>
 
       </form>
+    <?php endforeach ?>
       <!-- 폼끝  -->
+<?php else : ?>
+  <form class="" action="addProduct_check.php" method="post" enctype="multipart/form-data">
 
+  <!-- 제목 입력 부분 -->
+  <div id="insertTitle_box" class="radius_box" >
+
+    <div class="title_box">
+      <h2><d>*</d>제목입력</h2>
+      <span>100자 이하로 입력해 주세요.</span>
+    </div>
+
+    <div class="content_box">
+      <input id ="titleText" class="w3-input" type="text" name="title" placeholder="제목을 입력해주세요."required>
+      <input type="hidden" name="lines" value="<?=$lines?>">
+      <input type="hidden" name="mode" value="insert">
+      <input type="hidden" name="station" value="<?=$stations?>">
+      <input type="hidden" name="mb" value="<?=isset($mb) ? $mb["mb_num"] : ''?>">
+      <input type="hidden" name="om" value="<?=isset($om) ? $om["om_id"] : ''?>">
+      <!-- php 추가예정  -->
+      <div id="check_TitleCount"><span>0</span> / 100</div>
+    </div>
+
+  </div>
+
+  <!-- 판매가 책정 부분 -->
+  <div id="insertPrice_box" class="radius_box">
+
+    <div class="title_box">
+      <h2><d>*</d>판매가</h2>
+    </div>
+
+    <div class="content_box">
+      <div class="priceInput_box">
+        <input id ="price" name="price" class="w3-input" type="text" placeholder="숫자만 입력해주세요." onkeyup="inputNumberFormat(this)" required>
+        &#8361;
+      </div>
+
+      <div class="priceCheck_box">
+        <img id="priceCheckImg" src="img/priceCheckOnBtn.png" alt="" onclick="checkPricepNegotiation();">
+        <p id="priceCheckText" class="priceCheck_on">가격흥정가능</p>
+        <input id="price_check" type="hidden" name="price_checking" value="1">
+      </div>
+    </div>
+  </div>
+
+  <!-- 카테고리 선택 부분 -->
+  <div id="insertCategory_box" class="radius_box">
+    <div class="title_box">
+      <h2><d>*</d>카테고리 설정 </h2>
+      <span> 원하시는 카테고리를 설정해 주세요.</span>
+    </div>
+
+    <div class="content_box">
+      <div class="categoryGrid_box">
+        <label id="" class="categorylabel"><input type="radio" class="test" name="category" value="디지털/가전">디지털/가전</label>
+        <label id="" class="categorylabel"><input type="radio" class="test" name="category" value="가구/인테리어">가구/인테리어</label>
+        <label id="" class="categorylabel"><input type="radio" class="test" name="category" value="유아동/유아도서">유아동/유아도서</label>
+        <label id="" class="categorylabel"><input type="radio" class="test" name="category" value="생활/가공식품">생활/가공식품</label>
+        <label id="" class="categorylabel"><input type="radio" class="test" name="category" value="스포츠/레저">스포츠/레저</label>
+        <label id="" class="categorylabel"><input type="radio" class="test" name="category" value="여성잡화">여성잡화</label>
+        <label id="" class="categorylabel"><input type="radio" class="test" name="category" value="여성의류">여성의류</label>
+        <label id="" class="categorylabel"><input type="radio" class="test" name="category" value="남성패션/잡화">남성패션/잡화</label>
+        <label id="" class="categorylabel"><input type="radio" class="test" name="category" value="게임/취미">게임/취미</label>
+        <label id="" class="categorylabel"><input type="radio" class="test" name="category" value="반려동물용품">반려동물용품</label>
+        <label id="" class="categorylabel"><input type="radio" class="test" name="category" value="도서/티켓/음반">도서/티켓/음반</label>
+        <label id="" class="categorylabel"><input type="radio" class="test" name="category" value="식물">식물</label>
+        <label id="" class="categorylabel"><input type="radio" class="test" name="category" value="기타 중고물품">기타 중고물품</label>
+        <label id="" class="categorylabel"><input type="radio" class="test" name="category" value="뷰티/미용">뷰티/미용</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- 상품이미지 업로드 부분 -->
+  <div id="insertImg_box" class="radius_box">
+    <div class="title_box">
+      <h2><d>*</d>상품이미지 </h2>
+      <span> 최소 1장 이상의 이미지를 업로드 해주세요 (최대 6장 이하 업로드 가능)</span>
+    </div>
+
+    <div class="content_box">
+      <div class="imgGrid_box">
+        <div class="img_Item" style="background-image:url('../img/add_img.png')"></div>
+        <div class="img_Item" style="background-image:url('../img/add_img.png')"></div>
+        <div class="img_Item" style="background-image:url('../img/add_img.png')"></div>
+        <div class="img_Item" style="background-image:url('../img/add_img.png')"></div>
+        <div class="img_Item" style="background-image:url('../img/add_img.png')"></div>
+        <div class="img_Item" style="background-image:url('../img/add_img.png')"></div>
+        <input type="file" id="real-input" name="files[]" class="image_inputType_file" onchange="imageURL(this)" accept="image/jpeg,image/png,image/gif" style="display:none" required multiple>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 상세설명 작성 부분  -->
+  <div id="insertText_box" class="radius_box">
+
+    <div class="title_box">
+      <h2><d>*</d>상세설명</h2>
+    </div>
+
+    <div class="content_box">
+      <textarea id ="explainText" name="explainText" rows="14" cols="80" style="width:100%; resize: none"; placeholder="내용을 작성해 상품을 소개해 주세요."></textarea>
+      <div id="check_explainTextCount"><span>0</span> / 1000</div>
+    </div>
+
+  </div>
+
+<div class="btn_box">
+  <input class="w3-button w3-blue w3-round-large" type="submit" name="upload" value="완료">
+  <input class="w3-button w3-round-large" type="button" name="" value="취소">
+  </div>
+
+  </form>
+<?php endif ?>
     </div>
     <!-- 푸터 부분  -->
     <?php require_once 'metrocket_footer.php';?>
@@ -290,7 +436,7 @@
     }
   </script>
   <script type="text/javascript">
-  initImages();
+
 
     function imageURL(input) {
         initImages();
@@ -309,24 +455,7 @@
         }
       }
 
-      function initImages() {
-        document.getElementsByClassName('imgs')[0].innerHTML = '';
-        document.getElementsByName('upload')[0].disabled = true;
-      }
 
-      function makeImage(src) {
-        var box = document.createElement('div');
-        var obj = document.createElement('img');
-        var in1 = document.createElement('input');
-        in1.setAttribute('placeholder', '사진 설명을 입력');
-        in1.setAttribute('type', 'text');
-        in1.setAttribute('name', 'names[]');
-        obj.setAttribute('src', src);
-        var cnter = document.getElementsByClassName('imgs')[0];
-        box.appendChild(obj);
-        box.appendChild(in1);
-        cnter.appendChild(box);
-      }
   </script>
 </html>
 <?php } ?>

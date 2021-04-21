@@ -73,165 +73,61 @@ class MetroDAO {
 	}
 
 	//겔러리, 컨설팅, 제품 modify
-	public function Modify($product=null,$fparam,$fnum,$id, $datArray) {
-		if($product){
-			if(!is_array($datArray)) throw new CommonException('잘못된 인수');//is_array($datArray) 배열검사
-			$farray = null;
-			if(is_string($fparam) && ($fparam != '')) {
-				if(isset($_FILES[$fparam]) && $this->quTableFname != '') {
-					if(is_array($_FILES[$fparam]['name'])) {
-						$farray = $this->fileUploader([ //객체배열로 넣기
-							'name' => $_FILES[$fparam]['name'][$fnum],
-							'tmp_name' => $_FILES[$fparam]['tmp_name'][$fnum],
-							'size' => $_FILES[$fparam]['size'][$fnum],
-							'type' => $_FILES[$fparam]['type'][$fnum],
-							'error' => $_FILES[$fparam]['error'][$fnum]
-						]);
-					}
-					else {
-						$farray = $this->fileUploader([
-							'name' => $_FILES[$fparam]['name'],
-							'tmp_name' => $_FILES[$fparam]['tmp_name'],
-							'size' => $_FILES[$fparam]['size'],
-							'type' => $_FILES[$fparam]['type'],
-							'error' => $_FILES[$fparam]['error']
-						]);
-					}
-				}
-			}
-			if($farray === null) {
-	      $farray = array(); //배열선언
-	    }
-	  else{
-		    $dfield = '';
-				$dvalue = '';
-		    $first = true;
-		    foreach($datArray as $key => $val) {
-
-		      $dfield = ($first)?($dfield.$key.'=:'.$key):($dfield.','.$key.'=:'.$key);
-		      $first = false;
-		    }
-				foreach($farray as $key => $val) {
-					$first = true;
-					$dvalue = ($first)?($dvalue.':'.$key):($dvalue.',:'.$key);
-					$first = false;
-				}
+	public function Modify($pr_id,$mb_id,$om_id,$datArray) {
+		$dfield = '';
+		$first = true;
+		foreach($datArray as $key => $val) {
+			$dfield = ($first)?($dfield.$key.'=:'.$key):($dfield.','.$key.'=:'.$key);
+			$first = false;
 		}
 
-			if(empty($dvalue)){
-				$dfield = '';
-				$first = true;
-				$file='';
-				foreach($datArray as $key => $val) {
-
-					$dfield = ($first)?($dfield.$key.'=:'.$key):($dfield.','.$key.'=:'.$key);
-					$first = false;
-				}
-			}else{
-				$file=", file=$dvalue";
-			}
-			$this->openDB();
-			$query = $this->db->prepare("update $this->quTable set $dfield $file where $this->quTableId=:id");
-			print_r($query);
-			$query->bindValue(':id', $id);
-			foreach($datArray as $key => $val) {
-				print_r($datArray);
-				if(is_string($val)) {
-					$query->bindValue(":$key", $val);
-					// echo $val."<br>";
-				}
-				else if(is_int($val)) {
-					$query->bindValue(":$key", $val, PDO::PARAM_INT);
-					// echo $val."<br>";
-				}
-				else {
-						$files = implode('', $val);
-						$query->bindValue(":$key", $files);
-				}
-			}
-			foreach($farray as $key => $val) {
-				if(is_string($val)) {
-					$query->bindValue(":$key", $val);
-					// echo $key,$val."<br>";
-					// print_r($query);
-				}
-				else if(is_int($val)) {
-					$query->bindValue(":$key", $val, PDO::PARAM_INT);
-					// echo $val."<br>";
-					// print_r($query);
-				}
-				else {
-					$query->bindValue(":$key", $val);
-					// print_r($query);
-				}
-			}
-			$query->execute();
-		}else{
-			$dfield = '';
-			$first = true;
-			foreach($datArray as $key => $val) {
-				$dfield = ($first)?($dfield.$key.'=:'.$key):($dfield.','.$key.'=:'.$key);
-				$first = false;
-			}
-		}
 		$this->openDB();
-		$query = $this->db->prepare("update $this->quTable set $dfield where $this->quTableId=:id");
-		// print_r( $query)."<br>";
-		$query->bindValue(':id', $id);
+		if($mb_id != 'null' && $om_id == 'null'){
+			$query = $this->db->prepare("update $this->quTable set $dfield where $this->quTableId=:id and mb_id=:mb and om_id is null and pr_block = 1");
+			$query -> bindValue(":mb", $mb_id, PDO::PARAM_INT);
+		}elseif($mb_id == 'null' && $om_id != 'null'){
+			$query = $this->db->prepare("update $this->quTable set $dfield where $this->quTableId=:id and om_id=:om and mb_id is null and pr_block = 1");
+			$query -> bindValue(":om", $om_id, PDO::PARAM_INT);
+		}
+		$query->bindValue(':id', $pr_id , PDO::PARAM_INT);
 		foreach($datArray as $key => $val) {
 			if(is_string($val)) {
 				$query->bindValue(":$key", $val);
-				// echo $key,$val."<br>";
 			}
 			else if(is_int($val)) {
 				$query->bindValue(":$key", $val, PDO::PARAM_INT);
-				// echo $key,$val."<br>";
 			}
 			else {
-				if($this->quTable == "consulting"){
-					$query->bindValue(":$key", $val);
-				}else{
-						$files = implode('', $val);
-						$query->bindValue(":$key", $files);
-						// print_r( $val)."<br>";
-					}
+				$query->bindValue(":$key", $val);
 			}
 		}
 		$query->execute();
 	}
-//제품, 컨설팅, 겔러리 삭제
+//제품 삭제
 
 public function Delete($id) {
 try{
 $this->openDB();
 
-if($this->quTable == "consulting"){
-	$query = $this->db->prepare("delete from $this->quTable where id=:id");
-	// print_r($query);
-	// echo "delete from $this->quTableFname where id=:id";
-	$query->bindValue(":id", $id, PDO::PARAM_INT);
-	$query->execute();
-}else{
 // 파일 삭제
 if( $this->quTableFname !=  '') {
-$query = $this->db->prepare("select file from $this->quTable where id=:id");
-$query->bindValue(":id", $id, PDO::PARAM_INT);
+$query = $this->db->prepare("select pr_img from $this->quTable where pr_img_id=:id");
+$query->bindValue(":id", $id, PDO::PARAM_STR);
 $query->execute();
-$fetch = $query->fetch(PDO::FETCH_ASSOC);
-$fname = $fetch['file'];
-if($fname != '') {
-		if(file_exists("files/$this->quTable/".$fname)) {
-			unlink("files/$this->quTable/".$fname);
+while ($fetch = $query->fetch(PDO::FETCH_ASSOC)) {
+	$fname = $fetch['pr_img'];
+	// var_dump($fname);
+	if($fname != '') {
+			if(file_exists("files/".$fname)) {
+				// echo "삭제";
+				unlink("files/".$fname);
 			}
-	}
+		}
 }
+$query = $this->db->prepare("delete from $this->quTable where pr_img_id=:id");
+$query->bindValue(":id", $id, PDO::PARAM_STR);
+$query->execute();
 }
-
-	// 게시글 삭제
-	$sql = "delete from $this->quTable where id=:id";
-	$query = $this->db->prepare($sql);
-	$query->bindValue(":id", $id, PDO::PARAM_INT);
-	$query->execute();
 	}catch(PDOException $e){
 	exit($e ->getMessage());
 		}
@@ -300,10 +196,10 @@ if($fname != '') {
 
 		if($mb_id != 'null' && $om_id == 'null'){
 			$om_id = null;
-			$sql =	"select p.pr_title,p.pr_status,p.pr_price,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,pi.pr_img,l.l_name,p.pr_station from product p left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join member m ON p.mb_id = m.mb_num where p.mb_id = :mb_id and p.pr_img_id = pi.pr_img_id and pi.main_check = 'y' and p.om_id is :om_id order by $this->quTableId asc limit :start, :viewLen";
+			$sql =	"select p.pr_id,p.pr_title,p.pr_status,p.pr_price,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,pi.pr_img,l.l_name,p.pr_station from product p left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join member m ON p.mb_id = m.mb_num where p.mb_id = :mb_id and p.pr_img_id = pi.pr_img_id and pi.main_check = 'y' and p.om_id is :om_id order by $this->quTableId asc limit :start, :viewLen";
 		}elseif($om_id != 'null' && $mb_id == 'null'){
 			$mb_id = null;
-			$sql = "select p.pr_title,p.pr_status,p.pr_price, (select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count, pi.pr_img, l.l_name, p.pr_station from product p left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join oauth_member om ON p.om_id = om.om_id where p.om_id = :om_id and p.pr_img_id = pi.pr_img_id and pi.main_check = 'y' and  p.mb_id is :mb_id order by $this->quTableId asc limit :start, :viewLen";
+			$sql = "select p.pr_id,p.pr_title,p.pr_status,p.pr_price, (select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count, pi.pr_img, l.l_name, p.pr_station from product p left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join oauth_member om ON p.om_id = om.om_id where p.om_id = :om_id and p.pr_img_id = pi.pr_img_id and pi.main_check = 'y' and  p.mb_id is :mb_id order by $this->quTableId asc limit :start, :viewLen";
 		}else{
 			if($s_value){
 				// echo "SelectPageList1";

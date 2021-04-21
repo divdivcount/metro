@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
     require_once('modules/db.php');
     $dao = new Product;
     $pid = Get('p', 1);
@@ -80,6 +82,8 @@
 
       <!-- 상품 정보  -->
       <?php foreach ($list as $row) : ?>
+        <?php echo $row["pr_id"]?>
+
       <div class="productInfo_box">
 
         <!-- 상품 이미지  -->
@@ -99,13 +103,12 @@
             <!-- 버튼들 -->
             <div class="pr_buttons">
               <!-- 여기 건들이면 큰일남 할때 언급좀  -->
-              <button type="button" class="reviseProduct_btn w3-button w3-blue w3-round">수정하기</button>
+              <button type="button" class="reviseProduct_btn w3-button w3-blue w3-round" onclick="updateProduct(<?=$row["pr_id"]?>,<?=isset($mb) ? $mb["mb_num"] : 'null'?>, <?= isset($om) ? $om["om_id"] : 'null' ?>)">수정하기</button>
               <button type="button" class="completeSale_btn w3-button w3-light-grey w3-round" onclick="completeSale(this)">판매완료</button>
               <button type="button" class="deleteProduct_btn w3-button w3-dark-grey w3-round">삭제하기</button>
               <!--  여기 건들이면 큰일남 할때 언급좀  -->
             </div>
           </div>
-
           <!--  2. 판매여부 라인 -->
           <div class="checkSale_line">
             <?= $row['pr_status'] ?>
@@ -200,6 +203,47 @@
       child[5].style.display ="block";
     }
 
+    function updateProduct(pr_id, mb_id, om_id) {
+      $("#upadteId").submit();
+      $.ajax({
+          url:'addProduct.php', //request 보낼 서버의 경로
+          type:'post', // 메소드(get, post)
+          data:{pr_ida : pr_id, mb_ida:mb_id, om_ida:om_id}, //보낼 데이터
+          success: function(data) {
+              //서버로부터 정상적으로 응답이 왔을 때 실행
+              var form = document.createElement('form');
+              form.setAttribute('method', 'post');
+              form.setAttribute('action', "./addProduct.php");
+              form.setAttribute('target', "_top");  
+               var objs, objs2, objs3;
+               objs = document.createElement('input');
+               objs.setAttribute('type', 'hidden');
+               objs.setAttribute('name', 'pr_ida');      // 받을 네이밍
+               objs.setAttribute('value', pr_id);       // 넘길 파라메터
+               form.appendChild(objs);
+
+               objs2 = document.createElement('input');
+               objs2.setAttribute('type', 'hidden');
+               objs2.setAttribute('name', 'mb_ida');      // 받을 네이밍
+               objs2.setAttribute('value', mb_id);       // 넘길 파라메터
+               form.appendChild(objs2);
+
+               objs3 = document.createElement('input');
+               objs3.setAttribute('type', 'hidden');
+               objs3.setAttribute('name', 'om_ida');      // 받을 네이밍
+               objs3.setAttribute('value', om_id);       // 넘길 파라메터
+               form.appendChild(objs3);
+
+
+               document.body.appendChild(form);
+               form.submit();
+          },
+          error: function(err) {
+            alert("오류가 떴다");
+          }
+      });
+      // window.parent.location.replace("./addProduct.php");
+    }
   </script>
 </body>
 </html>

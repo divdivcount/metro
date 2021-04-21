@@ -16,5 +16,8 @@ protected $quTableFname = 'pr_img';
 protected $quTableFdate = 'fdate';
 protected $fdir = 'files';
 
+
+
+
 }
 ?>
