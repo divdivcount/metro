@@ -119,34 +119,39 @@ try {
             userGoto("이미 한번 입력된 제목 입니다.", "addProduct.php");
           }
         }
-        $img_del = $productObjs->Product_img_code($pr_id, $mb_id, $om_id);
-        foreach ($img_del as $del) {
-          $delIMG->Delete($del["pr_img_id"]);
-        }
+
 
         $ftime = time();
         $pm = ($mb_id ? $mb_id : $om_id).$title."val".$ftime;
         $productObjs->Modify($pr_id,$mb_id, $om_id,['ca_name'=>$category,'l_id'=>$line,'pr_station' => $station,'pr_title'=>$title,'pr_price'=>$price ,'pr_explanation'=>$explainText, 'pr_check'=>$price_checking,'pr_img_id'=>$pm, 'pr_block'=>'1']);
 
-        $result = $productObjs->ProductAll($title,$om_id,$mb_id);
-        foreach ($result as $row) {
-          $pr = $row['pr_img_id'];
-        }
-        if($pr) {
-          // echo $pr."<br>";
-          // echo count($_FILES['files']['name'])."<br>";
-          for($i=0; $i<count($_FILES['files']['name']); $i++) {
-            if($_FILES['files']['type'][$i] == 'image/jpeg' || $_FILES['files']['type'][$i] == 'image/png' || $_FILES['files']['type'][$i] == 'image/gif') {
-              // echo $i."<br>";
-              if($i == 0){
-                $y = 'y';
-                // echo $y;
-              }else{
-                $y = 'n';
-                // echo $y;
+        if($_FILES['files']['name'][0] !== '') {
+
+          $result = $productObjs->ProductAll($title,$om_id,$mb_id);
+          foreach ($result as $row) {
+            $pr = $row['pr_img_id'];
+          }
+          if($pr) {
+            // echo $pr."<br>";
+            // echo count($_FILES['files']['name'])."<br>";
+            $img_del = $productObjs->Product_img_code($pr_id, $mb_id, $om_id);
+            foreach ($img_del as $del) {
+              $delIMG->Delete($del["pr_img_id"]);
+            }
+            for($i=0; $i<count($_FILES['files']['name']); $i++) {
+              if($_FILES['files']['type'][$i] == 'image/jpeg' || $_FILES['files']['type'][$i] == 'image/png' || $_FILES['files']['type'][$i] == 'image/gif') {
+                // echo $i."<br>";
+                    if($i == 0){
+                      $y = 'y';
+                      // echo $y;
+                    }else{
+                      $y = 'n';
+                      // echo $y;
+                    }
+
+                  $productIMG = new Primg();
+                  $productIMG->Upload('files', $i, ['pr_img_id'=>$pm, "main_check" => $y]);
               }
-              $productIMG = new Primg();
-              $productIMG->Upload('files', $i, ['pr_img_id'=>$pm, "main_check" => $y]);
             }
           }
         }

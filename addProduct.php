@@ -174,9 +174,9 @@ ini_set('display_errors', '1');
                   <?php
                 }
               ?>
-              <input type="hidden" name="filesa[]" value="<?= $pr_img[$img] ?>">
+
             <?php } ?>
-            <input type="file" id="real-input" name="files[]" class="image_inputType_file" onchange="imageURL(this)" accept="image/jpeg,image/png,image/gif" style="display:none" required multiple>
+            <input type="file" id="real-input" name="files[]" class="image_inputType_file"  accept="image/jpeg,image/png,image/gif" style="display:none;"  multiple>
           </div>
 
         </div>
@@ -292,7 +292,7 @@ ini_set('display_errors', '1');
         <div class="img_Item" style="background-image:url('../img/add_img.png')"></div>
         <div class="img_Item" style="background-image:url('../img/add_img.png')"></div>
         <div class="img_Item" style="background-image:url('../img/add_img.png')"></div>
-        <input type="file" id="real-input" name="files[]" class="image_inputType_file" onchange="imageURL(this)" accept="image/jpeg,image/png,image/gif" style="display:none" required multiple>
+        <input type="file" id="real-input" name="files[]" class="image_inputType_file"  accept="image/jpeg,image/png,image/gif" style="display:none" required multiple>
 
       </div>
 
@@ -438,22 +438,6 @@ ini_set('display_errors', '1');
   <script type="text/javascript">
 
 
-    function imageURL(input) {
-        initImages();
-        if (input.files && input.files.length>0) {
-          document.getElementsByName('upload')[0].disabled = false;
-          var onloadcallback = function(e) {
-            //document.getElementsByTagName('img')[0].setAttribute('src', e.target.result);
-            makeImage(e.target.result);
-          };
-
-          for(var i=0; i<input.files.length; i++) {
-            var reader = new FileReader();
-            reader.onload = onloadcallback;
-            reader.readAsDataURL(input.files[i]);
-          }
-        }
-      }
 
 
   </script>
