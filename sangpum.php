@@ -48,7 +48,7 @@ ini_set('display_errors', '1');
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/css_noamlfont.css">
-<link rel="stylesheet" href="css/css.sangpum.css">
+<link rel="stylesheet" href="css/css_sangpum.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <style>
 
@@ -70,8 +70,8 @@ ini_set('display_errors', '1');
       			// 	$result = $dao->SelectPageLength($pid, 10, $s_value, $start_s_value);
       			//   $list = $dao->SelectPageList($result['current'], 10,$s_value, $start_s_value);
       			// }else{
-      			$result = $dao->SelectPageLength($pid, 3, isset($mb_id) ? $mb_id : 'null', isset($om_id) ? $om_id : 'null','');
-      			$list = $dao->SelectPageList($result['current'], 3, isset($mb_id) ? $mb_id : 'null', isset($om_id) ? $om_id : 'null','');
+      			$result = $dao->SelectPageLength($pid, 4, isset($mb_id) ? $mb_id : 'null', isset($om_id) ? $om_id : 'null','');
+      			$list = $dao->SelectPageList($result['current'], 4, isset($mb_id) ? $mb_id : 'null', isset($om_id) ? $om_id : 'null','');
       		// }
       	} catch (PDOException $e) {
       	  $result = null;
@@ -82,7 +82,6 @@ ini_set('display_errors', '1');
 
       <!-- 상품 정보  -->
       <?php foreach ($list as $row) : ?>
-        <?php echo $row["pr_id"]?>
 
       <div class="productInfo_box">
 
@@ -101,12 +100,10 @@ ini_set('display_errors', '1');
             <div class="pr_title"><?= $row['pr_title'] ?></div>
 
             <!-- 버튼들 -->
-            <div class="pr_buttons">
-              <!-- 여기 건들이면 큰일남 할때 언급좀  -->
+            <div class="pr_buttons" data-sell_check ="<?= $row['pr_status'] ?>">
               <button type="button" class="reviseProduct_btn w3-button w3-blue w3-round" onclick="updateProduct(<?=$row["pr_id"]?>,<?=isset($mb) ? $mb["mb_num"] : 'null'?>, <?= isset($om) ? $om["om_id"] : 'null' ?>)">수정하기</button>
               <button type="button" class="completeSale_btn w3-button w3-light-grey w3-round" onclick="completeSale(this)">판매완료</button>
               <button type="button" class="deleteProduct_btn w3-button w3-dark-grey w3-round">삭제하기</button>
-              <!--  여기 건들이면 큰일남 할때 언급좀  -->
             </div>
           </div>
           <!--  2. 판매여부 라인 -->
@@ -180,11 +177,11 @@ ini_set('display_errors', '1');
 
     window.onload = function() {
       for (var i = 0; i < pr_buttons.length; i++) {
-        if (pr_buttons.item(i).dataset.sell_check == "0") { //판매 완료가 false(0)이면  삭제버튼 감추기
+        if (pr_buttons.item(i).dataset.sell_check == "판매중") { //판매 완료가 false(0)이면  삭제버튼 감추기
           completeSale_btn.item(i).style.display="block";
           reviseProduct_btn.item(i).style.display="block";
           deleteProduct_btn.item(i).style.display="none";
-        }else if (pr_buttons.item(i).dataset.sell_check == "1") { //판매 완료가 true(1)이면  수정 및 판매완료 버튼 감추기
+        }else if (pr_buttons.item(i).dataset.sell_check == "판매완료") { //판매 완료가 true(1)이면  수정 및 판매완료 버튼 감추기
           completeSale_btn.item(i).style.display="none";
           reviseProduct_btn.item(i).style.display="none";
           deleteProduct_btn.item(i).style.display="block";
@@ -214,7 +211,7 @@ ini_set('display_errors', '1');
               var form = document.createElement('form');
               form.setAttribute('method', 'post');
               form.setAttribute('action', "./addProduct.php");
-              form.setAttribute('target', "_top");  
+              form.setAttribute('target', "_top");
                var objs, objs2, objs3;
                objs = document.createElement('input');
                objs.setAttribute('type', 'hidden');

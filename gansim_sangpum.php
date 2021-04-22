@@ -46,9 +46,9 @@ ini_set('display_errors', '1');
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="css/css_noamlfont.css">
 <link rel="stylesheet" href="css/css_sangpum.css">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <style>
 
@@ -70,8 +70,8 @@ ini_set('display_errors', '1');
       			// 	$result = $dao->SelectPageLength($pid, 10, $s_value, $start_s_value);
       			//   $list = $dao->SelectPageList($result['current'], 10,$s_value, $start_s_value);
       			// }else{
-      			$result = $dao->SelectPageLength($pid, 3, isset($mb_id) ? $mb_id : 'null', isset($om_id) ? $om_id : 'null','');
-      			$list = $dao->SelectPageList($result['current'], 3, isset($mb_id) ? $mb_id : 'null', isset($om_id) ? $om_id : 'null','');
+      			$result = $dao->SelectPageLength($pid, 4, isset($mb_id) ? $mb_id : 'null', isset($om_id) ? $om_id : 'null','');
+      			$list = $dao->SelectPageList($result['current'], 4, isset($mb_id) ? $mb_id : 'null', isset($om_id) ? $om_id : 'null','');
       		// }
       	} catch (PDOException $e) {
       	  $result = null;
@@ -99,13 +99,11 @@ ini_set('display_errors', '1');
             <!-- 제목 -->
             <div class="pr_title"><?= $row['pr_title'] ?></div>
 
-            <!-- 버튼들 -->
+            <!-- 관심버튼 -->
 
-            <!-- 여기 건들이면 큰일남 할때 언급좀  -->
             <div class="pr_buttons">
-              <img src="img/star_30x30.png" data-value="<?=$row["pr_status"]?>" >
+              <img src="img/star_30x30.png" data-value="<?=$row["pr_status"]?>" data-pr_id="<?= $row['pr_id'] ?>" onclick="check_interest(this)">
             </div>
-            <!--  여기 건들이면 큰일남 할때 언급좀  -->
 
           </div>
           <!--  2. 판매여부 라인 -->
@@ -131,7 +129,7 @@ ini_set('display_errors', '1');
             <div class="pr_station"><?= $row['l_name'] ?> <?= $row['pr_station'] ?></div>
           </div>
 
-          <div class="hidden" data-pr_id="<?= $row['pr_id'] ?>">
+          <div class="hidden">
             <?= $row['pr_id'] ?>
           </div>
 
@@ -162,19 +160,15 @@ ini_set('display_errors', '1');
   <script>
   //관심상품 클릭시 값넘어가는거
   var star_btn = document.getElementById('star_btn');
-   //  star_btn.addEventListener('click',(event)=>{
-   //
-   // });
-  function test() {
+  function check_interest(e) {
     let values =star_btn.dataset.value;
-    let pr_id = "<?= $pr_id ?>";
-    // let mb_id = "<?= //isset($mb) ? $mb["mb_num"] : 'null' ?>";
-    // let om_id = "<?= //isset($om) ? $om["om_id"] : 'null' ?>";
+    let pr_id = "";
+    pr_id = e.dataset.pr_id;
     if (star_btn.dataset.value == 0) {
       $.ajax({
           url:'search_detail_ajax.php', //request 보낼 서버의 경로
           type:'post', // 메소드(get, post)
-          data:{values:"0", pr_id : pr_id, mb_id:mb_id,om_id:om_id}, //보낼 데이터
+          data:{values:"0", pr_id : pr_id}, //보낼 데이터
           success: function(data) {
               //서버로부터 정상적으로 응답이 왔을 때 실행
               $('#star_btn').html(data);
@@ -191,7 +185,7 @@ ini_set('display_errors', '1');
       $.ajax({
           url:'search_detail_ajax.php', //request 보낼 서버의 경로
           type:'post', // 메소드(get, post)
-          data:{values:"1", pr_id : pr_id, mb_id:mb_id,om_id:om_id}, //보낼 데이터
+          data:{values:"1", pr_id : pr_id}, //보낼 데이터
           success: function(data) {
               //서버로부터 정상적으로 응답이 왔을 때 실행
               star_btn.src = "img/staroff_30x30.png";
@@ -204,8 +198,7 @@ ini_set('display_errors', '1');
           }
       });
     }
-
-
+}
 
   </script>
 </body>
