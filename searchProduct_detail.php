@@ -149,7 +149,11 @@ try{
           <?= $row["pr_explanation"] ?>
         </p>
       </div>
-      <?php $sameProduct = $dao->same_searchProduct($row["l_id"],$row["pr_station"],$row["ca_name"]);?>
+
+      <?php
+       $piec = explode("&nbsp;", $row["profile_station"]);
+       // echo $piec[1];
+       $sameProduct = $dao->same_searchProduct($row["l_id"],$piec[1],$row["ca_name"]);?>
       <?php $panmejaProduct = $dao->panpeja_searchProduct($row["mb_id"]? $row["mb_id"] : 'null', $row["om_id"] ? $row["om_id"] : 'null' );?>
     <?php endforeach ?>
     <!-- 댓글이 들어가야하는 부분입니다. -->
@@ -377,20 +381,6 @@ try{
             }
         });
       }
-      <?php /*아래에 있는 걸 AJAX로 고쳐야 함*/ ?>
-      <?php //  $inter = $interest->in_select($pr_id,isset($mb) ? $mb["mb_num"] : 14, isset($om) ? $om["om_id"] : 'null'); ?>
-
-
-        <?php /*
-        if($inter == null){
-          $inters = $interest->in_insert($pr_id,isset($mb) ? $mb["mb_num"] : 14, isset($om) ? $om["om_id"] : 'null', 1);
-        }else{
-          $inters = $interest->in_update($pr_id,isset($mb) ? $mb["mb_num"] : 14, isset($om) ? $om["om_id"] : 'null', 1);
-        }
-        */ ?>
-
-
-        <?php  // $inters = $interest->in_update($pr_id,isset($mb) ? $mb["mb_num"] : 14, isset($om) ? $om["om_id"] : 'null', 0); ?>
     }
     </script>
   </body>

@@ -451,7 +451,7 @@ $query->execute();
 				$query->execute();
 			}
 
-	public function searchProduct_detail($mb_id,$om_id,$p_id, $p_title) {
+	public function searchProduct_detail($mb_id,$om_id,$pr_id) {
     $this->openDB();
 		// echo "--------------------------------<br>";
 		// echo $mb_id."<br>";
@@ -459,18 +459,93 @@ $query->execute();
 		// echo $p_id."<br>";
 		// echo $p_title."<br>";
 		// echo "--------------------------------<br>";
-    $query = $this->db->prepare("
-		select p.pr_id, p.pr_check,p.om_id,p.mb_id,
-		(select group_concat(pi.pr_img) from product_img pi where pi.pr_img_id = p.pr_img_id ) as pr_img,p.l_id ,p.pr_station,
-		(case when p.mb_id then (select e.mb_image from member e where p.mb_id = e.mb_num) when p.om_id then (select a.om_image_url from oauth_member a where a.om_id = p.om_id) else null end) as profile_img,
-		(case when p.mb_id then (select m.mb_name from member m where p.mb_id = m.mb_num) when p.om_id then (select o.om_nickname from oauth_member o where o.om_id = p.om_id) else null end) as profile_name,
-		(case when p.mb_id then (select m.line_station from member m where p.mb_id = m.mb_num) when p.om_id then (select o.line_station from oauth_member o where o.om_id = p.om_id) else null end) as profile_station, p.pr_title, p.ca_name, p.pr_status, p.pr_price, (select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,
-		(case when m.mb_num = :mb_id then (select i.in_hit from interest i where i.mb_id = :mb_id and i.pr_id = p.pr_id and i.om_id is null) when o.om_id = :om_id then (select i.in_hit from interest i where i.om_id = :om_id and i.pr_id = p.pr_id and i.mb_id is null) else null end) as mem_i_check,
-		p.pr_explanation from product_img pi, product p, member m, oauth_member o where p.pr_id = :p_id and p.pr_title = :title and p.pr_block = 1 group by p.pr_id");
-    $query -> bindValue(":p_id", $p_id, PDO::PARAM_INT);
-		$query -> bindValue(":mb_id", $mb_id, PDO::PARAM_INT);
-		$query -> bindValue(":om_id", $om_id, PDO::PARAM_INT);
-    $query -> bindValue(":title", $p_title, PDO::PARAM_STR);
+    $query = $this->db->prepare(
+"select
+  product.pr_id,
+  product.pr_check,
+  product.om_id,
+  product.mb_id,
+  product_img.pr_img,
+  product.l_id,
+	case
+    when member.mb_num is not null
+    then member.line_station
+    when oauth_member.om_id is not null
+    then oauth_member.line_station
+    else null
+  end as profile_station,
+  case
+    when member.mb_num is not null
+    then member.mb_name
+    when oauth_member.om_id is not null
+    then oauth_member.om_nickname
+    else null
+  end as profile_name,
+  case
+    when member.mb_num is not null
+    then member.mb_image
+    when oauth_member.om_id is not null
+    then oauth_member.om_image_url
+    else null
+  end as profile_img,
+  product.pr_title,
+  product.ca_name,
+  product.pr_status,
+  product.pr_price,
+  count(interest.in_hit=1) as i_count,
+  count(case
+    when myAccountInfo.myAccountType='mb'
+    then interest.mb_id
+    when myAccountInfo.myAccountType='om'
+    then interest.om_id
+    else null
+  end=myAccountInfo.myID) as mem_i_check,
+  product.pr_explanation,
+  myAccountInfo.myAccountType,
+  myAccountInfo.myID
+from
+  product left join
+  (select
+    product_img.pr_img_id,
+    group_concat(product_img.pr_img) as pr_img
+  from
+    product_img
+  group by
+    product_img.pr_img_id
+  ) as product_img on
+    product.pr_img_id=product_img.pr_img_id left join
+  member on
+    product.mb_id=member.mb_num left join
+  oauth_member on
+    product.om_id=oauth_member.om_id left join
+  (select
+    interest.pr_id,
+    interest.mb_id,
+    interest.om_id,
+    interest.in_hit
+  from
+    interest
+  ) as interest on
+    interest.pr_id=product.pr_id,
+  (select
+    :accountID as myID,
+    :accountType as myAccountType
+  ) as myAccountInfo
+where
+  product.pr_id=:pr_id
+group by
+  product.pr_id"
+		);
+    $query -> bindValue(":pr_id", $pr_id, PDO::PARAM_INT);
+		if($mb_id !== 'null') {
+			$query -> bindValue(":accountType", 'mb', PDO::PARAM_STR);
+			$query -> bindValue(":accountID", $mb_id, PDO::PARAM_INT);
+		} else if($om_id !== 'null') {
+			$query -> bindValue(":accountType", 'om', PDO::PARAM_STR);
+			$query -> bindValue(":accountID", $om_id, PDO::PARAM_INT);
+		} else {
+			return null;
+		}
     $query->execute();
     $fetch = $query->fetchAll(PDO::FETCH_ASSOC);
 		// var_dump($fetch);

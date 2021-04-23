@@ -44,6 +44,10 @@
     }
 
     public function in_update($pr_id,$mb_id,$om_id,$in_hit) {
+      // echo $pr_id."<br>";
+      // echo $mb_id."<br>";
+      // echo $om_id."<br>";
+      // echo $in_hit."<br>";
       $this->openDB();
       if($mb_id != 'null'){
         $query = $this->db->prepare("update $this->quTable set in_hit=:in_hit where pr_id=:pr_id and mb_id=:mb_id");
@@ -51,6 +55,7 @@
       }else if($om_id != 'null'){
         $query = $this->db->prepare("update $this->quTable set in_hit=:in_hit where pr_id=:pr_id and om_id=:om_id");
         $query -> bindValue(":om_id", $om_id, PDO::PARAM_INT);
+        echo "통과";
       }
       $query -> bindValue(":pr_id", $pr_id, PDO::PARAM_INT);
       $query -> bindValue(":in_hit", $in_hit, PDO::PARAM_INT);
