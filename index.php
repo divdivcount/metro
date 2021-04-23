@@ -125,9 +125,40 @@ require_once('modules/db.php');
 
 
     <!-- 배너이미지 1 -->
-    <div class="slideImg_box">
+    <div class="contentImg_box">
       <img src="img/bannerImg_2.png" alt="">
     </div>
+
+    <!-- 최신매물 나오는 부분 -->
+    <div id="subContent_box">
+
+      <div class="titleText_1">최신매물 모아보기</div>
+
+      <div class="blue_line_120"></div>
+
+
+
+
+      <div class="recentProducts_gridbox">
+        <div class="productInfo_box">
+
+          <!-- 이미지 부분  -->
+          <div class="productImg_box">
+            <img src="" alt="">
+          </div>
+
+          <!-- 텍스트 부분 -->
+          <div class="productText_box">
+            <div class="productText_box_title_line">제목</div>
+            <div class="productText_box_price_line">가격</div>
+            <div class="productText_box_station_line">역호선</div>
+            <div class="productText_box_category_line">카테고리</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
 
     <!-- 매트로켓 장점 소개 부분  -->
     <div id="advantages_box">
@@ -138,6 +169,23 @@ require_once('modules/db.php');
       </div>
       <div class="textStyle_1">
         메트로켓은 가장 실용성있는 중고거래사이트 입니다.
+      </div>
+
+      <!-- 배너이미지 1 -->
+      <div class="contentImg_box ">
+
+        <!-- 이미지  -->
+        <div class="contentImg_img">
+          <img src="img/bannerImg_3.png" alt="">
+        </div>
+
+        <!-- 텍스트 부분 -->
+        <div class="contentImg_text">
+          <p style="font-size:3.0rem;color:#3b3b3b">
+            <span style="color:#0099ff">중고거래,</span><br>
+            매일 삼천그루의 나무를 심습니다.
+          </p>
+        </div>
       </div>
 
       <!-- 텍스트 박스 4개  -->
@@ -173,11 +221,6 @@ require_once('modules/db.php');
 
       </div>
 
-
-      <!-- 배너이미지 1 -->
-      <div class="slideImg_box">
-        <img src="img/bannerImg_3.png" alt="">
-      </div>
 
     </div>
 
@@ -334,8 +377,10 @@ require_once('modules/db.php');
     margin:0,
     responsiveClass:true,
     responsive:{
-       1800:{items:4,},
-       1024:{items:3},
+       1800:{items:5},
+       1440:{items:5},
+       1024:{items:4},
+       768:{items:3},
        0:{items:2}
     }
   }

@@ -27,7 +27,7 @@
     <div id="topMenu_box">
       <!-- 상단 로고 -->
       <div class="imgbox_1">
-        <a href="index.php"><img src="img\mainlogo02.png" alt=""></a>
+        <a href="index.php"><img src="img\mainlogo02_158x32.png" alt=""></a>
       </div>
 
       <!-- 상단 툴바 -->
