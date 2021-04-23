@@ -110,16 +110,6 @@ try {
 
         $productObjs = new Product();
         $delIMG = new Primg();
-        $resultss = $productObjs->Product_update_search($pr_id,$mb_id,$om_id);
-
-        // echo $pr_img_id."<br>";
-        foreach ($resultss as $rowsa) {
-          // echo $rows['pr_title']."<br>";
-          if($rowsa['pr_title'] == $title){
-            userGoto("이미 한번 입력된 제목 입니다.", "addProduct.php");
-          }
-        }
-
 
         $ftime = time();
         $pm = ($mb_id ? $mb_id : $om_id).$title."val".$ftime;

@@ -22,9 +22,9 @@
     public function in_select($pr_id,$mb_id,$om_id) {
       $this->openDB();
       if($mb_id != 'null' && $om_id == 'null'){
-        echo $pr_id."pr_id_dao<br>";
-        echo $mb_id."mb_id_dao<br>";
-        echo $om_id."om_id_dao<br>";
+        // echo $pr_id."pr_id_dao<br>";
+        // echo $mb_id."mb_id_dao<br>";
+        // echo $om_id."om_id_dao<br>";
         $query = $this->db->prepare("select * from $this->quTable where pr_id = :pr_id  and mb_id= :mb_id and om_id is null");
         $query -> bindValue(":mb_id", $mb_id, PDO::PARAM_INT);
         $query -> bindValue(":pr_id", $pr_id, PDO::PARAM_INT);
@@ -56,6 +56,21 @@
       $query -> bindValue(":in_hit", $in_hit, PDO::PARAM_INT);
       $query->execute();
     }
+
+    public function in_delete($pr_id,$mb_id,$om_id) {
+      $this->openDB();
+      if($mb_id != 'null'){
+        $query = $this->db->prepare("delete from $this->quTable where pr_id=:pr_id and mb_id=:mb_id");
+        $query -> bindValue(":mb_id", $mb_id, PDO::PARAM_INT);
+      }else if($om_id != 'null'){
+        $query = $this->db->prepare("delete from $this->quTable  where pr_id=:pr_id and om_id=:om_id");
+        $query -> bindValue(":om_id", $om_id, PDO::PARAM_INT);
+      }
+      $query -> bindValue(":pr_id", $pr_id, PDO::PARAM_INT);
+      $query->execute();
+    }
+
+
 
 
 }

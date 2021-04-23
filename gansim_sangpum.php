@@ -2,7 +2,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
     require_once('modules/db.php');
-    $dao = new Product;
+    $dao = new Interest;
     $pid = Get('p', 1);
 
   if(empty($_SESSION['ss_mb_id']) && empty($_SESSION['naver_mb_id']) && empty($_SESSION['kakao_mb_id']) ){
@@ -100,9 +100,12 @@ ini_set('display_errors', '1');
             <div class="pr_title"><?= $row['pr_title'] ?></div>
 
             <!-- 관심버튼 -->
-
+              <?php $imgdao = $dao->searchProduct_detail(isset($mb) ? $mb["mb_num"] : 'null', isset($om) ? $om["om_id"] : 'null',$row['pr_id'], $row['pr_title']); ?>
             <div class="pr_buttons">
-              <img src="img/star_30x30.png" data-value="<?=$row["pr_status"]?>" data-pr_id="<?= $row['pr_id'] ?>" onclick="check_interest(this)">
+              <?php foreach ($imgdao as $rows) : ?>
+              <img id="star_btn" src="<?php if($rows["mem_i_check"] == 0){echo "img/staroff_30x30png.png";}elseif($rows["mem_i_check"] == 1){echo "img/star_30x30.png";} ?>" data-value="<?=$rows["mem_i_check"]?>"
+            <?php endforeach ?>
+             data-pr_id="<?= $row['pr_id'] ?>" onclick="check_interest(this)" />
             </div>
 
           </div>
@@ -161,35 +164,17 @@ ini_set('display_errors', '1');
   //관심상품 클릭시 값넘어가는거
   var star_btn = document.getElementById('star_btn');
   function check_interest(e) {
-    let values =star_btn.dataset.value;
-    let pr_id = "";
-    pr_id = e.dataset.pr_id;
-    if (star_btn.dataset.value == 0) {
+    let pr_id =  e.dataset.pr_id;
+    let mb_id = "<?= isset($mb) ? $mb["mb_num"] : 'null' ?>";
+    let om_id = "<?= isset($om) ? $om["om_id"] : 'null' ?>";
+    if (star_btn.dataset.value == 1) {
       $.ajax({
-          url:'search_detail_ajax.php', //request 보낼 서버의 경로
+          url:'gansim_del_ajax.php', //request 보낼 서버의 경로
           type:'post', // 메소드(get, post)
-          data:{values:"0", pr_id : pr_id}, //보낼 데이터
+          data:{pr_id : pr_id, mb_id:mb_id,om_id:om_id}, //보낼 데이터
           success: function(data) {
               //서버로부터 정상적으로 응답이 왔을 때 실행
-              $('#star_btn').html(data);
-              star_btn.src ="img/star_30x30.png";
-              star_btn.dataset.value = 1;
-          },
-          error: function(err) {
-            alert("관심 상품을 등록하기 위해서 로그인을 먼저 해주세요");
-            history.back();
-          }
-      });
-    }
-    else if (star_btn.dataset.value == 1) {
-      $.ajax({
-          url:'search_detail_ajax.php', //request 보낼 서버의 경로
-          type:'post', // 메소드(get, post)
-          data:{values:"1", pr_id : pr_id}, //보낼 데이터
-          success: function(data) {
-              //서버로부터 정상적으로 응답이 왔을 때 실행
-              star_btn.src = "img/staroff_30x30.png";
-              star_btn.dataset.value = 0;
+              location.reload(true);
           },
           error: function(err) {
               //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
@@ -197,8 +182,44 @@ ini_set('display_errors', '1');
               history.back();
           }
       });
-    }
-}
+    // let values =star_btn.dataset.value;
+    // let pr_id = "";
+    // pr_id = e.dataset.pr_id;
+    // if (star_btn.dataset.value == 0) {
+    //   $.ajax({
+    //       url:'search_detail_ajax.php', //request 보낼 서버의 경로
+    //       type:'post', // 메소드(get, post)
+    //       data:{values:"0", pr_id : pr_id}, //보낼 데이터
+    //       success: function(data) {
+    //           //서버로부터 정상적으로 응답이 왔을 때 실행
+    //           $('#star_btn').html(data);
+    //           star_btn.src ="img/star_30x30.png";
+    //           star_btn.dataset.value = 1;
+    //       },
+    //       error: function(err) {
+    //         alert("관심 상품을 등록하기 위해서 로그인을 먼저 해주세요");
+    //         history.back();
+    //       }
+    //   });
+    // }
+    // else if (star_btn.dataset.value == 1) {
+    //   $.ajax({
+    //       url:'search_detail_ajax.php', //request 보낼 서버의 경로
+    //       type:'post', // 메소드(get, post)
+    //       data:{values:"1", pr_id : pr_id}, //보낼 데이터
+    //       success: function(data) {
+    //           //서버로부터 정상적으로 응답이 왔을 때 실행
+    //           star_btn.src = "img/staroff_30x30.png";
+    //           star_btn.dataset.value = 0;
+    //       },
+    //       error: function(err) {
+    //           //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
+    //           alert("관심 상품을 등록하기 위해서 로그인을 먼저 해주세요");
+    //           history.back();
+    //       }
+    //   });
+    // }
+}}
 
   </script>
 </body>
