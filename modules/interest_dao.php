@@ -11,7 +11,7 @@
         $query = $this->db->prepare("insert into $this->quTable (pr_id, mb_id, in_hit) values (:pr_id, :mb_id, :in_hit)");
         $query -> bindValue(":mb_id", $mb_id, PDO::PARAM_INT);
       }else if($om_id != 'null'){
-        $query = $this->db-prepare("insert into $this->quTable (pr_id, om_id, in_hit) values (:pr_id, :om_id, :in_hit)");
+        $query = $this->db->prepare("insert into $this->quTable (pr_id, om_id, in_hit) values (:pr_id, :om_id, :in_hit)");
         $query -> bindValue(":om_id", $om_id, PDO::PARAM_INT);
       }
       $query -> bindValue(":pr_id", $pr_id, PDO::PARAM_INT);
@@ -36,7 +36,7 @@
 
       $query->execute();
       $fetch = $query->fetchAll(PDO::FETCH_ASSOC);
-      var_dump($fetch);
+      // var_dump($fetch);
       if($fetch){
         return $fetch;
       }

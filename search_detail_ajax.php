@@ -19,7 +19,7 @@ try{
     <script>
       alert("관심 상품을 등록하기 위해서 로그인을 먼저 해주세요");
       //로그인 모달창 띄우기
-      location.reload();
+      // location.reload();
     </script>
     <?php
     exit;
@@ -30,7 +30,7 @@ try{
   $inter = $interest->in_select($pr_id, $mb_id, $om_id);
 
   if($val == 0){
-    echo "if 0 통과";
+    // echo "if 0 통과";
 
       if(empty($inter) == 1){
           $inters = $interest->in_insert($pr_id, $mb_id, $om_id, 1);
@@ -47,7 +47,7 @@ try{
       }
     }else{
       if($val == 1){
-         echo "if 2 통과";
+         // echo "if 2 통과";
         $inters = $interest->in_update($pr_id, $mb_id, $om_id, 0);
       }
     }

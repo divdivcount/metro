@@ -465,7 +465,7 @@ $query->execute();
 		(case when p.mb_id then (select e.mb_image from member e where p.mb_id = e.mb_num) when p.om_id then (select a.om_image_url from oauth_member a where a.om_id = p.om_id) else null end) as profile_img,
 		(case when p.mb_id then (select m.mb_name from member m where p.mb_id = m.mb_num) when p.om_id then (select o.om_nickname from oauth_member o where o.om_id = p.om_id) else null end) as profile_name,
 		(case when p.mb_id then (select m.line_station from member m where p.mb_id = m.mb_num) when p.om_id then (select o.line_station from oauth_member o where o.om_id = p.om_id) else null end) as profile_station, p.pr_title, p.ca_name, p.pr_status, p.pr_price, (select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,
-		(case when m.mb_num then (select i.in_hit from interest i where i.mb_id = :mb_id and i.pr_id = p.pr_id and i.om_id is null) when o.om_id then (select i.in_hit from interest i where i.om_id = :om_id and i.pr_id = p.pr_id and i.mb_id is null) else null end) as mem_i_check,
+		(case when m.mb_num = :mb_id then (select i.in_hit from interest i where i.mb_id = :mb_id and i.pr_id = p.pr_id and i.om_id is null) when o.om_id = :om_id then (select i.in_hit from interest i where i.om_id = :om_id and i.pr_id = p.pr_id and i.mb_id is null) else null end) as mem_i_check,
 		p.pr_explanation from product_img pi, product p, member m, oauth_member o where p.pr_id = :p_id and p.pr_title = :title and p.pr_block = 1 group by p.pr_id");
     $query -> bindValue(":p_id", $p_id, PDO::PARAM_INT);
 		$query -> bindValue(":mb_id", $mb_id, PDO::PARAM_INT);

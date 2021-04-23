@@ -347,7 +347,7 @@ try{
         $.ajax({
             url:'search_detail_ajax.php', //request 보낼 서버의 경로
             type:'post', // 메소드(get, post)
-            data:{values:"0", pr_id : pr_id, mb_id:mb_id,om_id:om_id}, //보낼 데이터
+            data:{values:"0", pr_id : pr_id, mb_id:mb_id, om_id:om_id}, //보낼 데이터
             success: function(data) {
                 //서버로부터 정상적으로 응답이 왔을 때 실행
                 $('#star_btn').html(data);
@@ -356,7 +356,7 @@ try{
             },
             error: function(err) {
               alert("관심 상품을 등록하기 위해서 로그인을 먼저 해주세요");
-              history.back();
+              // history.back();
             }
         });
       }
