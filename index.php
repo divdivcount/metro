@@ -124,9 +124,23 @@ require_once('modules/db.php');
     </div>
 
 
-    <!-- 배너이미지 1 -->
-    <div class="contentImg_box">
-      <img src="img/bannerImg_2.png" alt="">
+    <!-- 배너이미지 2 -->
+    <div class="contentImg_box" id="c_img01">
+
+      <!-- 이미지  -->
+      <div class="contentImg_img">
+        <img src="img/bannerImg_2.png" id="img01" alt="">
+      </div>
+
+      <!-- 텍스트 부분 -->
+      <div class="contentImg_text">
+        <h5>Metroket</h5>
+        <p>
+          누구나 손쉽게 거래 하는<br>
+          취향저격 중고거래 사이트
+        </p>
+        <span>메트로켓을 통해 필요하고 원하는 물품을 값 싸고 빠르게 얻어보세요.</span>
+      </div>
     </div>
 
     <!-- 최신매물 나오는 부분 -->
@@ -171,18 +185,18 @@ require_once('modules/db.php');
         메트로켓은 가장 실용성있는 중고거래사이트 입니다.
       </div>
 
-      <!-- 배너이미지 1 -->
-      <div class="contentImg_box ">
+      <!-- 배너이미지 2 -->
+      <div class="contentImg_box" id="c_img02">
 
         <!-- 이미지  -->
         <div class="contentImg_img">
-          <img src="img/bannerImg_3.png" alt="">
+          <img src="img/bannerImg_3.png" id="img02" alt="">
         </div>
 
         <!-- 텍스트 부분 -->
         <div class="contentImg_text">
-          <p style="font-size:3.0rem;color:#3b3b3b">
-            <span style="color:#0099ff">중고거래,</span><br>
+          <p style="">
+            <span style="">중고거래,</span><br>
             매일 삼천그루의 나무를 심습니다.
           </p>
         </div>
@@ -244,6 +258,9 @@ require_once('modules/db.php');
     });
     load_category(tapmenuItem.item(0).innerText);
     // $(".owl-carousel").owlCarousel(obj);
+
+    // 768px 일때 사이트 소개이미지파일 다른해상도 파일로 변경
+    changeImage();
   });
 
 
@@ -398,10 +415,15 @@ require_once('modules/db.php');
 })
 
 
-  //로그인 모달
+  //콘텐츠이미지들 일정디스플레이시 변경해주는 함수
+  window.addEventListener("resize", changeImage);
 
-
-
-  // document.querySelector(".bg").addEventListener("click", close);
+    function changeImage() {
+      var w_width = window.outerWidth;
+      if (w_width <= 768) {
+        document.getElementById('img01').src = "img/bannerImg_2_768x320.png";
+        document.getElementById('img02').src = "img/bannerImg_3_768x320.png";
+      }
+}
 </script>
 </html>

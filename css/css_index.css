@@ -87,8 +87,6 @@ body {
   cursor: pointer;
 }
 
-
-
 /* info 박스아래 img박스및 test 박스가 있음 */
 .productInfo_box{
   margin: 4.0rem auto;
@@ -152,7 +150,6 @@ display : -webkit-box;
   margin-top: 10.0rem;
   position: relative;
 }
-
 .contentImg_img{
   width: 100%;
 }
@@ -160,12 +157,55 @@ display : -webkit-box;
   width: 100%;
 }
 .contentImg_text{
-  width: 100%;
+  width: auto;
 }
 .contentImg_box_logo_line{}
 .contentImg_box_title_line{}
 .contentImg_box_text_line{}
 
+#c_img01 .contentImg_text{
+  width: fit-content;
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  font-family: "NotoSansKR_m";
+  color:#fff;
+  transform: translate(-50%, -40%);
+}
+#c_img01 .contentImg_text h5{
+  margin: 0 0 1.0rem  0;
+  font-family: "NotoSansKR_m";
+  text-align: center;
+  font-size:2.0rem;
+}
+#c_img01 .contentImg_text p{
+  text-align: center;
+  font-weight: 500;
+  font-size:3.0rem;
+  margin:0;
+}
+#c_img01 .contentImg_text span{
+  text-align: center;
+  font-size:2.0rem;
+  font-weight: 100;
+}
+
+#c_img02 .contentImg_text{
+  position: absolute;
+  left: 10%;
+  top:30%;
+  transform: translate(-10%, -30%);
+}
+#c_img02 .contentImg_text p{
+  font-family: "NotoSansKR_m";
+  font-weight: 500;
+  font-size:3.0rem;
+  color:#3b3b3b;
+  margin:0;
+}
+#c_img02 .contentImg_text p span{
+  color:#0099ff;
+}
 #subContent_box{
   width: 75%;
   margin: 0 auto;
@@ -320,6 +360,13 @@ a{text-decoration: none;}
   #selectMetro_box .w3-button{width: 160px;height: 40px;padding: 10px 40px;}
   #mainContent_box {margin-top: 10.0rem}
   #explain_box{grid-template-columns: 1fr 1fr;width: 80%;}
+
+  #c_img01 .contentImg_text{top: 25%;transform: translate(-50%, -25%);}
+  #c_img01 .contentImg_text p{font-size:2.5rem;}
+  #c_img01 .contentImg_text h5,#c_img01 .contentImg_text span{font-size:1.25rem;}
+
+  #c_img02 .contentImg_text p{font-size:2.5rem;}
+
   .textBox_1:nth-child(2),.textBox_1:nth-child(3) {border-right:none;border-left:none;}
   .textBox_1:nth-child(4){border-left:none;}
   .textBox_1:nth-child(1){border-right:none;}
@@ -329,7 +376,7 @@ a{text-decoration: none;}
 @media only screen and (max-width: 540px) {
   html,body{font-size: 7px!important;}
   #explain_box{width: 90%}
-  #main_tapmenu{width: 100%;}
+  #main_tapmenu{width: 80%;}
   .bx-wrapper .bx-pager{padding: 0!important;}
   .productInfo_box{width: 160px;}
   .productInfo_box .productImg_box{height:160px;}
