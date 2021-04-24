@@ -544,7 +544,8 @@ group by
 			$query -> bindValue(":accountType", 'om', PDO::PARAM_STR);
 			$query -> bindValue(":accountID", $om_id, PDO::PARAM_INT);
 		} else {
-			return null;
+			$query -> bindValue(":accountID", null, PDO::PARAM_INT);
+			$query -> bindValue(":accountType", null, PDO::PARAM_STR);
 		}
     $query->execute();
     $fetch = $query->fetchAll(PDO::FETCH_ASSOC);
