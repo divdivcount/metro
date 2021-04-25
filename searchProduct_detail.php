@@ -136,7 +136,20 @@ try{
 
             <div class="imgPlusText">
               <div class="img_box"><img src="img/chat.png" alt=""></div>
-              <span>채팅하기</span>
+              <span><a href="./memo_form.php?me_recv_mb_id=<?php
+              try{
+                $member = new Member;
+                if($row['mb_id']){
+                  $mb_name = $member->Member_Select($row['mb_id'] ? $row['mb_id'] : null);
+                  echo trim($mb_name[0]['mb_id']);
+                }else{
+                  echo trim("sir".$row['om_id']);
+                }
+
+              }catch(PDOException $e){
+                  echo $e;
+                }
+              ?>&id=<?=$row["pr_id"]?>" class="td_btn" onclick="win_memo(this.href); return false;">쪽지보내기</a></span>
             </div>
 
           </div>
@@ -381,6 +394,11 @@ try{
             }
         });
       }
+    }
+
+    var win_memo = function(href) { // 쪽지 팝업창
+    var new_win = window.open(href, 'win_memo', 'left=100,top=100,width=620,height=600,scrollbars=1');
+    new_win.focus();
     }
     </script>
   </body>
