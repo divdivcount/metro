@@ -6,25 +6,49 @@ $ctg_name = Get("ctg_name", 0);
 $ctg_station = Get("ctg_station", 0);
 // echo $ctg_name."호선"."<br>";
 // echo $ctg_station."역"."<br>";
-
-$sql = "select s.s_name, i.l_name  from station s, line i where i.l_id = $ctg_name";
-$result = mysqli_query($conn, $sql);
-$a = 0;
-while($station = mysqli_fetch_assoc($result)){
-	// print_r($station)."<br>";
-	if(array_search($ctg_station, $station) === false) {
-		$theVariable = "not";
-		// echo $theVariable."<br>";
-	}else{
-		$theVariable = "sure";
-		// echo $theVariable."<br>";
-		$a = 1;
-		break;
+if($ctg_name != "all" && $ctg_station){
+	echo "통과1";
+	$sql = "select s.s_name, i.l_name  from station s, line i where i.l_id = $ctg_name";
+	$result = mysqli_query($conn, $sql);
+	$a = 0;
+	while($station = mysqli_fetch_assoc($result)){
+		// print_r($station)."<br>";
+		if(array_search($ctg_station, $station) === false) {
+			$theVariable = "not";
+			// echo $theVariable."<br>";
+		}else{
+			$theVariable = "sure";
+			// echo $theVariable."<br>";
+			$a = 1;
+			break;
+		}
+	}
+}else{
+	echo "통과2";
+	echo $ctg_station;
+	if($ctg_name == "all" && $ctg_station){
+		$sql = "select s.s_name, i.l_name from station s, line i where s.l_id = i.l_id and s.s_name = '$ctg_station'";
+		$result = mysqli_query($conn, $sql);
+		$a = 0;
+		while($station = mysqli_fetch_assoc($result)){
+			print_r($station)."<br>";
+			if(array_search($ctg_station, $station) === false) {
+				$theVariable = "not";
+				echo $theVariable."<br>";
+			}else{
+				$ctg_name = $station["l_name"];
+				$theVariable = "sure";
+				echo $theVariable."<br>";
+				$a = 1;
+				break;
+			}
+		}
 	}
 }
+
 if($a == 0){
 	echo "<script>alert('입력을 잘못하셨거나 없는 역을 입력하셨습니다.');</script>";
-	echo "<script>location.replace('./index.php');</script>";
+	// echo "<script>location.replace('./index.php');</script>";
 	exit;
 }else{
 ?>

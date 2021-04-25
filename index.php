@@ -83,7 +83,8 @@ require_once('modules/db.php');
           <div class="find_item">
             <span>호선을 선택해 주세요.</span>
             <select name="ctg_name" id="selectID" class="w3-select">
-              <option value="">선택</option>
+              <option value="">선택 해주세요</option>
+              <option value="all">전체</option>
               <?php
               $sql = " select * from line";
               $station_result = mysqli_query($conn, $sql);  //여기
