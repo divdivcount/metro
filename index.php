@@ -62,8 +62,16 @@ require_once('modules/db.php');
     <!-- 메인 배너이미지 부분 -->
     <div id="bannerImg_box">
       <div class="bxslider">
-        <div><img src="img\slideimg_1.png" alt=""></div>
-        <div><img src="img\slideimg_2.png" alt=""></div>
+        <div>
+          <img src="img\slideimg_1.png" alt="" >
+          <p>안</p>
+        </div>
+        <div>
+          <img src="img\slideimg_2.png" alt="">
+          <div class="bx_text">
+          <p>녕</p>
+          </div>
+        </div>
         <div><img src="img\slideimg_3.png" alt=""></div>
         <div><img src="img\slideimg_4.png" alt=""></div>
         <div><img src="img\slideimg_5.png" alt=""></div>
@@ -129,7 +137,7 @@ require_once('modules/db.php');
 
       <!-- 이미지  -->
       <div class="contentImg_img">
-        <img src="img/bannerImg_2.png" id="img01" alt="">
+        <img src="img/bannerImg_1.png" id="img01" alt="">
       </div>
 
       <!-- 텍스트 부분 -->
@@ -177,20 +185,12 @@ require_once('modules/db.php');
     <!-- 매트로켓 장점 소개 부분  -->
     <div id="advantages_box">
 
-      <!-- 타이틀  -->
-      <div class="titleText_1">
-        왜 매트로켓이 좋을까요
-      </div>
-      <div class="textStyle_1">
-        메트로켓은 가장 실용성있는 중고거래사이트 입니다.
-      </div>
-
       <!-- 배너이미지 2 -->
       <div class="contentImg_box" id="c_img02">
 
         <!-- 이미지  -->
         <div class="contentImg_img">
-          <img src="img/bannerImg_3.png" id="img02" alt="">
+          <img src="img/bannerImg_2.png" id="img02" alt="">
         </div>
 
         <!-- 텍스트 부분 -->
@@ -202,32 +202,42 @@ require_once('modules/db.php');
         </div>
       </div>
 
+      <!-- 타이틀  -->
+      <div class="titleText_1">
+        왜 매트로켓이 좋을까요
+      </div>
+      <div class="textStyle_1">
+        메트로켓은 가장 실용성있는 중고거래사이트 입니다.
+      </div>
+
+
+
       <!-- 텍스트 박스 4개  -->
       <div id="explain_box">
 
         <div class="textBox_1">
-          <div class="imgbox_3"><img src="img\locker_2.png" alt=""></div>
+          <div class="imgbox_3"><img src="img\locker_3.png" alt=""></div>
           <span>비대면 거래</span>
           <div class="blue_line"></div>
           <p>필요에 따라 물품 보관함을 이용해 비대면 거래를 이용할 수 있습니다.</p>
         </div>
 
         <div class="textBox_1">
-          <div class="imgbox_3"><img src="img\time_2.png" alt=""></div>
+          <div class="imgbox_3"><img src="img\time_3.png" alt=""></div>
           <span>도착시간</span></li>
           <div class="blue_line"></div>
           <p>메트로켓은 출발시간에 맞춰서 도착시간을 알려줍니다.</p>
         </div>
 
         <div class="textBox_1">
-          <div class="imgbox_3"><img src="img\train_2.png" alt=""></div>
+          <div class="imgbox_3"><img src="img\train_3.png" alt=""></div>
           <span>지하철역 거래</span>
           <div class="blue_line"></div>
           <p>인증받은 주변 역을 중심으로 품목들을 볼 수 있고, 호선을 선택하여 다양한 물품들을 검색할 수 있습니다.</p>
         </div>
 
         <div class="textBox_1">
-          <div class="imgbox_3"><img src="img\shield_2.png" alt=""></div>
+          <div class="imgbox_3"><img src="img\shield_3.png" alt=""></div>
           <span>안전거래</span>
           <div class="blue_line"></div>
           <p>실시간으로 물건을 직접 보고 거래하여 안전하게 거래를 이용할 수 있습니다.</p>
@@ -235,6 +245,23 @@ require_once('modules/db.php');
 
       </div>
 
+      <!-- 배너이미지 3 -->
+      <div class="contentImg_box" id="c_img03">
+
+        <!-- 이미지  -->
+        <div class="contentImg_img">
+          <img src="img/bannerImg_3.png" id="img03" alt="">
+        </div>
+
+        <!-- 텍스트 부분 -->
+        <div class="contentImg_text">
+          <h5>똑똑한 중고거래</h5>
+          <p>
+            "사기는 NO! 안전하게 물건 사는 방법!"
+          </p>
+          <span>메트로켓</span>
+        </div>
+      </div>
 
     </div>
 
@@ -254,7 +281,8 @@ require_once('modules/db.php');
         moveSlides: 1,     // 슬라이드 이동시 개수
         auto: true,        // 자동 실행 여부
         autoHover: false,   // 마우스 호버시 정지 여부
-        controls: true    // 이전 다음 버튼 노출 여부
+        controls: true,    // 이전 다음 버튼 노출 여부
+        captions:true
     });
     load_category(tapmenuItem.item(0).innerText);
     // $(".owl-carousel").owlCarousel(obj);
@@ -421,8 +449,9 @@ require_once('modules/db.php');
     function changeImage() {
       var w_width = window.outerWidth;
       if (w_width <= 768) {
-        document.getElementById('img01').src = "img/bannerImg_2_768x320.png";
-        document.getElementById('img02').src = "img/bannerImg_3_768x320.png";
+        document.getElementById('img01').src = "img/bannerImg_1_768x320.png";
+        document.getElementById('img02').src = "img/bannerImg_2_768x320.png";
+        document.getElementById('img03').src = "img/bannerImg_3_768x110.png";
       }
 }
 </script>
