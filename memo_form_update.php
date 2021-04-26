@@ -4,7 +4,6 @@ require_once('modules/db.php');  // DB연결을 위한 같은 경로의 dbconn.p
 
 $mb_id = isset($_SESSION['ss_mb_id']) ? $_SESSION['ss_mb_id'] : null;
 $om_id =	isset($_SESSION['naver_mb_id']) ? $_SESSION['naver_mb_id'] : $_SESSION['kakao_mb_id'];
-
 $om_id = substr($om_id, 5);
 // var_dump($mb_id);
 // var_dump($om_id);
