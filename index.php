@@ -162,7 +162,7 @@ require_once('modules/db.php');
 
 
 
-      <div class="recentProducts_gridbox">
+      <div id="recentProducts_gridbox">
         <div class="productInfo_box">
 
           <!-- 이미지 부분  -->
@@ -179,7 +179,94 @@ require_once('modules/db.php');
           </div>
 
         </div>
+
+        <div class="productInfo_box">
+
+          <!-- 이미지 부분  -->
+          <div class="productImg_box">
+            <img src="" alt="">
+          </div>
+
+          <!-- 텍스트 부분 -->
+          <div class="productText_box">
+            <div class="productText_box_title_line">제목</div>
+            <div class="productText_box_price_line">가격</div>
+            <div class="productText_box_station_line">역호선</div>
+            <div class="productText_box_category_line">카테고리</div>
+          </div>
+
+        </div>
+
+        <div class="productInfo_box">
+
+          <!-- 이미지 부분  -->
+          <div class="productImg_box">
+            <img src="" alt="">
+          </div>
+
+          <!-- 텍스트 부분 -->
+          <div class="productText_box">
+            <div class="productText_box_title_line">제목</div>
+            <div class="productText_box_price_line">가격</div>
+            <div class="productText_box_station_line">역호선</div>
+            <div class="productText_box_category_line">카테고리</div>
+          </div>
+
+        </div>
+
+        <div class="productInfo_box">
+
+          <!-- 이미지 부분  -->
+          <div class="productImg_box">
+            <img src="" alt="">
+          </div>
+
+          <!-- 텍스트 부분 -->
+          <div class="productText_box">
+            <div class="productText_box_title_line">제목</div>
+            <div class="productText_box_price_line">가격</div>
+            <div class="productText_box_station_line">역호선</div>
+            <div class="productText_box_category_line">카테고리</div>
+          </div>
+
+        </div>
+
+        <div class="productInfo_box">
+
+          <!-- 이미지 부분  -->
+          <div class="productImg_box">
+            <img src="" alt="">
+          </div>
+
+          <!-- 텍스트 부분 -->
+          <div class="productText_box">
+            <div class="productText_box_title_line">제목</div>
+            <div class="productText_box_price_line">가격</div>
+            <div class="productText_box_station_line">역호선</div>
+            <div class="productText_box_category_line">카테고리</div>
+          </div>
+
+        </div>
+
+        <div class="productInfo_box">
+
+          <!-- 이미지 부분  -->
+          <div class="productImg_box">
+            <img src="" alt="">
+          </div>
+
+          <!-- 텍스트 부분 -->
+          <div class="productText_box">
+            <div class="productText_box_title_line">제목</div>
+            <div class="productText_box_price_line">가격</div>
+            <div class="productText_box_station_line">역호선</div>
+            <div class="productText_box_category_line">카테고리</div>
+          </div>
+
+        </div>
+
       </div>
+      <input type="button" id="moreInfo_btn" class="w3-button w3-round-xlarge" data-tf="0" name="" value="최신매물 더 보기" style="box-shadow:3px 3px 10px 0 rgba(0, 0, 0, 0.16);width:30.0rem;color:#3b3b3b">
     </div>
 
 
@@ -424,9 +511,9 @@ require_once('modules/db.php');
     responsiveClass:true,
     responsive:{
        1800:{items:5},
-       1440:{items:5},
-       1024:{items:4},
-       768:{items:3},
+       1441:{items:5},
+       1025:{items:4},
+       769:{items:3},
        0:{items:2}
     }
   }
@@ -444,16 +531,75 @@ require_once('modules/db.php');
 })
 
 
-  //콘텐츠이미지들 일정디스플레이시 변경해주는 함수
-  window.addEventListener("resize", changeImage);
+  //content_count 보여주고싶은 콘텐츠들의 행의 수 (열은 자동으로 조정)
+  //check 버튼 체크여
+  function changeWidth_RecentProducts_gridbox(int content_count) {
+    var w_width = window.outerWidth;
+    let content_rem = 19.4;
 
-    function changeImage() {
-      var w_width = window.outerWidth;
-      if (w_width <= 768) {
-        document.getElementById('img01').src = "img/bannerImg_1_768x320.png";
-        document.getElementById('img02').src = "img/bannerImg_2_768x320.png";
-        document.getElementById('img03').src = "img/bannerImg_3_768x110.png";
+    if (w_width <= 1440) {
+      if (w_width <= 1024) {
+        if (w_width <= 768) {
+          if (w_width <= 540) {
+            if (w_width <= 425) {
+              if (w_width <= 360) {
+                document.getElementById('recentProducts_gridbox').style.height =String((content_rem * 6 + 140)*content_count)+"px";
+                return 0;
+              }
+              document.getElementById('recentProducts_gridbox').style.height =String((content_rem * 7 + 140)*content_count)+"px";
+              return 0;
+            }
+            document.getElementById('recentProducts_gridbox').style.height =String((content_rem * 7 + 160)*content_count)+"px";
+            return 0;
+          }
+          document.getElementById('recentProducts_gridbox').style.height =String((content_rem * 8 + 200)*content_count)+"px";
+          return 0;
+        }
+        document.getElementById('recentProducts_gridbox').style.height =String((content_rem * 9 + 200)*content_count)+"px";
+        return 0;
       }
-}
+    document.getElementById('recentProducts_gridbox').style.height =String((content_rem * 10 + 200)*content_count)+"px";
+    return 0;
+    }
+  }
+
+  function changeSubBannerImge() {
+    var w_width = window.outerWidth;
+    if (w_width <= 768) {
+      document.getElementById('img01').src = "img/bannerImg_1_768x320.png";
+      document.getElementById('img02').src = "img/bannerImg_2_768x320.png";
+      document.getElementById('img03').src = "img/bannerImg_3_768x110.png";
+    }
+  }
+
+
+
+
+  //더보기 버튼
+  document.getElementById('moreInfo_btn').addEventListener("click",changeBtn_style);
+
+    function changeBtn_style() {
+      if (document.getElementById('moreInfo_btn').dataset.tf=="0") {
+        changeWidth_RecentProducts_gridbox(4);
+        document.getElementById('moreInfo_btn').value="닫기";
+        document.getElementById('moreInfo_btn').dataset.tf="1"
+      }else {
+        changeWidth_RecentProducts_gridbox(2);
+        document.getElementById('moreInfo_btn').value ="최신매물 더 보기";
+        document.getElementById('moreInfo_btn').dataset.tf="0"
+      }
+    }
+
+
+  //콘텐츠이미지들 일정디스플레이시 변경해주는 함수
+  window.addEventListener("resize", changeContent);
+
+    function changeContent() {
+      if (document.getElementById('moreInfo_btn').dataset.tf=="0") {
+        changeWidth_RecentProducts_gridbox(2);
+      }else {
+        changeWidth_RecentProducts_gridbox(4);
+      }
+    }
 </script>
 </html>

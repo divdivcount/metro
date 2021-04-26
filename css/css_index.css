@@ -107,8 +107,8 @@ body {
   border-radius: 3.0rem;
 }
 
-.productText_box{width: 100%;height:auto;display: flex;flex-direction: column;margin-top: 5px;padding: 0 1.0rem;justify-content: space-around;}
-.productText_box_title_line{width: 100%;margin-top: 0.5rem;font-family: "NotoSansKR_r";font-size: 1.5rem;color: #3b3b3b;text-align: center;text-overflow:ellipsis;overflow:hidden;
+.productText_box{width: 100%;height:auto;display: flex;flex-direction: column;margin-top: 0.5px;padding: 0 1.0rem;justify-content: space-around;}
+.productText_box_title_line{width: 100%;height:2.1rem;margin-top: 0.5rem;font-family: "NotoSansKR_r";font-size: 1.5rem;color: #3b3b3b;text-align: center;text-overflow:ellipsis;overflow:hidden;
 overflow : hidden;
 text-overflow : ellipsis;
 height : 2.1rem; /*(대신 height를 설정해준다. 텍스트 크기에 맞춰 height가 1줄인 경우를 생각하자.) */
@@ -117,7 +117,7 @@ display : -webkit-box;
 -webkit-line-clamp : 1; /*(줄 개수를 설정한다. 만약 2줄이상이라면 height와 해당 값을 수정한다.) */
 -webkit-box-orient: vertical; }
 
-.productText_box_station_line{width: 100%;margin-top: 0.5rem;font-family: "NotoSansKR_t";font-size: 1.5rem;color: #707070;text-align: center;
+.productText_box_station_line{width: 100%;height:2.1rem;margin-top: 0.5rem;font-family: "NotoSansKR_t";font-size: 1.5rem;color: #707070;text-align: center;
 overflow : hidden;
 text-overflow : ellipsis;
 height : 2.1rem; /*(대신 height를 설정해준다. 텍스트 크기에 맞춰 height가 1줄인 경우를 생각하자.) */
@@ -126,7 +126,7 @@ display : -webkit-box;
 -webkit-line-clamp : 1; /*(줄 개수를 설정한다. 만약 2줄이상이라면 height와 해당 값을 수정한다.) */
 -webkit-box-orient: vertical;}
 
-.productText_box_category_line{width: 100%;margin-top: 0.5rem;font-family: "NotoSansKR_t";font-size: 1.5rem;color: #707070;text-align: center;
+.productText_box_category_line{width: 100%;height:2.1rem;margin-top: 0.5rem;font-family: "NotoSansKR_t";font-size: 1.5rem;color: #707070;text-align: center;
 overflow : hidden;
 text-overflow : ellipsis;
 height : 2.1rem; /*(대신 height를 설정해준다. 텍스트 크기에 맞춰 height가 1줄인 경우를 생각하자.) */
@@ -135,7 +135,7 @@ display : -webkit-box;
 -webkit-line-clamp : 1; /*(줄 개수를 설정한다. 만약 2줄이상이라면 height와 해당 값을 수정한다.) */
 -webkit-box-orient: vertical;}
 
-.productText_box_price_line{width: 100%;margin-top: 0.5rem;font-family: "NotoSansKR_m";font-size: 1.5rem;color: #3b3b3b;text-align: center;
+.productText_box_price_line{width: 100%;height:2.1rem;margin-top: 0.5rem;font-family: "NotoSansKR_m";font-size: 1.5rem;color: #3b3b3b;text-align: center;
 overflow : hidden;
 text-overflow : ellipsis;
 height : 2.1rem; /*(대신 height를 설정해준다. 텍스트 크기에 맞춰 height가 1줄인 경우를 생각하자.) */
@@ -165,23 +165,24 @@ display : -webkit-box;
   position: absolute;
   left: 50%;
   top: 40%;
-  font-family: "NotoSansKR_m";
   color:#fff;
   transform: translate(-50%, -40%);
 }
 #c_img01 .contentImg_text h5{
   margin: 0 0 1.0rem  0;
-  font-family: "NotoSansKR_m";
+  font-family: "NotoSansKR_r";
   text-align: center;
   font-size:2.0rem;
 }
 #c_img01 .contentImg_text p{
+  font-family: "NotoSansKR_m";
   text-align: center;
   font-weight: 500;
   font-size:3.0rem;
   margin:0;
 }
 #c_img01 .contentImg_text span{
+  font-family: "NotoSansKR_t";
   text-align: center;
   font-size:2.0rem;
   font-weight: 100;
@@ -193,7 +194,7 @@ display : -webkit-box;
   transform: translate(-10%, -30%);
 }
 #c_img02 .contentImg_text p{
-  font-family: "NotoSansKR_m";
+  font-family: "NotoSansKR_r";
   font-weight: 500;
   font-size:3.0rem;
   color:#3b3b3b;
@@ -213,7 +214,7 @@ display : -webkit-box;
 }
 #c_img03 .contentImg_text h5{
   margin: 0 0 0.5rem  0;
-  font-family: "NotoSansKR_m";
+  font-family: "NotoSansKR_t";
   font-size:2.0rem;
 }
 #c_img03 .contentImg_text p{
@@ -225,10 +226,11 @@ display : -webkit-box;
 #c_img03 .contentImg_text span{
   text-align: center;
   font-size:2.0rem;
+  font-family: "NotoSansKR_t";
   font-weight: 100;
 }
 #subContent_box{
-  width: 75%;
+  width: 85%;
   margin: 0 auto;
   text-align: center;
   justify-content: center;
@@ -237,6 +239,7 @@ display : -webkit-box;
   display: grid;
   grid-auto-flow:row;
   grid-template-columns: repeat(5,1fr);
+  overflow: hidden;
   grid-gap: auto;
 }
 #subContent_box .productInfo_box{
@@ -368,6 +371,7 @@ a{text-decoration: none;}
 @media only screen and (max-width: 1440px) {
     #selectMetro_box{width: 85%;}
     #mainContent_box {margin-top: 20.0rem}
+    #subContent_box #recentProducts_gridbox{grid-template-columns: repeat(4,1fr)}
     #explain_box{grid-template-columns: repeat(4,1fr);width: 90%;}
     .textBox_1{width: 225px;height: 315px;}
 }
@@ -376,6 +380,7 @@ a{text-decoration: none;}
   #selectMetro_box{width: 90%;}
   #selectMetro_box .find_item{width: 45%;}
   #mainContent_box {width:85%}
+  #subContent_box #recentProducts_gridbox{grid-template-columns: repeat(3,1fr)}
   #explain_box{grid-template-columns: repeat(2,1fr);}
   .textBox_1{margin: 2.5rem 4.5rem;width: 25.0rem;height: 35.0rem;}
   .textBox_1:nth-child(1),.textBox_1:nth-child(3){justify-self:end}
@@ -387,6 +392,7 @@ a{text-decoration: none;}
   #selectMetro_box #bothFind_item {width: 100%}
   #selectMetro_box .w3-button{width: 160px;height: 40px;padding: 10px 40px;}
   #mainContent_box {margin-top: 10.0rem}
+  #subContent_box #recentProducts_gridbox{grid-template-columns: repeat(2,1fr)}
   #explain_box{}
   .textBox_1{margin: 2.0rem 2.5rem;}
   #c_img01 .contentImg_text{top: 25%;transform: translate(-50%, -25%);}
@@ -395,8 +401,8 @@ a{text-decoration: none;}
 
   #c_img02 .contentImg_text p{font-size:2.5rem;}
 
-  #c_img03 .contentImg_text{top: 25%;transform: translate(-50%, -25%);}
-  #c_img03 .contentImg_text p{font-size:2.5rem;}
+  #c_img03 .contentImg_text{left: 60%;top: 25%;transform: translate(-60%, -25%);}
+  #c_img03 .contentImg_text p{font-size:2.0rem;}
   #c_img03 .contentImg_text h5,#c_img01 .contentImg_text span{font-size:1.25rem;}
 
   .modalBox {width: 80%;height: auto;}
