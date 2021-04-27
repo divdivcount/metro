@@ -7,6 +7,7 @@ require_once("modules/db.php");
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="utf-8">
 <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<link rel="stylesheet" href="css/css_select_station.css">
 <link rel="stylesheet" href="css/css_my_one_page.css">
 <link rel="stylesheet" href="css/css_noamlfont.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -22,6 +23,8 @@ require_once("modules/db.php");
 </style>
 </head>
 <body>
+
+
   <!-- 상단 메뉴 부분 -->
   <?php
     if(empty($_SESSION['ss_mb_id']) && empty($_SESSION['naver_mb_id']) && empty($_SESSION['kakao_mb_id']) ){
@@ -55,7 +58,8 @@ require_once("modules/db.php");
       }
   ?>
   <!-- 최상단 로고 및 상단메뉴 -->
-      <?php require_once('metrocket_header.php') ?>
+    <?php require_once('metrocket_header.php') ?>
+    <?php require_once('select_station.php'); ?>
 	<div class="w3-content w3-container w3-margin-top" >
 
     <!-- 유저정보  차후 php 작업 필요 -->
@@ -105,6 +109,20 @@ require_once("modules/db.php");
   <?php require_once 'metrocket_footer.php';?>
 </body>
 <script type="text/javascript">
+  $(document).ready(function(){
+
+    function selectStation_close() {
+       document.querySelector(".modal_2").classList.add("hidden");
+      //document.getElementById('test_bg');
+    }
+    document.querySelector('.closeBtn_2').addEventListener("click", selectStation_close);
+    // document.getElementById('main_frame').contentDocument.getElementById('openBtn').addEventListener("click", selectStation_open);
+    // alert(document.getElementById('main_frame').contentWindow.document.getElementById('openBtn'));
+    // $('#main_frame').contents().find('#openBtn').addEventListener("click", selectStation_open);
+
+  });
+
+
   var iframe = document.getElementById('main_frame')
 
   window.addEventListener('DOMContentLoaded', function () {

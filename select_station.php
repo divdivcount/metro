@@ -3,7 +3,7 @@ require_once('modules/db.php');
 ?>
 <div class="modal_2 hidden">
 <div class="bg">
-  <div class="test_modal">
+  <div class="test_modal_2">
 
     <div class="modalBox_2">
       <div class="closeBtn_box_2"><img src="img/cancle.png" class="closeBtn_2"></div>
@@ -11,7 +11,7 @@ require_once('modules/db.php');
       <form  id="selectMetro_box" action="station_update.php" method="post">
         <input type="hidden" name="mode" value="modify">
         <input type="hidden" name="mbs_id"  value="<?= $mb["mb_id"] ? $mb["mb_id"] : 'null' ?>">
-        <input type="hidden" name="om_id"  value="<?= $om["om_id"] ? $om["om_id"] : 'null' ?>">
+        <input type="hidden" name="om_id"  value="<?= isset($om["om_id"]) ? $om["om_id"] : 'null' ?>">
 
         <div class="title_line">
         </div>
@@ -26,8 +26,8 @@ require_once('modules/db.php');
               <option value="">선택</option>
               <?php
               $sql = " select * from line";
-              $result = mysqli_query($conn, $sql);
-              while ($row = mysqli_fetch_assoc($result)) {
+              $select_station_result = mysqli_query($conn, $sql);
+              while ($row = mysqli_fetch_assoc($select_station_result)) {
               ?>
               <option value="<?=$row["l_id"]?>"><?=$row["l_name"]?></option>
             <?php }
