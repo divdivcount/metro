@@ -70,10 +70,10 @@ require_once("modules/db.php");
     <!-- 메인 버튼 -->
 
     <div class="mainBtn_box">
-       <button type="button" class="w3-button w3-round" name="main_button" onclick = "changeIframeUrl('member_update.php','800px')" >회원 정보</button>
-       <button type="button" class="w3-button w3-round" name="main_button" onclick = "changeIframeUrl('sangpum.php','1300px')" >판매 상품</button>
-       <button type="button" class="w3-button w3-round" name="main_button" onclick = "changeIframeUrl('gansim_sangpum.php','1300px')" >관심 상품</button>
-       <button type="button" class="w3-button w3-round" name="main_button" onclick = "changeIframeUrl('buy_sangpum.php','1300px')">구매 상품</button>
+       <button type="button" class="w3-button w3-round" name="main_button" onclick = "changeIframeUrl('member_update.php')" >회원 정보</button>
+       <button type="button" class="w3-button w3-round" name="main_button" onclick = "changeIframeUrl('sangpum.php')" >판매 상품</button>
+       <button type="button" class="w3-button w3-round" name="main_button" onclick = "changeIframeUrl('gansim_sangpum.php')" >관심 상품</button>
+       <button type="button" class="w3-button w3-round" name="main_button" onclick = "changeIframeUrl('buy_sangpum.php')">구매 상품</button>
     </div>
 
     <form name="nan" method="post" target="mbs">
@@ -81,14 +81,13 @@ require_once("modules/db.php");
     </form>
 
     <div class="click_box">
-							<iframe style="float:left;" frameborder="0"  id="main_frame" src="member_update.php" height="800px" width="100%"></iframe>
+							<iframe style="float:left;" frameborder="0"  id="main_frame" src="member_update.php" width="100%"></iframe>
 		</div>
 
 	</div>
   <script>
-    function changeIframeUrl(url,iframe_width){
+    function changeIframeUrl(url){
         document.getElementById("main_frame").src = url;
-        document.getElementById("main_frame").height = iframe_width;
   		}
 
     var mainBtn = document.getElementsByClassName('w3-button w3-round');
@@ -105,5 +104,18 @@ require_once("modules/db.php");
   <!-- 하단 메뉴 부분 -->
   <?php require_once 'metrocket_footer.php';?>
 </body>
+<script type="text/javascript">
+  var iframe = document.getElementById('main_frame')
+
+  window.addEventListener('DOMContentLoaded', function () {
+  iframe.addEventListener('load', autoHeight)
+  })
+
+  function autoHeight() {
+  var frame = iframe
+    var sub = frame.contentDocument ? frame.contentDocument : frame.contentWindow.document
+    iframe.height = sub.body.scrollHeight
+  }
+</script>
 </html>
 <?php } ?>

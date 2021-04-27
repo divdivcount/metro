@@ -4,9 +4,12 @@ body {
   padding: 0;
   width:100%;
   height:100%;
-  background-color:#f0f0f0;
-  position: relative;
   font-family: "NotoSansKR_r";
+  position: relative;
+}
+#wrapPage{
+  width:100%;
+  background-color:#f0f0f0;
 }
 #bannerImg_box{
   width: 100%;
@@ -317,59 +320,14 @@ display : -webkit-box;
 .left{float: left;}
 .right{float: right;}
 .clear{clear: both;}
-
-/* 모달 팝업  */
-.modal {
- position: absolute;
- top: 0;
- left: 0;
- width: 100%;
- height: 100%;
- display: flex;
- justify-content: center;
- align-items: center;
-}
-.modal .bg {
- width: 100%;
- height: 100%;
- background-color: rgba(0, 0, 0, 0.6);
- z-index: 10000;
-}
-
-.test_modal{
- display: flex;
- justify-content: center;
- align-items: center;
- position: fixed;
- width: 100%;
- height: 100%;
- z-index: 10001
-}
-
-.modalBox {
- position: absolute;
- background-color: #fff;
- width: 700px;
- height: 600px;
- padding: 2.0rem;
- z-index: 10002;
-}
-.closeBtn_box {
- display: flex;
- justify-content: flex-end;
-}
-.closeBtn{cursor: pointer;}
-.hidden {
- display: none;
-}
+.hidden {display: none;}
 
 a{text-decoration: none;}
 @media only screen and (min-width: 1920px) {
-  body{
+  #wrapPage{
     width: 1920px;
     margin: 0 auto!important;
   }
-  .test_modal{width: 1920px;}
 }
 @media only screen and (max-width: 1440px) {
     #selectMetro_box{width: 85%;}

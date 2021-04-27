@@ -21,13 +21,13 @@
 
 .ui-autocomplete{z-index: 10010!important}
 
-.closeBtn_box {
+.closeBtn_box_2 {
   display: flex;
   justify-content: flex-end;
 }
-.closeBtn{cursor: pointer;}
+.closeBtn_2{cursor: pointer;}
 
-.modal {
+.modal_2 {
    position: absolute;
    top: 0;
    left: 0;
@@ -37,15 +37,13 @@
    justify-content: center;
    align-items: center;
 }
-
-.modal .bg {
+.modal_2 .bg {
    width: 100%;
    height: 100%;
    background-color: rgba(0, 0, 0, 0.6);
    z-index: 10000;
 }
-
-.test_modal{
+.test_modal_2{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -54,11 +52,11 @@
   height: 100%;
   z-index: 10001
 }
-
-.modalBox {
+.modalBox_2 {
   position: absolute;
   background-color: #fff;
   width: 80%;
+  max-width: 1500px;
   height: auto;
   padding: 15px;
   z-index: 10002;
@@ -66,13 +64,13 @@
   box-shadow: 10px 10px 50px 0 rgba(0, 0, 0, 0.16);
     border-radius: 30px;
 }
-.hidden {
+.hidden{
   display: none;
 }
 
 
 @media only screen and (min-width: 1920px) {
-  .test_modal{width: 1920px;}
+  /* .test_modal{width: 1920px;} */
 }
 @media only screen and (max-width: 1024px) {
 

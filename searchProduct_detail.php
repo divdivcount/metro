@@ -21,6 +21,7 @@ try{
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="css/bxslider-4-4.2.12/src/css/jquery.bxslider.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="css/css_login.css">
     <link rel="stylesheet" href="css/css_searchProduct_detail.css">
     <link rel="stylesheet" href="css/css_noamlfont.css">
     <link rel="stylesheet" href="css/reply.css">
@@ -38,6 +39,8 @@ try{
     <link rel="mask-icon" href="css/favicon_package_v0.16/safari-pinned-tab.svg" color="#5bbad5">
   </head>
   <body>
+  <div id="wrapPage">
+
     <!-- 상단 메뉴 부분 -->
     <?php require_once('metrocket_header.php');?>
     <div id="wrapContainer_Box">
@@ -186,7 +189,7 @@ try{
             </div>
           </div>
 
-          <div class="modal fade" id="rep_modal_del">
+          <div class="" id="rep_modal_del">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
@@ -401,6 +404,7 @@ try{
     new_win.focus();
     }
     </script>
+  </div>
   </body>
 
 </html>

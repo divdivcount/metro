@@ -56,6 +56,7 @@ if($a == 0){
 <html lang="en" dir="ltr">
   <head>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<link rel="stylesheet" href="css/css_login.css">
     <link rel="stylesheet" href="css/css_searchProduct.css">
     <link rel="stylesheet" href="css/css_noamlfont.css">
     <link rel="stylesheet" href="css/css_metrocket_footer.css">
@@ -76,6 +77,7 @@ if($a == 0){
     <title></title>
   </head>
   <body>
+	<div id="wrapPage">
 
     <!-- 상단 메뉴 부분 -->
     <?php require_once('metrocket_header.php'); ?>
@@ -122,7 +124,7 @@ if($a == 0){
 
         <!-- 호선 선택 버튼 -->
         <div class="btn_box">
-          <input id="openBtn" class="w3-button w3-round-large" type="button" name="" value="호선선택">
+          <input id="openBtn_2" class="w3-button w3-round-large" type="button" name="" value="호선선택">
         </div>
 
 				<?php require_once('select_station.php'); ?>
@@ -222,21 +224,18 @@ if($a == 0){
 
     <!-- 푸터 부분  -->
     <?php require_once('metrocket_footer.php');?>
-
+	</div>
   </body>
   <script type="text/javascript">
     $(document).ready(function(){
-			function login_open() {
-				document.querySelector(".modal").classList.remove("hidden");
+			function selectStation_open() {
+				document.querySelector(".modal_2").classList.remove("hidden");
 			}
-			function login_close() {
-				document.querySelector(".modal").classList.add("hidden");
+			function selectStation_close() {
+				document.querySelector(".modal_2").classList.add("hidden");
 			}
-
-
-			document.querySelector("#openBtn").addEventListener("click", login_open);
-			document.querySelector(".closeBtn").addEventListener("click", login_close);
-
+			document.querySelector("#openBtn_2").addEventListener("click", selectStation_open);
+			document.querySelector(".closeBtn_2").addEventListener("click", selectStation_close);
   });
   </script>
 </html>

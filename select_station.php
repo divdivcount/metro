@@ -1,12 +1,12 @@
 <?php
 require_once('modules/db.php');
 ?>
-<div class="modal hidden">
+<div class="modal_2 hidden">
 <div class="bg">
   <div class="test_modal">
 
-    <div class="modalBox">
-      <div class="closeBtn_box"><img src="img/cancle.png" class="closeBtn"></div>
+    <div class="modalBox_2">
+      <div class="closeBtn_box_2"><img src="img/cancle.png" class="closeBtn_2"></div>
 
       <form  id="selectMetro_box" action="station_update.php" method="post">
         <input type="hidden" name="mode" value="modify">

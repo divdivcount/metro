@@ -60,17 +60,49 @@
             echo "<ul><li class='openBtn'>로그인</li></ul>";
           }
          ?>
-         <script type="text/javascript">
-         function line_station() {
-            alert("마이페이지에서 역 선택을 먼저 등록 해주세요.");
-            location.replace("My_one_page.php");
-          }
-          var win_memo = function(href) { // 쪽지 팝업창
-          var new_win = window.open(href, 'win_memo', 'left=100,top=100,width=620,height=600,scrollbars=1');
-          new_win.focus();
-          }
-
-
-         </script>
       </div>
     </div>
+
+    <div class="modal hidden">
+      <div class="bg">
+        <div class="test_modal">
+
+          <div class="modalBox">
+
+            <div class="closeBtn_box"><img src="img/cancle.png" class="closeBtn"></div>
+
+            <?php require_once('login.php'); ?>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+
+    $(document).ready(function(){ // html 문서를 다 읽어들인 후
+
+      //헤더 로그인 메뉴쪽 모달팝업 제어 함수
+      function login_open() {
+        document.querySelector(".modal").classList.remove("hidden");
+      }
+      function login_close() {
+        document.querySelector(".modal").classList.add("hidden");
+      }
+
+      if (document.querySelector(".openBtn")) {
+        document.querySelector(".openBtn").addEventListener("click", login_open);
+      }
+      document.querySelector(".closeBtn").addEventListener("click", login_close);
+    });
+
+    function line_station() {
+       alert("마이페이지에서 역 선택을 먼저 등록 해주세요.");
+       location.replace("My_one_page.php");
+     }
+     var win_memo = function(href) { // 쪽지 팝업창
+     var new_win = window.open(href, 'win_memo', 'left=100,top=100,width=620,height=600,scrollbars=1');
+     new_win.focus();
+     }
+
+    </script>

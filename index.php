@@ -42,22 +42,10 @@ require_once('modules/db.php');
     </style>
   </head>
   <body>
+  <div id="wrapPage">
     <!-- 상단 메뉴 부분 -->
     <?php require_once('metrocket_header.php'); ?>
-    <div class="modal hidden">
-      <div class="bg">
-        <div class="test_modal">
 
-          <div class="modalBox">
-
-            <div class="closeBtn_box"><img src="img/cancle.png" class="closeBtn"></div>
-
-            <?php require_once('login.php'); ?>
-          </div>
-
-        </div>
-      </div>
-   </div>
 
     <!-- 메인 배너이미지 부분 -->
     <div id="bannerImg_box">
@@ -267,6 +255,7 @@ require_once('modules/db.php');
 
     <!-- 푸터 부분  -->
     <?php require_once('metrocket_footer.php');?>
+  </div>
   </body>
   <script>
   const tapmenuItem = document.getElementsByClassName('tapmenuItem');
@@ -286,11 +275,9 @@ require_once('modules/db.php');
     load_category(tapmenuItem.item(0).innerText);
     // $(".owl-carousel").owlCarousel(obj);
 
-    // 768px 일때 사이트 소개이미지파일 다른해상도 파일로 변경
-    // changeContent()
-    // changeBtn_style();
-    changeSubBannerImge();
-    changeWidth_RecentProducts_gridbox(2);
+
+    changeSubBannerImge();                      // 768px 일때 사이트 소개이미지파일 다른해상도 파일로 변경
+    changeWidth_RecentProducts_gridbox(2);      // 최근상품 그리드박스 높이 정의
   });
 
 
@@ -335,12 +322,6 @@ require_once('modules/db.php');
           success: function(data) {
               //서버로부터 정상적으로 응답이 왔을 때 실행
               $('#owl-carousel').trigger('replace.owl.carousel', data).trigger('refresh.owl.carousel');
-              // $('#owl-carousel').attr('class','owl-carousel');
-              // $('#owl-carousel').html(data);
-              // $("#owl-carousel").owlCarousel(obj);
-              // $("#owl-carousel").removeClass();
-              // $("#owl-carousel").addClass("owl-carousel");
-
           },
           error: function(err) {
               //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
@@ -350,6 +331,8 @@ require_once('modules/db.php');
 
 
   $(document).ready(function(){ // html 문서를 다 읽어들인 후
+
+    //헤더 로그인 메뉴쪽 모달팝업 제어 함수
     function login_open() {
       document.querySelector(".modal").classList.remove("hidden");
     }
@@ -432,6 +415,7 @@ require_once('modules/db.php');
     }
   }
 
+  //인기 카테고리 상품 슬라이드쪽 커스텀 버튼 함수
   var owl = $('.owl-carousel');
   // Go to the next item
   $('.customNextBtn').click(function() {
@@ -445,8 +429,7 @@ require_once('modules/db.php');
 })
 
 
-  //content_count 보여주고싶은 콘텐츠들의 행의 수 (열은 자동으로 조정)
-  //check 버튼 체크여
+  //content_count 보여주고싶은 콘텐츠들의 행의 수 (열은 css 자동으로 조정)
   function changeWidth_RecentProducts_gridbox(content_count) {
     var w_width = window.outerWidth;
     let content_rem = 19.4;
@@ -479,6 +462,7 @@ require_once('modules/db.php');
     }
   }
 
+  //768px 때 서브배너이미지 변경 (모바일용으로)
   function changeSubBannerImge() {
     var w_width = window.outerWidth;
     if (w_width <= 768) {
@@ -487,9 +471,6 @@ require_once('modules/db.php');
       document.getElementById('img03').src = "img/bannerImg_3_768x110.png";
     }
   }
-
-
-
 
   //더보기 버튼
   document.getElementById('moreInfo_btn').addEventListener("click",changeBtn_style);
