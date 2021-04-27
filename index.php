@@ -376,7 +376,7 @@ require_once('modules/db.php');
     // $(".owl-carousel").owlCarousel(obj);
 
     // 768px 일때 사이트 소개이미지파일 다른해상도 파일로 변경
-    changeImage();
+    // changeContent()
   });
 
 
@@ -533,7 +533,7 @@ require_once('modules/db.php');
 
   //content_count 보여주고싶은 콘텐츠들의 행의 수 (열은 자동으로 조정)
   //check 버튼 체크여
-  function changeWidth_RecentProducts_gridbox(int content_count) {
+  function changeWidth_RecentProducts_gridbox(content_count) {
     var w_width = window.outerWidth;
     let content_rem = 19.4;
 
