@@ -476,6 +476,7 @@ require_once('modules/db.php');
     // 768px 일때 사이트 소개이미지파일 다른해상도 파일로 변경
     // changeContent()
     // changeBtn_style();
+    changeSubBannerImge();
     changeWidth_RecentProducts_gridbox(2);
   });
 
@@ -695,7 +696,7 @@ require_once('modules/db.php');
 
   //콘텐츠이미지들 일정디스플레이시 변경해주는 함수
   window.addEventListener("resize", changeContent);
-
+    function changeSubBannerImge();
     function changeContent() {
       if (document.getElementById('moreInfo_btn').dataset.tf=="0") {
         changeWidth_RecentProducts_gridbox(2);
