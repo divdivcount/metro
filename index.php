@@ -43,38 +43,27 @@ require_once('modules/db.php');
     <!-- 상단 메뉴 부분 -->
     <?php require_once('metrocket_header.php'); ?>
     <div class="modal hidden">
-    <div class="bg">
-      <div class="test_modal">
+      <div class="bg">
+        <div class="test_modal">
 
-        <div class="modalBox">
+          <div class="modalBox">
 
-          <div class="closeBtn_box"><img src="img/cancle.png" class="closeBtn"></div>
+            <div class="closeBtn_box"><img src="img/cancle.png" class="closeBtn"></div>
 
-          <!-- <button class="closeBtn">✖</button> -->
-          <?php require_once('login.php'); ?>
+            <?php require_once('login.php'); ?>
+          </div>
+
         </div>
-
       </div>
-    </div>
-
    </div>
 
     <!-- 메인 배너이미지 부분 -->
     <div id="bannerImg_box">
       <div class="bxslider">
-        <div>
-          <img src="img\slideimg_1.png" alt="" >
-          <p>안</p>
-        </div>
-        <div>
-          <img src="img\slideimg_2.png" alt="">
-          <div class="bx_text">
-          <p>녕</p>
-          </div>
-        </div>
+        <div><img src="img\slideimg_1.png" alt=""></div>
+        <div><img src="img\slideimg_2.png" alt=""></div>
         <div><img src="img\slideimg_3.png" alt=""></div>
         <div><img src="img\slideimg_4.png" alt=""></div>
-        <div><img src="img\slideimg_5.png" alt=""></div>
       </div>
       <!-- 이중select box 로 지하철역 선택하는 부분 -->
         <form  id="selectMetro_box" action="searchProduct.php" method="get">
@@ -180,6 +169,7 @@ require_once('modules/db.php');
 
         </div>
 
+
         <div class="productInfo_box">
 
           <!-- 이미지 부분  -->
@@ -196,6 +186,114 @@ require_once('modules/db.php');
           </div>
 
         </div>
+
+        <div class="productInfo_box">
+
+          <!-- 이미지 부분  -->
+          <div class="productImg_box">
+            <img src="" alt="">
+          </div>
+
+          <!-- 텍스트 부분 -->
+          <div class="productText_box">
+            <div class="productText_box_title_line">제목</div>
+            <div class="productText_box_price_line">가격</div>
+            <div class="productText_box_station_line">역호선</div>
+            <div class="productText_box_category_line">카테고리</div>
+          </div>
+
+        </div>
+
+
+        <div class="productInfo_box">
+
+          <!-- 이미지 부분  -->
+          <div class="productImg_box">
+            <img src="" alt="">
+          </div>
+
+          <!-- 텍스트 부분 -->
+          <div class="productText_box">
+            <div class="productText_box_title_line">제목</div>
+            <div class="productText_box_price_line">가격</div>
+            <div class="productText_box_station_line">역호선</div>
+            <div class="productText_box_category_line">카테고리</div>
+          </div>
+
+        </div>
+
+
+        <div class="productInfo_box">
+
+          <!-- 이미지 부분  -->
+          <div class="productImg_box">
+            <img src="" alt="">
+          </div>
+
+          <!-- 텍스트 부분 -->
+          <div class="productText_box">
+            <div class="productText_box_title_line">제목</div>
+            <div class="productText_box_price_line">가격</div>
+            <div class="productText_box_station_line">역호선</div>
+            <div class="productText_box_category_line">카테고리</div>
+          </div>
+
+        </div>
+
+
+        <div class="productInfo_box">
+
+          <!-- 이미지 부분  -->
+          <div class="productImg_box">
+            <img src="" alt="">
+          </div>
+
+          <!-- 텍스트 부분 -->
+          <div class="productText_box">
+            <div class="productText_box_title_line">제목</div>
+            <div class="productText_box_price_line">가격</div>
+            <div class="productText_box_station_line">역호선</div>
+            <div class="productText_box_category_line">카테고리</div>
+          </div>
+
+        </div>
+
+
+        <div class="productInfo_box">
+
+          <!-- 이미지 부분  -->
+          <div class="productImg_box">
+            <img src="" alt="">
+          </div>
+
+          <!-- 텍스트 부분 -->
+          <div class="productText_box">
+            <div class="productText_box_title_line">제목</div>
+            <div class="productText_box_price_line">가격</div>
+            <div class="productText_box_station_line">역호선</div>
+            <div class="productText_box_category_line">카테고리</div>
+          </div>
+
+        </div>
+
+
+        <div class="productInfo_box">
+
+          <!-- 이미지 부분  -->
+          <div class="productImg_box">
+            <img src="" alt="">
+          </div>
+
+          <!-- 텍스트 부분 -->
+          <div class="productText_box">
+            <div class="productText_box_title_line">제목</div>
+            <div class="productText_box_price_line">가격</div>
+            <div class="productText_box_station_line">역호선</div>
+            <div class="productText_box_category_line">카테고리</div>
+          </div>
+
+        </div>
+
 
         <div class="productInfo_box">
 
@@ -365,7 +463,7 @@ require_once('modules/db.php');
     $('.bxslider').bxSlider( {
         mode: 'horizontal',// 가로 방향 수평 슬라이드
         speed: 500,        // 이동 속도를 설정
-        pager: true,      // 현재 위치 페이징 표시 여부 설정
+        pager: false,      // 현재 위치 페이징 표시 여부 설정
         moveSlides: 1,     // 슬라이드 이동시 개수
         auto: true,        // 자동 실행 여부
         autoHover: false,   // 마우스 호버시 정지 여부
@@ -377,6 +475,8 @@ require_once('modules/db.php');
 
     // 768px 일때 사이트 소개이미지파일 다른해상도 파일로 변경
     // changeContent()
+    // changeBtn_style();
+    changeWidth_RecentProducts_gridbox(2);
   });
 
 
@@ -536,7 +636,6 @@ require_once('modules/db.php');
   function changeWidth_RecentProducts_gridbox(content_count) {
     var w_width = window.outerWidth;
     let content_rem = 19.4;
-
     if (w_width <= 1440) {
       if (w_width <= 1024) {
         if (w_width <= 768) {
@@ -560,6 +659,9 @@ require_once('modules/db.php');
       }
     document.getElementById('recentProducts_gridbox').style.height =String((content_rem * 10 + 200)*content_count)+"px";
     return 0;
+    }else{
+      document.getElementById('recentProducts_gridbox').style.height =String((content_rem * 10 + 200)*content_count)+"px";
+      return 0;
     }
   }
 
