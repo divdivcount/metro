@@ -56,13 +56,12 @@ if(isset($_SESSION['ss_mb_id'])){
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
 <body>
-
 <?php
 // echo $mb["mb_id"] ? $mb["mb_id"] : $om["om_id"];
 // echo $mb["mb_name"] ? $mb["mb_name"] : $om["om_nickname"];
 // echo $mb["mb_email"] ? $mb["mb_email"] : $om["om_email"];
 ?>
-<?php require_once('select_station.php'); ?>
+
 <div class="w3-container">
   <h3 class="h3">회원정보 수정</h3>
 
@@ -94,7 +93,7 @@ if(isset($_SESSION['ss_mb_id'])){
 
       </div>
     </form>
-
+    <input type="button" id="test" name="" value="dadfs">
     <p class="w3-center button_contatiner_margin">
       <button class="w3-button  w3-blue w3-ripple w3-margin-top w3-round" onclick="document.getElementById('pwForm').submit();">비밀번호 변경</button>
       <button type="button" class="w3-button w3-dark-gray w3-ripple w3-margin-top w3-round" onclick = "parent.changeIframeUrl('delete_userInfo.php?id=<?= $mb["mb_id"]?>&oid=<?=$om["om_id"]?>')">회원 탈퇴</button>
@@ -103,35 +102,14 @@ if(isset($_SESSION['ss_mb_id'])){
 </div>
 </body>
 <script type="text/javascript">
+  $(document).ready(function(){
+    function selectStation_open() {
+      parent.document.querySelector(".modal_2").classList.remove("hidden");
+      // parent.document.body.style.backgroundColor = "rgba(0, 0, 0, 0.6)";
+    }
+    document.getElementById("openBtn").addEventListener("click", selectStation_open);
+  });
 
-$(document).ready(function(){
-  function login_open() {
-    document.querySelector(".modal").classList.remove("hidden");
-  }
-  function login_close() {
-    document.querySelector(".modal").classList.add("hidden");
-  }
-
-
-  document.querySelector("#openBtn").addEventListener("click", login_open);
-  document.querySelector(".closeBtn").addEventListener("click", login_close);
-  // popup();
-  //
-  // function popup(){
-  //   open_pop();
-  //   close_pop();
-  // }
-  // function open_pop(){
-  //   $('#joinBtn').click(function(){
-  //     $('#selectMetro_box').css({'display':'flex'});
-  //   });
-  // }
-  // function close_pop(){
-  //   $('.close_pop').click(function(){
-  //     $('#selectMetro_box').css({'display':'none'});
-  //   });
-  // }
-});
 </script>
 </html>
 <?php } ?>

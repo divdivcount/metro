@@ -53,8 +53,12 @@ body {
 .mainBtn_box .w3-button:nth-child(1){
   background: WHITE;
 }
-.blue{color: blue;}
 
+
+
+
+.blue{color: blue;}
+.hidden {display: none;}
 @media only screen and (min-width: 1920px) {
   body{
     width: 1920px;

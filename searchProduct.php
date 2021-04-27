@@ -227,7 +227,7 @@ if($a == 0){
 	</div>
   </body>
   <script type="text/javascript">
-    $(document).ready(function(){
+  	$(document).ready(function(){
 			function selectStation_open() {
 				document.querySelector(".modal_2").classList.remove("hidden");
 			}
@@ -236,7 +236,7 @@ if($a == 0){
 			}
 			document.querySelector("#openBtn_2").addEventListener("click", selectStation_open);
 			document.querySelector(".closeBtn_2").addEventListener("click", selectStation_close);
-  });
+  	});
   </script>
 </html>
 <?php }?>
