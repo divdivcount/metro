@@ -136,7 +136,7 @@ try{
 
             <div class="imgPlusText">
               <div class="img_box"><img src="img/chat.png" alt=""></div>
-              <span><a href="./memo_form.php?me_recv_mb_id=<?php
+              <span><a href="./memo_form.php?me_recive_mb_id=<?php
               try{
                 $member = new Member;
                 if($row['mb_id']){

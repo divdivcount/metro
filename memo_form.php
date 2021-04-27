@@ -16,7 +16,7 @@ $pr_id = $_GET['id']; // GET 방식으로 넘어온 받는 제품번호
 		<h1>쪽지 보내기</h1>
 
 		<ul>
-			<li><a href="./memo.php?kind=recv">받은쪽지</a></li>
+			<li><a href="./memo.php?kind=recive">받은쪽지</a></li>
 			<li><a href="./memo.php?kind=send">보낸쪽지</a></li>
 		</ul>
 

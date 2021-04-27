@@ -10,7 +10,7 @@ $om_id = substr($om_id, 5);
 
 if(!(empty($_SESSION['ss_mb_id']) || empty($_SESSION['naver_mb_id']) || empty($_SESSION['kakao_mb_id']))){
 	echo "<script>alert('쪽지를 보내기 위해서는 로그인이 필요합니다.');</script>";
-	// echo "<script>history.back();</script>";
+	echo "<script>history.back();</script>";
 }else{
 	$me_send_datetime = date('Y-m-d H:i:s', time()); // 메모 작성일
 
@@ -18,8 +18,8 @@ if(!(empty($_SESSION['ss_mb_id']) || empty($_SESSION['naver_mb_id']) || empty($_
 	$pr_id = trim($_POST['id']);
 	if(strpos($recv_list1, "sir") !== false) {
 	    $recv_list = explode('sir', $recv_list1);
-			// echo $recv_list[0]."<br>";
-			// echo $recv_list[1]."<br>";
+			echo $recv_list[0]."<br>";
+			echo $recv_list[1]."<br>";
 			$sql = " SELECT om_id, om_nickname FROM oauth_member WHERE om_id = $recv_list[1]";
 	} else {
 			$sql = " SELECT mb_id, mb_name FROM member WHERE mb_id = '{$recv_list1}' ";
@@ -69,6 +69,7 @@ if(!(empty($_SESSION['ss_mb_id']) || empty($_SESSION['naver_mb_id']) || empty($_
 	if ($member_list) {
 	    $str_name_list = implode(',', $member_list['name']);
 		echo "<script>alert('{$str_name_list} 님께 쪽지를 전달하였습니다.');window.close();</script>";
+		// window.close();
 		exit;
 	} else {
 		echo "<script>alert('회원아이디 오류 같습니다.');window.close();</script>";

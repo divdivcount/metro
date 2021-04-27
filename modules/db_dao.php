@@ -212,20 +212,20 @@ $query->execute();
 		if($this->quTable == 'interest'){
 			if($mb_id != 'null' && $om_id == 'null'){
 				$om_id = null;
-				$sql = "select p.pr_id,p.pr_title,p.pr_status,p.pr_price,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,pi.pr_img,l.l_name,p.pr_station from product p left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join member m ON p.mb_id = m.mb_num left outer join interest ia on ia.pr_id = p.pr_id where ia.mb_id = :mb_id and p.pr_img_id = pi.pr_img_id and pi.main_check = 'y' and ia.om_id is :om_id and ia.pr_id = p.pr_id order by pr_id asc limit :start, :viewLen";
+				$sql = "select p.pr_id,p.pr_title,p.pr_status,p.pr_price,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,pi.pr_img,l.l_name,p.pr_station from product p left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join member m ON p.mb_id = m.mb_num left outer join interest ia on ia.pr_id = p.pr_id where ia.mb_id = :mb_id and p.pr_img_id = pi.pr_img_id and pi.main_check = 'y' and ia.om_id is :om_id and ia.pr_id = p.pr_id order by pr_id desc limit :start, :viewLen";
 				// echo "통과했냐4트";
 			}elseif($om_id != 'null' && $mb_id == 'null'){
 				$mb_id = null;
-				$sql = "select p.pr_id,p.pr_title,p.pr_status,p.pr_price,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,pi.pr_img,l.l_name,p.pr_station from product p left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join member m ON p.mb_id = m.mb_num left outer join interest ia on ia.pr_id = p.pr_id where ia.om_id = :om_id and p.pr_img_id = pi.pr_img_id and pi.main_check = 'y' and ia.mb_id is :mb_id and ia.pr_id = p.pr_id order by pr_id asc limit :start, :viewLen";
+				$sql = "select p.pr_id,p.pr_title,p.pr_status,p.pr_price,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,pi.pr_img,l.l_name,p.pr_station from product p left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join member m ON p.mb_id = m.mb_num left outer join interest ia on ia.pr_id = p.pr_id where ia.om_id = :om_id and p.pr_img_id = pi.pr_img_id and pi.main_check = 'y' and ia.mb_id is :mb_id and ia.pr_id = p.pr_id order by pr_id desc limit :start, :viewLen";
 			}
 		}else{
 				if($mb_id != 'null' && $om_id == 'null'){
 					$om_id = null;
-					$sql =	"select p.pr_id,p.pr_title,p.pr_status,p.pr_price,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,pi.pr_img,l.l_name,p.pr_station from product p left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join member m ON p.mb_id = m.mb_num where p.mb_id = :mb_id and p.pr_img_id = pi.pr_img_id and pi.main_check = 'y' and p.om_id is :om_id order by $this->quTableId asc limit :start, :viewLen";
+					$sql =	"select p.pr_id,p.pr_title,p.pr_status,p.pr_price,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,pi.pr_img,l.l_name,p.pr_station from product p left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join member m ON p.mb_id = m.mb_num where p.mb_id = :mb_id and p.pr_img_id = pi.pr_img_id and pi.main_check = 'y' and p.om_id is :om_id order by $this->quTableId desc limit :start, :viewLen";
 					// echo " 여기도 통과?";
 				}elseif($om_id != 'null' && $mb_id == 'null'){
 					$mb_id = null;
-					$sql = "select p.pr_id,p.pr_title,p.pr_status,p.pr_price, (select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count, pi.pr_img, l.l_name, p.pr_station from product p left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join oauth_member om ON p.om_id = om.om_id where p.om_id = :om_id and p.pr_img_id = pi.pr_img_id and pi.main_check = 'y' and  p.mb_id is :mb_id order by $this->quTableId asc limit :start, :viewLen";
+					$sql = "select p.pr_id,p.pr_title,p.pr_status,p.pr_price, (select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count, pi.pr_img, l.l_name, p.pr_station from product p left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join oauth_member om ON p.om_id = om.om_id where p.om_id = :om_id and p.pr_img_id = pi.pr_img_id and pi.main_check = 'y' and  p.mb_id is :mb_id order by $this->quTableId desc limit :start, :viewLen";
 				}else{
 					// echo "통과했냐 6트";
 					if($s_value){

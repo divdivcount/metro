@@ -2,7 +2,6 @@
 #footer_box{
   width: 100%;
   background-color:#e5e6e7;
-  margin-top: 4.0rem;
 }
 #information_box{
   grid-template-columns: 8fr 2fr 2fr 3fr;

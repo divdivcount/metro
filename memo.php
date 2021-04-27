@@ -22,7 +22,7 @@ if ($kind == 'recive') {
 }
 
 $sql = " SELECT COUNT(*) AS cnt FROM mb_om_memo WHERE me_{$kind}_mb_id = '{$all}' ";
-echo $sql."<br>";
+// echo $sql."<br>";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 $total_count = $row['cnt'];
@@ -42,7 +42,7 @@ $sql = " SELECT a.*, b.mb_id, b.mb_name, b.mb_email, c.om_id,c.om_nickname, c.om
             LEFT JOIN oauth_member c ON (a.me_{$unkind}_mb_id = c.om_id)
             WHERE a.me_{$kind}_mb_id = '{$all}'
             ORDER BY a.me_id DESC LIMIT $from_record, {$page_rows} ";
-echo $sql;
+// echo $sql;
 $result = mysqli_query($conn, $sql);
 for ($i=0; $row=mysqli_fetch_assoc($result); $i++)
 {
@@ -54,9 +54,10 @@ for ($i=0; $row=mysqli_fetch_assoc($result); $i++)
       $read_datetime = '아직 읽지 않음';
     }else{
         $read_datetime =$row['me_recive_datetime'] ? $row['me_recive_datetime'] : null;
+        $read_datetime = substr($read_datetime, 5, 5);
     }
     $send_datetime = $row['me_send_datetime'];
-
+    $send_datetime = substr($send_datetime, 5, 5);
     $list[$i]['send_datetime'] = $send_datetime;
     $list[$i]['read_datetime'] = $read_datetime;
     $list[$i]['view_href'] = './memo_view.php?me_id='.$row['me_id'].'&amp;kind='.$kind; // 쪽지 읽기 링크

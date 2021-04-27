@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 require_once('modules/db.php');
 ?>
 <!DOCTYPE html>
@@ -82,7 +84,7 @@ require_once('modules/db.php');
               ?>
               <option value="<?=$row["l_id"]?>"><?=$row["l_name"]?></option>
             <?php }
-            mysqli_close($conn);
+
             ?>
             </select>
           </div>
@@ -142,6 +144,7 @@ require_once('modules/db.php');
     </div>
 
     <!-- 최신매물 나오는 부분 -->
+
     <div id="subContent_box">
 
       <div class="titleText_1">최신매물 모아보기</div>
@@ -152,217 +155,27 @@ require_once('modules/db.php');
 
 
       <div id="recentProducts_gridbox">
-        <div class="productInfo_box">
+        <?php
+        $sql = "select p.ca_name, p.pr_id,p.pr_title,p.pr_status,p.pr_price,pi.pr_img,l.l_name,p.pr_station from product p left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join member m ON p.mb_id = m.mb_num left outer join interest ia on ia.pr_id = p.pr_id where p.pr_img_id = pi.pr_img_id and pi.main_check = 'y' order by pr_id desc limit 0,20";
+        $new_product_result = mysqli_query($conn, $sql);  //여기
+        while ($product_result = mysqli_fetch_assoc($new_product_result)) { //여기 ?>
+        <a href="searchProduct_detail.php?id=<?=$product_result['pr_id']?>&title=<?=$product_result['pr_title']?>"><div class="productInfo_box">
 
           <!-- 이미지 부분  -->
           <div class="productImg_box">
-            <img src="" alt="">
+            <img src="<?="files/".$product_result["pr_img"]?>" alt="">
           </div>
 
           <!-- 텍스트 부분 -->
           <div class="productText_box">
-            <div class="productText_box_title_line">제목</div>
-            <div class="productText_box_price_line">가격</div>
-            <div class="productText_box_station_line">역호선</div>
-            <div class="productText_box_category_line">카테고리</div>
+            <div class="productText_box_title_line"><?=$product_result["pr_title"]?></div>
+            <div class="productText_box_price_line"><?=$product_result["pr_price"]?></div>
+            <div class="productText_box_station_line"><?=$product_result["l_name"].$product_result["pr_station"]?></div>
+            <div class="productText_box_category_line"><?=$product_result["ca_name"]?></div>
           </div>
 
-        </div>
-
-
-        <div class="productInfo_box">
-
-          <!-- 이미지 부분  -->
-          <div class="productImg_box">
-            <img src="" alt="">
-          </div>
-
-          <!-- 텍스트 부분 -->
-          <div class="productText_box">
-            <div class="productText_box_title_line">제목</div>
-            <div class="productText_box_price_line">가격</div>
-            <div class="productText_box_station_line">역호선</div>
-            <div class="productText_box_category_line">카테고리</div>
-          </div>
-
-        </div>
-
-        <div class="productInfo_box">
-
-          <!-- 이미지 부분  -->
-          <div class="productImg_box">
-            <img src="" alt="">
-          </div>
-
-          <!-- 텍스트 부분 -->
-          <div class="productText_box">
-            <div class="productText_box_title_line">제목</div>
-            <div class="productText_box_price_line">가격</div>
-            <div class="productText_box_station_line">역호선</div>
-            <div class="productText_box_category_line">카테고리</div>
-          </div>
-
-        </div>
-
-
-        <div class="productInfo_box">
-
-          <!-- 이미지 부분  -->
-          <div class="productImg_box">
-            <img src="" alt="">
-          </div>
-
-          <!-- 텍스트 부분 -->
-          <div class="productText_box">
-            <div class="productText_box_title_line">제목</div>
-            <div class="productText_box_price_line">가격</div>
-            <div class="productText_box_station_line">역호선</div>
-            <div class="productText_box_category_line">카테고리</div>
-          </div>
-
-        </div>
-
-
-        <div class="productInfo_box">
-
-          <!-- 이미지 부분  -->
-          <div class="productImg_box">
-            <img src="" alt="">
-          </div>
-
-          <!-- 텍스트 부분 -->
-          <div class="productText_box">
-            <div class="productText_box_title_line">제목</div>
-            <div class="productText_box_price_line">가격</div>
-            <div class="productText_box_station_line">역호선</div>
-            <div class="productText_box_category_line">카테고리</div>
-          </div>
-
-        </div>
-
-
-        <div class="productInfo_box">
-
-          <!-- 이미지 부분  -->
-          <div class="productImg_box">
-            <img src="" alt="">
-          </div>
-
-          <!-- 텍스트 부분 -->
-          <div class="productText_box">
-            <div class="productText_box_title_line">제목</div>
-            <div class="productText_box_price_line">가격</div>
-            <div class="productText_box_station_line">역호선</div>
-            <div class="productText_box_category_line">카테고리</div>
-          </div>
-
-        </div>
-
-
-        <div class="productInfo_box">
-
-          <!-- 이미지 부분  -->
-          <div class="productImg_box">
-            <img src="" alt="">
-          </div>
-
-          <!-- 텍스트 부분 -->
-          <div class="productText_box">
-            <div class="productText_box_title_line">제목</div>
-            <div class="productText_box_price_line">가격</div>
-            <div class="productText_box_station_line">역호선</div>
-            <div class="productText_box_category_line">카테고리</div>
-          </div>
-
-        </div>
-
-
-        <div class="productInfo_box">
-
-          <!-- 이미지 부분  -->
-          <div class="productImg_box">
-            <img src="" alt="">
-          </div>
-
-          <!-- 텍스트 부분 -->
-          <div class="productText_box">
-            <div class="productText_box_title_line">제목</div>
-            <div class="productText_box_price_line">가격</div>
-            <div class="productText_box_station_line">역호선</div>
-            <div class="productText_box_category_line">카테고리</div>
-          </div>
-
-        </div>
-
-
-        <div class="productInfo_box">
-
-          <!-- 이미지 부분  -->
-          <div class="productImg_box">
-            <img src="" alt="">
-          </div>
-
-          <!-- 텍스트 부분 -->
-          <div class="productText_box">
-            <div class="productText_box_title_line">제목</div>
-            <div class="productText_box_price_line">가격</div>
-            <div class="productText_box_station_line">역호선</div>
-            <div class="productText_box_category_line">카테고리</div>
-          </div>
-
-        </div>
-
-        <div class="productInfo_box">
-
-          <!-- 이미지 부분  -->
-          <div class="productImg_box">
-            <img src="" alt="">
-          </div>
-
-          <!-- 텍스트 부분 -->
-          <div class="productText_box">
-            <div class="productText_box_title_line">제목</div>
-            <div class="productText_box_price_line">가격</div>
-            <div class="productText_box_station_line">역호선</div>
-            <div class="productText_box_category_line">카테고리</div>
-          </div>
-
-        </div>
-
-        <div class="productInfo_box">
-
-          <!-- 이미지 부분  -->
-          <div class="productImg_box">
-            <img src="" alt="">
-          </div>
-
-          <!-- 텍스트 부분 -->
-          <div class="productText_box">
-            <div class="productText_box_title_line">제목</div>
-            <div class="productText_box_price_line">가격</div>
-            <div class="productText_box_station_line">역호선</div>
-            <div class="productText_box_category_line">카테고리</div>
-          </div>
-
-        </div>
-
-        <div class="productInfo_box">
-
-          <!-- 이미지 부분  -->
-          <div class="productImg_box">
-            <img src="" alt="">
-          </div>
-
-          <!-- 텍스트 부분 -->
-          <div class="productText_box">
-            <div class="productText_box_title_line">제목</div>
-            <div class="productText_box_price_line">가격</div>
-            <div class="productText_box_station_line">역호선</div>
-            <div class="productText_box_category_line">카테고리</div>
-          </div>
-
-        </div>
-
+        </div></a>
+      <?php }mysqli_close($conn); ?>
       </div>
       <input type="button" id="moreInfo_btn" class="w3-button w3-round-xlarge" data-tf="0" name="" value="최신매물 더 보기" style="box-shadow:3px 3px 10px 0 rgba(0, 0, 0, 0.16);width:30.0rem;color:#3b3b3b">
     </div>
@@ -704,5 +517,48 @@ require_once('modules/db.php');
         changeWidth_RecentProducts_gridbox(4);
       }
     }
+
 </script>
+<!-- Channel Plugin Scripts -->
+<script>
+  (function() {
+    var w = window;
+    if (w.ChannelIO) {
+      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+    }
+    var ch = function() {
+      ch.c(arguments);
+    };
+    ch.q = [];
+    ch.c = function(args) {
+      ch.q.push(args);
+    };
+    w.ChannelIO = ch;
+    function l() {
+      if (w.ChannelIOInitialized) {
+        return;
+      }
+      w.ChannelIOInitialized = true;
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+      s.charset = 'UTF-8';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+    if (document.readyState === 'complete') {
+      l();
+    } else if (window.attachEvent) {
+      window.attachEvent('onload', l);
+    } else {
+      window.addEventListener('DOMContentLoaded', l, false);
+      window.addEventListener('load', l, false);
+    }
+  })();
+  ChannelIO('boot', {
+    "pluginKey": "8b4e7045-687e-4f31-afa7-83b85d41112c"
+  });
+</script>
+<!-- End Channel Plugin -->
 </html>

@@ -23,10 +23,11 @@ if ($kind == 'recive')
     $kind_date = "받은";
 
     $sql = " UPDATE mb_om_memo
-                SET me_read_datetime = '$me_read_datetime'
+                SET me_recive_datetime = '$me_read_datetime'
                 WHERE me_id = '$me_id'
                 AND me_recive_mb_id = '$all'
-                AND me_read_datetime = '0000-00-00 00:00:00' ";
+                AND me_recive_datetime = '0000-00-00 00:00:00' ";
+		// echo $sql;
     $result = mysqli_query($conn, $sql);
 }
 else if ($kind == 'send')
@@ -45,6 +46,15 @@ $sql = " SELECT * FROM mb_om_memo
             AND me_{$kind}_mb_id = '$all' ";
 $result = mysqli_query($conn, $sql);
 $memo = mysqli_fetch_assoc($result);
+
+$sql = " SELECT a.*, b.mb_name, b.mb_email, c.om_id,c.om_nickname
+            FROM mb_om_memo a
+            LEFT JOIN member b ON (a.me_{$kind}_mb_id = b.mb_id)
+            LEFT JOIN oauth_member c ON (a.me_{$kind}_mb_id = c.om_id)
+            WHERE a.me_{$kind}_mb_id = '{$memo[me_send_mb_id]}'";
+// echo $sql;
+$result = mysqli_query($conn, $sql);
+$memos = mysqli_fetch_assoc($result);
 
 mysqli_close($conn); // 데이터베이스 접속 종료
 ?>
@@ -79,7 +89,7 @@ mysqli_close($conn); // 데이터베이스 접속 종료
 					<th><?php echo $kind_str ?>사람</th>
 					<td><strong><?php echo $memo['me_send_mb_id'] ?></strong></td>
 					<th><?php echo $kind_date ?>시간</th>
-					<td><strong><?php echo $memo['me_send_datetime'] ?></strong></td>
+					<td><strong><?php echo substr($memo['me_send_datetime'], 0, 16); ?></strong></td>
 				</tr>
 				<tr>
 					<td colspan="4"><?php echo nl2br($memo['me_text']) ?></td>
@@ -88,7 +98,7 @@ mysqli_close($conn); // 데이터베이스 접속 종료
 		</article>
 
 		<div class="win_btn">
-			<?php if ($kind == 'recive') {  ?><a href="./memo_form.php?me_recive_mb_id=<?php echo $memo['me_send_mb_id'] ?>&amp;me_id=<?php echo $memo['me_id'] ?>">답장</a><?php }  ?>
+			<?php if ($kind == 'recive') {  ?><a href="./memo_form.php?me_recive_mb_id=<?php echo $memos['mb_id'] != null ? $memos['mb_id']  : 'sir'.$memos['om_id']  ?>&amp;me_id=<?php echo $memo['me_id'] ?>&amp;id=<?=$memos['pr_id']?>">답장</a><?php }  ?>
 			<a href="./memo.php?kind=<?php echo $kind ?>">목록보기</a>
 			<button type="button" onclick="window.close();">창닫기</button>
 		</div>

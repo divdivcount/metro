@@ -7,7 +7,7 @@ $ctg_station = Get("ctg_station", 0);
 // echo $ctg_name."호선"."<br>";
 // echo $ctg_station."역"."<br>";
 if($ctg_name != "all" && $ctg_station){
-	echo "통과1";
+	// echo "통과1";
 	$sql = "select s.s_name, i.l_name  from station s, line i where i.l_id = $ctg_name";
 	$result = mysqli_query($conn, $sql);
 	$a = 0;
@@ -24,21 +24,21 @@ if($ctg_name != "all" && $ctg_station){
 		}
 	}
 }else{
-	echo "통과2";
-	echo $ctg_station;
+	// echo "통과2";
+	// echo $ctg_station;
 	if($ctg_name == "all" && $ctg_station){
 		$sql = "select s.s_name, i.l_name from station s, line i where s.l_id = i.l_id and s.s_name = '$ctg_station'";
 		$result = mysqli_query($conn, $sql);
 		$a = 0;
 		while($station = mysqli_fetch_assoc($result)){
-			print_r($station)."<br>";
+			// print_r($station)."<br>";
 			if(array_search($ctg_station, $station) === false) {
 				$theVariable = "not";
-				echo $theVariable."<br>";
+				// echo $theVariable."<br>";
 			}else{
 				$ctg_name = $station["l_name"];
 				$theVariable = "sure";
-				echo $theVariable."<br>";
+				// echo $theVariable."<br>";
 				$a = 1;
 				break;
 			}
