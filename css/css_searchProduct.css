@@ -58,6 +58,84 @@ ul{list-style: none;}
   color: #3b3b3b;
 }
 
+#selectMetro_box{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 3.0rem 2.0rem;
+  z-index: 1;
+  font-family: "NotoSansKR_r";
+  font-size:2.3rem;
+  background-color: #f9f9f9;
+  border-radius: 30px;
+  justify-content: space-between;
+}
+
+#selectMetro_box .title_line{width: 100%;display: flex;justify-content: flex-end;}
+#selectMetro_box .input_line{display: flex;justify-content: space-between;height: 80%;align-items: center;}
+#selectMetro_box span{font-size:1.8rem;color: #a1a1a1;}
+#selectMetro_box .find_item{width: 45%;border-bottom: 3px solid #a5a5a5;}
+#selectMetro_box .w3-button{width:20%;height: 7.0rem;font-family: "NotoSansKR_r";}
+#selectMetro_box .w3-input{outline: none;background-color:#f9f9f9!important;border: none;}
+#selectMetro_box .w3-select{outline: none;background-color:#f9f9f9!important;border: none;}
+#selectMetro_box .find_item:nth-child(1){}
+#selectMetro_box #bothFind_item{display: flex;width: 75%;flex-direction: row;justify-content: space-between;align-items: center;margin: 0 auto}
+
+.ui-autocomplete{z-index: 10010!important}
+
+.closeBtn_box_2 {
+  display: flex;
+  justify-content: flex-end;
+}
+.closeBtn_2{cursor: pointer;}
+
+
+
+.modal_2 {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+.modal_2 .bg {
+   width: 100%;
+   height: 100%;
+   background-color: rgba(0, 0, 0, 0.6);
+   z-index: 10000;
+}
+.test_modal_2{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 10001
+}
+.modalBox_2 {
+  position: absolute;
+  background-color: #fff;
+  width: 80%;
+  max-width: 1500px;
+  height: auto;
+  padding: 15px;
+  z-index: 10002;
+  background-color: #f9f9f9;
+  box-shadow: 10px 10px 50px 0 rgba(0, 0, 0, 0.16);
+    border-radius: 30px;
+}
+.hidden{
+  display: none;
+}
+
+
+
+
+
 .btn_box{
   width: 100%;
   display: flex;
@@ -182,6 +260,8 @@ display : -webkit-box;
   }
   @media only screen and (max-width: 1024px) {
     html,body{font-size: 9px!important;}
+    #selectMetro_box{flex-direction:column;}
+    #selectMetro_box .w3-button{margin-top: 3.0rem;width: 30%;}
     #productTitle{ width: 75%;}
     #productGrid_box{grid-template-columns: repeat(3,1fr);}
     .productInfo_box{}

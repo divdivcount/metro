@@ -1,9 +1,8 @@
 #selectMetro_box{
   width: 100%;
-  height: 260px;
   flex-direction: column;
   align-items: center;
-  padding: 1.0rem 2.0rem;
+  padding: 3.0rem 2.0rem;
   z-index: 1;
   font-family: "NotoSansKR_r";
   font-size:2.3rem;
@@ -73,7 +72,6 @@
   /* .test_modal{width: 1920px;} */
 }
 @media only screen and (max-width: 1024px) {
-
 }
 @media only screen and (max-width: 768px) {
 

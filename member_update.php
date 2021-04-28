@@ -93,7 +93,6 @@ if(isset($_SESSION['ss_mb_id'])){
 
       </div>
     </form>
-    <input type="button" id="test" name="" value="dadfs">
     <p class="w3-center button_contatiner_margin">
       <button class="w3-button  w3-blue w3-ripple w3-margin-top w3-round" onclick="document.getElementById('pwForm').submit();">비밀번호 변경</button>
       <button type="button" class="w3-button w3-dark-gray w3-ripple w3-margin-top w3-round" onclick = "parent.changeIframeUrl('delete_userInfo.php?id=<?= $mb["mb_id"]?>&oid=<?=$om["om_id"]?>')">회원 탈퇴</button>

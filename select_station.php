@@ -44,7 +44,7 @@ require_once('modules/db.php');
 
           </div>
 
-          <button type="submit" class="w3-button w3-blue w3-ripple w3-round-xxlarge close_pop">등록</button>
+          <button type="submit" class="w3-button w3-blue w3-ripple w3-round-xlarge close_pop">등록</button>
         </div>
       </form>
 
