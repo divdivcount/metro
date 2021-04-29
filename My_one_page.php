@@ -23,8 +23,7 @@ require_once("modules/db.php");
 </style>
 </head>
 <body>
-
-
+<div id="wrapPage">
   <!-- 상단 메뉴 부분 -->
   <?php
     if(empty($_SESSION['ss_mb_id']) && empty($_SESSION['naver_mb_id']) && empty($_SESSION['kakao_mb_id']) ){
@@ -60,13 +59,50 @@ require_once("modules/db.php");
   <!-- 최상단 로고 및 상단메뉴 -->
     <?php require_once('metrocket_header.php') ?>
     <?php require_once('select_station.php'); ?>
+
+  <!-- 모달팝업 (hidden여부로 팝업) -->
+  <div class="my_one_page_modal hidden">
+    <div class="bg">          <!-- 백그라운드 잡는 부분  -->
+      <div class="fix_page">  <!-- 화면가운데 fix로 잡는 부분  -->
+
+        <div class="modalBox">            <!-- 콘텐츠 들어가는부분 -->
+
+          <div class="closeBtn_box"><img src="img/cancle.png" class="" onclick="updateImage_close()"></div>
+          <h3>프로필 이미지 등록</h3>
+          <p>나를 표현하는 프로필 이미지를 등록하세요.</p>
+          <div class="profile_image"><img class="w3-circle" src="<?=$mb['mb_image'] ? $mb['mb_image'] : $om['om_image_url'] ?>" alt="">          </div>
+          <div class="updateImage_Button_Line">
+            <button type="button" class="w3-button w3-round w3-light-gray" name="button">사진올리기</button>
+            <button type="button" class="w3-button w3-round w3-light-gray" name="button">삭제</button>
+          </div>
+          <span>닉네임</span>
+          <form action="" method="post">
+
+            <div class="inputNicname_Line">
+              <input name="nickname" type="text" value="<?=$mb['mb_name'] ? $mb['mb_name'] : $om['om_nickname']?>" placeholder="<?=$mb['mb_name'] ? $mb['mb_name'] : $om['om_nickname']?>">
+              <img src="img/close_10x10.png" alt="">
+            </div>
+
+            <div class="updateProfile_Button_Line">
+              <input class="w3-button w3-round-xxlarge w3-blue" type="submit" name="" value="저장">
+              <input class="w3-button w3-round-xxlarge w3-light-gray" type="button" onclick="updateImage_close()" value="취소">
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
 	<div class="w3-content w3-container w3-margin-top" >
 
     <!-- 유저정보  차후 php 작업 필요 -->
     <div class="profile_box">
       <div class="prfileImg_box">
         <img class="w3-circle" src="<?=$mb['mb_image'] ? $mb['mb_image'] : $om['om_image_url'] ?>" >
-        <img src="img/camera.png" style="position:absolute;left:70%;top:70%;" alt="">
+        <img src="img/camera.png" style="position:absolute;left:70%;top:70%;" alt="" class="open_updateImage_btn">
       </div>
         <div class="user_name"><?=$mb['mb_name'] ? $mb['mb_name'] : $om['om_nickname']?></div>
     </div>
@@ -108,18 +144,15 @@ require_once("modules/db.php");
   </script>
   <!-- 하단 메뉴 부분 -->
   <?php require_once 'metrocket_footer.php';?>
+</div>
 </body>
 <script type="text/javascript">
   $(document).ready(function(){
 
     function selectStation_close() {
        document.querySelector(".modal_2").classList.add("hidden");
-      //document.getElementById('test_bg');
     }
     document.querySelector('.closeBtn_2').addEventListener("click", selectStation_close);
-    // document.getElementById('main_frame').contentDocument.getElementById('openBtn').addEventListener("click", selectStation_open);
-    // alert(document.getElementById('main_frame').contentWindow.document.getElementById('openBtn'));
-    // $('#main_frame').contents().find('#openBtn').addEventListener("click", selectStation_open);
 
   });
 
@@ -135,6 +168,17 @@ require_once("modules/db.php");
     var sub = frame.contentDocument ? frame.contentDocument : frame.contentWindow.document
     iframe.height = sub.body.scrollHeight
   }
+
+  //
+  function updateImage_open() {
+    document.querySelector(".my_one_page_modal").classList.remove("hidden");
+  }
+  function updateImage_close() {
+    document.querySelector(".my_one_page_modal").classList.add("hidden");
+  }
+  document.querySelector(".open_updateImage_btn").addEventListener("click", updateImage_open);
+
+
 </script>
 </html>
 <?php } ?>

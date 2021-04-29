@@ -4,14 +4,20 @@ body {
   padding: 0;
   width:100%;
   height:100%;
-  background-color:#f0f0f0;
   position: relative;
   font-family: "NotoSansKR_r";
+}
+#wrapPage{
+  width:100%;
+  background-color:#f0f0f0;
 }
 .w3-content {
     width: 71%!important;
     max-width: none!important;
     margin-bottom: 10.0rem;
+}
+.w3-container{
+  padding: 0!important;
 }
 .profile_box{
   text-align: center;
@@ -58,6 +64,120 @@ body {
 
 .main_frame{
   overflow-y: hidden;
+}
+
+/* 모달 팝업  */
+.my_one_page_modal {
+ position: absolute;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+.my_one_page_modal .bg {
+ width: 100%;
+ height: 100%;
+ background-color: rgba(0, 0, 0, 0.6);
+ z-index: 10000;
+}
+.my_one_page_modal .bg .fix_page{
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ position: fixed;
+ width: 100%;
+ height: 100%;
+ z-index: 10001
+}
+.my_one_page_modal .modalBox {
+ position: absolute;
+ background-color: #fff;
+ width: 80%;
+ max-width: 450px;
+ height: auto;
+ /* max-height: 80%;
+ min-height: 650px; */
+ padding: 3.5rem 3.0rem 5.0rem 3.0rem;
+ z-index: 10002;
+
+ display: flex;
+ flex-direction: column;
+}
+.closeBtn_box {
+ display: flex;
+ justify-content: flex-end;
+}
+.closeBtn{cursor: pointer;}
+
+.modalBox h3{
+  width: 100%;
+  font-family: "NotoSansKR_m";
+  font-size: 3.0rem;
+  font-weight: 500;
+  color: #110e0c;
+  text-align: left;
+  margin: 0;
+}
+.modalBox p{
+  width: 100%;
+  font-family: "NotoSansKR_r";
+  font-size: 2.0rem;
+  text-align: left;
+  color: #707070;
+  margin: 0;
+  margin-top: 0.6rem;
+  margin-bottom: 3.0rem;
+}
+.profile_image{text-align: center;}
+.updateImage_Button_Line{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 3.5rem 0;
+}
+.updateImage_Button_Line button{font-family: "NotoSansKR_r";font-size: 2.0rem;height: 5.0rem;color: #3b3b3b;border: none;outline: none;}
+.updateImage_Button_Line button:nth-child(1){width: 60%;}
+.updateImage_Button_Line button:nth-child(2){width: 35%;}
+.modalBox span{
+  font-family: "NotoSansKR_r";
+  font-size: 1.8rem;
+  text-align: left;
+  color: #3b3b3b;
+}
+.inputNicname_Line{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: solid 1px #707070;
+}
+.inputNicname_Line img{
+  width: 10px;
+  height: 10px;
+}
+.inputNicname_Line input{
+  width: 80%;
+  outline: none;
+  border: none;
+  overflow:auto;
+  font-family: "NotoSansKR_r";
+  font-size: 2.3rem;
+  color: #a8a8a8;
+}
+.updateProfile_Button_Line{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 4.0rem;
+}
+.updateProfile_Button_Line input {
+  width: 45%;
+  font-family: "NotoSansKR_r";
+  font-size: 2.0rem;
+  height: 5.0rem;
+  border: none;outline: none;
 }
 
 
