@@ -11,6 +11,7 @@ body {
 .w3-content {
     width: 71%!important;
     max-width: none!important;
+    margin-bottom: 10.0rem;
 }
 .profile_box{
   text-align: center;
@@ -54,7 +55,9 @@ body {
   background: WHITE;
 }
 
+.w3-container{
 
+}
 
 
 .blue{color: blue;}

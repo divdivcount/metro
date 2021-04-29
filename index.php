@@ -165,7 +165,10 @@ require_once('modules/db.php');
         </div></a>
       <?php }mysqli_close($conn); ?>
       </div>
-      <input type="button" id="moreInfo_btn" class="w3-button w3-round-xlarge" data-tf="0" name="" value="최신매물 더 보기" style="box-shadow:3px 3px 10px 0 rgba(0, 0, 0, 0.16);width:30.0rem;color:#3b3b3b">
+      <button type="button" id="moreInfo_btn" class="w3-button w3-round-xlarge" data-tf="0" name="" value="최신매물 더 보기" style="">최신매물 더 보기<img src="img/dropdown_15x15.png" alt="" style="margin-left:1.0rem;height:1.5rem;"></button>
+
+
+      <!-- <input type="button" id="moreInfo_btn" class="w3-button w3-round-xlarge" data-tf="0" name="" value="최신매물 더 보기" style="box-shadow:3px 3px 10px 0 rgba(0, 0, 0, 0.16);width:30.0rem;color:#3b3b3b;background-color: #fff!important"> -->
     </div>
 
 

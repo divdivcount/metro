@@ -114,12 +114,6 @@ ini_set('display_errors', '1');
           <!-- 4. 별점과 역정보 라인 -->
           <div class="productRecommendation_line">
 
-            <!-- 별점  -->
-            <div class="pr_starcount">
-              <div style="display:flex"><img src="img\star_19x19.png"></div>
-              <?=$row['i_count'] ?>
-            </div>
-
             <!-- 역 -->
             <div class="pr_station"><?= $row['l_name'] ?> <?= $row['pr_station'] ?></div>
           </div>
