@@ -40,12 +40,13 @@ body {
   font-family: "NotoSansKR_r";
 }
 .mainBtn_box .w3-button{
-  width: 24%;
+  width: 22%;
   color:#5e5956;
   font-size: 1.8rem;
   padding: 1.8rem 0;
   background-color: #e6e6e6;
   outline: none;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
 }
 .mainBtn_box .w3-button:hover{
    background-color: white!important;
@@ -55,8 +56,8 @@ body {
   background: WHITE;
 }
 
-.w3-container{
-
+.main_frame{
+  overflow-y: hidden;
 }
 
 

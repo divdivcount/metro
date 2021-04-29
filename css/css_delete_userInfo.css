@@ -4,6 +4,7 @@
   justify-content: space-around;
   padding:10.0rem 0 !important;
   background-color: #fff;
+  overflow-y: hidden;
 }
 
 #logoimg_box{

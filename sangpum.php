@@ -59,28 +59,28 @@ ini_set('display_errors', '1');
 
     <!-- 제목 -->
     <h3 class="h3">판매 내역</h3>
+    <?php
+      try {
+          // $start_s_value = empty($_REQUEST["start_s_value"]) ? "" : $_REQUEST["start_s_value"];
+          // $s_value = empty($_REQUEST["s_value"]) ? "" : $_REQUEST["s_value"];
+          // if($start_s_value){
+          // 	$result = $dao->SelectPageLength($pid, 10, $s_value, $start_s_value);
+          //   $list = $dao->SelectPageList($result['current'], 10,$s_value, $start_s_value);
+          // }else{
+          $result = $dao->SelectPageLength($pid, 4, isset($mb_id) ? $mb_id : 'null', isset($om_id) ? $om_id : 'null','');
+          $list = $dao->SelectPageList($result['current'], 4, isset($mb_id) ? $mb_id : 'null', isset($om_id) ? $om_id : 'null','');
+        // }
+      } catch (PDOException $e) {
+        $result = null;
+        $list = null;
+       echo $e->getMessage();
+      }
+    ?>
 
+    <?php if ($list): ?>
     <!-- 상품 나오는 박스  -->
 		<div class="productList_box">
-      <?php
-      	try {
-      			// $start_s_value = empty($_REQUEST["start_s_value"]) ? "" : $_REQUEST["start_s_value"];
-      		  // $s_value = empty($_REQUEST["s_value"]) ? "" : $_REQUEST["s_value"];
-      			// if($start_s_value){
-      			// 	$result = $dao->SelectPageLength($pid, 10, $s_value, $start_s_value);
-      			//   $list = $dao->SelectPageList($result['current'], 10,$s_value, $start_s_value);
-      			// }else{
-      			$result = $dao->SelectPageLength($pid, 4, isset($mb_id) ? $mb_id : 'null', isset($om_id) ? $om_id : 'null','');
-      			$list = $dao->SelectPageList($result['current'], 4, isset($mb_id) ? $mb_id : 'null', isset($om_id) ? $om_id : 'null','');
-      		// }
-      	} catch (PDOException $e) {
-      	  $result = null;
-      	  $list = null;
-      	 echo $e->getMessage();
-      	}
-      ?>
 
-      <!-- 상품 정보  -->
       <?php foreach ($list as $row) : ?>
 
       <div class="productInfo_box">
@@ -147,6 +147,8 @@ ini_set('display_errors', '1');
       </div>
     <?php endforeach ?>
 
+
+
     <div id="pagenation_box"class="w3-center">
         <?php
         if($result['start'] < $result['current'] ) :?>
@@ -160,8 +162,19 @@ ini_set('display_errors', '1');
         <?php if( $result['end'] > $result['current']) : ?>
           <a class="abtn" href="sangpum.php?p=<?=($pid + 1)?>">&gt;</a>
         <?php endif ?>
+    </div>
+    <?php else: ?>
+
+      <div id="empty_page">
+        <img src="img/sad_back.png" alt="">
+        <h4>EMPTY</h4>
+        <p>
+          <span>고객님의 상품정보가 비어있습니다.</span><br>
+          판매 상품을 올리면 정보가 보여집니다.
+        </p>
       </div>
 
+  <?php endif; ?>
 
 		</div>
 
@@ -199,7 +212,7 @@ ini_set('display_errors', '1');
       child[1].style.display ="none";
       child[5].style.display ="block";
 
-      //  판매완료시 판매상품 id 전달 
+      //  판매완료시 판매상품 id 전달
       $.ajax({
           url:'test_php.php', //request 보낼 서버의 경로
           type:'post', // 메소드(get, post)

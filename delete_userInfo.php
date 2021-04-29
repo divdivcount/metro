@@ -19,8 +19,6 @@
     <link rel="stylesheet" href="css/css_noamlfont.css">
     <link rel="stylesheet" href="css/css_delete_userInfo.css">
 
-    <script src="https://unpkg.com/hangul-js" type="text/javascript"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   </head>
   <body>
     <div class="w3-container">

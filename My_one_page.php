@@ -74,10 +74,10 @@ require_once("modules/db.php");
     <!-- 메인 버튼 -->
 
     <div class="mainBtn_box">
-       <button type="button" class="w3-button w3-round" name="main_button" onclick = "changeIframeUrl('member_update.php')" >회원 정보</button>
-       <button type="button" class="w3-button w3-round" name="main_button" onclick = "changeIframeUrl('sangpum.php')" >판매 상품</button>
-       <button type="button" class="w3-button w3-round" name="main_button" onclick = "changeIframeUrl('gansim_sangpum.php')" >관심 상품</button>
-       <button type="button" class="w3-button w3-round" name="main_button" onclick = "changeIframeUrl('buy_sangpum.php')">구매 상품</button>
+       <button type="button" class="w3-button w3-round-large" name="main_button" onclick = "changeIframeUrl('member_update.php')" >회원 정보</button>
+       <button type="button" class="w3-button w3-round-large" name="main_button" onclick = "changeIframeUrl('sangpum.php')" >판매 상품</button>
+       <button type="button" class="w3-button w3-round-large" name="main_button" onclick = "changeIframeUrl('gansim_sangpum.php')" >관심 상품</button>
+       <button type="button" class="w3-button w3-round-large" name="main_button" onclick = "changeIframeUrl('buy_sangpum.php')">구매 상품</button>
     </div>
 
     <form name="nan" method="post" target="mbs">
@@ -90,6 +90,7 @@ require_once("modules/db.php");
 
 	</div>
   <script>
+
     function changeIframeUrl(url){
         document.getElementById("main_frame").src = url;
   		}
@@ -126,7 +127,7 @@ require_once("modules/db.php");
   var iframe = document.getElementById('main_frame')
 
   window.addEventListener('DOMContentLoaded', function () {
-  iframe.addEventListener('load', autoHeight)
+  iframe.addEventListener('load', autoHeight);
   })
 
   function autoHeight() {

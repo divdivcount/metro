@@ -9,9 +9,10 @@ body {
   font-family: "NotoSansKR_r";
 }
 .w3-container{
-    padding:7.0rem 5.0rem;
+  padding:7.0rem 5.0rem;
   max-width: none;
   margin: 0;
+  overflow-y: hidden;
 }
 .w3-content .w3-container{
   width: 100%;

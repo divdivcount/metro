@@ -12,6 +12,7 @@ body {
   padding:7.0rem 5.0rem;
   max-width: none;
   margin: 0;
+  overflow-y: hidden;
 }
 .w3-content .w3-container{
   width: 100%;
