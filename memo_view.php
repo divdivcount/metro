@@ -47,7 +47,7 @@ $sql = " SELECT * FROM mb_om_memo
 $result = mysqli_query($conn, $sql);
 $memo = mysqli_fetch_assoc($result);
 
-$sql = " SELECT a.*, b.mb_name, b.mb_email, c.om_id,c.om_nickname
+$sql = " SELECT a.*,b.mb_id, b.mb_email, c.om_id,c.om_nickname
             FROM mb_om_memo a
             LEFT JOIN member b ON (a.me_{$kind}_mb_id = b.mb_id)
             LEFT JOIN oauth_member c ON (a.me_{$kind}_mb_id = c.om_id)
@@ -55,7 +55,7 @@ $sql = " SELECT a.*, b.mb_name, b.mb_email, c.om_id,c.om_nickname
 // echo $sql;
 $result = mysqli_query($conn, $sql);
 $memos = mysqli_fetch_assoc($result);
-
+// echo $memos['mb_id'];
 mysqli_close($conn); // 데이터베이스 접속 종료
 ?>
 

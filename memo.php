@@ -51,7 +51,7 @@ for ($i=0; $row=mysqli_fetch_assoc($result); $i++)
     $mb_id = $row["me_{$unkind}_mb_id"];
 
     if ($row['me_recive_datetime'] == '0000-00-00 00:00:00'){
-      $read_datetime = '아직 읽지 않음';
+      $read_datetime = '미열람';
     }else{
         $read_datetime =$row['me_recive_datetime'] ? $row['me_recive_datetime'] : null;
         $read_datetime = substr($read_datetime, 5, 5);
@@ -102,23 +102,29 @@ mysqli_close($conn); // 데이터베이스 접속 종료
 <html>
 <head>
 	<title>Memo</title>
-	<link href="./style.css" rel="stylesheet" type="text/css">
+	<link href="css/note.css" rel="stylesheet" type="text/css">
+  <link href="css/content.css" rel="stylesheet" type="text/css">
 </head>
 <body id="memo">
 	<!-- 쪽지 목록 시작 { -->
-	<div>
-		<h1>내 쪽지함</h1>
+	<div class="note">
+    <div class="header">
+        <div>
+            <img src="img/note.png">
+            <span class="title">쪽지함</span>
+            <span class="text">전체 <?php echo $kind_title ?>쪽지 <?php echo $total_count ?>통</span>
+        </div>
+    </div>
 
-		<ul>
-			<li><a href="./memo.php?kind=recive">받은쪽지</a></li>
-			<li><a href="./memo.php?kind=send">보낸쪽지</a></li>
-		</ul>
+			<button class="btn1" onclick="location.href ='./memo.php?kind=recive'">받은쪽지</button>
+			<button class="btn2" onclick="location.href ='./memo.php?kind=send'">보낸쪽지</button>
 
-		<div>
-			<table>
-			<caption>
-				전체 <?php echo $kind_title ?>쪽지 <?php echo $total_count ?>통<br>
-			</caption>
+
+		<div id="contentBody">
+			<table class='contentheader'>
+			<!-- <caption>
+				전통<br>
+			</caption> -->
 			<colgroup>
 				<col width="20%">
 				<col width="">
@@ -128,9 +134,9 @@ mysqli_close($conn); // 데이터베이스 접속 종료
 			<thead>
 			<tr>
 				<th><?php echo ($kind == "recive") ? "보낸사람" : "받는사람";  ?></th>
-				<th>보낸시간</th>
-				<th>읽은시간</th>
-				<th>관리</th>
+				<th>보낸날</th>
+				<th>읽은날</th>
+				<th>삭제</th>
 			</tr>
 			</thead>
 			<tbody>
@@ -139,20 +145,15 @@ mysqli_close($conn); // 데이터베이스 접속 종료
 				<td><?php echo isset($list[$i]['mb_name']) ? $list[$i]['mb_name'] : $list[$i]['om_nickname'] ?></td>
 				<td><?php echo $list[$i]['send_datetime'] ?></td>
 				<td><a href="<?php echo $list[$i]['view_href'] ?>"><?php echo $list[$i]['read_datetime'] ?></a></td>
-				<td><a href="<?php echo $list[$i]['del_href'] ?>" onclick="del(this.href); return false;">삭제</a></td>
+				<td><a href="<?php echo $list[$i]['del_href'] ?>" onclick="del(this.href); return false;"><img src="img/delete.png"></a></td>
 			</tr>
 			<?php }  ?>
 			<?php if ($i==0) { echo '<tr><td colspan="4">자료가 없습니다.</td></tr>'; }  ?>
 			</tbody>
 			</table>
 		</div>
-
-		<p><?php echo $write_page;  ?><!-- 페이지 --></p>
-
-		<div>
-			<button type="button" onclick="window.close();">창닫기</button>
-		</div>
 	</div>
+  <p><?php echo $write_page;  ?><!-- 페이지 --></p>
 	<!-- } 쪽지 목록 끝 -->
 
 </body>
