@@ -374,8 +374,7 @@ a{text-decoration: none;}
   #c_img03 .contentImg_text{left: 60%;top: 25%;transform: translate(-60%, -25%);}
   #c_img03 .contentImg_text p{font-size:2.0rem;}
   #c_img03 .contentImg_text h5,#c_img01 .contentImg_text span{font-size:1.25rem;}
-
-  .modalBox {width: 80%;height: auto;}
+  
   .imgbox_3{width: 40%;}
 }
 @media only screen and (max-width: 540px) {
@@ -398,7 +397,4 @@ a{text-decoration: none;}
 @media only screen and (max-width: 360px) {
   html,body{font-size: 6px!important;}
   .textBox_1{width: 25.0rem;height: 35.0rem;}
-}
-@media only screen and (max-height: 700px) {
-  .modalBox {height: auto;}
 }

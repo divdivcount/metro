@@ -165,10 +165,14 @@ require_once('modules/db.php');
         </div></a>
       <?php }mysqli_close($conn); ?>
       </div>
-      <button type="button" id="moreInfo_btn" class="w3-button w3-round-xlarge" data-tf="0" name="" value="최신매물 더 보기" style="">최신매물 더 보기<img src="img/dropdown_15x15.png" alt="" style="margin-left:1.0rem;height:1.5rem;"></button>
+
+      <button type="button" id="moreInfo_btn" class="w3-button w3-round-xlarge" data-tf="0" name="" value="" style=""><div style='display:flex;align-items:center'>최신매물 더 보기<img src='img/dropdown_15x15.png' style='margin-left:1.0rem;height:1.5rem;'></div></button>
 
 
-      <!-- <input type="button" id="moreInfo_btn" class="w3-button w3-round-xlarge" data-tf="0" name="" value="최신매물 더 보기" style="box-shadow:3px 3px 10px 0 rgba(0, 0, 0, 0.16);width:30.0rem;color:#3b3b3b;background-color: #fff!important"> -->
+
+      <!-- <input type="button" id="moreInfo_btn" class="w3-button w3-round-xlarge" data-tf="0" name="moreInfo_btn" value="최신매물 더 보기" style="box-shadow:3px 3px 10px 0 rgba(0, 0, 0, 0.16);width:30.0rem;color:#3b3b3b;background-color: #fff!important"> -->
+
+      <!-- <label for="moreInfo_btn"><span id="moreInfo_btn_text">최신매물 더 보기</span></label> -->
     </div>
 
 
@@ -254,7 +258,6 @@ require_once('modules/db.php');
       </div>
 
     </div>
-
 
     <!-- 푸터 부분  -->
     <?php require_once('metrocket_footer.php');?>
@@ -366,7 +369,6 @@ require_once('modules/db.php');
 
                     }
                   });
-
 
                   return {
                     label : chosung + "|" + (item).replace(/ /gi, "") +"|" + full, //실제 검색어랑 비교 대상 ㄱㅊㅂㅇㅂ|김치볶음밥|ㄱㅣㅁㅊㅣㅂㅗㄲㅇㅡㅁㅂㅏㅂ 이 저장된다.
@@ -481,11 +483,11 @@ require_once('modules/db.php');
     function changeBtn_style() {
       if (document.getElementById('moreInfo_btn').dataset.tf=="0") {
         changeWidth_RecentProducts_gridbox(4);
-        document.getElementById('moreInfo_btn').value="닫기";
+        document.getElementById('moreInfo_btn').innerHTML="<div style='display:flex;align-items:center'>닫기<img src='img/listup_15x15.png' style='margin-left:1.0rem;height:1.5rem;'></div>";
         document.getElementById('moreInfo_btn').dataset.tf="1"
       }else {
         changeWidth_RecentProducts_gridbox(2);
-        document.getElementById('moreInfo_btn').value ="최신매물 더 보기";
+        document.getElementById('moreInfo_btn').innerHTML ="<div style='display:flex;align-items:center'>최신매물 더 보기<img src='img/dropdown_15x15.png' style='margin-left:1.0rem;height:1.5rem;'></div>";
         document.getElementById('moreInfo_btn').dataset.tf="0"
       }
     }

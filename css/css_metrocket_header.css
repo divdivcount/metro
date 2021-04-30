@@ -92,4 +92,8 @@ a{text-decoration: none;}
     margin: 2.0rem auto;
   }
   .imgbox_1 img{width: 75%}
+  .modalBox {width: 80%;height: auto;}
+}
+@media only screen and (max-height: 700px) {
+  .modalBox {height: auto;}
 }

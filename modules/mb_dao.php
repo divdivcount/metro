@@ -4,6 +4,8 @@
   class Member extends MetroDAO {
     protected $quTable = 'member';
     protected $quTableId = 'mb_num';
+    protected $quTableFname = 'mb_image';
+    protected $fdir = 'files';
 
     public function Member_Delete($mb_id) {
     try{
@@ -51,6 +53,37 @@
     	}
     	else return null;
     }
+
+    public function Delete_mbImg($id) {
+  		try{
+  			$this->openDB();
+
+  			// 파일 삭제
+  			if( $this->quTableFname !=  '') {
+
+  				$query = $this->db->prepare("select mb_image from $this->quTable where mb_num=:id");
+  				$query->bindValue(":id", $id, PDO::PARAM_STR);
+  				$query->execute();
+
+  				while ($fetch = $query->fetch(PDO::FETCH_ASSOC)) {
+            if ($fetch['mb_image'] != "img/normal_profile.png") {
+    					$fname = $fetch['mb_image'];
+    					// var_dump($fname);
+    					if($fname != '') {
+    						if(file_exists("files/".$fname)) {
+    							// echo "삭제";
+    							unlink("files/".$fname);
+    						}
+    					}
+            }else{
+              return null;
+            }
+  				}
+  			}
+  		}catch(PDOException $e){
+  			exit($e ->getMessage());
+  		}
+  	}
 
     // public function Member_Join($mb_id, $mb_password, $mb_name, $mb_email, $mb_gender, $mb_datetime) {
     // 	// 회원 번호 찾기

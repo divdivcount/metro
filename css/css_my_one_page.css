@@ -29,15 +29,18 @@ body {
 }
 .prfileImg_box{
   margin: 0 auto;
-  width: 160px;
-  height: 160px;
+  width: 16.0rem;
+  height: 16.0rem;
   position: relative;
 }
 .prfileImg_box .w3-circle {
-  width: 160px;
-  height: 160px;
+  width: 100%;
+  height: 100%;
 }
-.prfileImg_box .camera_btn {
+.prfileImg_box .open_updateImage_btn {
+  width: 5.6rem;
+  height: 5.6rem;
+  cursor: pointer;
 }
 .mainBtn_box{
   display: flex;
@@ -131,7 +134,16 @@ body {
   margin-top: 0.6rem;
   margin-bottom: 3.0rem;
 }
-.profile_image{text-align: center;}
+.changedProfile_image{
+  margin: 0 auto;
+  width: 21.0rem;
+  height: 21.0rem;
+  text-align: center;
+}
+.changedProfile_image img{
+  height: 100%;
+  width: 100%;
+}
 .updateImage_Button_Line{
   width: 100%;
   display: flex;
@@ -152,6 +164,7 @@ body {
   display: flex;
   justify-content: space-between;
   border-bottom: solid 1px #707070;
+  align-items: center;
 }
 .inputNicname_Line img{
   width: 10px;

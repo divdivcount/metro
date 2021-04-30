@@ -36,6 +36,7 @@
   font-size: 1.3rem;
   text-decoration: none;
   margin: 12px auto 0 auto;
+  font-family: "NotoSansKR_r";
 }
 .line  {
   width: 40%;
@@ -50,6 +51,7 @@
   margin-top: 10px;
   margin-bottom: 30px;
   font-size: 2.3em;
+  font-family: "NotoSansKR_m";
 }
 #loginbtn{
   width: 100%;
@@ -72,6 +74,7 @@
   margin:12px 0 12px 0;
   align-items: center;
   display:flex;
+  font-family: "NotoSansKR_r";
 }
 #logoimg_box{
   width: 100%;
@@ -86,7 +89,7 @@
   margin-bottom: 10px;
 }
 #imgbox img{
-  padding: 0 5px 0 5px;
+  margin:  0 0.5rem 0 0.5rem;
 }
 input::placeholder{
   color:#a7a7a7;

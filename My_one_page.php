@@ -67,19 +67,21 @@ require_once("modules/db.php");
 
         <div class="modalBox">            <!-- 콘텐츠 들어가는부분 -->
 
-          <div class="closeBtn_box"><img src="img/cancle.png" class="" onclick="updateImage_close()"></div>
+          <div class="closeBtn_box"><img src="img/cancle.png" class="" onclick="updateImage_close()" style="width:2.3rem;height:2.3rem;cursor:pointer"></div>
           <h3>프로필 이미지 등록</h3>
           <p>나를 표현하는 프로필 이미지를 등록하세요.</p>
-          <div class="profile_image"><img class="w3-circle" src="<?=$mb['mb_image'] ? $mb['mb_image'] : $om['om_image_url'] ?>" alt="">          </div>
+          <div class="changedProfile_image" ><img id="changedProfile_image" class="w3-circle" src="<?=($mb['mb_image']  != 'img/normal_profile.png'  ?'files/'.$mb['mb_image'] :
+            ($mb['mb_image']  == 'img/normal_profile.png' ? $mb['mb_image']  : $om['om_image_url']));?>" alt="">          </div>
           <div class="updateImage_Button_Line">
-            <button type="button" class="w3-button w3-round w3-light-gray" name="button">사진올리기</button>
-            <button type="button" class="w3-button w3-round w3-light-gray" name="button">삭제</button>
+            <button type="button" id="uploadImg_btn" class="w3-button w3-round w3-light-gray" name="button">사진올리기</button>
+            <button type="button" id="deleteImg_btn" class="w3-button w3-round w3-light-gray" name="button">삭제</button>
           </div>
           <span>닉네임</span>
-          <form action="" method="post">
-
+          <form action="update_ProfileImg.php" method="post" enctype="multipart/form-data">
+            <input type="file" id="real-input" name="files" class="image_inputType_file"  accept="image/jpeg,image/png,image/gif" style="display:none;" >
             <div class="inputNicname_Line">
-              <input name="nickname" type="text" value="<?=$mb['mb_name'] ? $mb['mb_name'] : $om['om_nickname']?>" placeholder="<?=$mb['mb_name'] ? $mb['mb_name'] : $om['om_nickname']?>">
+              <input name="nickname" type="text" value="<?=$mb['mb_name'] ? $mb['mb_name'] : null?>" placeholder="<?=$mb['mb_name'] ? $mb['mb_name'] : $om['om_nickname']?>">
+              <input type="hidden" name="member_num" value="<?=$mb['mb_num'] ? $mb['mb_num'] : null?>">
               <img src="img/close_10x10.png" alt="">
             </div>
 
@@ -101,8 +103,9 @@ require_once("modules/db.php");
     <!-- 유저정보  차후 php 작업 필요 -->
     <div class="profile_box">
       <div class="prfileImg_box">
-        <img class="w3-circle" src="<?=$mb['mb_image'] ? $mb['mb_image'] : $om['om_image_url'] ?>" >
-        <img src="img/camera.png" style="position:absolute;left:70%;top:70%;" alt="" class="open_updateImage_btn">
+        <img class="w3-circle" src="<?=($mb['mb_image']  != 'img/normal_profile.png'  ?'files/'.$mb['mb_image'] :
+          ($mb['mb_image']  == 'img/normal_profile.png' ? $mb['mb_image']  : $om['om_image_url']));?>" >
+        <img src="img/camera.png" style="position:absolute;left:70%;top:70%;" alt="" class="open_updateImage_btn" data-check_om="<?= isset($om['om_id']) ? $om['om_id'] : null ?> ">
       </div>
         <div class="user_name"><?=$mb['mb_name'] ? $mb['mb_name'] : $om['om_nickname']?></div>
     </div>
@@ -110,10 +113,10 @@ require_once("modules/db.php");
     <!-- 메인 버튼 -->
 
     <div class="mainBtn_box">
-       <button type="button" class="w3-button w3-round-large" name="main_button" onclick = "changeIframeUrl('member_update.php')" >회원 정보</button>
-       <button type="button" class="w3-button w3-round-large" name="main_button" onclick = "changeIframeUrl('sangpum.php')" >판매 상품</button>
-       <button type="button" class="w3-button w3-round-large" name="main_button" onclick = "changeIframeUrl('gansim_sangpum.php')" >관심 상품</button>
-       <button type="button" class="w3-button w3-round-large" name="main_button" onclick = "changeIframeUrl('buy_sangpum.php')">구매 상품</button>
+       <button type="button" class="w3-button w3-round-large tapMenu_btn" name="main_button" onclick = "changeIframeUrl('member_update.php')" >회원 정보</button>
+       <button type="button" class="w3-button w3-round-large tapMenu_btn" name="main_button" onclick = "changeIframeUrl('sangpum.php')" >판매 상품</button>
+       <button type="button" class="w3-button w3-round-large tapMenu_btn" name="main_button" onclick = "changeIframeUrl('gansim_sangpum.php')" >관심 상품</button>
+       <button type="button" class="w3-button w3-round-large tapMenu_btn" name="main_button" onclick = "changeIframeUrl('buy_sangpum.php')">구매 상품</button>
     </div>
 
     <form name="nan" method="post" target="mbs">
@@ -131,7 +134,7 @@ require_once("modules/db.php");
         document.getElementById("main_frame").src = url;
   		}
 
-    var mainBtn = document.getElementsByClassName('w3-button w3-round');
+    var mainBtn = document.getElementsByClassName('tapMenu_btn');
     for (var i = 0; i < 4; i++) {
 
       mainBtn.item(i).addEventListener('click',(event)=>{
@@ -169,16 +172,49 @@ require_once("modules/db.php");
     iframe.height = sub.body.scrollHeight
   }
 
-  //
+  // 유저 이미지 및 닉네임 변경모달창 관련 함수
   function updateImage_open() {
-    document.querySelector(".my_one_page_modal").classList.remove("hidden");
+    alert(document.querySelector(".open_updateImage_btn").dataset.check_om);
+    if (document.querySelector(".open_updateImage_btn").dataset.check_om == null) {
+       document.querySelector(".my_one_page_modal").classList.remove("hidden");
+    }
   }
   function updateImage_close() {
     document.querySelector(".my_one_page_modal").classList.add("hidden");
   }
   document.querySelector(".open_updateImage_btn").addEventListener("click", updateImage_open);
 
+  const realInput = document.getElementById('real-input');
+  const uploadImg_btn = document.getElementById('uploadImg_btn');
+  const deleteImg_btn = document.getElementById('deleteImg_btn');
+  const changedProfile_image = document.getElementById('changedProfile_image');
 
+  //사진 올리기 버튼과 이미지에 파일업로드 이벤트 연결
+  uploadImg_btn.addEventListener('click',()=>{realInput.click();});
+  changedProfile_image.addEventListener('click',()=>{realInput.click();});
+
+  //삭제버튼 누르면 파일 정보를 삭제
+  deleteImg_btn.addEventListener('click',()=>{
+    realInput.value="";
+    // realInput.files[0].name ="img/normal_profile.png";
+    // alert(realInput.files[0].name);
+    changedProfile_image.src="img/normal_profile.png";
+  });
+
+  //사진 업로드 함수
+  realInput.addEventListener('change',function(){
+
+      if(this.files[0].type!='image/jpeg' && this.files[0].type!='image/png') {
+        alert('jpg 및 png 이미지를 업로드해주세요');
+        realInput.value="";
+      }else{
+        var url =""
+        url = URL.createObjectURL(this.files[0]);
+        changedProfile_image.src =  url ;
+        alert(changedProfile_image.src);
+      }
+
+  })
 </script>
 </html>
 <?php } ?>

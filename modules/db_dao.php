@@ -44,7 +44,9 @@ class MetroDAO {
     $this->db = new PDO($profile, $this->dbid, $this->dbpw);
     $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   }
-//제품 출력
+
+
+	//제품 출력
 	public function SelectAll($select = '*', $where = null) {
     $this->openDB();
     if($where){
@@ -103,33 +105,36 @@ class MetroDAO {
 		}
 		$query->execute();
 	}
-//제품 삭제
+	//제품 삭제
 
-public function Delete($id) {
-try{
-$this->openDB();
+	public function Delete($id) {
+		try{
+			$this->openDB();
 
-// 파일 삭제
-if( $this->quTableFname !=  '') {
-$query = $this->db->prepare("select pr_img from $this->quTable where pr_img_id=:id");
-$query->bindValue(":id", $id, PDO::PARAM_STR);
-$query->execute();
-while ($fetch = $query->fetch(PDO::FETCH_ASSOC)) {
-	$fname = $fetch['pr_img'];
-	// var_dump($fname);
-	if($fname != '') {
-			if(file_exists("files/".$fname)) {
-				// echo "삭제";
-				unlink("files/".$fname);
+			// 파일 삭제
+			if( $this->quTableFname !=  '') {
+
+				$query = $this->db->prepare("select pr_img from $this->quTable where pr_img_id=:id");
+				$query->bindValue(":id", $id, PDO::PARAM_STR);
+				$query->execute();
+
+				while ($fetch = $query->fetch(PDO::FETCH_ASSOC)) {
+					$fname = $fetch['pr_img'];
+					// var_dump($fname);
+					if($fname != '') {
+						if(file_exists("files/".$fname)) {
+							// echo "삭제";
+							unlink("files/".$fname);
+						}
+					}
+				}
+
+				$query = $this->db->prepare("delete from $this->quTable where pr_img_id=:id");
+				$query->bindValue(":id", $id, PDO::PARAM_STR);
+				$query->execute();
 			}
-		}
-}
-$query = $this->db->prepare("delete from $this->quTable where pr_img_id=:id");
-$query->bindValue(":id", $id, PDO::PARAM_STR);
-$query->execute();
-}
-	}catch(PDOException $e){
-	exit($e ->getMessage());
+		}catch(PDOException $e){
+			exit($e ->getMessage());
 		}
 	}
 
@@ -322,6 +327,7 @@ $query->execute();
 			$farray = array();//farray배열 선언
 			if($this->quTableFname) { //$this->quTableFname이 있으면 farray[파일이름필드의 이름] = 임시파일명
 				$farray[$this->quTableFname] = $fname_save; //farray[파일이름필드의 이름] = 임시파일명
+				echo $fname_save;
 			}
 			if($this->quTableFrname) {//quTableFrname이 있으면
 				$farray[$this->quTableFrname] = $fdat['name'];//quTableFrname을

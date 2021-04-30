@@ -44,8 +44,8 @@ $naver_apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code&cli
 
           <!-- 소셜 로그인 아이콘 부분 -->
           <div id="imgbox">
-            <a href="<?=$naver_apiURL;?>"><img src="img/naver.png"></a>
-            <a href="<?= $kakaoLoginUrl;?>"><img src="img/kakao.png" /></a>
+            <a href="<?=$naver_apiURL;?>"><img src="img/naver.png" style="width:5.0rem;height:5.0rem"></a>
+            <a href="<?= $kakaoLoginUrl;?>"><img src="img/kakao.png"  style="width:5.0rem;height:5.0rem"></a>
             <!-- <img src="img/google.png" alt=""> -->
           </div>
           <a class="text_center" href="signup_agreement.php">아직 회원이 아니신가요? 회원가입</a>
