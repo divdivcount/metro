@@ -70,8 +70,7 @@ require_once("modules/db.php");
           <div class="closeBtn_box"><img src="img/cancle.png" class="" onclick="updateImage_close()" style="width:2.3rem;height:2.3rem;cursor:pointer"></div>
           <h3>프로필 이미지 등록</h3>
           <p>나를 표현하는 프로필 이미지를 등록하세요.</p>
-          <div class="changedProfile_image" ><img id="changedProfile_image" class="w3-circle" src="<?=($mb['mb_image']  != 'img/normal_profile.png'  ?'files/'.$mb['mb_image'] :
-            ($mb['mb_image']  == 'img/normal_profile.png' ? $mb['mb_image']  : $om['om_image_url']));?>" alt="">          </div>
+          <div class="changedProfile_image" ><img id="changedProfile_image" class="w3-circle" src="<?= $mb['mb_image'] ?($mb['mb_image'] == 'img/normal_profile.png' ? $mb['mb_image'] : 'files/'.$mb['mb_image']) : $om['om_image_url'] ?>" alt="">          </div>
           <div class="updateImage_Button_Line">
             <button type="button" id="uploadImg_btn" class="w3-button w3-round w3-light-gray" name="button">사진올리기</button>
             <button type="button" id="deleteImg_btn" class="w3-button w3-round w3-light-gray" name="button">삭제</button>
