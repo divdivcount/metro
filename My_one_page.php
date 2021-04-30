@@ -172,7 +172,6 @@ require_once("modules/db.php");
 
   // 유저 이미지 및 닉네임 변경모달창 관련 함수
   function updateImage_open() {
-    alert(document.querySelector(".open_updateImage_btn").dataset.check_om);
     if (document.querySelector(".open_updateImage_btn").dataset.check_om == null) {
        document.querySelector(".my_one_page_modal").classList.remove("hidden");
     }
@@ -209,7 +208,6 @@ require_once("modules/db.php");
         var url =""
         url = URL.createObjectURL(this.files[0]);
         changedProfile_image.src =  url ;
-        alert(changedProfile_image.src);
       }
 
   })
