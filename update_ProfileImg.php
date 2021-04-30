@@ -38,7 +38,7 @@
     <body>
       <script type="text/javascript">
         alert("프로필 정보가 성공적으로 저장되었습니다");
-        hitory.back();
+        history.back();
       </script>
     </body>
   </html>
