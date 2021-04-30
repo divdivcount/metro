@@ -103,7 +103,7 @@ require_once("modules/db.php");
     <div class="profile_box">
       <div class="prfileImg_box">
         <img class="w3-circle" src="<?=$mb['mb_image'] ?($mb['mb_image'] == 'img/normal_profile.png' ? $mb['mb_image'] : 'files/'.$mb['mb_image']) : $om['om_image_url']?>" >
-        <img src="img/camera.png" style="position:absolute;left:70%;top:70%;" alt="" class="open_updateImage_btn" data-check_om="<?= isset($om['om_id']) ? $om['om_id'] : null ?> ">
+        <img src="img/camera.png" style="position:absolute;left:70%;top:70%;" alt="" class="open_updateImage_btn" data-check_om="<?= isset($om['om_id']) ? $om['om_id'] : "1" ?> ">
       </div>
         <div class="user_name"><?=$mb['mb_name'] ? $mb['mb_name'] : $om['om_nickname']?></div>
     </div>
@@ -172,8 +172,10 @@ require_once("modules/db.php");
 
   // 유저 이미지 및 닉네임 변경모달창 관련 함수
   function updateImage_open() {
-    if (document.querySelector(".open_updateImage_btn").dataset.check_om == null) {
+    if (document.querySelector(".open_updateImage_btn").dataset.check_om == 1) {
        document.querySelector(".my_one_page_modal").classList.remove("hidden");
+    }else{
+      alert("소셜 로그인 유저는 사이트내에서 프로필 이미지 및 닉네임 변경이 불가합니다.");
     }
   }
   function updateImage_close() {
