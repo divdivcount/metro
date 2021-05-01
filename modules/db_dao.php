@@ -327,7 +327,7 @@ class MetroDAO {
 			$farray = array();//farray배열 선언
 			if($this->quTableFname) { //$this->quTableFname이 있으면 farray[파일이름필드의 이름] = 임시파일명
 				$farray[$this->quTableFname] = $fname_save; //farray[파일이름필드의 이름] = 임시파일명
-				echo $fname_save;
+				// echo $fname_save;
 			}
 			if($this->quTableFrname) {//quTableFrname이 있으면
 				$farray[$this->quTableFrname] = $fdat['name'];//quTableFrname을

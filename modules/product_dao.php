@@ -89,6 +89,32 @@ class Product extends MetroDAO {
       else return null;
     }
 
+    public function Product_status_update($pr_id) {
+      // 회원 정보 1명 찾기
+      $this->openDB();
+      $query = $this->db->prepare("update product set mb_name = '거래완료' where pr_id = :pr_id");
+      $query->bindValue(":pr_id", $pr_id, PDO::PARAM_INT);
+      $query->execute();
 
+      $query = $this->db->prepare("select * from product where pr_id=:pr_id");
+      $query->bindValue(":pr_id", $pr_id, PDO::PARAM_INT);
+
+
+      while ($fetch = $query->fetch(PDO::FETCH_ASSOC)) {
+        $status = $fetch['pr_status'];
+        var_dump($status);
+        if($status === '거래완료') {
+          $last_id = 0;
+          $query = $this->db->prepare("insert into product_history valuse (null, {$fetch['pr_id']},{$fetch['pr_img_id']},{$fetch['pr_order_id']},{$fetch['pr_id']}) ");
+          $query->bindValue(":pr_id", $pr_id, PDO::PARAM_INT);
+          $query->execute();
+          if($last_id == 0){
+      			$last_id = $this->db->lastInsertId();//오토 인크리먼트로 가장 최근 값
+      		}
+      		$this->db->exec("update product_history set pr_order_id = {$last_id} where pu_id = " . $this->db->lastInsertId());
+      		return $last_id;
+        }
+      }
+    }
 }
   ?>

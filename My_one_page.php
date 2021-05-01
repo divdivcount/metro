@@ -1,5 +1,8 @@
 <?php
-require_once("modules/db.php");
+  error_reporting(E_ALL);
+  ini_set('display_errors', '1');
+  require_once("modules/db.php");
+  require_once("modules/notification.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -79,7 +82,7 @@ require_once("modules/db.php");
           <form action="update_ProfileImg.php" method="post" enctype="multipart/form-data">
             <input type="file" id="real-input" name="files" class="image_inputType_file"  accept="image/jpeg,image/png,image/gif" style="display:none;" >
             <div class="inputNicname_Line">
-              <input name="nickname" type="text" value="<?=$mb['mb_name'] ? $mb['mb_name'] : null?>" placeholder="<?=$mb['mb_name'] ? $mb['mb_name'] : $om['om_nickname']?>">
+              <input name="nickname" type="text" placeholder="<?=$mb['mb_name'] ? $mb['mb_name'] : $om['om_nickname']?>">
               <input type="hidden" name="member_num" value="<?=$mb['mb_num'] ? $mb['mb_num'] : null?>">
               <img src="img/close_10x10.png" alt="">
             </div>

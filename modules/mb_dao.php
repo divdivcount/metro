@@ -85,6 +85,15 @@
   		}
   	}
 
+    public function Member_nickname_update($mb_num, $mb_name) {
+    	// 회원 정보 1명 찾기
+    	$this->openDB();
+    	$query = $this->db->prepare("update member set mb_name = :mb_name where mb_num = :mb_num");
+      $query->bindValue(":mb_num", $mb_num, PDO::PARAM_INT);
+      $query->bindValue(":mb_name", $mb_name, PDO::PARAM_STR);
+    	$query->execute();
+    }
+
     // public function Member_Join($mb_id, $mb_password, $mb_name, $mb_email, $mb_gender, $mb_datetime) {
     // 	// 회원 번호 찾기
     // 	$this->openDB();

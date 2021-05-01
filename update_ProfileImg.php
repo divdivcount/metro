@@ -1,11 +1,19 @@
 <?php
+  error_reporting(E_ALL);
+  ini_set('display_errors', '1');
   require_once("modules/db.php");
+  require_once("modules/notification.php");
+  $productIMG = new Member();
+  $member_num = Post("member_num", null);
+  $nickname = Post("nickname", null);
 
-  $member_num = $_POST["member_num"];
+  if($nickname != null && $member_num != null){
+    $productIMG->Member_nickname_update($member_num, $nickname);
+  }
 
   if ($_FILES['files']['name'] != "") {
     if($_FILES['files']['type'] == 'image/jpeg' || $_FILES['files']['type'] == 'image/png' || $_FILES['files']['type'] == 'image/gif') {
-      $productIMG = new Member();
+
       $userprofile_img[] = $productIMG->fileUploader($_FILES['files']);
       $fileName ="";
       $fileName = $userprofile_img[0]['mb_image'];
@@ -16,7 +24,6 @@
       $result = mysqli_query($conn, $query);
     }
   }else{
-    $productIMG = new Member();
     $query = "update member set mb_image = 'img/normal_profile.png' where mb_num = TRIM($member_num)";
     $result = mysqli_query($conn, $query);
     $productIMG->Delete_mbImg($member_num);
