@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<style>
+.bigB{
+  height:auto;
+  padding: 5.0rem 3.0rem 5.0rem;
+  border-radius: 20px;
+  background-color: #ffffff;
+}
+.mother{
+  margin:auto;
+  display:grid;
+  grid-template-columns:1fr;
+  grid-template-rows:auto;
+}
+.reP{
+  font-size:3.5rem;
+  font-weight:500;
+  color:#3b3b3b;
+  font-family:"NotoSansKR_m";
+  display: flex;
+  align-items: center;
+}
+.conT{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  font-size:2.0rem;
+  color:#5b5b5b;
+  font-family: "NotoSansKR_r";
+  margin:auto;
+  align-items: center;
+}
+.conT .conT_gridItem{
+   margin: 2.5rem 0;
+}
+input[type=checkbox] {display:none;}
+
+input[type=checkbox] + label {
+display: inline-block;
+cursor: pointer;
+line-height: 22px;
+padding-left: 27px;
+background: url('img/check.png') left/22px no-repeat;
+}
+
+input[type=checkbox]:checked + label { background-image: url('img/checkIn.png'); }
+
+.box{
+  width:100%;
+  height:200px;
+  border-radius:20px;
+  background-color:#f0f0f0;
+  padding:20px;
+  box-shadow:0px 3px 6px 0px rgba(0,0,0,0.16);
+}
+.textarea{
+  width: 100%;
+  font-size: 1.5rem;
+  background-color:#f0f0f0;
+  border:0px solid #f0f0f0;
+  height: 20.0rem;
+  outline: none;
+  resize: none;
+}
+.reportBtn_box{
+  display: flex;
+  justify-content: space-around;
+  margin: 3.0rem 0 5.0rem 0;
+}
+.button{
+  width: 40%;
+  max-width: 180px;
+  height: 5.0rem;
+  padding: 1.0rem 5.0rem;
+  border-radius: 50px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: #0088ff;
+  border:0px solid;
+  color:#ffffff;
+  font-size: 2.0rem;
+  font-family: "NotoSansKR_r";
+}
+.button2{
+  width: 40%;
+  max-width: 180px;
+  height: 5.0rem;
+  padding: 1.0rem 5.0rem;
+  border-radius: 50px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+  background-color: #f0f0f0;
+  border:0px solid;
+  font-size: 2.0rem;
+  font-family: "NotoSansKR_r";
+ }
+</style>
+</head>
+<body>
+  <div class=bigB>
+    <div class=mother>
+      <div class="closeBtn_box"><img src="img/cancle.png" class="" onclick="report_close()" style="width:2.3rem;height:2.3rem;cursor:pointer"></div>
+      <div class=reP><img src="img/reP.png">신고하기</div><br>
+	  <form>
+		<div class=conT>
+			<div class="conT_gridItem"><input type="checkbox" id="che0" name="che0"/><label for="che0">광고성/홍보성</label></div>
+			<div class="conT_gridItem"><input type="checkbox" id="che1" name="che1"/><label for="che1">업자로 의심</label></div>
+			<div class="conT_gridItem"><input type="checkbox" id="che2" name="che2"/><label for="che2">판매글이 아닌 글</label></div>
+			<div class="conT_gridItem"><input type="checkbox" id="che3" name="che3"/><label for="che3">욕설/폭언</label></div>
+			<div class="conT_gridItem"><input type="checkbox" id="che4" name="che4"/><label for="che4">같은 내용 반복 게시</label></div>
+			<div class="conT_gridItem"><input type="checkbox" id="che5" name="che5"/><label for="che5">글과 사진이 연관이 없음</label></div>
+			<div class="conT_gridItem"><input type="checkbox" id="che6" name="che6"/><label for="che6">기타</label></div>
+		</div>
+
+
+    <textarea name="report_otherReason" placeholder="기타 사유를 입력해 주세요."  class="textarea"></textarea>
+    <div class="reportBtn_box">.
+      <button class="button">신고하기</button>
+  		<button class="button2">취소</button>
+    </div>
+
+	   </form>
+    </div>
+  </div>
+  </body>
+</html>

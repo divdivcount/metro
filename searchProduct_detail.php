@@ -40,7 +40,18 @@ try{
   </head>
   <body>
   <div id="wrapPage">
+    <!-- 모달팝업 (hidden여부로 팝업) -->
+    <div class="report_modal hidden">
+      <div class="bg">          <!-- 백그라운드 잡는 부분  -->
+        <div class="fix_page">  <!-- 화면가운데 fix로 잡는 부분  -->
 
+          <div class="modalBox">            <!-- 콘텐츠 들어가는부분 -->
+            <?= require_once('report.html'); ?>
+          </div>
+
+        </div>
+      </div>
+    </div>
     <!-- 상단 메뉴 부분 -->
     <?php require_once('metrocket_header.php');?>
     <div id="wrapContainer_Box">
@@ -92,7 +103,7 @@ try{
           </div>
 
           <!-- 신고하기 버튼  -->
-          <div id="reportBtn_box" class="imgPlusText">
+          <div id="reportBtn_box" class="imgPlusText" onclick="report_open()">
             <div class="img_box"><img src="img/siren.png" alt=""></div>
             <span>신고하기</span>
           </div>
@@ -189,14 +200,14 @@ try{
             </div>
           </div>
 
-          <div class="" id="rep_modal_del">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h4 class="modal-title"><b>댓글 삭제</b></h4>
+          <div class="" id="rep_del">
+            <div class="rep_dialog">
+              <div class="rep_content">
+                <div class="rep_header">
+                  <h4 class="rep_title"><b>댓글 삭제</b></h4>
                 </div>
-                <div class="modal-body">
-                  <form method="get" id="modal_form" action="reply_delete.php">
+                <div class="rep_body">
+                  <form method="get" id="rep_form" action="reply_delete.php">
                     <input type="hidden" name="rno" value="<?=$reple['idx']?>" />
                     <input type="hidden" name="b_no" value="<?=$pr_id?>">
                     <input type="submit" class="btn btn-primary" value="확인" /></p>
@@ -339,7 +350,7 @@ try{
         })
 
         $(".dat_del_btn").click(function() {
-          $("#rep_modal_del").modal();
+          $("#rep_del").modal();
         });
 
         $('.bxslider').bxSlider( {
@@ -402,6 +413,13 @@ try{
     var win_memo = function(href) { // 쪽지 팝업창
     var new_win = window.open(href, 'win_memo', 'left=100,top=100,width=620,height=600,scrollbars=1');
     new_win.focus();
+    }
+    function report_open() {
+      document.querySelector(".report_modal").classList.remove("hidden");
+    }
+
+    function report_close() {
+      document.querySelector(".report_modal").classList.add("hidden");
     }
     </script>
   </div>

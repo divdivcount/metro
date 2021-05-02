@@ -166,7 +166,7 @@ require_once('modules/db.php');
       <?php }mysqli_close($conn); ?>
       </div>
 
-      <button type="button" id="moreInfo_btn" class="w3-button w3-round-xlarge" data-tf="0" name="" value="" style=""><div style='display:flex;align-items:center'>최신매물 더 보기<img src='img/dropdown_15x15.png' style='margin-left:1.0rem;height:1.5rem;'></div></button>
+      <button type="button" id="moreInfo_btn" class="w3-button w3-round-xlarge" data-tf="0" name="" value="" style=""><div style='display:flex;align-items:center;justify-content: center;'>최신매물 더 보기<img src='img/dropdown_15x15.png' style='margin-left:1.0rem;height:1.5rem;'></div></button>
 
 
 
