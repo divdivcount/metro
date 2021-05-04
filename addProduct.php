@@ -34,6 +34,9 @@ ini_set('display_errors', '1');
     <title></title>
   </head>
   <body>
+    <div id="wrapPage">
+
+
     <!-- 상단 메뉴 부분 -->
     <?php require_once('metrocket_header.php'); ?>
 
@@ -323,6 +326,7 @@ ini_set('display_errors', '1');
     </div>
     <!-- 푸터 부분  -->
     <?php require_once 'metrocket_footer.php';?>
+    </div>
   </body>
   <script type="text/javascript">
     const img_Item = document.getElementsByClassName('img_Item');

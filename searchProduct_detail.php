@@ -87,7 +87,7 @@ try{
           <div class="userProfile">
             <!-- 사람사진 -->
             <div class="profileImg">
-              <img src="<?= $row["profile_img"] ?>" alt="">
+              <img class=" w3-circle" src="<?= $mb['mb_image'] ?($mb['mb_image'] == 'img/normal_profile.png' ? $mb['mb_image'] : 'files/'.$mb['mb_image']) : $om['om_image_url'] ?>" alt="">
             </div>
 
             <!-- 이름이랑 호선  -->
