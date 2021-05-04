@@ -115,7 +115,7 @@ body {
 .productText_box_title_line{width: 100%;height:2.1rem;margin-top: 0.5rem;font-family: "NotoSansKR_r";font-size: 1.5rem;color: #3b3b3b;text-align: center;text-overflow:ellipsis;overflow:hidden;
 overflow : hidden;
 text-overflow : ellipsis;
-height : 2.1rem; /*(대신 height를 설정해준다. 텍스트 크기에 맞춰 height가 1줄인 경우를 생각하자.) */
+height : auto; /*(대신 height를 설정해준다. 텍스트 크기에 맞춰 height가 1줄인 경우를 생각하자.) */
 word-wrap : brek-word;
 display : -webkit-box;
 -webkit-line-clamp : 1; /*(줄 개수를 설정한다. 만약 2줄이상이라면 height와 해당 값을 수정한다.) */
@@ -124,7 +124,7 @@ display : -webkit-box;
 .productText_box_station_line{width: 100%;height:2.1rem;margin-top: 0.5rem;font-family: "NotoSansKR_t";font-size: 1.5rem;color: #707070;text-align: center;
 overflow : hidden;
 text-overflow : ellipsis;
-height : 2.1rem; /*(대신 height를 설정해준다. 텍스트 크기에 맞춰 height가 1줄인 경우를 생각하자.) */
+height : auto; /*(대신 height를 설정해준다. 텍스트 크기에 맞춰 height가 1줄인 경우를 생각하자.) */
 word-wrap : brek-word;
 display : -webkit-box;
 -webkit-line-clamp : 1; /*(줄 개수를 설정한다. 만약 2줄이상이라면 height와 해당 값을 수정한다.) */
@@ -133,7 +133,7 @@ display : -webkit-box;
 .productText_box_category_line{width: 100%;height:2.1rem;margin-top: 0.5rem;font-family: "NotoSansKR_t";font-size: 1.5rem;color: #707070;text-align: center;
 overflow : hidden;
 text-overflow : ellipsis;
-height : 2.1rem; /*(대신 height를 설정해준다. 텍스트 크기에 맞춰 height가 1줄인 경우를 생각하자.) */
+height : auto; /*(대신 height를 설정해준다. 텍스트 크기에 맞춰 height가 1줄인 경우를 생각하자.) */
 word-wrap : brek-word;
 display : -webkit-box;
 -webkit-line-clamp : 1; /*(줄 개수를 설정한다. 만약 2줄이상이라면 height와 해당 값을 수정한다.) */
@@ -142,7 +142,7 @@ display : -webkit-box;
 .productText_box_price_line{width: 100%;height:2.1rem;margin-top: 0.5rem;font-family: "NotoSansKR_m";font-size: 1.5rem;color: #3b3b3b;text-align: center;
 overflow : hidden;
 text-overflow : ellipsis;
-height : 2.1rem; /*(대신 height를 설정해준다. 텍스트 크기에 맞춰 height가 1줄인 경우를 생각하자.) */
+height : auto; /*(대신 height를 설정해준다. 텍스트 크기에 맞춰 height가 1줄인 경우를 생각하자.) */
 word-wrap : brek-word;
 display : -webkit-box;
 -webkit-line-clamp : 1; /*(줄 개수를 설정한다. 만약 2줄이상이라면 height와 해당 값을 수정한다.) */
@@ -374,7 +374,7 @@ a{text-decoration: none;}
   #c_img03 .contentImg_text{left: 60%;top: 25%;transform: translate(-60%, -25%);}
   #c_img03 .contentImg_text p{font-size:2.0rem;}
   #c_img03 .contentImg_text h5,#c_img01 .contentImg_text span{font-size:1.25rem;}
-  
+
   .imgbox_3{width: 40%;}
 }
 @media only screen and (max-width: 540px) {

@@ -48,7 +48,7 @@ ini_set('display_errors', '1');
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="css/css_noamlfont.css">
-<link rel="stylesheet" href="css/css_sangpum.css">
+<link rel="stylesheet" href="css/css_gansim_sangpum.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <style>
 
@@ -58,27 +58,28 @@ ini_set('display_errors', '1');
 	<div class="w3-content w3-container">
 
     <!-- 제목 -->
-    <h3 class="h3">판매 내역</h3>
-
+    <h3 class="h3">관심목록 내역</h3>
+    <?php
+      try {
+          // $start_s_value = empty($_REQUEST["start_s_value"]) ? "" : $_REQUEST["start_s_value"];
+          // $s_value = empty($_REQUEST["s_value"]) ? "" : $_REQUEST["s_value"];
+          // if($start_s_value){
+          // 	$result = $dao->SelectPageLength($pid, 10, $s_value, $start_s_value);
+          //   $list = $dao->SelectPageList($result['current'], 10,$s_value, $start_s_value);
+          // }else{
+          $result = $dao->SelectPageLength($pid, 4, isset($mb_id) ? $mb_id : 'null', isset($om_id) ? $om_id : 'null','');
+          $list = $dao->SelectPageList($result['current'], 4, isset($mb_id) ? $mb_id : 'null', isset($om_id) ? $om_id : 'null','');
+        // }
+      } catch (PDOException $e) {
+        $result = null;
+        $list = null;
+       echo $e->getMessage();
+      }
+    ?>
+    <?php if ($list): ?>
     <!-- 상품 나오는 박스  -->
 		<div class="productList_box">
-      <?php
-      	try {
-      			// $start_s_value = empty($_REQUEST["start_s_value"]) ? "" : $_REQUEST["start_s_value"];
-      		  // $s_value = empty($_REQUEST["s_value"]) ? "" : $_REQUEST["s_value"];
-      			// if($start_s_value){
-      			// 	$result = $dao->SelectPageLength($pid, 10, $s_value, $start_s_value);
-      			//   $list = $dao->SelectPageList($result['current'], 10,$s_value, $start_s_value);
-      			// }else{
-      			$result = $dao->SelectPageLength($pid, 4, isset($mb_id) ? $mb_id : 'null', isset($om_id) ? $om_id : 'null','');
-      			$list = $dao->SelectPageList($result['current'], 4, isset($mb_id) ? $mb_id : 'null', isset($om_id) ? $om_id : 'null','');
-      		// }
-      	} catch (PDOException $e) {
-      	  $result = null;
-      	  $list = null;
-      	 echo $e->getMessage();
-      	}
-      ?>
+
 
       <!-- 상품 정보  -->
       <?php foreach ($list as $row) : ?>
@@ -154,7 +155,17 @@ ini_set('display_errors', '1');
           <a class="abtn" href="gansim_sangpum.php?p=<?=($pid + 1)?>">&gt;</a>
         <?php endif ?>
       </div>
+      <?php else: ?>
+        <div id="empty_page">
+          <img src="img/sad_back.png" alt="">
+          <h4>EMPTY</h4>
+          <p>
+            <span>고객님의 관심 상품 정보가 비어있습니다.</span><br>
+            다른 상품을 관심등록 하시면 관련 정보가 보여집니다.
+          </p>
+        </div>
 
+    <?php endif; ?>
 
 		</div>
 

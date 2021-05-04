@@ -470,11 +470,28 @@ require_once('modules/db.php');
   //768px 때 서브배너이미지 변경 (모바일용으로)
   function changeSubBannerImge() {
     var w_width = window.outerWidth;
+    bannerImg_box_img = document.getElementById('bannerImg_box').getElementsByTagName('img');
+
     if (w_width <= 768) {
+      for (var i = 1; i <= 4; i++) {
+        bannerImg_box_img.item(i).src = "img/slideimg_" + i + "_m.png";
+      }
+      //사이트 서브 배너 이미지
       document.getElementById('img01').src = "img/bannerImg_1_768x320.png";
       document.getElementById('img02').src = "img/bannerImg_2_768x320.png";
       document.getElementById('img03').src = "img/bannerImg_3_768x110.png";
+    }else{
+      for (var i = 1; i <= 4; i++) {
+        bannerImg_box_img.item(i).src = "img/slideimg_" + i + ".png";
+      }
+      //사이트 서브 배너 이미지
+      document.getElementById('img01').src = "img/bannerImg_1.png";
+      document.getElementById('img02').src = "img/bannerImg_2.png";
+      document.getElementById('img03').src = "img/bannerImg_3.png";
     }
+
+
+
   }
 
   //더보기 버튼
@@ -495,13 +512,24 @@ require_once('modules/db.php');
 
   //콘텐츠이미지들 일정디스플레이시 변경해주는 함수
   window.addEventListener("resize", changeContent);
-    changeSubBannerImge();
+
     function changeContent() {
       if (document.getElementById('moreInfo_btn').dataset.tf=="0") {
         changeWidth_RecentProducts_gridbox(2);
       }else {
         changeWidth_RecentProducts_gridbox(4);
       }
+      changeSubBannerImge();
+      $('.bxslider').bxSlider( {
+          mode: 'horizontal',// 가로 방향 수평 슬라이드
+          speed: 500,        // 이동 속도를 설정
+          pager: false,      // 현재 위치 페이징 표시 여부 설정
+          moveSlides: 1,     // 슬라이드 이동시 개수
+          auto: true,        // 자동 실행 여부
+          autoHover: false,   // 마우스 호버시 정지 여부
+          controls: true,    // 이전 다음 버튼 노출 여부
+          captions:true
+      });
     }
 
 </script>
