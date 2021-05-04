@@ -142,9 +142,9 @@ try{
               <span>도착시간</span>
             </div>
 
-            <div class="imgPlusText">
+            <div class="imgPlusText" onclick="registerInterest()">
               <!-- 여기 관심등록 -->
-              <div class="img_box"> <img src="<?php if($row["mem_i_check"] == 0){echo "img/staroff_19x19.png";}elseif($row["mem_i_check"] == 1){echo "img/star_19x19.png";} ?>" id="star_btn" data-value="<?=$row["mem_i_check"] ? $row["mem_i_check"] : 0 ?>" alt="" onclick="test()"></div>
+              <div class="img_box" > <img src="<?php if($row["mem_i_check"] == 0){echo "img/staroff_19x19.png";}elseif($row["mem_i_check"] == 1){echo "img/star_19x19.png";} ?>" id="star_btn" data-value="<?=$row["mem_i_check"] ? $row["mem_i_check"] : 0 ?>" alt="" ></div>
               <span>관심등록</span>
             </div>
 
@@ -369,45 +369,51 @@ try{
      //  star_btn.addEventListener('click',(event)=>{
      //
      // });
-    function test() {
+    function registerInterest() {
       let values =star_btn.dataset.value;
       let pr_id = "<?= $pr_id ?>";
       let mb_id = "<?= isset($mb) ? $mb["mb_num"] : 'null' ?>";
       let om_id = "<?= isset($om) ? $om["om_id"] : 'null' ?>";
-      if (star_btn.dataset.value == 0) {
-        $.ajax({
-            url:'search_detail_ajax.php', //request 보낼 서버의 경로
-            type:'post', // 메소드(get, post)
-            data:{values:"0", pr_id : pr_id, mb_id:mb_id, om_id:om_id}, //보낼 데이터
-            success: function(data) {
-                //서버로부터 정상적으로 응답이 왔을 때 실행
-                $('#star_btn').html(data);
-                star_btn.src ="img/star_19x19.png";
-                star_btn.dataset.value = 1;
-            },
-            error: function(err) {
-              alert("관심 상품을 등록하기 위해서 로그인을 먼저 해주세요");
-              // history.back();
-            }
-        });
+
+      if (mb_id != 'null' || om_id != 'null') {
+        if (star_btn.dataset.value == 0) {
+          $.ajax({
+              url:'search_detail_ajax.php', //request 보낼 서버의 경로
+              type:'post', // 메소드(get, post)
+              data:{values:"0", pr_id : pr_id, mb_id:mb_id, om_id:om_id}, //보낼 데이터
+              success: function(data) {
+                  //서버로부터 정상적으로 응답이 왔을 때 실행
+                  $('#star_btn').html(data);
+                  star_btn.src ="img/star_19x19.png";
+                  star_btn.dataset.value = 1;
+              },
+              error: function(err) {
+                // alert("관심 상품을 등록하기 위해서 로그인을 먼저 해주세요");
+                // history.back();
+              }
+          });
+        }
+        else if (star_btn.dataset.value == 1) {
+          $.ajax({
+              url:'search_detail_ajax.php', //request 보낼 서버의 경로
+              type:'post', // 메소드(get, post)
+              data:{values:"1", pr_id : pr_id, mb_id:mb_id,om_id:om_id}, //보낼 데이터
+              success: function(data) {
+                  //서버로부터 정상적으로 응답이 왔을 때 실행
+                  star_btn.src = "img/staroff_19x19.png";
+                  star_btn.dataset.value = 0;
+              },
+              error: function(err) {
+                  //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
+                  // alert("관심 상품을 등록하기 위해서 로그인을 먼저 해주세요");
+                  // history.back();
+              }
+          });
+        }
+      }else {
+        alert("관심 상품을 등록하기 위해서 로그인을 먼저 해주세요");
       }
-      else if (star_btn.dataset.value == 1) {
-        $.ajax({
-            url:'search_detail_ajax.php', //request 보낼 서버의 경로
-            type:'post', // 메소드(get, post)
-            data:{values:"1", pr_id : pr_id, mb_id:mb_id,om_id:om_id}, //보낼 데이터
-            success: function(data) {
-                //서버로부터 정상적으로 응답이 왔을 때 실행
-                star_btn.src = "img/staroff_19x19.png";
-                star_btn.dataset.value = 0;
-            },
-            error: function(err) {
-                //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
-                alert("관심 상품을 등록하기 위해서 로그인을 먼저 해주세요");
-                history.back();
-            }
-        });
-      }
+
     }
 
     var win_memo = function(href) { // 쪽지 팝업창

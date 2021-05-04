@@ -48,7 +48,7 @@ if($ctg_name != "all" && $ctg_station){
 
 if($a == 0){
 	echo "<script>alert('입력을 잘못하셨거나 없는 역을 입력하셨습니다.');</script>";
-	// echo "<script>location.replace('./index.php');</script>";
+	echo "<script>location.replace('./index.php');</script>";
 	exit;
 }else{
 ?>

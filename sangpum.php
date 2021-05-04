@@ -131,19 +131,7 @@ ini_set('display_errors', '1');
           </div>
 
         </div>
-        <!-- <ul class="list">
-        <li class="hidden"></li>
-        <li class="list-li w3-round image_box"></li>
-        <div class="text_field">
-          <li class="name_field"></li>
-          <li class="clear"></li>
-          <li class="sell_text"></li>
-          <li class="clear"></li>
-          <li class="price_text"></li>
-          <li class="clear"></li>
-          <li class="star_text"><span style="float:left;"></span><span class="station_text"></span></li>
-        </div>
-        </ul> -->
+
       </div>
     <?php endforeach ?>
 

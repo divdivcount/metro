@@ -55,6 +55,13 @@ body {
     color: #3b3b3b;
     font-family: "NotoSansKR_m";
     font-weight: 500;
+    overflow : hidden;
+    text-overflow : ellipsis;
+    height : auto; /*(대신 height를 설정해준다. 텍스트 크기에 맞춰 height가 1줄인 경우를 생각하자.) */
+    word-wrap : brek-word;
+    display : -webkit-box;
+    -webkit-line-clamp : 1; /*(줄 개수를 설정한다. 만약 2줄이상이라면 height와 해당 값을 수정한다.) */
+    -webkit-box-orient: vertical;
   }
 .checkSale_line{
   font-size: 2.0rem;
@@ -81,7 +88,28 @@ body {
   .pr_station{
 
   }
-
+  #empty_page{
+    height: 60.0rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.3rem;
+  }
+  #empty_page h4{
+    font-family: "NotoSansKR_r";
+    color: #707070;
+  }
+  #empty_page p{
+    font-family: "NotoSansKR_r";
+    text-align: center;
+    color: #707070;
+  }
+  #empty_page p span{
+    font-family: "NotoSansKR_m";
+    color: #3b3b3b;
+    font-weight: 500;
+  }
 #pagenation_box{
   text-align: center;
   width: 100%;

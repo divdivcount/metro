@@ -93,34 +93,38 @@ p{margin: 0}
 .otherProduct_content_text_title_line{width: 100%;font-family: "NotoSansKR_m";font-size: 1.3rem;color: #5b5b5b;
 overflow : hidden;
 text-overflow : ellipsis;
-height : 1.9rem; /*(대신 height를 설정해준다. 텍스트 크기에 맞춰 height가 1줄인 경우를 생각하자.) */
+height : auto; /*(대신 height를 설정해준다. 텍스트 크기에 맞춰 height가 1줄인 경우를 생각하자.) */
 word-wrap : brek-word;
 display : -webkit-box;
 -webkit-line-clamp : 1; /*(줄 개수를 설정한다. 만약 2줄이상이라면 height와 해당 값을 수정한다.) */
--webkit-box-orient: vertical;}
+-webkit-box-orient: vertical;
+-webkit-text-size-adjust: none;}
 .otherProduct_content_text_price_line{width: 100%;font-family: "NotoSansKR_m";font-size: 1.3rem;color: #5b5b5b;
 overflow : hidden;
 text-overflow : ellipsis;
-height : 1.9rem; /*(대신 height를 설정해준다. 텍스트 크기에 맞춰 height가 1줄인 경우를 생각하자.) */
+height : auto; /*(대신 height를 설정해준다. 텍스트 크기에 맞춰 height가 1줄인 경우를 생각하자.) */
 word-wrap : brek-word;
 display : -webkit-box;
 -webkit-line-clamp : 1; /*(줄 개수를 설정한다. 만약 2줄이상이라면 height와 해당 값을 수정한다.) */
--webkit-box-orient: vertical;}
+-webkit-box-orient: vertical;
+-webkit-text-size-adjust: none;}
 .otherProduct_content_text_station_line{width: 100%;font-family: "NotoSansKR_r";font-size: 1.0rem;color: #5e5956;
 overflow : hidden;
 text-overflow : ellipsis;
-height : 1.5rem; /*(대신 height를 설정해준다. 텍스트 크기에 맞춰 height가 1줄인 경우를 생각하자.) */
+height : auto; /*(대신 height를 설정해준다. 텍스트 크기에 맞춰 height가 1줄인 경우를 생각하자.) */
 word-wrap : brek-word;
 display : -webkit-box;
 -webkit-line-clamp : 1; /*(줄 개수를 설정한다. 만약 2줄이상이라면 height와 해당 값을 수정한다.) */
--webkit-box-orient: vertical;}
+-webkit-box-orient: vertical;
+-webkit-text-size-adjust: none;}
 .otherProduct_content_text_category_line{width: 100%;display: flex;justify-content: space-between;overflow : hidden;
 text-overflow : ellipsis;
-height : 1.5rem; /*(대신 height를 설정해준다. 텍스트 크기에 맞춰 height가 1줄인 경우를 생각하자.) */
+height : auto; /*(대신 height를 설정해준다. 텍스트 크기에 맞춰 height가 1줄인 경우를 생각하자.) */
 word-wrap : brek-word;
 display : -webkit-box;
 -webkit-line-clamp : 1; /*(줄 개수를 설정한다. 만약 2줄이상이라면 height와 해당 값을 수정한다.) */
--webkit-box-orient: vertical;}
+-webkit-box-orient: vertical;
+-webkit-text-size-adjust: none;}
 .otherProduct_content_text_category_line span{font-family: "NotoSansKR_t";font-size: 0.8rem;color: #7d7d7d;}
 
 
@@ -136,7 +140,7 @@ display : -webkit-box;
     .pr_namestation{display: flex;flex-direction: column;}
       .pr_namestation p{font-size: 2.0rem;color: #3b3b3b}
       .pr_namestation span{font-size: 1.5rem;color: #5b5b5b}
-  .reportBtn_box{}
+  .reportBtn_box{cursor: pointer;}
     #reportBtn_box span{font-size: 1.5rem;color: #3b3b3b;}
 
 .productTitle_line{display: flex;justify-content: flex-start;margin: 1.0rem 0;}
@@ -150,7 +154,7 @@ display : -webkit-box;
   .pr_category{font-size: 1.5rem;color: #a7a7a7}
   #extraBtn_box{display: flex;justify-content: space-between;}
     #extraBtn_box span{font-size: 1.5rem;color: #3b3b3b}
-    #extraBtn_box .imgPlusText{margin-left: 1.0rem}
+    #extraBtn_box .imgPlusText{margin-left: 1.0rem;cursor: pointer;}
 
 .imgPlusText{display: flex;align-items: center;}
 .img_box{margin-right: 0.4rem;}
