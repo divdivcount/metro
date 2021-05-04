@@ -140,7 +140,7 @@ class MetroDAO {
 
 
 	//페이지 내이션
-  	public function SelectPageLength($cPage, $viewLen, $mb_id, $om_id, $category = null) {
+  	public function SelectPageLength($cPage, $viewLen, $mb_id, $om_id, $s_value= null,$category = null) {
 			$this->openDB();
 		 if($this->quTable == 'interest'){
 			  // echo "통과했냐";
@@ -173,13 +173,22 @@ class MetroDAO {
 						// echo "SelectPageLength2";
 						$query = $this->db->prepare("select count(*) from $this->quTable where l_id = :mb_id and pr_station = :om_id");
 					}
+
 					// echo "??";
 				}
 			}
-
 		$query->bindValue(":mb_id", $mb_id,  PDO::PARAM_STR);
 		$query->bindValue(":om_id", $om_id,  PDO::PARAM_STR);
-
+		if($mb_id == 'null' && $om_id == 'null'){
+				if(empty($s_value) == true){
+					$query = $this->db->prepare("select count(*) from $this->quTable");
+					// var_dump($query);
+				}else{
+					$query = $this->db->prepare("select count(*) from product p left join line l ON p.l_id = l.l_id where concat(pr_title,pr_station,l_name) like :s_value order by pr_id");
+					$query->bindValue(":s_value", "%$s_value%",  PDO::PARAM_STR);
+					// var_dump($query);
+				}
+			}
     $query->execute();
 		$fetch = $query->fetch(PDO::FETCH_ASSOC);
 		$countLen = $fetch['count(*)'];
@@ -211,9 +220,12 @@ class MetroDAO {
 	}
 
 	public function SelectPageList($cPage, $viewLen, $mb_id, $om_id, $s_value = null, $category = null) {
+		$this->openDB();
 		$start = ($cPage * $viewLen) - $viewLen;
-		// echo $start;
+		// echo $start."<br>";
 		// echo $viewLen;
+		// echo $mb_id;
+		// echo $om_id;
 		if($this->quTable == 'interest'){
 			if($mb_id != 'null' && $om_id == 'null'){
 				$om_id = null;
@@ -231,7 +243,32 @@ class MetroDAO {
 				}elseif($om_id != 'null' && $mb_id == 'null'){
 					$mb_id = null;
 					$sql = "select p.pr_id,p.pr_title,p.pr_status,p.pr_price, (select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count, pi.pr_img, l.l_name, p.pr_station from product p left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join oauth_member om ON p.om_id = om.om_id where p.om_id = :om_id and p.pr_img_id = pi.pr_img_id and pi.main_check = 'y' and  p.mb_id is :mb_id order by $this->quTableId desc limit :start, :viewLen";
-				}else{
+				}elseif($mb_id == 'null' && $om_id == 'null'){
+						if(empty($s_value) == true){
+							$sql = "select p.pr_id,p.pr_title,p.pr_date,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,l.l_name,p.pr_station,(select count(rep_mb.pr_id) from member_declaration rep_mb where rep_mb.pr_id = p.pr_id) as rep_count from product p left outer join line l ON p.l_id = l.l_id order by pr_id asc limit :start, :viewLen";
+							$query = $this->db->prepare($sql);
+						}else{
+							// echo "2??";
+							$sql = "select p.pr_id,p.pr_title,p.pr_date,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,l.l_name,p.pr_station,(select count(rep_mb.pr_id) from member_declaration rep_mb where rep_mb.pr_id = p.pr_id) as rep_count from product p left join line l ON p.l_id = l.l_id where concat(p.pr_title,p.pr_station,l.l_name) like :s_value order by pr_id asc limit :start, :viewLen";
+							$query = $this->db->prepare($sql);
+							if($s_value)$query->bindValue(":s_value", "%$s_value%",  PDO::PARAM_STR);
+						}
+
+						$query->bindValue(":start", $start, PDO::PARAM_INT);
+						$query->bindValue(":viewLen", $viewLen, PDO::PARAM_INT);
+
+
+						$query->execute();
+						$fetch = $query->fetchAll(PDO::FETCH_ASSOC);
+						try{
+						if(!$fetch){
+							// echo "결과 값이 없습니다.";
+						}
+						return $fetch;
+						}catch(PDOException $e){
+							exit($e ->getMessage());
+						}
+					}else{
 					// echo "통과했냐 6트";
 					if($s_value){
 						// echo "SelectPageList1";
@@ -247,10 +284,7 @@ class MetroDAO {
 						$sql = "select pr_id,pr_title, pr_price, ca_name,  (select l_name from line l where l.l_id = :mb_id ) as line_name ,pr_station,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,(select pr_img from product_img pi where pi.pr_img_id = p.pr_img_id and pi.main_check = 'y') as pr_img  from product p  where l_id = :mb_id and pr_station = :om_id order by $this->quTableId asc limit :start, :viewLen";
 					}
 				}
-			// echo "???";
 		}
-
-		$this->openDB();
 		$query = $this->db->prepare($sql);
 		$query->bindValue(":start", $start, PDO::PARAM_INT);
 		$query->bindValue(":viewLen", $viewLen, PDO::PARAM_INT);
