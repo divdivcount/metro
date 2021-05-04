@@ -46,7 +46,7 @@ try{
         <div class="fix_page">  <!-- 화면가운데 fix로 잡는 부분  -->
 
           <div class="modalBox">            <!-- 콘텐츠 들어가는부분 -->
-            <?= require_once('report.html'); ?>
+            <?php require_once('report.php'); ?>
           </div>
 
         </div>
