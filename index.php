@@ -470,11 +470,7 @@ require_once('modules/db.php');
   //768px 때 서브배너이미지 변경 (모바일용으로)
   function changeSubBannerImge() {
     var w_width = window.outerWidth;
-<<<<<<< HEAD
     bannerImg_box_img = document.querySelector('.bxslider').getElementsByTagName('img');
-=======
-    bannerImg_box_img = document.getElementById('bannerImg_box').getElementsByTagName('img');
->>>>>>> f9c882f6548fbb075b8431abeb26abf355543829
 
     if (w_width <= 768) {
       for (var i = 1; i <= 4; i++) {
