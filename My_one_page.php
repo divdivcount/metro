@@ -15,9 +15,13 @@
 <link rel="stylesheet" href="css/css_noamlfont.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 <link rel="stylesheet" href="css/css_metrocket_header.css">
 <link rel="stylesheet" href="css/css_metrocket_footer.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://unpkg.com/hangul-js" type="text/javascript"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <style>
 .click_box{

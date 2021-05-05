@@ -50,10 +50,10 @@ require_once('modules/db.php');
     <!-- 메인 배너이미지 부분 -->
     <div id="bannerImg_box">
       <div class="bxslider">
+        <div><img src="img\slideimg_0.png" alt=""></div>
         <div><img src="img\slideimg_1.png" alt=""></div>
         <div><img src="img\slideimg_2.png" alt=""></div>
         <div><img src="img\slideimg_3.png" alt=""></div>
-        <div><img src="img\slideimg_4.png" alt=""></div>
       </div>
       <!-- 이중select box 로 지하철역 선택하는 부분 -->
         <form  id="selectMetro_box" action="searchProduct.php" method="get">
@@ -264,25 +264,30 @@ require_once('modules/db.php');
   </div>
   </body>
   <script>
+  var slider = $('.bxslider');
+  var slider_bx =null;
   const tapmenuItem = document.getElementsByClassName('tapmenuItem');
   $(document).ready(function(){
 
-    //슬라이드 이미지
-    $('.bxslider').bxSlider( {
-        mode: 'horizontal',// 가로 방향 수평 슬라이드
-        speed: 500,        // 이동 속도를 설정
-        pager: false,      // 현재 위치 페이징 표시 여부 설정
-        moveSlides: 1,     // 슬라이드 이동시 개수
-        auto: true,        // 자동 실행 여부
-        autoHover: false,   // 마우스 호버시 정지 여부
-        controls: true,    // 이전 다음 버튼 노출 여부
-        captions:true
-    });
+    setTimeout(function(e) {
+      slider_bx = slider.bxSlider( {
+          mode: 'horizontal',// 가로 방향 수평 슬라이드
+          speed: 500,        // 이동 속도를 설정
+          pager: false,      // 현재 위치 페이징 표시 여부 설정
+          moveSlides: 1,     // 슬라이드 이동시 개수
+          auto: true,        // 자동 실행 여부
+          autoHover: false,   // 마우스 호버시 정지 여부
+          controls: true,    // 이전 다음 버튼 노출 여부
+          captions:true,
+          adaptiveHeight:true
+      })
+    },1)
+
     load_category(tapmenuItem.item(0).innerText);
     // $(".owl-carousel").owlCarousel(obj);
 
 
-    changeSubBannerImge();                      // 768px 일때 사이트 소개이미지파일 다른해상도 파일로 변경
+    // 768px 일때 사이트 소개이미지파일 다른해상도 파일로 변경
     changeWidth_RecentProducts_gridbox(2);      // 최근상품 그리드박스 높이 정의
   });
 
@@ -467,22 +472,38 @@ require_once('modules/db.php');
     }
   }
 
+
+  function setAllBannerImage() {
+
+    if (w_width <= 768) {
+      for (var i = 0; i < bannerImg_box_img.length; i++) {
+        bannerImg_box_img.item(i).src = bannerImg_box_img.item(i).src.slice(0,-4) + "_m.png";
+      }
+    }else{
+
+    }
+
+  }
+  var check_M = 0;
   //768px 때 서브배너이미지 변경 (모바일용으로)
   function changeSubBannerImge() {
     var w_width = window.outerWidth;
-    bannerImg_box_img = document.querySelector('.bxslider').getElementsByTagName('img');
+    var bannerImg_box_img = document.querySelector('.bxslider').getElementsByTagName('img');
 
-    if (w_width <= 768) {
-      for (var i = 1; i <= 4; i++) {
-        bannerImg_box_img.item(i).src = "img/slideimg_" + i + "_m.png";
+    if (w_width <= 768 && check_M == 0) {
+      for (var i = 0; i < bannerImg_box_img.length; i++) {
+        bannerImg_box_img.item(i).src = bannerImg_box_img.item(i).src.slice(0,-4) + "_m.png";
+        check_M = 1;
       }
+
       //사이트 서브 배너 이미지
       document.getElementById('img01').src = "img/bannerImg_1_768x320.png";
       document.getElementById('img02').src = "img/bannerImg_2_768x320.png";
       document.getElementById('img03').src = "img/bannerImg_3_768x110.png";
-    }else{
-      for (var i = 1; i <= 4; i++) {
-        bannerImg_box_img.item(i).src = "img/slideimg_" + i + ".png";
+    }else if(check_M == 1){
+      for (var i = 0; i < bannerImg_box_img.length; i++) {
+        bannerImg_box_img.item(i).src = bannerImg_box_img.item(i).src.slice(0,-6) + ".png";
+        check_M =  0;
       }
       //사이트 서브 배너 이미지
       document.getElementById('img01').src = "img/bannerImg_1.png";
@@ -490,8 +511,9 @@ require_once('modules/db.php');
       document.getElementById('img03').src = "img/bannerImg_3.png";
     }
 
-
-
+    setTimeout(function(e) {
+      slider_bx.reloadSlider();
+    },1)
   }
 
   //더보기 버튼
@@ -520,16 +542,6 @@ require_once('modules/db.php');
         changeWidth_RecentProducts_gridbox(4);
       }
       changeSubBannerImge();
-      $('.bxslider').bxSlider( {
-          mode: 'horizontal',// 가로 방향 수평 슬라이드
-          speed: 500,        // 이동 속도를 설정
-          pager: false,      // 현재 위치 페이징 표시 여부 설정
-          moveSlides: 1,     // 슬라이드 이동시 개수
-          auto: true,        // 자동 실행 여부
-          autoHover: false,   // 마우스 호버시 정지 여부
-          controls: true,    // 이전 다음 버튼 노출 여부
-          captions:true
-      });
     }
 
 </script>
