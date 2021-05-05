@@ -30,6 +30,20 @@
       }
     }
 
+    public function Member_all_select($mb_id) {
+      // 회원 번호 찾기 User_page 회원번호 찾는데 사용합니다.
+      $this->openDB();
+      $query = $this->db->prepare("select * from member where mb_num =:mb_num");
+      $query->bindValue(":mb_num", $mb_id, PDO::PARAM_INT);
+      $query->execute();
+      $fetch = $query->fetchAll(PDO::FETCH_ASSOC);
+      if($fetch){
+        return $fetch;
+      }
+      else return null;
+    }
+
+
     public function Member_Search($mb_name, $mb_email) {
       // 회원 번호 찾기 User_page 회원번호 찾는데 사용합니다.
       $this->openDB();

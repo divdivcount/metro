@@ -2,7 +2,7 @@
   require_once('modules/db.php');
   $category = isset($_REQUEST["category"]) ? $_REQUEST["category"] : "";
 
-  $sql = "select p.pr_id,(select pr_img from product_img pi where pi.pr_img_id = p.pr_img_id and pi.main_check = 'y') as pr_img, p.pr_title, (select l_name from line l where l.l_id = 1 ) as line_name, p.pr_station, p.pr_price, (select count(i.in_hit) from interest i where p.pr_id = i.pr_id )as in_hit, p.ca_name from product p where p.ca_name ='$category' order by in_hit desc"; // 입력한 비밀번호를 MySQL password() 함수를 이용해 암호화해서 가져옴
+  $sql = "select p.pr_id,(select pr_img from product_img pi where pi.pr_img_id = p.pr_img_id and pi.main_check = 'y') as pr_img, p.pr_title, (select l_name from line l where l.l_id = 1 ) as line_name, p.pr_station, p.pr_price, (select count(i.in_hit) from interest i where p.pr_id = i.pr_id )as in_hit, p.ca_name from product p where p.ca_name ='$category' and pr_block = 1 order by in_hit desc"; // 입력한 비밀번호를 MySQL password() 함수를 이용해 암호화해서 가져옴
   $result = mysqli_query($conn, $sql);
 
   try {

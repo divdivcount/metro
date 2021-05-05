@@ -24,7 +24,7 @@
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
   </head>
   <body>
-    <?php $imgdao = $dao->searchProduct_detail(isset($mb) ? $mb["mb_num"] : 'null', isset($om) ? $om["om_id"] : 'null',$pr_id); ?>
+    <?php $imgdao = $dao->admin_product_list_detail(isset($mb) ? $mb["mb_num"] : 'null', isset($om) ? $om["om_id"] : 'null',$pr_id); ?>
     <!-- 슬라이드 이미지 -->
     <?php foreach ($imgdao as $row) : ?>
 
@@ -42,139 +42,67 @@
       </div>
 
     </div>
-    <!-- 상품 및 유저 정보 + 부가기능 부분  -->
-    <div id="productInfo_title" class="radiusTop">
 
-      <!-- 첫줄  -->
-      <div class="userProfile_line">
 
-        <div class="userProfile">
-          <!-- 사람사진 -->
-          <div class="profileImg">
-            <img class=" w3-circle" src="<?= $mb['mb_image'] ?($mb['mb_image'] == 'img/normal_profile.png' ? $mb['mb_image'] : 'files/'.$mb['mb_image']) : $om['om_image_url'] ?>" alt="">
-          </div>
 
-          <!-- 이름이랑 호선  -->
-          <div class="pr_namestation">
-            <p><?= $row["profile_name"] ?></p>
 
-            <div class="imgPlusText">
-              <div class="img_box"><img src="img/maps-and-flags.png" alt=""></div>
-              <span><?= $row["profile_station"] ?></span>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- 신고하기 버튼  -->
-        <div id="reportBtn_box" class="imgPlusText" onclick="report_open()">
-          <div class="img_box"><img src="img/siren.png" alt=""></div>
-          <span>신고하기</span>
-        </div>
-      </div>
-
-      <!-- 두번째줄 -->
-      <div class="productTitle_line">
-        <p><?= $row["pr_title"] ?></p>
-      </div>
-
-      <!-- 세번째줄  -->
-      <div class="productPrice_line">
-        <div class="imgPlusText">
-          <div class="img_box"><img src="img/tag.png" alt=""></div>
-          <span><?= $row["pr_price"] ?>원</span>
-        </div>
-
-        <!-- 가격제안 가능여부 -->
-        <div class="checkPricepNegotiation">
-          <?php if($row["pr_check"] == 1){echo "가격제안 가능";}else{} ?>
-        </div>
-      </div>
-
-      <!-- 4번째줄 -->
-      <div class="productCategory_line">
-
+        <!-- 신고수 -->
+        <?=$row["rep_count"]?><br>
+        <!--호선  -->
+        <?= $row["profile_station"] ?><br>
+        <!--제품 제목  -->
+        <?= $row["pr_title"] ?><br>
         <!-- 카테고리 내용 -->
-        <div class="pr_category">
-          <?= $row["ca_name"] ?> · 관심 <?= $row["i_count"] ?>
-        </div>
+        <?= $row["ca_name"] ?><br>
+        <!-- 상품 설명  -->
+        <?= $row["pr_explanation"] ?><br>
+        <form action="admin_member_detail.php" method="post">
+          <input type="hidden" name="om_id" value="<?=isset($row["om_id"]) ? $row["om_id"] : null ?>">
+          <input type="hidden" name="mb_id" value="<?=isset($row["mb_id"]) ? $row["mb_id"] : null ?>">
+          <input type="submit" value="회원보기" />
+        </form>
 
-        <div id="extraBtn_box">
-
-          <div class="imgPlusText">
-            <div class="img_box"><img src="img/flag.png" alt=""></div>
-            <span>도착시간</span>
-          </div>
-
-          <div class="imgPlusText" onclick="registerInterest()">
-            <!-- 여기 관심등록 -->
-            <div class="img_box" > <img src="<?php if($row["mem_i_check"] == 0){echo "img/staroff_19x19.png";}elseif($row["mem_i_check"] == 1){echo "img/star_19x19.png";} ?>" id="star_btn" data-value="<?=$row["mem_i_check"] ? $row["mem_i_check"] : 0 ?>" alt="" ></div>
-            <span>관심등록</span>
-          </div>
-
-          <div class="imgPlusText">
-            <div class="img_box"><img src="img/chat.png" alt=""></div>
-            <span><a href="./memo_form.php?me_recive_mb_id=<?php
-            try{
-              $member = new Member;
-              if($row['mb_id']){
-                $mb_name = $member->Member_Select($row['mb_id'] ? $row['mb_id'] : null);
-                echo trim($mb_name[0]['mb_id']);
-              }else{
-                echo trim("sir".$row['om_id']);
-              }
-
-            }catch(PDOException $e){
-                echo $e;
-              }
-            ?>&id=<?=$row["pr_id"]?>" class="td_btn" onclick="win_memo(this.href); return false;">쪽지보내기</a></span>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <!-- 상품 설명  -->
-    <div id="productInfo_text" class="radiusBottom">
-      <p>
-        <?= $row["pr_explanation"] ?>
-      </p>
-    </div>
-
-    <?php
-     $piec = explode("&nbsp;", $row["profile_station"]);
-     // echo $piec[1];
-     ?>
-
+        <form method="post">
+          <input type="hidden" name= "gap" value="<?php if($row["pr_block"] == 1){echo 2;}else{echo 1;} ?>">
+          <input type="submit" name="product_block" id="product_block" value="가리기" />
+        </form>
+        <form method="post">
+          <input type="submit" name="product_del" id="product_del" value="삭제하기" />
+        </form>
     <?php endforeach ?>
+    <?php
+    //제품가리기
+      function product_block(){
+        $dao = new Product;
+        $gap = Post("gap",0);
+        $pr_id = Get('id', null);
+        $dao->Product_block_update($pr_id, $gap);
+      }
+      if(array_key_exists('product_block',$_POST))
+      {
+        $gap = Post("gap",0);
+        product_block();
+          if($gap == 2){
+            userGoto("상품을 숨김처리 하셨습니다", "admin_product_list.php");
+          }else{
+            userGoto("상품을 보이게 하셨습니다", "admin_product_list.php");
+          }
+      }
+      //제품삭제
+      function product_del(){
+        $dao = new Product;
+        $pr_id = Get('id', null);
+        echo $pr_id;
+        $dao->admin_product_del($pr_id);
+      }
+      if(array_key_exists('product_del',$_POST))
+      {
+        product_del();
+        userGoto("상품을 삭제 하셨습니다", "admin_product_list.php");
+      }
+    ?>
     <script type="text/javascript">
       $(document).ready(function(){
-
-        $("#rep_btn").click(function() {
-          $.ajax({
-            url : "reply_ok.php",
-            type : "get",
-            data : {
-              "bno" : $(".bno").val(),
-              "mb_id" : $(".mb_dat_user").val(),
-              "om_id" : $(".om_dat_user").val(),
-              "rep_con" : $(".rep_con").val()
-            },
-            success : function(data) {
-            alert("댓글이 작성되었습니다");
-            location.reload();
-          },
-          error : function(e){
-            alert("로그인을 먼저 해주세요");
-            location.repleace("./index.php");
-          }
-          });
-        })
-
-        $(".dat_del_btn").click(function() {
-          $("#rep_del").modal();
-        });
-
         $('.bxslider').bxSlider( {
             mode: 'horizontal',// 가로 방향 수평 슬라이드
             speed: 500,        // 이동 속도를 설정

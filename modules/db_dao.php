@@ -147,31 +147,31 @@ class MetroDAO {
 				if($mb_id != 'null' && $om_id == 'null'){
 					$om_id = null;
 					// echo "통과했냐2트";
-					$query = $this->db->prepare("select count(*) from $this->quTable where mb_id = :mb_id and in_hit = 1 and om_id is :om_id");
+					$query = $this->db->prepare("select count(*) from $this->quTable where mb_id = :mb_id and in_hit = 1 and om_id is :om_id and pr_block = 1");
 					// echo "통과했냐3트";
 				}elseif($om_id != 'null' && $mb_id == 'null'){
 					$mb_id = null;
-					$query = $this->db->prepare("select count(*) from $this->quTable where om_id = :om_id and in_hit = 1 and mb_id is :mb_id");
+					$query = $this->db->prepare("select count(*) from $this->quTable where om_id = :om_id and in_hit = 1 and mb_id is :mb_id and pr_block = 1");
 				}
 			}else{
 				// echo "통과했냐5트";
 				if($mb_id != 'null' && $om_id == 'null'){
 					$om_id = null;
-					$query = $this->db->prepare("select count(*) from $this->quTable where mb_id = :mb_id and om_id is :om_id");
+					$query = $this->db->prepare("select count(*) from $this->quTable where mb_id = :mb_id and om_id is :om_id and pr_block = 1");
 					// echo "dd";
 				}elseif($om_id != 'null' && $mb_id == 'null'){
 					$mb_id = null;
-					$query = $this->db->prepare("select count(*) from $this->quTable where om_id = :om_id and mb_id is :mb_id");
+					$query = $this->db->prepare("select count(*) from $this->quTable where om_id = :om_id and mb_id is :mb_id and pr_block = 1");
 					// echo "????";
 				}else{
 					if($category){
 						 // echo "어 ?";
-							$query = $this->db->prepare("select count(*) from $this->quTable where l_id = :mb_id and pr_station = :om_id and ca_name = :category");
+							$query = $this->db->prepare("select count(*) from $this->quTable where l_id = :mb_id and pr_station = :om_id and ca_name = :category and pr_block = 1");
 							// echo "SelectPageLength1";
 							$query->bindValue(":category", $category,  PDO::PARAM_STR);
 					}else{
 						// echo "SelectPageLength2";
-						$query = $this->db->prepare("select count(*) from $this->quTable where l_id = :mb_id and pr_station = :om_id");
+						$query = $this->db->prepare("select count(*) from $this->quTable where l_id = :mb_id and pr_station = :om_id and pr_block = 1");
 					}
 
 					// echo "??";
@@ -181,10 +181,10 @@ class MetroDAO {
 		$query->bindValue(":om_id", $om_id,  PDO::PARAM_STR);
 		if($mb_id == 'null' && $om_id == 'null'){
 				if(empty($s_value) == true){
-					$query = $this->db->prepare("select count(*) from $this->quTable");
+					$query = $this->db->prepare("select count(*) from $this->quTable where pr_block = 1 or pr_block = 2 ");
 					// var_dump($query);
 				}else{
-					$query = $this->db->prepare("select count(*) from product p left join line l ON p.l_id = l.l_id where concat(pr_title,pr_station,l_name) like :s_value order by pr_id");
+					$query = $this->db->prepare("select count(*) from product p left join line l ON p.l_id = l.l_id where concat(pr_title,pr_station,l_name) like :s_value and pr_block = 1 or pr_block = 2 order by pr_id");
 					$query->bindValue(":s_value", "%$s_value%",  PDO::PARAM_STR);
 					// var_dump($query);
 				}
@@ -239,17 +239,17 @@ class MetroDAO {
 				if($mb_id != 'null' && $om_id == 'null'){
 					$om_id = null;
 					$sql =	"select p.pr_id,p.pr_title,p.pr_status,p.pr_price,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,pi.pr_img,l.l_name,p.pr_station from product p left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join member m ON p.mb_id = m.mb_num where p.mb_id = :mb_id and p.pr_img_id = pi.pr_img_id and pi.main_check = 'y' and p.om_id is :om_id and pr_block = 1 order by $this->quTableId desc limit :start, :viewLen";
-					echo " 여기도 통과?";
+					// echo " 여기도 통과?";
 				}elseif($om_id != 'null' && $mb_id == 'null'){
 					$mb_id = null;
 					$sql = "select p.pr_id,p.pr_title,p.pr_status,p.pr_price, (select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count, pi.pr_img, l.l_name, p.pr_station from product p left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join oauth_member om ON p.om_id = om.om_id where p.om_id = :om_id and p.pr_img_id = pi.pr_img_id and pi.main_check = 'y' and  p.mb_id is :mb_id and pr_block = 1 order by $this->quTableId desc limit :start, :viewLen";
 				}elseif($mb_id == 'null' && $om_id == 'null'){
 						if(empty($s_value) == true){
-							$sql = "select p.pr_id,p.pr_title,p.pr_date,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,l.l_name,p.pr_station,(select count(rep_mb.pr_id) from member_declaration rep_mb where rep_mb.pr_id = p.pr_id) as rep_count from product p left outer join line l ON p.l_id = l.l_id order by pr_id asc limit :start, :viewLen";
+							$sql = "select p.pr_id,p.pr_title,p.pr_date,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,l.l_name,p.pr_station,(select count(rep_mb.pr_id) from member_declaration rep_mb where rep_mb.pr_id = p.pr_id) as rep_count from product p left outer join line l ON p.l_id = l.l_id where pr_block = 1 or pr_block = 2 order by pr_id asc limit :start, :viewLen";
 							$query = $this->db->prepare($sql);
 						}else{
 							// echo "2??";
-							$sql = "select p.pr_id,p.pr_title,p.pr_date,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,l.l_name,p.pr_station,(select count(rep_mb.pr_id) from member_declaration rep_mb where rep_mb.pr_id = p.pr_id) as rep_count from product p left join line l ON p.l_id = l.l_id where concat(p.pr_title,p.pr_station,l.l_name) like :s_value order by pr_id asc limit :start, :viewLen";
+							$sql = "select p.pr_id,p.pr_title,p.pr_date,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,l.l_name,p.pr_station,(select count(rep_mb.pr_id) from member_declaration rep_mb where rep_mb.pr_id = p.pr_id) as rep_count from product p left join line l ON p.l_id = l.l_id where concat(p.pr_title,p.pr_station,l.l_name) like :s_value and pr_block = 1 or pr_block = 2 order by pr_id asc limit :start, :viewLen";
 							$query = $this->db->prepare($sql);
 							if($s_value)$query->bindValue(":s_value", "%$s_value%",  PDO::PARAM_STR);
 						}
@@ -501,6 +501,7 @@ class MetroDAO {
 		// echo "--------------------------------<br>";
     $query = $this->db->prepare(
 "select
+	count(member_declaration.pr_id) as rep_count,
   product.pr_id,
   product.pr_check,
   product.om_id,
@@ -514,6 +515,13 @@ class MetroDAO {
     then oauth_member.line_station
     else null
   end as profile_station,
+	case
+    when member.mb_num is not null
+    then member.mb_num
+    when oauth_member.om_id is not null
+    then oauth_member.om_id
+    else null
+  end as profile_id,
   case
     when member.mb_num is not null
     then member.mb_name
@@ -531,6 +539,7 @@ class MetroDAO {
   product.pr_title,
   product.ca_name,
   product.pr_status,
+	product.pr_block,
   product.pr_price,
   count(interest.in_hit=1) as i_count,
   count(case
@@ -554,6 +563,8 @@ from
     product_img.pr_img_id
   ) as product_img on
     product.pr_img_id=product_img.pr_img_id left join
+    member_declaration on
+	product.pr_id = member_declaration.pr_id left join
   member on
     product.mb_id=member.mb_num left join
   oauth_member on
