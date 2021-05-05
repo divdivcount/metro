@@ -16,6 +16,9 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <style media="screen">
+      tbody tr:hover{background-color:orange};
+    </style>
   </head>
   <body>
     <div>
@@ -67,7 +70,7 @@
             ?>
             <tbody style="width : 100%;">
               <?php foreach ($list as $admin_list): ?>
-                <tr>
+                <tr style="cursor:pointer;" onclick="location.href='admin_product_detail.php?id=<?=$admin_list["pr_id"]?>'">
                   <td><?=$admin_list["pr_title"]?></td>
                   <td><?=$admin_list["l_name"]?> <?=$admin_list["pr_station"]?></td>
                   <td><?=$admin_list["pr_date"]?></td>

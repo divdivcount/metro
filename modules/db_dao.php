@@ -229,20 +229,20 @@ class MetroDAO {
 		if($this->quTable == 'interest'){
 			if($mb_id != 'null' && $om_id == 'null'){
 				$om_id = null;
-				$sql = "select p.pr_id,p.pr_title,p.pr_status,p.pr_price,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,pi.pr_img,l.l_name,p.pr_station from product p left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join member m ON p.mb_id = m.mb_num left outer join interest ia on ia.pr_id = p.pr_id where ia.mb_id = :mb_id and p.pr_img_id = pi.pr_img_id and pi.main_check = 'y' and ia.om_id is :om_id and ia.pr_id = p.pr_id order by pr_id desc limit :start, :viewLen";
+				$sql = "select p.pr_id,p.pr_title,p.pr_status,p.pr_price,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,pi.pr_img,l.l_name,p.pr_station from product p left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join member m ON p.mb_id = m.mb_num left outer join interest ia on ia.pr_id = p.pr_id where ia.mb_id = :mb_id and p.pr_img_id = pi.pr_img_id and pi.main_check = 'y' and ia.om_id is :om_id and ia.pr_id = p.pr_id and pr_block = 1 order by pr_id desc limit :start, :viewLen";
 				// echo "통과했냐4트";
 			}elseif($om_id != 'null' && $mb_id == 'null'){
 				$mb_id = null;
-				$sql = "select p.pr_id,p.pr_title,p.pr_status,p.pr_price,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,pi.pr_img,l.l_name,p.pr_station from product p left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join member m ON p.mb_id = m.mb_num left outer join interest ia on ia.pr_id = p.pr_id where ia.om_id = :om_id and p.pr_img_id = pi.pr_img_id and pi.main_check = 'y' and ia.mb_id is :mb_id and ia.pr_id = p.pr_id order by pr_id desc limit :start, :viewLen";
+				$sql = "select p.pr_id,p.pr_title,p.pr_status,p.pr_price,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,pi.pr_img,l.l_name,p.pr_station from product p left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join member m ON p.mb_id = m.mb_num left outer join interest ia on ia.pr_id = p.pr_id where ia.om_id = :om_id and p.pr_img_id = pi.pr_img_id and pi.main_check = 'y' and ia.mb_id is :mb_id and ia.pr_id = p.pr_id and pr_block = 1 order by pr_id desc limit :start, :viewLen";
 			}
 		}else{
 				if($mb_id != 'null' && $om_id == 'null'){
 					$om_id = null;
-					$sql =	"select p.pr_id,p.pr_title,p.pr_status,p.pr_price,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,pi.pr_img,l.l_name,p.pr_station from product p left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join member m ON p.mb_id = m.mb_num where p.mb_id = :mb_id and p.pr_img_id = pi.pr_img_id and pi.main_check = 'y' and p.om_id is :om_id order by $this->quTableId desc limit :start, :viewLen";
-					// echo " 여기도 통과?";
+					$sql =	"select p.pr_id,p.pr_title,p.pr_status,p.pr_price,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,pi.pr_img,l.l_name,p.pr_station from product p left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join member m ON p.mb_id = m.mb_num where p.mb_id = :mb_id and p.pr_img_id = pi.pr_img_id and pi.main_check = 'y' and p.om_id is :om_id and pr_block = 1 order by $this->quTableId desc limit :start, :viewLen";
+					echo " 여기도 통과?";
 				}elseif($om_id != 'null' && $mb_id == 'null'){
 					$mb_id = null;
-					$sql = "select p.pr_id,p.pr_title,p.pr_status,p.pr_price, (select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count, pi.pr_img, l.l_name, p.pr_station from product p left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join oauth_member om ON p.om_id = om.om_id where p.om_id = :om_id and p.pr_img_id = pi.pr_img_id and pi.main_check = 'y' and  p.mb_id is :mb_id order by $this->quTableId desc limit :start, :viewLen";
+					$sql = "select p.pr_id,p.pr_title,p.pr_status,p.pr_price, (select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count, pi.pr_img, l.l_name, p.pr_station from product p left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join oauth_member om ON p.om_id = om.om_id where p.om_id = :om_id and p.pr_img_id = pi.pr_img_id and pi.main_check = 'y' and  p.mb_id is :mb_id and pr_block = 1 order by $this->quTableId desc limit :start, :viewLen";
 				}elseif($mb_id == 'null' && $om_id == 'null'){
 						if(empty($s_value) == true){
 							$sql = "select p.pr_id,p.pr_title,p.pr_date,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,l.l_name,p.pr_station,(select count(rep_mb.pr_id) from member_declaration rep_mb where rep_mb.pr_id = p.pr_id) as rep_count from product p left outer join line l ON p.l_id = l.l_id order by pr_id asc limit :start, :viewLen";
@@ -272,16 +272,16 @@ class MetroDAO {
 					// echo "통과했냐 6트";
 					if($s_value){
 						// echo "SelectPageList1";
-						$sql = "select pr_id,pr_title, pr_price, ca_name, (select l_name from line l where l.l_id = :mb_id ) as line_name, pr_station,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,(select pr_img from product_img pi where pi.pr_img_id = p.pr_img_id and pi.main_check = 'y') as pr_img  from product p  where l_id = :mb_id and pr_station = :om_id and pr_title like :s_value order by $this->quTableId asc limit :start, :viewLen";
+						$sql = "select pr_id,pr_title, pr_price, ca_name, (select l_name from line l where l.l_id = :mb_id ) as line_name, pr_station,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,(select pr_img from product_img pi where pi.pr_img_id = p.pr_img_id and pi.main_check = 'y') as pr_img  from product p  where l_id = :mb_id and pr_station = :om_id and pr_title like :s_value and pr_block = 1 order by $this->quTableId asc limit :start, :viewLen";
 					}elseif($category){
 						// echo "SelectPageList3";
-						$sql = "select pr_id,pr_title, pr_price, ca_name, (select l_name from line l where l.l_id = :mb_id ) as line_name, pr_station,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,(select pr_img from product_img pi where pi.pr_img_id = p.pr_img_id and pi.main_check = 'y') as pr_img  from product p  where l_id = :mb_id and pr_station = :om_id and p.ca_name = :category order by $this->quTableId asc limit :start, :viewLen";
+						$sql = "select pr_id,pr_title, pr_price, ca_name, (select l_name from line l where l.l_id = :mb_id ) as line_name, pr_station,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,(select pr_img from product_img pi where pi.pr_img_id = p.pr_img_id and pi.main_check = 'y') as pr_img  from product p  where l_id = :mb_id and pr_station = :om_id and p.ca_name = :category and pr_block = 1 order by $this->quTableId asc limit :start, :viewLen";
 					}elseif($s_value && $category){
 						// echo "SelectPageList4";
-						$sql = "select pr_id,pr_title, pr_price, ca_name, (select l_name from line l where l.l_id = :mb_id ) as line_name, pr_station,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,(select pr_img from product_img pi where pi.pr_img_id = p.pr_img_id and pi.main_check = 'y') as pr_img  from product p  where l_id = :mb_id and pr_station = :om_id and pr_title and ca_name = :category and pr_title like :s_value order by $this->quTableId asc limit :start, :viewLen";
+						$sql = "select pr_id,pr_title, pr_price, ca_name, (select l_name from line l where l.l_id = :mb_id ) as line_name, pr_station,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,(select pr_img from product_img pi where pi.pr_img_id = p.pr_img_id and pi.main_check = 'y') as pr_img  from product p  where l_id = :mb_id and pr_station = :om_id and pr_title and ca_name = :category and pr_title like :s_value and pr_block = 1 order by $this->quTableId asc limit :start, :viewLen";
 					}else{
 						// echo "SelectPageList2";
-						$sql = "select pr_id,pr_title, pr_price, ca_name,  (select l_name from line l where l.l_id = :mb_id ) as line_name ,pr_station,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,(select pr_img from product_img pi where pi.pr_img_id = p.pr_img_id and pi.main_check = 'y') as pr_img  from product p  where l_id = :mb_id and pr_station = :om_id order by $this->quTableId asc limit :start, :viewLen";
+						$sql = "select pr_id,pr_title, pr_price, ca_name,  (select l_name from line l where l.l_id = :mb_id ) as line_name ,pr_station,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,(select pr_img from product_img pi where pi.pr_img_id = p.pr_img_id and pi.main_check = 'y') as pr_img  from product p  where l_id = :mb_id and pr_station = :om_id and pr_block = 1 order by $this->quTableId asc limit :start, :viewLen";
 					}
 				}
 		}
@@ -572,7 +572,7 @@ from
     :accountType as myAccountType
   ) as myAccountInfo
 where
-  product.pr_id=:pr_id
+  product.pr_id=:pr_id and pr_block = 1
 group by
   product.pr_id"
 		);
