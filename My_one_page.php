@@ -109,10 +109,10 @@
     <!-- 유저정보  차후 php 작업 필요 -->
     <div class="profile_box">
       <div class="prfileImg_box">
-        <img class="w3-circle" src="<?=$mb['mb_image'] ?($mb['mb_image'] == 'img/normal_profile.png' ? $mb['mb_image'] : 'files/'.$mb['mb_image']) : $om['om_image_url']?>" >
+        <img class="w3-circle" src="<?=isset($mb['mb_image']) ?($mb['mb_image'] == 'img/normal_profile.png' ? $mb['mb_image'] : 'files/'.$mb['mb_image']) : $om['om_image_url']?>" >
         <img src="img/camera.png" style="position:absolute;left:70%;top:70%;" alt="" class="open_updateImage_btn" data-check_om="<?= isset($om['om_id']) ? $om['om_id'] : "1" ?> ">
       </div>
-        <div class="user_name"><?=$mb['mb_name'] ? $mb['mb_name'] : $om['om_nickname']?></div>
+        <div class="user_name"><?=isset($mb['mb_name']) ? $mb['mb_name'] : $om['om_nickname']?></div>
     </div>
 
     <!-- 메인 버튼 -->
