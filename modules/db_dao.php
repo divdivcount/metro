@@ -147,11 +147,11 @@ class MetroDAO {
 				if($mb_id != 'null' && $om_id == 'null'){
 					$om_id = null;
 					// echo "통과했냐2트";
-					$query = $this->db->prepare("select count(*) from $this->quTable where mb_id = :mb_id and in_hit = 1 and om_id is :om_id and pr_block = 1");
+					$query = $this->db->prepare("select count(*) from $this->quTable where mb_id = :mb_id and in_hit = 1 and om_id is :om_id");
 					// echo "통과했냐3트";
 				}elseif($om_id != 'null' && $mb_id == 'null'){
 					$mb_id = null;
-					$query = $this->db->prepare("select count(*) from $this->quTable where om_id = :om_id and in_hit = 1 and mb_id is :mb_id and pr_block = 1");
+					$query = $this->db->prepare("select count(*) from $this->quTable where om_id = :om_id and in_hit = 1 and mb_id is :mb_id");
 				}
 			}else{
 				// echo "통과했냐5트";
