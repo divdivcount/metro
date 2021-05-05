@@ -119,8 +119,8 @@ ini_set('display_errors', '1');
           </div>
 
           <div class="priceCheck_box">
-            <img id="priceCheckImg" src="img/priceCheckOnBtn.png" alt="" onclick="checkPricepNegotiation();">
-            <p id="priceCheckText" class="priceCheck_on">가격흥정가능</p>
+            <img id="priceCheckImg" src="<?php if($u_select["pr_check"] == 1){echo "img/priceCheckOnBtn.png";}elseif($u_select["pr_check"] == 2){echo "img/priceCheckOffBtn.png";} ?>"  alt="" onclick="checkPricepNegotiation();">
+            <p id="priceCheckText" class='<?php if($u_select["pr_check"] == 1){echo "priceCheck_on";}elseif($u_select["pr_check"] == 2){echo "priceCheck_off";} ?>'>가격흥정가능</p>
             <input id="price_check" type="hidden" name="price_checking" value="<?php if($u_select["pr_check"] == 1){echo "1";}elseif($u_select["pr_check"] == 2){echo "2";} ?>">
           </div>
         </div>
