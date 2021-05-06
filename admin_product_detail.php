@@ -83,9 +83,9 @@
         $gap = Post("gap",0);
         product_block();
           if($gap == 2){
-            userGoto("상품을 숨김처리 하셨습니다", "admin_product_list.php");
+            userGoto("상품을 숨김처리 하셨습니다", "");
           }else{
-            userGoto("상품을 보이게 하셨습니다", "admin_product_list.php");
+            userGoto("상품을 보이게 하셨습니다", "");
           }
       }
       //제품삭제
@@ -98,7 +98,7 @@
       if(array_key_exists('product_del',$_POST))
       {
         product_del();
-        userGoto("상품을 삭제 하셨습니다", "admin_product_list.php");
+        userGoto("상품을 삭제 하셨습니다", "");
       }
     ?>
     <script type="text/javascript">

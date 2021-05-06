@@ -34,6 +34,10 @@
       <div id="topToolbar_box">
         <?php
           if(isset($mb['mb_num'])){
+            $sql = " SELECT COUNT(me_recive_datetime) AS cnt FROM mb_om_memo WHERE me_recive_mb_id = '{$mb["mb_id"]}' and me_recive_datetime = '0000-00-00 00:00:00' ";
+            // echo $sql."<br>";
+            $result_memo = mysqli_query($conn, $sql);
+            $memo_cnt = mysqli_fetch_assoc($result_memo);
             echo "<ul>"."&nbsp;";
             // echo $om["line_station"]."line_station";
             // var_dump($mb["line_station"] == null );
@@ -43,9 +47,13 @@
             }else{
               echo "<a href='./addProduct.php'><li>상품등록</li></a>";
             }
-            echo "&nbsp;<a href='./memo.php?kind=recive' onclick='win_memo(this.href); return false;'><li>쪽지함</li></a>"."&nbsp;<a href='My_one_page.php'><li>마이페이지</li></a>"."&nbsp;<a href='./logout.php'><li>로그아웃</li></a>"."</ul>";
+            echo "&nbsp;<a href='./memo.php?kind=recive' onclick='win_memo(this.href); return false;'><li>". ($memo_cnt['cnt'] > 0 ? 'N' : '') ."쪽지함</li></a>"."&nbsp;<a href='My_one_page.php'><li>마이페이지</li></a>"."&nbsp;<a href='./logout.php'><li>로그아웃</li></a>"."</ul>";
             // echo "일반 아이디";
           }elseif(isset($om['om_id'])){
+            $sql = " SELECT COUNT(me_recive_datetime) AS cnt FROM mb_om_memo WHERE me_recive_mb_id = '{$om["om_id"]}' and me_recive_datetime = '0000-00-00 00:00:00' ";
+            // echo $sql."<br>";
+            $result_memo = mysqli_query($conn, $sql);
+            $memo_cnt = mysqli_fetch_assoc($result_memo);
             echo "<ul>"."&nbsp;";
             // var_dump($mb["line_station"] == null );
             // var_dump($om["line_station"] == null );
@@ -54,7 +62,7 @@
             }else{
               echo "<a href='./addProduct.php'><li>상품등록</li></a>";
             }
-            echo "&nbsp;<a href='./memo.php?kind=recive' onclick='win_memo(this.href); return false;'><li>쪽지함</li></a>"."&nbsp;<a href='My_one_page.php'><li>마이페이지</li></a>"."&nbsp;<a href='./oauth_logout.php'><li>로그아웃</li></a>"."</ul>";
+            echo "&nbsp;<a href='./memo.php?kind=recive' onclick='win_memo(this.href); return false;'><li>". ($memo_cnt['cnt'] > 0 ? 'N' : '') ."쪽지함</li></a>"."&nbsp;<a href='My_one_page.php'><li>마이페이지</li></a>"."&nbsp;<a href='./oauth_logout.php'><li>로그아웃</li></a>"."</ul>";
             // echo "네이버 아이디";
           }else {
             echo "<ul><li class='openBtn'>로그인</li></ul>";

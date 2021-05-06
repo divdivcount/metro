@@ -269,5 +269,101 @@ class Product extends MetroDAO {
       $query->execute();
 
     }
+
+    //페이지 내이션
+    	public function admin_SelectPageLength($cPage, $viewLen, $mb_id, $om_id, $s_value= null) {
+  			$this->openDB();
+  		if($mb_id == 'null' && $om_id == 'null'){
+  				if(empty($s_value) == true){
+  					$query = $this->db->prepare("select count(*) from $this->quTable where pr_block = 2 ");
+  					// var_dump($query);
+  				}else{
+  					$query = $this->db->prepare("select count(*) from product p left join line l ON p.l_id = l.l_id where concat(pr_title,pr_station,l_name) like :s_value and pr_block = 2 order by pr_id");
+  					$query->bindValue(":s_value", "%$s_value%",  PDO::PARAM_STR);
+  					// var_dump($query);
+  				}
+  			}
+      $query->execute();
+  		$fetch = $query->fetch(PDO::FETCH_ASSOC);
+  		$countLen = $fetch['count(*)'];
+
+  		// 페이지의 총 개수가 몇개인가
+  		$plen = ($countLen != 0)?$countLen/((int)$viewLen):1;
+
+  		$plen = ceil($plen);
+
+  		// 표시할 페이지 시작점은 몇번인가
+  		$pstart = (
+  			($cPage-2<1)?1:(
+  				($cPage+2>$plen)?(
+  					($plen-4>1)?($plen-4):1
+  				):($cPage-2)
+  			)
+  		);
+  		// 현재 페이지 번호가 몇번인가
+  		$pcurnt = ((1>$cPage)?1:(($cPage>$plen)?$plen:$cPage));
+
+  		return [
+  			"count" => $countLen,
+  			"page" => $plen,
+  			"start" => $pstart,
+  			"end" => ($pstart+4>$plen)?$plen:$pstart+4,
+  			"current" => $pcurnt
+  		];
+
+  	}
+
+  	public function admin_SelectPageList($cPage, $viewLen, $mb_id, $om_id, $s_value = null) {
+  		$this->openDB();
+  		$start = ($cPage * $viewLen) - $viewLen;
+  		// echo $start."<br>";
+  		// echo $viewLen;
+  		// echo $mb_id;
+  		// echo $om_id;
+  			if($mb_id == 'null' && $om_id == 'null'){
+  						if(empty($s_value) == true){
+  							$sql = "select p.pr_id,p.pr_title,p.pr_date,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,l.l_name,p.pr_station,(select count(rep_mb.pr_id) from member_declaration rep_mb where rep_mb.pr_id = p.pr_id) as rep_count from product p left outer join line l ON p.l_id = l.l_id where pr_block = 2 order by pr_id asc limit :start, :viewLen";
+  							$query = $this->db->prepare($sql);
+  						}else{
+  							// echo "2??";
+  							$sql = "select p.pr_id,p.pr_title,p.pr_date,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,l.l_name,p.pr_station,(select count(rep_mb.pr_id) from member_declaration rep_mb where rep_mb.pr_id = p.pr_id) as rep_count from product p left join line l ON p.l_id = l.l_id where concat(p.pr_title,p.pr_station,l.l_name) like :s_value and pr_block = 2 order by pr_id asc limit :start, :viewLen";
+  							$query = $this->db->prepare($sql);
+  							if($s_value)$query->bindValue(":s_value", "%$s_value%",  PDO::PARAM_STR);
+  						}
+
+  						$query->bindValue(":start", $start, PDO::PARAM_INT);
+  						$query->bindValue(":viewLen", $viewLen, PDO::PARAM_INT);
+
+
+  						$query->execute();
+  						$fetch = $query->fetchAll(PDO::FETCH_ASSOC);
+  						try{
+  						if(!$fetch){
+  							// echo "결과 값이 없습니다.";
+  						}
+  						return $fetch;
+  						}catch(PDOException $e){
+  							exit($e ->getMessage());
+  						}
+  					}else{}
+
+  		$query = $this->db->prepare($sql);
+  		$query->bindValue(":start", $start, PDO::PARAM_INT);
+  		$query->bindValue(":viewLen", $viewLen, PDO::PARAM_INT);
+  		$query->bindValue(":mb_id", $mb_id,  PDO::PARAM_STR);
+  		$query->bindValue(":om_id", $om_id,  PDO::PARAM_STR);
+  		if($s_value)$query->bindValue(":s_value", "%$s_value%",  PDO::PARAM_STR);
+
+  		$query->execute();
+  		$fetch = $query->fetchAll(PDO::FETCH_ASSOC);
+  		try{
+  		if(!$fetch){
+  			// echo "결과 값이 없습니다.";
+  		}
+  		return $fetch;
+  		}catch(PDOException $e){
+  			exit($e ->getMessage());
+  		  }
+  	}
 }
   ?>
