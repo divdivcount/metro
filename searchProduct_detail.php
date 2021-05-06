@@ -69,113 +69,135 @@ try{
         // var_dump($pr_img);
         // print_r( $row);
       ?>
+      <!-- 딱딲해 -->
 
-      <div id="slideImg_box">
-        <!-- 나중에 php로 동적으로 이미지나오게 작업예정 -->
+      <!-- 메인상품을 감싸는 박스  -->
+      <div id="mainProduct_box">
+        <!-- 메인상품 이미지나오는 부분 -->
+        <div id="slideImg_box">
 
-        <div class="bxslider">
-          <?php for($img = 0; $img < count($pr_img); $img++) { ?><div><img src="files\<?= $pr_img[$img] ?>" alt="" ></div><?php } ?>
+          <div class="bxslider">
+            <?php for($img = 0; $img < count($pr_img); $img++) { ?><div><img src="files\<?= $pr_img[$img] ?>" alt="" ></div><?php } ?>
+          </div>
+
         </div>
 
-      </div>
-      <!-- 상품 및 유저 정보 + 부가기능 부분  -->
-      <div id="productInfo_title" class="radiusTop">
+        <!-- 상품 이미지제외한 정보 및 버튼 있는 부분 -->
+        <div id="mainProduct_information">
+          <!-- 판매유저 정보 및 신고버튼 -->
+          <div class="userProfile_line">
 
-        <!-- 첫줄  -->
-        <div class="userProfile_line">
+            <div class="userProfile">
+              <!-- 사람사진 -->
+              <div class="profileImg">
+                <img class=" w3-circle" src="<?= $mb['mb_image'] ?($mb['mb_image'] == 'img/normal_profile.png' ? $mb['mb_image'] : 'files/'.$mb['mb_image']) : $om['om_image_url'] ?>" alt="">
+              </div>
 
-          <div class="userProfile">
-            <!-- 사람사진 -->
-            <div class="profileImg">
-              <img class=" w3-circle" src="<?= $mb['mb_image'] ?($mb['mb_image'] == 'img/normal_profile.png' ? $mb['mb_image'] : 'files/'.$mb['mb_image']) : $om['om_image_url'] ?>" alt="">
+              <!-- 이름이랑 호선  -->
+              <div class="pr_namestation">
+                <p><?= $row["profile_name"] ?></p>
+
+                <div class="imgPlusText">
+                  <div class="img_box"><img src="img/maps-and-flags.png" alt=""></div>
+                  <span><?= $row["profile_station"] ?></span>
+                </div>
+
+              </div>
             </div>
 
-            <!-- 이름이랑 호선  -->
-            <div class="pr_namestation">
-              <p><?= $row["profile_name"] ?></p>
+            <!-- 신고하기 버튼  -->
+            <div id="reportBtn_box" class="imgPlusText" onclick="report_open()">
+              <div class="img_box"><img src="img/siren.png" alt=""></div>
+              <span>신고하기</span>
+            </div>
+          </div>
 
+          <!-- 상품 및 유저 정보 + 부가기능 부분  -->
+          <div id="productInfo_title">
+
+            <!-- 두번째줄 -->
+            <div class="productTitle_line">
+              <p><?= $row["pr_title"] ?></p>
+            </div>
+
+            <!-- 세번째줄  -->
+            <div class="productPrice_line">
               <div class="imgPlusText">
-                <div class="img_box"><img src="img/maps-and-flags.png" alt=""></div>
-                <span><?= $row["profile_station"] ?></span>
+                <div class="img_box"><img src="img/tag.png" alt=""></div>
+                <span><?= $row["pr_price"] ?>원</span>
+                <!-- 가격제안 가능여부 -->
+                <div class="checkPricepNegotiation"><?php if($row["pr_check"] == 1){echo "(가격제안 가능)";}else{echo "(가격제안 불가능)";} ?></div>
               </div>
 
             </div>
-          </div>
 
-          <!-- 신고하기 버튼  -->
-          <div id="reportBtn_box" class="imgPlusText" onclick="report_open()">
-            <div class="img_box"><img src="img/siren.png" alt=""></div>
-            <span>신고하기</span>
-          </div>
-        </div>
+            <!-- 4번째줄 -->
+            <div class="productCategory_line">
 
-        <!-- 두번째줄 -->
-        <div class="productTitle_line">
-          <p><?= $row["pr_title"] ?></p>
-        </div>
+              <!-- 카테고리 내용 -->
+              <div class="pr_category">
+                <?= $row["ca_name"] ?> · 관심 <?= $row["i_count"] ?>
+              </div>
 
-        <!-- 세번째줄  -->
-        <div class="productPrice_line">
-          <div class="imgPlusText">
-            <div class="img_box"><img src="img/tag.png" alt=""></div>
-            <span><?= $row["pr_price"] ?>원</span>
-          </div>
 
-          <!-- 가격제안 가능여부 -->
-          <div class="checkPricepNegotiation">
-            <?php if($row["pr_check"] == 1){echo "가격제안 가능";}else{} ?>
-          </div>
-        </div>
-
-        <!-- 4번째줄 -->
-        <div class="productCategory_line">
-
-          <!-- 카테고리 내용 -->
-          <div class="pr_category">
-            <?= $row["ca_name"] ?> · 관심 <?= $row["i_count"] ?>
-          </div>
-
-          <div id="extraBtn_box">
-
-            <div class="imgPlusText">
-              <div class="img_box"><img src="img/flag.png" alt=""></div>
-              <span>도착시간</span>
             </div>
+          </div>
 
-            <div class="imgPlusText" onclick="registerInterest()">
+
+        <!-- 상품 설명  -->
+          <div id="productInfo_text" >
+            <p>
+              <?= $row["pr_explanation"] ?>
+            </p>
+
+            <!-- 여러버튼 모아둔 부분  -->
+            <div id="extraBtn_box">
+
               <!-- 여기 관심등록 -->
-              <div class="img_box" > <img src="<?php if($row["mem_i_check"] == 0){echo "img/staroff_19x19.png";}elseif($row["mem_i_check"] == 1){echo "img/star_19x19.png";} ?>" id="star_btn" data-value="<?=$row["mem_i_check"] ? $row["mem_i_check"] : 0 ?>" alt="" ></div>
-              <span>관심등록</span>
+              <button type="button" class="w3-button w3-round-xlarge w3-light-gray" onclick="registerInterest()">
+                <div style="display:flex;align-items:center;justify-content:center"> <img src="<?php if($row["mem_i_check"] == 0){echo "img/staroff_19x19.png";}elseif($row["mem_i_check"] == 1){echo "img/star_19x19.png";} ?>" id="star_btn" data-value="<?=$row["mem_i_check"] ? $row["mem_i_check"] : 0 ?>" alt="" ></div>
+              </button>
+
+              <!-- 도착시간 확인 버튼 -->
+              <button type="button" class="w3-button w3-round-xlarge w3-light-gray">
+                <div class="img_box"><img src="img/flag.png" alt=""></div>
+                <span>도착시간</span>
+              </button>
+
+              <!-- 쪽지보낵 버튼 -->
+              <button type="button" class="w3-button w3-round-xlarge w3-light-gray">
+                <div class="img_box"><img src="img/chat.png" alt=""></div>
+                <span><a href="./memo_form.php?me_recive_mb_id=<?php
+                try{
+                  $member = new Member;
+                  if($row['mb_id']){
+                    $mb_name = $member->Member_Select($row['mb_id'] ? $row['mb_id'] : null);
+                    echo trim($mb_name[0]['mb_id']);
+                  }else{
+                    echo trim("sir".$row['om_id']);
+                  }
+
+                }catch(PDOException $e){
+                    echo $e;
+                  }
+                ?>&id=<?=$row["pr_id"]?>" class="td_btn" onclick="win_memo(this.href); return false;">쪽지보내기</a></span>
+              </button>
+
+              <button type="button" class="talk w3-button w3-round-xlarge w3-blue">
+                <div class="img_box"><img src="img/talk.png" alt=""></div>
+                <span>거래요청</span>
+              </button>
             </div>
-
-            <div class="imgPlusText">
-              <div class="img_box"><img src="img/chat.png" alt=""></div>
-              <span><a href="./memo_form.php?me_recive_mb_id=<?php
-              try{
-                $member = new Member;
-                if($row['mb_id']){
-                  $mb_name = $member->Member_Select($row['mb_id'] ? $row['mb_id'] : null);
-                  echo trim($mb_name[0]['mb_id']);
-                }else{
-                  echo trim("sir".$row['om_id']);
-                }
-
-              }catch(PDOException $e){
-                  echo $e;
-                }
-              ?>&id=<?=$row["pr_id"]?>" class="td_btn" onclick="win_memo(this.href); return false;">쪽지보내기</a></span>
-            </div>
-
           </div>
+
         </div>
       </div>
 
-      <!-- 상품 설명  -->
-      <div id="productInfo_text" class="radiusBottom">
-        <p>
-          <?= $row["pr_explanation"] ?>
-        </p>
-      </div>
+      <!-- 딱딱해 -->
+
+
+
+
 
       <?php
        $piec = explode("&nbsp;", $row["profile_station"]);
@@ -185,50 +207,55 @@ try{
     <?php endforeach ?>
     <!-- 댓글이 들어가야하는 부분입니다. -->
     <!-- 댓글 시작 -->
-    <div class="reply_container">
+    <div id="reply_container">
+
       <div class="reply_view">
-        <h3 style="padding:10px 0 15px 0; border-bottom: solid 1px gray;">댓글목록</h3>
+        <h3 style="padding:10px 0 15px 0; border-bottom: solid 1px gray;">댓글  php숫자 </h3>
         <?php if(isset($replys)) : ?>
         <?php foreach ($replys as $reple) : ?>
 
+          <!-- 댓글올라오면 생기는 부분 (유저이름 시간 댓글내용 삭제기능 ) -->
           <div class="dat_view">
-            <div><b><img src="<?=$reple['mb_img'] ? $reple['mb_img'] : "files/".$reple['mb_img'] ?>"></b></div>
-            <div><b><?=$reple['mb_id']?></b></div>
-            <div class="dap_to comt_edit"><?php echo nl2br("$reple[content]"); ?></div>
-            <div class="rep_me dap_to"><?=$reple['date']?></div>
-            <div class="rep_me rep_menu">
+            <div class="rep_profile">
+
+              <div class="rep_imgLine">
+                <b><img src="<?=$reple['mb_img'] ? $reple['mb_img'] : "files/".$reple['mb_img'] ?>"></b>
+              </div>
+
+              <div class="rep_textLine">
+                <div class="member_num"><b><?=$reple['mb_id']?></b></div>
+                <div class="reple_date"><?=$reple['date']?></div>
+              </div>
+
+            </div>
+
+            <div class="" id="rep_del">
+
+              <form method="get" name ="rep_form" id="rep_form" action="reply_delete.php">
+                <input type="hidden" name="rno" value="<?=$reple['idx']?>" />
+                <input type="hidden" name="b_no" value="<?=$pr_id?>">
+                <a href="javascript:rep_form.submit();">댓글 삭제</a>
+              </form>
             </div>
           </div>
 
-          <div class="" id="rep_del">
-            <div class="rep_dialog">
-              <div class="rep_content">
-                <div class="rep_header">
-                  <h4 class="rep_title"><b>댓글 삭제</b></h4>
-                </div>
-                <div class="rep_body">
-                  <form method="get" id="rep_form" action="reply_delete.php">
-                    <input type="hidden" name="rno" value="<?=$reple['idx']?>" />
-                    <input type="hidden" name="b_no" value="<?=$pr_id?>">
-                    <input type="submit" class="btn btn-primary" value="확인" /></p>
-                  </form>
-                </div>
-              </div>
-            </div>
+          <div class="reple_text">
+            <?php echo nl2br("$reple[content]"); ?>
           </div>
+
 
         <?php endforeach ?>
         <?php endif?>
+      </div>
 
-          <div class="dat_ins">
-            <input type="hidden" name="bno" class="bno" value="<?=$pr_id?>">
-            <input type="hidden" name="mb_id" id="mb_id" class="mb_dat_user" value=<?=isset($mb) ? $mb["mb_num"] : 'null' ?>>
-            <input type="hidden" name="om_id" id="om_id" class="om_dat_user" value=<?=isset($om) ? $om["om_id"] : 'null'?>>
-            <div class="replyInsert_box" style="margin-top:10px;">
-              <textarea name="content" class="rep_con" id="rep_con"></textarea>
-              <button id="rep_btn" class="rep_btn">댓글</button>
-            </div>
+        <div class="dat_ins">
+          <input type="hidden" name="bno" class="bno" value="<?=$pr_id?>">
+          <input type="hidden" name="mb_id" id="mb_id" class="mb_dat_user" value=<?=isset($mb) ? $mb["mb_num"] : 'null' ?>>
+          <input type="hidden" name="om_id" id="om_id" class="om_dat_user" value=<?=isset($om) ? $om["om_id"] : 'null'?>>
+          <div class="replyInsert_box" style="margin-top:10px;">
+            <textarea name="content" class="rep_con" id="rep_con" placeholder="댓글을 입력해주세요."></textarea>
           </div>
+          <button id="rep_btn" class="rep_btn w3-button w3-round-xlarge w3-blue">댓글</button>
         </div>
       </div>
       <!-- 댓글 끝 -->
@@ -246,7 +273,7 @@ try{
 
           <!-- 이미지 부분 -->
           <div class="otherProduct_content_img radiusTop">
-            <img src="files/<?=$rows["pr_img"]?>" alt="">
+            <img src="files/<?=$rows["pr_img"]?>" class="radiusTop" alt="">
           </div>
 
           <!-- 상품 내용 -->
@@ -291,7 +318,7 @@ try{
 
           <!-- 이미지 부분 -->
           <div class="otherProduct_content_img radiusTop">
-            <img src="files/<?=$product["pr_img"]?>" alt="">
+            <img src="files/<?=$product["pr_img"]?>" class="radiusTop" alt="">
           </div>
 
           <!-- 상품 내용 -->

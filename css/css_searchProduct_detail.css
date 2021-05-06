@@ -14,8 +14,21 @@ body {
 a{text-decoration: none;}
 p{margin: 0}
 #wrapContainer_Box{
-  width: 57%;
+  width: 71%;
   margin: 10.0rem auto;
+}
+#mainProduct_box{
+  display: flex;
+  justify-content: space-between;
+  height: auto;
+  margin: 5.0rem 0 2.5rem 0;
+}
+#mainProduct_information{
+  width: 49%;
+  display: flex;
+  flex-direction: column;
+  justify-content:space-between;
+
 }
 #pageTitle_box{
   text-align: center;
@@ -25,8 +38,8 @@ p{margin: 0}
 #star_btn{cursor: pointer;}
 /* 슬라이드 */
 
-#slideImg_box{}
-.bx-wrapper{margin-bottom: 20px;margin-top: 20px;border: none;border-radius: 10px; box-shadow: 4px 4px 3px #000 inset; }
+#slideImg_box{width:49%;height: auto;}
+.bx-wrapper{border: none;border-radius: 10px; box-shadow: 4px 4px 3px #000 inset; margin: 0;}
 .bx-wrapper img{border-radius: 10px;height: 550px;}
 .bx-wrapper .bx-pager{bottom:0;top: 80%;background:linear-gradient(to top, black, transparent);padding-top:0;display: flex;align-items: center;justify-content: center;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px}
 
@@ -44,36 +57,44 @@ p{margin: 0}
 
 #productInfo_title{
   width: 100%;
-  height:auto;
+  height:22%;
   padding: 2.0rem;
   display: flex;
+  justify-content: space-between;
   flex-direction: column;
+  border-radius: 10px;
   background-color: white;
 }
 #productInfo_text{
   width: 100%;
-  height:24.0rem;
+  height: 57%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   padding: 2.0rem;
   margin-top: 1.0rem;
+  border-radius: 10px;
   background-color: white;
   font-size: 2.0rem;
   color:#3b3b3b;
-  overflow:scroll;
+
 }
-#productInfo_text::-webkit-scrollbar {
+#productInfo_text p {width: 100%;max-height: 200px;overflow:scroll;display: flex;
+flex-direction: column;}
+#productInfo_text p::-webkit-scrollbar {
   margin-top: 0.5rem;
   width: 8px;
   height: 8px;
   background: #ffffff;
   }
-  #productInfo_text::-webkit-scrollbar-thumb{
+  #productInfo_text p::-webkit-scrollbar-thumb{
     border-radius: 3.5px;
     background-color:#E1E5E9
   }
-  #productInfo_text::-webkit-scrollbar-thumb:active {
+  #productInfo_text p::-webkit-scrollbar-thumb:active {
     background-color: #ced4da;
   }
-  #productInfo_text::-webkit-scrollbar-track {
+  #productInfo_text p::-webkit-scrollbar-track {
     background: #ffffff;
   }
 
@@ -87,7 +108,7 @@ p{margin: 0}
   justify-items: center;
 }
 .otherProduct_content{width: 230px;height: 360px;}
-.otherProduct_content_img{width: 100%;height:69%;background-color:gray;box-shadow: 3px 3px 6px 0 rgba(0, 0, 0, 0.16);}
+.otherProduct_content_img{width: 100%;height:69%;box-shadow: 3px 3px 6px 0 rgba(0, 0, 0, 0.16);}
 .otherProduct_content_img img{width: 100%;height:100%}
 .otherProduct_content_text{width: 100%;height:29%;display: flex;flex-direction: column;margin-top: 5px;padding: 1.0rem;background-color: white;box-shadow: 3px 3px 6px 0 rgba(0, 0, 0, 0.16);}
 .otherProduct_content_text_title_line{width: 100%;font-family: "NotoSansKR_m";font-size: 1.3rem;color: #5b5b5b;
@@ -133,33 +154,36 @@ display : -webkit-box;
 
 /* 문제의 그 곳  */
 
-.userProfile_line{display: flex;justify-content: space-between;align-items: center;margin-bottom: 1.0rem}
+.userProfile_line{width: 100%;height: 15%;display: flex;justify-content: space-between;align-items: center;margin-bottom: 1.0rem;padding: 2.0rem;background: white;border-radius: 10px;}
   .userProfile{display: flex;}
     .profileImg{width: 50px;height: 50px;}
     .profileImg img{width: 100%;height:100%;}
-    .pr_namestation{display: flex;flex-direction: column;}
+    .pr_namestation{display: flex;flex-direction: column;justify-content: space-between;margin-left: 1.0rem;}
       .pr_namestation p{font-size: 2.0rem;color: #3b3b3b}
       .pr_namestation span{font-size: 1.5rem;color: #5b5b5b}
-  .reportBtn_box{cursor: pointer;}
+  #reportBtn_box{cursor: pointer;align-self:flex-end;}
     #reportBtn_box span{font-size: 1.5rem;color: #3b3b3b;}
 
-.productTitle_line{display: flex;justify-content: flex-start;margin: 1.0rem 0;}
+.productTitle_line{display: flex;justify-content: flex-start;}
   .productTitle_line p{font-family: "NotoSansKR_m";font-size: 2.7rem;color: #3b3b3b}
 
-.productPrice_line{display: flex;justify-content: space-between;margin: 1.0rem 0;}
-  .productPrice_line span{font-size: 2.0rem;color: #3b3b3b}
-  .checkPricepNegotiation{font-size: 2.0rem;color: #3b3b3b}
+.productPrice_line{display: flex;justify-content: space-between;}
+  .productPrice_line span{font-size: 2.0rem;color: #3b3b3b;font-family: "NotoSansKR_m";margin-left: 1.0rem;}
+  .checkPricepNegotiation{font-size: 1.5rem;color: #3b3b3b;font-family: "NotoSansKR_r";}
 
-.productCategory_line{display: flex;justify-content: space-between;margin-bottom:1.0rem}
+.productCategory_line{display: flex;justify-content: space-between;}
   .pr_category{font-size: 1.5rem;color: #a7a7a7}
   #extraBtn_box{display: flex;justify-content: space-between;}
-    #extraBtn_box span{font-size: 1.5rem;color: #3b3b3b}
-    #extraBtn_box .imgPlusText{margin-left: 1.0rem;cursor: pointer;}
+    #extraBtn_box span{font-size: 1.5rem;color:#2196F3!important}
+    #extraBtn_box button{display:flex;align-items:center;box-shadow: 5px 5px 10px 0 rgba(59, 59, 59, 0.16);}
+      #extraBtn_box .talk span{color: white!important;}
+
+
 
 .imgPlusText{display: flex;align-items: center;}
 .img_box{margin-right: 0.4rem;}
 
-#productInfo_text{width:100%;height:24.0rem; }
+#productInfo_text{width:100%; }
 .radiusTop{border-top-left-radius: 10px;border-top-right-radius: 10px}
 .radiusBottom{border-bottom-left-radius: 10px;border-bottom-right-radius: 10px}
 
@@ -211,11 +235,11 @@ display : -webkit-box;
   }
 }
 @media only screen and (max-width: 1700px) {
-  #wrapContainer_Box{width: 65%;}
+  /* #wrapContainer_Box{width: 65%;} */
 }
 @media only screen and (max-width: 1440px) {
   html,body{font-size: 9px!important;}
-  #wrapContainer_Box{width: 70%;}
+  #wrapContainer_Box{width: 80%;}
   .otherProduct_content{width: 184px;height: 288px;}
 }
 @media only screen and (max-width: 1366px) {
@@ -224,7 +248,7 @@ display : -webkit-box;
 }
 @media only screen and (max-width: 1024px) {
   html,body{font-size: 8px!important;}
-  #wrapContainer_Box{width: 80%;}
+  #wrapContainer_Box{width: 85%;}
   .otherProduct_content{width: 138px;height: 216px;}
   .otherProduct_content_img{height:65%;}
   .otherProduct_content_text{;height:34%;}

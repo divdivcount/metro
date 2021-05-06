@@ -1,20 +1,38 @@
 /* 댓글 css */
+#reply_container{
+  width:100%;
+  margin-top:2.5rem;
+  word-break:break-all;
+  padding: 2.5rem 2.0rem 1.5rem;
+  background-color: white;
+}
 .reply_view {
-width:100%;
-margin-top:100px;
-word-break:break-all;
+  display: flex;
+  flex-direction: column;
+
 }
 .dat_view {
-font-size: 14px;
-padding:10px 0 15px 0;
-border-bottom: solid 1px gray;
-}
-.dat_ins {
-margin-top:50px;
-}
-.replyInsert_box{
   display: flex;
   justify-content: space-between;
+  font-size: 14px;
+  padding:10px 0 15px 0;
+}
+.rep_profile{
+  display: flex;
+}
+.rep_textLine{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 1.0rem;
+}
+.dat_ins {
+  margin-top:50px;
+  border-top:dashed 1px #f0f0f0;
+}
+.replyInsert_box{
+  background-color: #f0f0f0;
+  border-radius: 10px;
 }
 .dat_edit_t{
 width:520px;
@@ -23,12 +41,22 @@ position: absolute;
 top: 40px;
 }
 .rep_con {
-width:700px;
+  outline: none;
+  border: none;
+  resize: none;
+  background-color: #f0f0f0;
+  width:100%;
 height: 56px;
 }
 .rep_btn {
 width:100px;
-height:56px;
-font-size:16px;
-margin-left: 10px;
+font-size:1.6rem;
 }
+.dat_view img{
+  width: 5.0rem;
+  height: 5.0rem;
+}
+#rep_del{
+  align-self: flex-end;
+}
+#rep_del a{text-decoration: underline;}
