@@ -38,21 +38,43 @@ p{margin: 0}
 #star_btn{cursor: pointer;}
 /* 슬라이드 */
 
-#slideImg_box{width:49%;height: auto;}
-.bx-wrapper{border: none;border-radius: 10px; box-shadow: 4px 4px 3px #000 inset; margin: 0;}
-.bx-wrapper img{border-radius: 10px;height: 550px;}
-.bx-wrapper .bx-pager{bottom:0;top: 80%;background:linear-gradient(to top, black, transparent);padding-top:0;display: flex;align-items: center;justify-content: center;border-bottom-left-radius: 10px;border-bottom-right-radius: 10px}
+#slideImg_box{width:49%;height: 600px;}
 
+.bx-wrapper{border: none;border-radius: 10px; margin: 0;height: 100%;}
+
+.bx-wrapper .bx-viewport{height: 80%!important;}
+
+.bx-viewport div{height: 100%;}
+.bx-wrapper img{border-radius: 10px;height: 550px;height: 100%;}
+
+.bx-controls {height: 20%;}
+
+.bx-wrapper .bx-pager{
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  position:inherit;
+  display: grid;
+  grid-template-columns: repeat(6,1fr);
+  align-items: center;
+  justify-content: center;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.bx-wrapper .bx-pager.bx-default-pager a{width: auto;height: auto;}
 .bx-wrapper .bx-pager.bx-default-pager a:hover,
-.bx-wrapper .bx-pager.bx-default-pager a.active,
 .bx-wrapper .bx-pager.bx-default-pager a:focus {
   background: #fff;
 }
-.bx-wrapper .bx-pager.bx-default-pager a {background: #bebebe;}
+
+
+.bx-wrapper .bx-pager.bx-default-pager a {background: #fff;width: 100%;}
+.bx-wrapper .bx-pager.bx-default-pager a.active{background: #fff;border: solid #bebebe 1px;}
+
 
 .bx-viewport{border-radius: 10px}
 .bxslider img{border-radius: 10px;}
-.bx-pager .bx-default-pager{}
+
 /* 슬라이드 */
 
 #productInfo_title{

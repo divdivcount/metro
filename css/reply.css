@@ -9,13 +9,20 @@
 .reply_view {
   display: flex;
   flex-direction: column;
-
+}
+.reply_view h3{
+  font-size: 2.0rem;
+  color: #3b3b3b;
+  font-family: "NotoSansKR_r";
+  border-bottom: solid 1px gray;
+  margin: 0;
+  padding-bottom: 1.0rem;
 }
 .dat_view {
   display: flex;
   justify-content: space-between;
   font-size: 14px;
-  padding:10px 0 15px 0;
+  padding:2.0rem 0 1.0rem 0;
 }
 .rep_profile{
   display: flex;
@@ -46,7 +53,10 @@ top: 40px;
   resize: none;
   background-color: #f0f0f0;
   width:100%;
-height: 56px;
+  height: 7.0rem;
+  font-size: 2.0rem;
+  color: #3b3b3b;
+  font-family: "NotoSansKR_r";
 }
 .rep_btn {
 width:100px;
@@ -56,7 +66,30 @@ font-size:1.6rem;
   width: 5.0rem;
   height: 5.0rem;
 }
+.rep_textLine .member_num{
+  font-size: 2.0rem;
+  color: #3b3b3b;
+  font-family: "NotoSansKR_r";
+}
+.rep_textLine .reple_date{
+  font-size: 1.5rem;
+  color: #a7a7a7;
+  font-family: "NotoSansKR_r";
+}
 #rep_del{
   align-self: flex-end;
 }
-#rep_del a{text-decoration: underline;}
+#rep_del a{
+  text-decoration: underline;
+  font-size: 1.5rem;
+  color: #a7a7a7;
+  font-family: "NotoSansKR_r";
+}
+.reple_text{
+  font-size: 2.0rem;
+  color: #3b3b3b;
+  font-family: "NotoSansKR_r";
+}
+.rep_submitbtn_box{width: 100%; margin: 2.0rem 0 1.5rem 0;text-align: right;}
+#check_replyCount {color: #a7a7a7;font-size: 1.5rem;text-align: right; padding: 0 2.0rem 1.0rem 0 ;}
+#check_replyCount span {color:#0099ff;}

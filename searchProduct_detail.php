@@ -77,9 +77,8 @@ try{
         <div id="slideImg_box">
 
           <div class="bxslider">
-            <?php for($img = 0; $img < count($pr_img); $img++) { ?><div><img src="files\<?= $pr_img[$img] ?>" alt="" ></div><?php } ?>
+            <?php for($img = 0; $img < count($pr_img); $img++) { ?><div><img src="files/<?= $pr_img[$img] ?>" alt="" ></div><?php } ?>
           </div>
-
         </div>
 
         <!-- 상품 이미지제외한 정보 및 버튼 있는 부분 -->
@@ -154,18 +153,18 @@ try{
             <div id="extraBtn_box">
 
               <!-- 여기 관심등록 -->
-              <button type="button" class="w3-button w3-round-xlarge w3-light-gray" onclick="registerInterest()">
+              <button type="button" class="w3-button w3-round-large w3-light-gray" onclick="registerInterest()">
                 <div style="display:flex;align-items:center;justify-content:center"> <img src="<?php if($row["mem_i_check"] == 0){echo "img/staroff_19x19.png";}elseif($row["mem_i_check"] == 1){echo "img/star_19x19.png";} ?>" id="star_btn" data-value="<?=$row["mem_i_check"] ? $row["mem_i_check"] : 0 ?>" alt="" ></div>
               </button>
 
               <!-- 도착시간 확인 버튼 -->
-              <button type="button" class="w3-button w3-round-xlarge w3-light-gray">
+              <button type="button" class="w3-button w3-round-large w3-light-gray">
                 <div class="img_box"><img src="img/flag.png" alt=""></div>
                 <span>도착시간</span>
               </button>
 
               <!-- 쪽지보낵 버튼 -->
-              <button type="button" class="w3-button w3-round-xlarge w3-light-gray">
+              <button type="button" class="w3-button w3-round-large w3-light-gray">
                 <div class="img_box"><img src="img/chat.png" alt=""></div>
                 <span><a href="./memo_form.php?me_recive_mb_id=<?php
                 try{
@@ -183,7 +182,7 @@ try{
                 ?>&id=<?=$row["pr_id"]?>" class="td_btn" onclick="win_memo(this.href); return false;">쪽지보내기</a></span>
               </button>
 
-              <button type="button" class="talk w3-button w3-round-xlarge w3-blue">
+              <button type="button" class="talk w3-button w3-round-large w3-blue">
                 <div class="img_box"><img src="img/talk.png" alt=""></div>
                 <span>거래요청</span>
               </button>
@@ -194,6 +193,7 @@ try{
       </div>
 
       <!-- 딱딱해 -->
+
 
 
 
@@ -210,7 +210,7 @@ try{
     <div id="reply_container">
 
       <div class="reply_view">
-        <h3 style="padding:10px 0 15px 0; border-bottom: solid 1px gray;">댓글  php숫자 </h3>
+        <h3>댓글  php숫자 </h3>
         <?php if(isset($replys)) : ?>
         <?php foreach ($replys as $reple) : ?>
 
@@ -252,10 +252,16 @@ try{
           <input type="hidden" name="bno" class="bno" value="<?=$pr_id?>">
           <input type="hidden" name="mb_id" id="mb_id" class="mb_dat_user" value=<?=isset($mb) ? $mb["mb_num"] : 'null' ?>>
           <input type="hidden" name="om_id" id="om_id" class="om_dat_user" value=<?=isset($om) ? $om["om_id"] : 'null'?>>
+
           <div class="replyInsert_box" style="margin-top:10px;">
             <textarea name="content" class="rep_con" id="rep_con" placeholder="댓글을 입력해주세요."></textarea>
+            <div id="check_replyCount"><span>0</span> / 100</div>
           </div>
-          <button id="rep_btn" class="rep_btn w3-button w3-round-xlarge w3-blue">댓글</button>
+
+          <div class="rep_submitbtn_box"><button id="rep_btn" class="rep_btn w3-button w3-round-large w3-blue">댓글 등록</button></div>
+
+
+
         </div>
       </div>
       <!-- 댓글 끝 -->
@@ -354,7 +360,6 @@ try{
     <?php require_once 'metrocket_footer.php';?>
     <script type="text/javascript">
       $(document).ready(function(){
-
         $("#rep_btn").click(function() {
           $.ajax({
             url : "reply_ok.php",
@@ -389,6 +394,8 @@ try{
             autoHover: false,   // 마우스 호버시 정지 여부
             controls: true    // 이전 다음 버튼 노출 여부
         });
+
+        test();
     });
 
     //관심상품 클릭시 값넘어가는거
@@ -453,6 +460,48 @@ try{
 
     function report_close() {
       document.querySelector(".report_modal").classList.add("hidden");
+    }
+
+
+    // 글자수 카운트 (댓글쪽)
+    $('#rep_con').keyup(function (e){
+    var content = $(this).val();
+    $('#check_replyCount').html("<span>"+content.length+"</span> / 100");    //글자수 실시간 카운팅
+
+      if (content.length > 100){
+          alert("최대 100자까지 입력 가능합니다.");
+          $(this).val(content.substring(0, 100));
+          $('#check_replyCount').html("<span>100</span> / 100");
+      }
+    });
+
+    function test() {
+        var bx_pager_item = document.querySelector('.bx-pager');
+        <?php foreach ($imgdao as $row) : ?>
+
+        <?php
+          $pr_imgs = $row["pr_img"];
+          $pr_img = explode(",", $pr_imgs);
+          // var_dump($pr_img);
+          // print_r( $row);
+        ?>
+
+        <?php
+          for($img = 0; $img < count($pr_img); $img++) {
+            $pr_img_src[$img] = addslashes("files/") . $pr_img[$img];
+          }
+        ?>
+
+        <?php endforeach ?>
+        var makediv="";
+        var pr_img_src = <?php echo json_encode($pr_img_src,JSON_UNESCAPED_SLASHES);?>;
+        for (var i = 0; i < 6; i++) {
+          if (i < pr_img_src.length)
+            makediv += '<div class="bx-page-item"><a href data-slide-index ="'+ i +'"><img src="' + pr_img_src[i] +'"></a></div>';
+          else
+            makediv += '<div class="bx-page-item"><img src="img/empty_pr.png"></div>';
+        }
+        bx_pager_item.innerHTML = makediv;
     }
     </script>
   </div>
