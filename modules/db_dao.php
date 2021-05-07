@@ -182,7 +182,7 @@ class MetroDAO {
 		if($mb_id == 'null' && $om_id == 'null'){
 				if(empty($s_value) == true){
 					$query = $this->db->prepare("select count(*) from $this->quTable where pr_block = 1 or pr_block = 2 ");
-					// var_dump($query);
+					var_dump($query);
 				}else{
 					$query = $this->db->prepare("select count(*) from product p left join line l ON p.l_id = l.l_id where concat(pr_title,pr_station,l_name) like :s_value and pr_block = 1 or pr_block = 2 order by pr_id");
 					$query->bindValue(":s_value", "%$s_value%",  PDO::PARAM_STR);
@@ -269,7 +269,7 @@ class MetroDAO {
 							exit($e ->getMessage());
 						}
 					}else{
-					// echo "통과했냐 6트";
+					echo "통과했냐 6트";
 					if($s_value){
 						// echo "SelectPageList1";
 						$sql = "select pr_id,pr_title, pr_price, ca_name, (select l_name from line l where l.l_id = :mb_id ) as line_name, pr_station,(select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,(select pr_img from product_img pi where pi.pr_img_id = p.pr_img_id and pi.main_check = 'y') as pr_img  from product p  where l_id = :mb_id and pr_station = :om_id and pr_title like :s_value and pr_block = 1 order by $this->quTableId asc limit :start, :viewLen";

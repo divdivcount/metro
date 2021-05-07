@@ -95,9 +95,16 @@ require_once('modules/db.php');
       <div class="textStyle_1">인기 카테고리 별로 인기 매물을 확인해 보세요!</div>
 
       <div id="main_tapmenu">
-        <div class="tapmenuItem">디지털/가전</div>
-        <div class="tapmenuItem">생활/가공식품</div>
-        <div class="tapmenuItem">게임/취미</div>
+        <?php
+        $sql = "select p.ca_name as keyword, count(p.ca_name) as count from product p where p.pr_date>=CURDATE()-31 group by p.ca_name order by count desc limit 3";
+        $station_result = mysqli_query($conn, $sql);  //여기
+
+        while ($interest_count = mysqli_fetch_assoc($station_result)) { //여기
+        ?>
+        <div class="tapmenuItem"><?=$interest_count["keyword"]?></div>
+      <?php }
+
+      ?>
       </div>
 
 
