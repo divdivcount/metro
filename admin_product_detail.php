@@ -64,7 +64,7 @@
 
         <form method="post">
           <input type="hidden" name= "gap" value="<?php if($row["pr_block"] == 1){echo 2;}else{echo 1;} ?>">
-          <input type="submit" name="product_block" id="product_block" value="가리기" />
+          <input type="submit" name="product_block" id="product_block" value="<?php if($row["pr_block"] == 1){echo "가리기";}else{echo "가리기 풀기";} ?>" />
         </form>
         <form method="post">
           <input type="submit" name="product_del" id="product_del" value="삭제하기" />

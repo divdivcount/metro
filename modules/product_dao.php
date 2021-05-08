@@ -102,7 +102,7 @@ class Product extends MetroDAO {
 
       while ($fetch = $query->fetch(PDO::FETCH_ASSOC)) {
         $status = $fetch['pr_status'];
-        var_dump($status);
+        // var_dump($status);
         if($status === '거래완료') {
           $last_id = 0;
           $query = $this->db->prepare("insert into product_history valuse (null, {$fetch['pr_id']},{$fetch['pr_img_id']},{$fetch['pr_order_id']},{$fetch['pr_id']}) ");
@@ -248,7 +248,7 @@ class Product extends MetroDAO {
       $query->bindValue(":id", $pr_id, PDO::PARAM_INT);
       $query->execute();
       $fetch = $query->fetch(PDO::FETCH_ASSOC);
-      var_dump($fetch);
+      // var_dump($fetch);
 
       $query = $this->db->prepare("select pr_img from product_img where pr_img_id=:id");
       $query->bindValue(":id", $fetch['pr_img_id'], PDO::PARAM_STR);

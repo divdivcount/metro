@@ -43,6 +43,18 @@
       else return null;
     }
 
+    public function admin_Member_all_select($mb_id) {
+      // 회원 번호 찾기 User_page 회원번호 찾는데 사용합니다.
+      $this->openDB();
+      $query = $this->db->prepare("select *,(select count(rep_mb.mb_id) from member_declaration rep_mb where rep_mb.mb_id = m.mb_num) as rep_count from member m where mb_num =:mb_num");
+      $query->bindValue(":mb_num", $mb_id, PDO::PARAM_INT);
+      $query->execute();
+      $fetch = $query->fetchAll(PDO::FETCH_ASSOC);
+      if($fetch){
+        return $fetch;
+      }
+      else return null;
+    }
 
     public function Member_Search($mb_name, $mb_email) {
       // 회원 번호 찾기 User_page 회원번호 찾는데 사용합니다.
@@ -229,4 +241,29 @@
         exit($e ->getMessage());
         }
     }
+
+    public function admin_Member_Search($mb_name, $mb_id) {
+      // 회원 번호 찾기 User_page 회원번호 찾는데 사용합니다.
+      $this->openDB();
+      $query = $this->db->prepare("
+        (
+          select m.mb_name,m.mb_image ,m.mb_id, m.mb_email, m.mb_datetime, m.line_station ,(select count(rep_mb.mb_id) from member_declaration rep_mb where rep_mb.mb_id = m.mb_num) as rep_count from member m where mb_operation = 2 and mb_name = :mb_name and mb_id = :mb_id
+          Union all
+          select o.om_nickname,o.om_image_url ,o.om_id, o.om_email, o.om_datetime, o.line_station ,(select count(rep_mb.om_id) from member_declaration rep_mb where rep_mb.om_id = o.om_id) as rep_count from oauth_member o where om_nickname = :mb_name and om_id = :mb_id
+        )
+      ");
+      $query->bindValue(":mb_name","$mb_name",  PDO::PARAM_STR);
+      $query->bindValue(":mb_id", $mb_id,  PDO::PARAM_STR);
+      $query->execute();
+
+      $fetch = $query->fetchAll(PDO::FETCH_ASSOC);
+      if($fetch){
+        return $fetch;
+      }
+      else return null;
+    }
+
+
+
+
   }

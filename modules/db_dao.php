@@ -182,7 +182,7 @@ class MetroDAO {
 		if($mb_id == 'null' && $om_id == 'null'){
 				if(empty($s_value) == true){
 					$query = $this->db->prepare("select count(*) from $this->quTable where pr_block = 1 or pr_block = 2 ");
-					var_dump($query);
+					// var_dump($query);
 				}else{
 					$query = $this->db->prepare("select count(*) from product p left join line l ON p.l_id = l.l_id where concat(pr_title,pr_station,l_name) like :s_value and pr_block = 1 or pr_block = 2 order by pr_id");
 					$query->bindValue(":s_value", "%$s_value%",  PDO::PARAM_STR);

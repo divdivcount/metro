@@ -30,6 +30,19 @@
       else return null;
     }
 
+    public function admin_Om_select($mb_uid) {
+      // 회원 출력
+      $this->openDB();
+      $query = $this->db->prepare("select *, (select count(rep_mb.om_id) from member_declaration rep_mb where rep_mb.om_id = om_id) as rep_count from $this->quTable where om_id = $mb_uid");
+      $query -> bindValue(":mb_uid", $mb_uid, PDO::PARAM_STR);
+      $query->execute();
+      $fetch = $query->fetchAll(PDO::FETCH_ASSOC);
+      if($fetch){
+        return $fetch;
+      }
+      else return null;
+    }
+
     public function Om_token_update($mb_token, $mb_id) {
           $this->openDB();
           $query = $this->db->prepare("update $this->quTable set om_access_token=:mb_token where om_id=:mb_id");
