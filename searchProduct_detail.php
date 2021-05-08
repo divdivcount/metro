@@ -79,7 +79,13 @@ try{
           <div class="bxslider">
             <?php for($img = 0; $img < count($pr_img); $img++) { ?><div><img src="files/<?= $pr_img[$img] ?>" alt="" ></div><?php } ?>
           </div>
+
+          <div id="customPager">
+
+          </div>
         </div>
+
+
 
         <!-- 상품 이미지제외한 정보 및 버튼 있는 부분 -->
         <div id="mainProduct_information">
@@ -359,6 +365,9 @@ try{
     <!-- 푸터 부분  -->
     <?php require_once 'metrocket_footer.php';?>
     <script type="text/javascript">
+    var slider = $('.bxslider');
+    var slider_bx =null;
+
       $(document).ready(function(){
         $("#rep_btn").click(function() {
           $.ajax({
@@ -385,17 +394,40 @@ try{
           $("#rep_del").modal();
         });
 
-        $('.bxslider').bxSlider( {
-            mode: 'horizontal',// 가로 방향 수평 슬라이드
-            speed: 500,        // 이동 속도를 설정
-            pager: true,      // 현재 위치 페이징 표시 여부 설정
-            moveSlides: 1,     // 슬라이드 이동시 개수
-            auto: true,        // 자동 실행 여부
-            autoHover: false,   // 마우스 호버시 정지 여부
-            controls: true    // 이전 다음 버튼 노출 여부
-        });
+        //이미지 하나일때 체크
 
-        test();
+        var bxslider_img = document.querySelector(".bxslider").getElementsByTagName('img');
+
+        //이미지가 하나이상일때 설정
+        if (bxslider_img.length > 1) {
+          slider_bx = slider.bxSlider( {
+              mode: 'horizontal',// 가로 방향 수평 슬라이드
+              speed: 500,        // 이동 속도를 설정
+              pager: true,      // 현재 위치 페이징 표시 여부 설정
+              pagerCustom: $("#customPager"),
+              moveSlides: 1,     // 슬라이드 이동시 개수
+              auto: true,        // 자동 실행 여부
+              autoHover: false,   // 마우스 호버시 정지 여부
+              controls: true    // 이전 다음 버튼 노출 여부
+          });
+
+        //이미지가 하나일때 설정  (슬라이드 기능 거의 off)
+        }else{
+          slider_bx = slider.bxSlider( {
+              mode: 'horizontal',// 가로 방향 수평 슬라이드
+              speed: 500,        // 이동 속도를 설정
+              pager: true,      // 현재 위치 페이징 표시 여부 설정
+              pagerCustom: $("#customPager"),
+              moveSlides: 1,     // 슬라이드 이동시 개수
+              auto: false,        // 자동 실행 여부
+              preventDefaultSwipeX: false, // 손가락이 스핑할 때 터치 스크린이 x축이동 여부
+              touchEnabled:false, //슬라이더에 터치 swipe 전환을 허용 여부
+              autoHover: false,   // 마우스 호버시 정지 여부
+              controls: true    // 이전 다음 버튼 노출 여부
+          });
+        }
+        // 이미지 선택해서 슬라이드 넘기는 부분 함수
+        bxSetting();
     });
 
     //관심상품 클릭시 값넘어가는거
@@ -475,8 +507,8 @@ try{
       }
     });
 
-    function test() {
-        var bx_pager_item = document.querySelector('.bx-pager');
+    function bxSetting() {
+        var customPager = document.querySelector('#customPager');
         <?php foreach ($imgdao as $row) : ?>
 
         <?php
@@ -497,12 +529,13 @@ try{
         var pr_img_src = <?php echo json_encode($pr_img_src,JSON_UNESCAPED_SLASHES);?>;
         for (var i = 0; i < 6; i++) {
           if (i < pr_img_src.length)
-            makediv += '<div class="bx-page-item"><a href data-slide-index ="'+ i +'"><img src="' + pr_img_src[i] +'"></a></div>';
+            makediv += '<a href data-slide-index ="'+ i +'"><img src="' + pr_img_src[i] +'"></a>';
           else
-            makediv += '<div class="bx-page-item"><img src="img/empty_pr.png"></div>';
+            makediv += '<a><img src="img/empty_pr.png"></a>';
         }
-        bx_pager_item.innerHTML = makediv;
+        customPager.innerHTML = makediv;
     }
+
     </script>
   </div>
   </body>
