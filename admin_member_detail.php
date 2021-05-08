@@ -51,6 +51,7 @@
       메일 <?= isset($row["mb_email"]) ? $row["mb_email"] : $row["om_email"]?><br>
       역 <?=$row["line_station"]?><br>
       신고 수<?=$row["rep_count"]?><br>
+      경고 수<?=$row["warning_count"]?><br>
       <!-- 버튼 제어 하는 곳 -->
       <form method="post">
         <input type="hidden" name="mem_id" value="<?=isset($row["mb_id"]) ? $row["mb_id"] : null ?>">
@@ -58,6 +59,8 @@
         <input type="submit" name="mem_block" id="mem_block" value="차단하기" />
       </form>
       <form method="post">
+        <input type="hidden" name="mem_id" value="<?=isset($row["mb_id"]) ? $row["mb_id"] : null ?>">
+        <input type="hidden" name="mom_id" value="<?=isset($row["om_id"]) ? $row["om_id"] : null ?>">
         <input type="submit" name="warning_send" id="warning_send" value="경고 보내기" />
       </form>
     <?php endforeach ?>

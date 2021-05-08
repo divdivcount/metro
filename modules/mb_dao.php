@@ -247,9 +247,9 @@
       $this->openDB();
       $query = $this->db->prepare("
         (
-          select m.mb_name,m.mb_image ,m.mb_id, m.mb_email, m.mb_datetime, m.line_station ,(select count(rep_mb.mb_id) from member_declaration rep_mb where rep_mb.mb_id = m.mb_num) as rep_count from member m where mb_operation = 2 and mb_name = :mb_name and mb_id = :mb_id
+          select m.mb_name,m.mb_image ,m.mb_id, m.mb_email, m.mb_datetime, m.line_station,m.warning_count ,(select count(rep_mb.mb_id) from member_declaration rep_mb where rep_mb.mb_id = m.mb_num) as rep_count from member m where mb_operation = 2 and mb_name = :mb_name and mb_id = :mb_id
           Union all
-          select o.om_nickname,o.om_image_url ,o.om_id, o.om_email, o.om_datetime, o.line_station ,(select count(rep_mb.om_id) from member_declaration rep_mb where rep_mb.om_id = o.om_id) as rep_count from oauth_member o where om_nickname = :mb_name and om_id = :mb_id
+          select o.om_nickname,o.om_image_url ,o.om_id, o.om_email, o.om_datetime, o.line_station,o.warning_count ,(select count(rep_mb.om_id) from member_declaration rep_mb where rep_mb.om_id = o.om_id) as rep_count from oauth_member o where om_nickname = :mb_name and om_id = :mb_id
         )
       ");
       $query->bindValue(":mb_name","$mb_name",  PDO::PARAM_STR);
