@@ -38,10 +38,17 @@ if($status_code == 200) {
     foreach ($result as $row) {
       $om_id = $row['om_id'];
       $om_token = $row['om_access_token'];
+      $om_block = $row['om_block'];
     }
-    if ($om_id == $mb_uid) { // $om_id == $mb_uid멤버 DB에 토큰값 업데이트
+    if ($om_id == $mb_uid) {
+      // $om_id == $mb_uid멤버 DB에 토큰값 업데이트
       // if($om_token != $responseArr['access_token']){
         //기존 데이터가 변경 될 수 있기 때문에 다시 불러 update 처리
+        if($om_block === 'y'){
+          echo "<script>alert('관리자로 인해 차단 당한 아이디 입니다.');</script>";
+          echo "<script>location.replace('./index.php');</script>";
+          exit;
+        }
         $update = $oauth->Om_token_update($responseArr['access_token'], $mb_uid); // 로그인
       // }else{
       $mb_company = 'naver';

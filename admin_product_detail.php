@@ -7,8 +7,9 @@
   $pr_id = Get('id', null);
   echo $pr_id;
 
-  if(empty($_SESSION['ss_mb_id'])){
+  if(isset($_SESSION['ss_mb_id']) && $_SESSION['ss_mb_id'] !== 'admin'){
     echo "<script>alert('로그인을 해주세요');</script>";
+    echo "<script>location.replace('./index.php');</script>";
     exit;
   }
 ?>

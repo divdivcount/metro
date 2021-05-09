@@ -5,9 +5,11 @@
   require_once("modules/notification.php");
   $dao = new Product;
   $pid = Get('p', 1);
-
-  if(empty($_SESSION['ss_mb_id'])){
+  // echo $_SESSION["ss_mb_id"];
+  //   var_dump(isset($_SESSION['ss_mb_id']) && $_SESSION['ss_mb_id'] !== 'admin');
+  if(isset($_SESSION['ss_mb_id']) && $_SESSION['ss_mb_id'] !== 'admin'){
     echo "<script>alert('로그인을 해주세요');</script>";
+    echo "<script>location.replace('./index.php');</script>";
     exit;
   }
 ?>

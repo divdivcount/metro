@@ -25,8 +25,9 @@
   // var_dump($list_all)."<br>";
   // echo $member_id."<br>";
   // echo $oauth_id."<br>";
-  if(empty($_SESSION['ss_mb_id'])){
+  if(isset($_SESSION['ss_mb_id']) && $_SESSION['ss_mb_id'] !== 'admin'){
     echo "<script>alert('로그인을 해주세요');</script>";
+    echo "<script>location.replace('./index.php');</script>";
     exit;
   }
 
@@ -56,7 +57,8 @@
       <form method="post">
         <input type="hidden" name="mem_id" value="<?=isset($row["mb_id"]) ? $row["mb_id"] : null ?>">
         <input type="hidden" name="mom_id" value="<?=isset($row["om_id"]) ? $row["om_id"] : null ?>">
-        <input type="submit" name="mem_block" id="mem_block" value="차단하기" />
+        <input type="hidden" name= "gap" value="<?= (isset($row["mb_block"]) ? $row["mb_block"] : $row["om_block"] ) == 'n' ? 'y' : 'n' ?>">
+        <input type="submit" name="mem_block" id="mem_block" value="<?= (isset($row["mb_block"]) ? $row["mb_block"] : $row["om_block"] ) == 'n' ? '차단하기' : '차단해체' ?>" />
       </form>
       <form method="post">
         <input type="hidden" name="mem_id" value="<?=isset($row["mb_id"]) ? $row["mb_id"] : null ?>">
@@ -67,19 +69,39 @@
     <?php
     //맴버 차단
       function mem_block(){
-        $dao = new Member;
         $mem_id = Post("mem_id",null);
         $om_id = Post('mom_id', null);
+        $gap = Post("gap",null);
+        echo $mem_id;
         //쿼리 짜고 함수 지정
-      }
-      if(array_key_exists('product_block',$_POST))
-      {
-        $gap = Post("gap",0);
-        product_block();
-          if($gap == 2){
-            userGoto("상품을 숨김처리 하셨습니다", "");
+        if(!(is_null($mem_id))){
+          $dao = new Member;
+          $member = $dao->admin_Member_id_all_select($mem_id);
+          // var_dump($member);
+          if(is_null($member)){
+            // echo "이곳과";
+            $dao = new Oauths;
+            $other_member = $dao->admin_Om_select($mem_id);
+            $dao->admin_Om_block($other_member[0]["om_id"], $gap);
           }else{
-            userGoto("상품을 보이게 하셨습니다", "");
+            // echo "이곳";
+            $dao->admin_mb_block($member[0]["mb_id"], $gap);
+          }
+        }elseif (!(is_null($om_id))) {
+          // echo "저곳";
+          $dao = new Oauths;
+          $oauth = $dao->admin_Om_select($om_id, $gap);
+
+        }
+      }
+      if(array_key_exists('mem_block',$_POST))
+      {
+        $gap = Post("gap",null);
+        mem_block();
+          if($gap == 'y'){
+            userGoto("회원을 차단 하셨습니다", "");
+          }else{
+            userGoto("회원을 차단해체 하셨습니다", "");
           }
       }
       //경고 보내기

@@ -47,9 +47,14 @@
   foreach ($result as $row) {
     $om_id = $row['om_id'];
     $om_token = $row['om_access_token'];
+    $om_block = $row['om_block'];
   }
   if ($om_id == $userid) {
-
+    if($om_block === 'y'){
+      echo "<script>alert('관리자로 인해 차단 당한 아이디 입니다.');</script>";
+      echo "<script>location.replace('./index.php');</script>";
+      exit;
+    }
     $update = $oauth->Om_token_update($accessToken, $userid); // 로그인
     $mb_company = 'kakao';
     $_SESSION['kakao_mb_id'] = $mb_company.$userid;

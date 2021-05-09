@@ -20,6 +20,8 @@ $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 $password = $row['pass'];
 
+
+
 // $sql = " SELECT * FROM member WHERE mb_id = '$mb_id' and mb_del = 'y' ";
 // $result = mysqli_query($conn, $sql);
 // $mb_del = mysqli_fetch_assoc($result);
@@ -29,6 +31,12 @@ $password = $row['pass'];
 // 	echo "<script>location.replace('./login.php');</script>";
 // 	exit;
 // }
+// var_dump($mb['mb_block'] === 'y');
+if($mb['mb_block'] === 'y'){
+	echo "<script>alert('관리자로 인해 차단 당한 아이디 입니다.');</script>";
+	echo "<script>location.replace('./index.php');</script>";
+	exit;
+}
 
 if (!$mb['mb_id'] || !($password === $mb['mb_password'])) {
 	echo "<script>alert('가입된 회원아이디가 아니거나 비밀번호가 틀립니다.\\n비밀번호는 대소문자를 구분합니다.');</script>";
@@ -66,11 +74,12 @@ if ($mb['mb_email_certify'] == '0000-00-00 00:00:00') {
 
 $_SESSION['ss_mb_id'] = $mb_id; // 아이디/비밀번호 확인 후 세션 생성
 
-mysqli_close($conn); // 데이터베이스 접속 종료
-
-if(isset($_SESSION['ss_mb_id'])) { // 세션이 있다면 로그인 확인 페이지로 이동
+if(isset($_SESSION['ss_mb_id']) && $mb['mb_operation'] == 2) { // 세션이 있다면 로그인 확인 페이지로 이동
 	echo "<script>alert('로그인 되었습니다.');</script>";
 	echo "<script>location.replace('./index.php');</script>";
+}else{
+	echo "<script>alert('관리자님 안녕하세요.');</script>";
+	echo "<script>location.replace('./admin_product_list.php');</script>";
 }
-
+mysqli_close($conn); // 데이터베이스 접속 종료
 ?>

@@ -43,6 +43,17 @@
       else return null;
     }
 
+    public function admin_Om_block($om_id, $gap) {
+      echo $om_id;
+      echo $gap;
+          $this->openDB();
+          $query = $this->db->prepare("update $this->quTable set om_block=:gap where om_id=:om_id");
+          $query->bindValue(':om_id', $om_id, PDO::PARAM_INT);
+          $query->bindValue(':gap', $gap, PDO::PARAM_STR);
+          // var_dump($query);
+          return $query->execute();
+        }
+
     public function Om_token_update($mb_token, $mb_id) {
           $this->openDB();
           $query = $this->db->prepare("update $this->quTable set om_access_token=:mb_token where om_id=:mb_id");
