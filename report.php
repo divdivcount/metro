@@ -38,9 +38,9 @@
 .conT .conT_gridItem{
    margin: 2.5rem 0;
 }
-input[type=checkbox] {display:none;}
+input[type=radio] {display:none;}
 
-input[type=checkbox] + label {
+input[type=radio] + label {
 display: inline-block;
 cursor: pointer;
 line-height: 22px;
@@ -48,7 +48,7 @@ padding-left: 27px;
 background: url('img/check.png') left/22px no-repeat;
 }
 
-input[type=checkbox]:checked + label { background-image: url('img/checkIn.png'); }
+input[type=radio]:checked + label { background-image: url('img/checkIn.png'); }
 
 .box{
   width:100%;
@@ -124,19 +124,19 @@ input[type=checkbox]:checked + label { background-image: url('img/checkIn.png');
     $rep_mb = $om['om_id'];
   }
    ?>
-  <div class=bigB>
+  <div class="bigB">
     <div class=mother>
       <div class="closeBtn_box"><img src="img/cancle.png" class="" onclick="report_close()" style="width:2.3rem;height:2.3rem;cursor:pointer"></div>
       <div class=reP><img src="img/reP.png">신고하기</div><br>
 	  <form action="test_php.php" method="get">
 		<div class=conT>
-			<div class="conT_gridItem"><input type="checkbox" id="che0" value="광고성/홍보성" name="check[]"/><label for="che0">광고성/홍보성</label></div>
-			<div class="conT_gridItem"><input type="checkbox" id="che1" value="업자로 의심" name="check[]"/><label for="che1">업자로 의심</label></div>
-			<div class="conT_gridItem"><input type="checkbox" id="che2" value="판매글이 아닌 글" name="check[]"/><label for="che2">판매글이 아닌 글</label></div>
-			<div class="conT_gridItem"><input type="checkbox" id="che3" value="욕설/폭언" name="check[]"/><label for="che3">욕설/폭언</label></div>
-			<div class="conT_gridItem"><input type="checkbox" id="che4" value="같은 내용 반복 게시" name="check[]"/><label for="che4">같은 내용 반복 게시</label></div>
-			<div class="conT_gridItem"><input type="checkbox" id="che5" value="글과 사진이 연관이 없음" name="check[]"/><label for="che5">글과 사진이 연관이 없음</label></div>
-			<div class="conT_gridItem"><input type="checkbox" id="che6" value="기타" name="check[]" /><label for="che6">기타</label></div>
+			<div class="conT_gridItem"><input type="radio" id="che0" value="광고성/홍보성" name="check[]"/><label for="che0">광고성/홍보성</label></div>
+			<div class="conT_gridItem"><input type="radio" id="che1" value="업자로 의심" name="check[]"/><label for="che1">업자로 의심</label></div>
+			<div class="conT_gridItem"><input type="radio" id="che2" value="판매글이 아닌 글" name="check[]"/><label for="che2">판매글이 아닌 글</label></div>
+			<div class="conT_gridItem"><input type="radio" id="che3" value="욕설/폭언" name="check[]"/><label for="che3">욕설/폭언</label></div>
+			<div class="conT_gridItem"><input type="radio" id="che4" value="같은 내용 반복 게시" name="check[]"/><label for="che4">같은 내용 반복 게시</label></div>
+			<div class="conT_gridItem"><input type="radio" id="che5" value="글과 사진이 연관이 없음" name="check[]"/><label for="che5">글과 사진이 연관이 없음</label></div>
+			<div class="conT_gridItem"><input type="radio" id="che6" value="기타" name="check[]" /><label for="che6">기타</label></div>
 		</div>
 
 
@@ -153,16 +153,20 @@ input[type=checkbox]:checked + label { background-image: url('img/checkIn.png');
   </div>
   </body>
   <script type="text/javascript">
+
+    var rep_checkbox = document.getElementsByName('check[]');
     var otherReason = document.getElementById("che6")
     var textarea_otherReason =document.getElementById("textarea_otherReason");
 
-    otherReason.addEventListener('click',(event)=>{
-      if (otherReason.checked) {
-        textarea_otherReason.disabled = false;
-      }else {
-        textarea_otherReason.disabled = true;
-      }
+    for(var i=0; i < rep_checkbox.length; i++){
+      rep_checkbox[i].addEventListener("click",function(){
 
-    })
+        if (otherReason.checked)
+          textarea_otherReason.disabled = false;
+        else
+          textarea_otherReason.disabled = true;
+      });
+    }
+
   </script>
 </html>

@@ -41,12 +41,43 @@ try{
   <body>
   <div id="wrapPage">
     <!-- 모달팝업 (hidden여부로 팝업) -->
-    <div class="report_modal hidden">
+    <div class="modal hidden">
       <div class="bg">          <!-- 백그라운드 잡는 부분  -->
         <div class="fix_page">  <!-- 화면가운데 fix로 잡는 부분  -->
 
-          <div class="modalBox">            <!-- 콘텐츠 들어가는부분 -->
+          <div class="report_modalBox hidden">            <!-- 콘텐츠 들어가는부분 -->
             <?php require_once('report.php'); ?>
+          </div>
+
+          <div class="arrivalTime_modalBox hidden" action="">
+            <div class="closeBtn_box"><img src="img/cancle.png" class="" onclick="arrivalTime_close()" style="width:2.3rem;height:2.3rem;cursor:pointer"></div>
+            <div class="arrivalTime_contentBox">
+              <div id="bothFind_item">
+                <div class="find_item">
+                  <span>출발역을 입력해주세요.</span>
+                  <input type="text" id="departure_station" class="w3-input highlight" value="여긴 검색하는부분" name="departure_station">
+                </div>
+
+                <div class="find_item">
+                  <span>도착역</span>
+                  <input type="text" id="arrival_station" class="w3-input highlight" value="php 들어올부분" name ="arrival_station" readonly>
+                  <!-- <div style="display:flex"><input id="auto" class="w3-input highlight"   type="text"><div style="width:1.3rem;margin:auto"><img src="img\loupe.png" alt=""></div></div> -->
+                </div>
+              </div>
+              <div id="arr_imgBox">
+                <img src="img/rocket.png" style="width:7.1rem;height:3.8rem" alt="">
+              </div>
+
+              <div class="timeResult hidden">
+                <span>도착시간</span>
+                <div id="requiredTime">00:00</div>
+                <div id="requiredTime_detail">오전 00:00 ~ 오후 00:00</div>
+              </div>
+              <div class="search_arrivalTime">
+                <button type="button" class="w3-button w3-blue w3-round-large" id="arrivalTime_btn">검색</button>
+              </div>
+            </div>
+
           </div>
 
         </div>
@@ -55,10 +86,10 @@ try{
     <!-- 상단 메뉴 부분 -->
     <?php require_once('metrocket_header.php');?>
     <div id="wrapContainer_Box">
-      <div id="pageTitle_box" class="radius_box">
+      <!-- <div id="pageTitle_box" class="radius_box">
         <h2>품목 상세보기</h2>
         <span>채팅하기를 이용해 판매자와 대화할 수 있습니다.</span>
-      </div>
+      </div> -->
       <?php $imgdao = $dao->searchProduct_detail(isset($mb) ? $mb["mb_num"] : 'null', isset($om) ? $om["om_id"] : 'null',$pr_id, $pr_title); ?>
       <!-- 슬라이드 이미지 -->
       <?php foreach ($imgdao as $row) : ?>
@@ -128,7 +159,7 @@ try{
             <!-- 세번째줄  -->
             <div class="productPrice_line">
               <div class="imgPlusText">
-                <div class="img_box"><img src="img/tag.png" alt=""></div>
+                <div class="img_box" style="width:2.5rem;height:2.5rem"><img src="img/tag.png" alt=""></div>
                 <span><?= $row["pr_price"] ?>원</span>
                 <!-- 가격제안 가능여부 -->
                 <div class="checkPricepNegotiation"><?php if($row["pr_check"] == 1){echo "(가격제안 가능)";}else{echo "(가격제안 불가능)";} ?></div>
@@ -160,18 +191,18 @@ try{
 
               <!-- 여기 관심등록 -->
               <button type="button" class="w3-button w3-round-large w3-light-gray" onclick="registerInterest()">
-                <div style="display:flex;align-items:center;justify-content:center"> <img src="<?php if($row["mem_i_check"] == 0){echo "img/staroff_19x19.png";}elseif($row["mem_i_check"] == 1){echo "img/star_19x19.png";} ?>" id="star_btn" data-value="<?=$row["mem_i_check"] ? $row["mem_i_check"] : 0 ?>" alt="" ></div>
+                <div  class="img_box" style="width:1.9rem;height:1.9rem;margin:0"> <img src="<?php if($row["mem_i_check"] == 0){echo "img/staroff_19x19.png";}elseif($row["mem_i_check"] == 1){echo "img/star_19x19.png";} ?>" id="star_btn" data-value="<?=$row["mem_i_check"] ? $row["mem_i_check"] : 0 ?>" alt="" ></div>
               </button>
 
               <!-- 도착시간 확인 버튼 -->
-              <button type="button" class="w3-button w3-round-large w3-light-gray">
-                <div class="img_box"><img src="img/flag.png" alt=""></div>
+              <button type="button" class="w3-button w3-round-large w3-light-gray" onclick="arrivalTime_open()">
+                <div class="img_box" style="width:1.9rem;height:1.9rem"><img src="img/flag.png" alt=""></div>
                 <span>도착시간</span>
               </button>
 
               <!-- 쪽지보낵 버튼 -->
               <button type="button" class="w3-button w3-round-large w3-light-gray">
-                <div class="img_box"><img src="img/chat.png" alt=""></div>
+                <div class="img_box" style="width:1.5rem;height:2.1rem"><img src="img/chat.png" alt=""></div>
                 <span><a href="./memo_form.php?me_recive_mb_id=<?php
                 try{
                   $member = new Member;
@@ -189,7 +220,7 @@ try{
               </button>
 
               <button type="button" class="talk w3-button w3-round-large w3-blue">
-                <div class="img_box"><img src="img/talk.png" alt=""></div>
+                <div class="img_box" style="width:2.1rem;height:2.1rem"><img src="img/talk.png" alt=""></div>
                 <span>거래요청</span>
               </button>
             </div>
@@ -198,7 +229,7 @@ try{
         </div>
       </div>
 
-      <!-- 딱딱해 -->
+
 
 
 
@@ -284,7 +315,7 @@ try{
         <a href="searchProduct_detail.php?id=<?=$rows['pr_id']?>&title=<?=$rows['pr_title']?>"><div class="otherProduct_content">
 
           <!-- 이미지 부분 -->
-          <div class="otherProduct_content_img radiusTop">
+          <div class="otherProduct_content_img">
             <img src="files/<?=$rows["pr_img"]?>" class="radiusTop" alt="">
           </div>
 
@@ -486,12 +517,25 @@ try{
     var new_win = window.open(href, 'win_memo', 'left=100,top=100,width=620,height=600,scrollbars=1');
     new_win.focus();
     }
+
+    // 신고하기모달팝업 관련 함수
     function report_open() {
-      document.querySelector(".report_modal").classList.remove("hidden");
+      document.querySelector(".modal").classList.remove("hidden");
+      document.querySelector(".report_modalBox").classList.remove("hidden");
+    }
+    function report_close() {
+      document.querySelector(".modal").classList.add("hidden");
+      document.querySelector(".report_modalBox").classList.add("hidden");
     }
 
-    function report_close() {
-      document.querySelector(".report_modal").classList.add("hidden");
+    // 도착시간 모달팝업 관련 함수
+    function arrivalTime_open() {
+      document.querySelector(".modal").classList.remove("hidden");
+      document.querySelector(".arrivalTime_modalBox").classList.remove("hidden");
+    }
+    function arrivalTime_close() {
+      document.querySelector(".modal").classList.add("hidden");
+      document.querySelector(".arrivalTime_modalBox").classList.add("hidden");
     }
 
 
@@ -535,6 +579,37 @@ try{
         }
         customPager.innerHTML = makediv;
     }
+
+    $("#arrivalTime_btn").click(function() {
+      let mb_id = "<?= isset($mb) ? $mb["mb_num"] : 'null' ?>";
+      let om_id = "<?= isset($om) ? $om["om_id"] : 'null' ?>";
+
+      if (mb_id != 'null' || om_id != 'null') {
+        $.ajax({
+          url : "reply_ok.php",
+          type : "get",
+          data : {
+            "departure_station" : $(".departure_station").val(),
+            "arrival_station" : $(".arrival_station").val()
+          },
+          success : function(data) {
+            document.getElementById('requiredTime').innerHTML = data.requiredTime;
+            document.getElementById('requiredTime_detail').innerHTML =data.requiredTime_detail;
+            document.querySelector(".timeResult").classList.remove("hidden");
+            document.querySelector(".search_arrivalTime").classList.add("hidden");
+          },
+          error : function(e){
+            alert("로그인을 먼저 해주세요");
+            location.repleace("./index.php");
+          }
+        });
+      }else{
+        alert("관심 상품을 등록하기 위해서 로그인을 먼저 해주세요");
+      }
+    })
+
+
+
 
     </script>
   </div>
