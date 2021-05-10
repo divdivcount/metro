@@ -134,7 +134,7 @@
         }
         public function admin_om_waring_send($mem_id,$admin,$time,$recive,$memo_text) {
           $this->openDB();
-          $query = $this->db->prepare("update oauth_member set warning_count = warning_count + 1 where mb_id = :mem_id");
+          $query = $this->db->prepare("update oauth_member set warning_count = warning_count + 1 where om_id = :mem_id");
           $query -> bindValue(":mem_id", $mem_id, PDO::PARAM_STR);
           $query->execute();
           $query = $this->db->prepare("insert into mb_om_memo values (null, :mem_id, :admin, :time, :recive ,:memo_text, null)");

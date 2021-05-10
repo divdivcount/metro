@@ -119,14 +119,19 @@
           $member = $dao->admin_Member_id_all_select($mem_id);
           // var_dump($member);
           if(is_null($member)){
-            // echo "이곳과";
+            echo "이곳과";
+
             $dao = new Oauths;
             $other_member = $dao->admin_Om_select($mem_id);
-            $memo_text = "고객님의 현재 경고를 받은 수는  {$other_member[0]['warning_count']}개 입니다.\n불 합리하다 생각하신다면 실시간 상담을 통하여 메세지를 보내주세요.";
+            $warning_count =  $other_member[0]['warning_count']+1;
+            echo $warning_count;
+            $memo_text = "고객님의 현재 경고를 받은 수는".$warning_count."개 입니다.\n불 합리하다 생각하신다면 실시간 상담을 통하여 메세지를 보내주세요.";
             $dao->admin_om_waring_send($other_member[0]["om_id"], $admin, $time, $recive,$memo_text);
           }else{
-            // echo "이곳";
-            $memo_text = "고객님의 현재 경고를 받은 수는  {$member[0]['warning_count']}개 입니다.\n불 합리하다 생각하신다면 실시간 상담을 통하여 메세지를 보내주세요.";
+            echo "이곳";
+            $warning_count =  $member[0]['warning_count']+1;
+            echo $warning_count;
+            $memo_text = "고객님의 현재 경고를 받은 수는".$warning_count."개 입니다.\n불 합리하다 생각하신다면 실시간 상담을 통하여 메세지를 보내주세요.";
             $dao->admin_waring_send($member[0]["mb_id"], $admin, $time, $recive,$memo_text);
           }
         }elseif (!(is_null($om_id))) {
