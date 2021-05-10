@@ -138,10 +138,10 @@
       public function mem_SelectPageLength($cPage, $viewLen, $mb_id, $om_id, $s_value= null) {
         $this->openDB();
        if($this->quTable == 'member'){
-          echo "여긴가?";
+          // echo "여긴가?";
           if($mb_id == 'null' && $om_id == 'null'){
               if(empty($s_value) == true){
-                echo "여긴가?2";
+                // echo "여긴가?2";
                 $query = $this->db->prepare("select sum(cnt) from
                 (
                     select count(*) as cnt from member m where mb_operation = 2 and mb_email_certify != '0000-00-00 00:00:00'
@@ -149,7 +149,7 @@
                     select count(*) as cnts from oauth_member o ) as s
               ");
               }else{
-                echo "여긴가?3";
+                // echo "여긴가?3";
                 $query = $this->db->prepare("
                 select sum(cnt) from
                 ( select count(*) as cnt from member m where mb_operation = 2 and concat(m.mb_id,m.mb_name,m.line_station) like :s_value and mb_email_certify != '0000-00-00 00:00:00'
@@ -286,5 +286,18 @@
           return $query->execute();
         }
 
+        public function admin_waring_send($mem_id,$admin,$time,$recive,$memo_text) {
+          $this->openDB();
+          $query = $this->db->prepare("update member set warning_count = warning_count + 1 where mb_id = :mem_id");
+          $query -> bindValue(":mem_id", $mem_id, PDO::PARAM_STR);
+          $query->execute();
+          $query = $this->db->prepare("insert into mb_om_memo values (null, :mem_id, :admin, :time, :recive ,:memo_text, null)");
+          $query -> bindValue(":mem_id", $mem_id, PDO::PARAM_STR);
+          $query -> bindValue(":admin", $admin, PDO::PARAM_STR);
+          $query -> bindValue(":time", $time, PDO::PARAM_STR);
+          $query -> bindValue(":recive", $recive, PDO::PARAM_STR);
+          $query -> bindValue(":memo_text", $memo_text, PDO::PARAM_STR);
+          $query->execute();
 
+        }
   }

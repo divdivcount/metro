@@ -98,7 +98,8 @@ mysqli_close($conn); // 데이터베이스 접속 종료
 		</article>
 
 		<div class="win_btn">
-			<?php if ($kind == 'recive') {  ?><a href="./memo_form.php?me_recive_mb_id=<?php echo $memos['mb_id'] != null ? $memos['mb_id']  : 'sir'.$memos['om_id']  ?>&amp;me_id=<?php echo $memo['me_id'] ?>&amp;id=<?=$memos['pr_id']?>">답장</a><?php }  ?>
+			<?php if ($kind == 'recive') {  ?><a href="./memo_form.php?me_recive_mb_id=<?php echo $memos['mb_id'] != null ? $memos['mb_id']  : 'sir'.$memos['om_id']  ?>&amp;me_id=<?php echo $memo['me_id'] ?>&amp;id=<?=$memos['pr_id']?>">
+				<?php if($memo['me_send_mb_id'] === 'admin'){echo "";}else{echo "답장";}?></a><?php }  ?>
 			<a href="./memo.php?kind=<?php echo $kind ?>">목록보기</a>
 			<button type="button" onclick="window.close();">창닫기</button>
 		</div>
