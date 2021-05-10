@@ -202,19 +202,19 @@
           if($mb_id == 'null' && $om_id == 'null'){
               if(empty($s_value) == true){
                 $sql = "
-                  (
-                    select m.mb_name, m.mb_id, m.mb_email, m.mb_datetime, m.line_station, (select count(rep_mb.mb_id) from member_declaration rep_mb where rep_mb.mb_id = m.mb_num) as rep_count from member m where mb_operation = 2 and mb_email_certify != '0000-00-00 00:00:00'
-                    Union all
-                    select o.om_nickname, o.om_id, o.om_email, o.om_datetime, o.line_station, (select count(rep_mb.om_id) from member_declaration rep_mb where rep_mb.om_id = o.om_id) as rep_count from oauth_member o
-                  )limit :start, :viewLen";
+                (select m.mb_name, m.mb_id, m.mb_email, m.mb_datetime, m.line_station, (select count(rep_mb.mb_id) from member_declaration rep_mb where rep_mb.mb_id = m.mb_num) as rep_count from member m where mb_operation = 2 and mb_email_certify != '0000-00-00 00:00:00')
+                  union all
+                (select o.om_nickname, o.om_id, o.om_email, o.om_datetime, o.line_station, (select count(rep_mb.om_id) from member_declaration rep_mb where rep_mb.om_id = o.om_id) as rep_count from oauth_member o)
+                limit :start, :viewLen";
+
                 $query = $this->db->prepare($sql);
               }else{
                 // echo "2??";
-                $sql = "(
-                  select m.mb_name, m.mb_id, m.mb_email, m.mb_datetime, m.line_station, (select count(rep_mb.mb_id) from member_declaration rep_mb where rep_mb.mb_id = m.mb_num) as rep_count from member m where mb_operation = 2 and concat(m.mb_id,m.mb_name) like :s_value and mb_email_certify != '0000-00-00 00:00:00'
-                  Union all
-                  select o.om_nickname, o.om_id, o.om_email, o.om_datetime, o.line_station, (select count(rep_mb.om_id) from member_declaration rep_mb where rep_mb.om_id = o.om_id) as rep_count from oauth_member o where concat(o.om_id,o.om_nickname) like :s_value
-                )limit :start, :viewLen";
+                $sql = "
+                  (select m.mb_name, m.mb_id, m.mb_email, m.mb_datetime, m.line_station, (select count(rep_mb.mb_id) from member_declaration rep_mb where rep_mb.mb_id = m.mb_num) as rep_count from member m where mb_operation = 2 and concat(m.mb_id,m.mb_name) like :s_value and mb_email_certify != '0000-00-00 00:00:00')
+                  union all
+                  (select o.om_nickname, o.om_id, o.om_email, o.om_datetime, o.line_station, (select count(rep_mb.om_id) from member_declaration rep_mb where rep_mb.om_id = o.om_id) as rep_count from oauth_member o where concat(o.om_id,o.om_nickname) like :s_value)
+                limit :start, :viewLen";
                 $query = $this->db->prepare($sql);
                 if($s_value)$query->bindValue(":s_value", "%$s_value%",  PDO::PARAM_STR);
               }
@@ -260,11 +260,9 @@
       // 회원 번호 찾기 User_page 회원번호 찾는데 사용합니다.
       $this->openDB();
       $query = $this->db->prepare("
-        (
-          select m.mb_name,m.mb_image ,m.mb_id, m.mb_email, m.mb_datetime, m.mb_block,m.line_station,m.warning_count ,(select count(rep_mb.mb_id) from member_declaration rep_mb where rep_mb.mb_id = m.mb_num) as rep_count from member m where mb_operation = 2 and mb_name = :mb_name and mb_id = :mb_id
+        (select m.mb_name,m.mb_image ,m.mb_id, m.mb_email, m.mb_datetime, m.mb_block,m.line_station,m.warning_count ,(select count(rep_mb.mb_id) from member_declaration rep_mb where rep_mb.mb_id = m.mb_num) as rep_count from member m where mb_operation = 2 and mb_name = :mb_name and mb_id = :mb_id)
           Union all
-          select o.om_nickname,o.om_image_url ,o.om_id, o.om_email, o.om_datetime, o.om_block,o.line_station,o.warning_count ,(select count(rep_mb.om_id) from member_declaration rep_mb where rep_mb.om_id = o.om_id) as rep_count from oauth_member o where om_nickname = :mb_name and om_id = :mb_id
-        )
+          (select o.om_nickname,o.om_image_url ,o.om_id, o.om_email, o.om_datetime, o.om_block,o.line_station,o.warning_count ,(select count(rep_mb.om_id) from member_declaration rep_mb where rep_mb.om_id = o.om_id) as rep_count from oauth_member o where om_nickname = :mb_name and om_id = :mb_id)
       ");
       $query->bindValue(":mb_name","$mb_name",  PDO::PARAM_STR);
       $query->bindValue(":mb_id", $mb_id,  PDO::PARAM_STR);
