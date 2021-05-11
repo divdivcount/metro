@@ -22,6 +22,9 @@ curl_close($ch);
 
 if (isset($_POST["departure_stationID"]) && isset($_POST["arrival_stationID"])) {
   $response_result=json_decode($response,true);
+  // print_r($response_result);
+  //삽질하는 그대에게 이게 맞는가 편지를 씁니다.. 왜 아까 했을때 안됐을까요?
+  echo $response_result['result']['globalTravelTime'];
   // if (is_array($response_result["result"])) {
   //   print_r($response_result["result"]["globalStartName"]);
   // }
@@ -32,7 +35,7 @@ if (isset($_POST["departure_stationID"]) && isset($_POST["arrival_stationID"])) 
   // echo $return_stationTime_array;
   //var_dump( json_encode($return_stationTime_array, JSON_UNESCAPED_UNICODE));
   // echo $response_result["result"]["globalTravelTime"];
-  echo $response_result['result'] -> 'globalStartName';
+  // echo $response_result['result'] -> 'globalStartName';
 }else {
   // code...
 }
