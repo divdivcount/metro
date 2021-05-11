@@ -368,23 +368,19 @@ require_once('modules/db.php');
       if(this.value !== ""){
         var optVal = $(this).find(":selected").val();
         //alert(optVal);
-        $.post(
-          'autosearch.php',
-          {optVal:optVal},
-          function(data) {
-            let source = $.map($.parseJSON(data),
-              function(item) { //json[i] 번째 에 있는게 item 임.
-                chosung = "";
-                //Hangul.d(item, true) 을 하게 되면 item이 분해가 되어서
-                //["ㄱ", "ㅣ", "ㅁ"],["ㅊ", "ㅣ"],[" "],["ㅂ", "ㅗ", "ㄲ"],["ㅇ", "ㅡ", "ㅁ"],["ㅂ", "ㅏ", "ㅂ"]
-                //으로 나오는데 이중 0번째 인덱스만 가지고 오면 초성이다.
-                full = Hangul.disassemble(item).join("").replace(/ /gi, "");	//공백제거된 ㄱㅣㅁㅊㅣㅂㅗㄲㅇㅡㅁㅂㅏㅂ
-                Hangul.d(item, true).forEach(function(strItem, index) {
+        $.post('autosearch.php',{optVal:optVal},function(data) {
+            let source = $.map($.parseJSON(data),function(item) { //json[i] 번째 에 있는게 item 임.
+              chosung = "";
+              //Hangul.d(item, true) 을 하게 되면 item이 분해가 되어서
+              //["ㄱ", "ㅣ", "ㅁ"],["ㅊ", "ㅣ"],[" "],["ㅂ", "ㅗ", "ㄲ"],["ㅇ", "ㅡ", "ㅁ"],["ㅂ", "ㅏ", "ㅂ"]
+              //으로 나오는데 이중 0번째 인덱스만 가지고 오면 초성이다.
+              full = Hangul.disassemble(item).join("").replace(/ /gi, "");	//공백제거된 ㄱㅣㅁㅊㅣㅂㅗㄲㅇㅡㅁㅂㅏㅂ
+              Hangul.d(item, true).forEach(function(strItem, index) {
 
-                  if(strItem[0] != " "){	//띄어 쓰기가 아니면
-                    chosung += strItem[0];//초성 추가
-                  }
-                });
+                if(strItem[0] != " "){	//띄어 쓰기가 아니면
+                  chosung += strItem[0];//초성 추가
+                }
+              });
 
                 return {
                   label : chosung + "|" + (item).replace(/ /gi, "") +"|" + full, //실제 검색어랑 비교 대상 ㄱㅊㅂㅇㅂ|김치볶음밥|ㄱㅣㅁㅊㅣㅂㅗㄲㅇㅡㅁㅂㅏㅂ 이 저장된다.
@@ -392,14 +388,13 @@ require_once('modules/db.php');
                   chosung : chosung,
                   full : full
                 }
-              }
-            );
+              });
 
           $("#auto").autocomplete({
             source : source,	// source 는 자동 완성 대상
             select : function(event, ui) {	//아이템 선택시
-            console.log(ui.item.label + " 선택 완료");
-          },
+              console.log(ui.item.label + " 선택 완료");
+            },
             focus : function(event, ui) {	//포커스 가면
               return false;//한글 에러 잡기용도로 사용됨
             },
@@ -413,7 +408,6 @@ require_once('modules/db.php');
       }
     })
   });
-
   $("#auto").on("keyup",function(){	//검색창에 뭔가가 입력될 때마다
   input = $("#auto").val();	//입력된 값 저장
   $( "#auto" ).autocomplete( "search", Hangul.disassemble(input).join("").replace(/ /gi, "") );	//자모 분리후 띄어쓰기 삭제

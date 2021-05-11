@@ -31,7 +31,7 @@
 
 
 /* 모달 팝업  */
-.modal {
+.modal_header {
  position: absolute;
  top: 0;
  left: 0;
@@ -41,7 +41,7 @@
  justify-content: center;
  align-items: center;
 }
-.modal .bg {
+.modal_header .bg {
  width: 100%;
  height: 100%;
  background-color: rgba(0, 0, 0, 0.6);
@@ -56,7 +56,7 @@
  height: 100%;
  z-index: 10001
 }
-.modal .modalBox {
+.modal_header .modalBox {
  position: absolute;
  background-color: #fff;
  max-width: 700px;
@@ -65,7 +65,7 @@
  padding: 2.0rem;
  z-index: 10002;
 }
-.modal .closeBtn_box {
+.modal_header .closeBtn_box {
  display: flex;
  justify-content: flex-end;
 }
@@ -93,7 +93,7 @@ a{text-decoration: none;}
     margin: 2.0rem auto;
   }
   .imgbox_1 img{width: 75%}
-  .modalBox {width: 80%;height: auto;}
+  .modal_headerBox {width: 80%;height: auto;}
 }
 @media only screen and (max-height: 700px) {
   .modalBox {height: auto;}

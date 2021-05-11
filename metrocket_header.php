@@ -71,7 +71,7 @@
       </div>
     </div>
 
-    <div class="modal hidden">
+    <div class="modal_header hidden">
       <div class="bg">
         <div class="test_modal">
 
@@ -92,10 +92,10 @@
 
       //헤더 로그인 메뉴쪽 모달팝업 제어 함수
       function login_open() {
-        document.querySelector(".modal").classList.remove("hidden");
+        document.querySelector(".modal_header").classList.remove("hidden");
       }
       function login_close() {
-        document.querySelector(".modal").classList.add("hidden");
+        document.querySelector(".modal_header").classList.add("hidden");
       }
 
       if (document.querySelector(".openBtn")) {

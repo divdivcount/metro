@@ -280,7 +280,7 @@ display : -webkit-box;
   .search_arrivalTime{display: flex;text-align: center;align-items:flex-end;}
   .search_arrivalTime .w3-button{width: 16.0rem;padding: 0.8rem 1.6rem;font-size:1.5rem;font-family: "NotoSansKR_r";outline: none;}
 
-
+.ui-autocomplete{z-index: 10003}
 
 .closeBtn_box {
  display: flex;

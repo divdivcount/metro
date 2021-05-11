@@ -30,6 +30,7 @@ try{
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://unpkg.com/hangul-js" type="text/javascript"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="apple-touch-icon" sizes="180x180" href="css/favicon_package_v0.16/apple-touch-icon.png">
@@ -40,6 +41,16 @@ try{
   </head>
   <body>
   <div id="wrapPage">
+    <?php $imgdao = $dao->searchProduct_detail(isset($mb) ? $mb["mb_num"] : 'null', isset($om) ? $om["om_id"] : 'null',$pr_id, $pr_title); ?>
+    <!-- 슬라이드 이미지 -->
+    <?php foreach ($imgdao as $row) : ?>
+
+    <?php
+      $pr_imgs = $row["pr_img"];
+      $pr_img = explode(",", $pr_imgs);
+      // var_dump($pr_img);
+      // print_r( $row);
+    ?>
     <!-- 모달팝업 (hidden여부로 팝업) -->
     <div class="modal hidden">
       <div class="bg">          <!-- 백그라운드 잡는 부분  -->
@@ -55,12 +66,12 @@ try{
               <div id="bothFind_item">
                 <div class="find_item">
                   <span>출발역을 입력해주세요.</span>
-                  <input type="text" id="departure_station" class="w3-input highlight" value="여긴 검색하는부분" name="departure_station">
+                  <input type="text" id="auto" class="w3-input highlight" value="" name="departure_station" placeholder="여긴 검색하는부분">
                 </div>
 
                 <div class="find_item">
                   <span>도착역</span>
-                  <input type="text" id="arrival_station" class="w3-input highlight" value="php 들어올부분" name ="arrival_station" readonly>
+                  <input type="text" id="arrival_station" class="w3-input highlight" value="<?= substr($row["profile_station"],(strpos($row["profile_station"],';')+1)) ?>" name ="arrival_station" readonly>
                   <!-- <div style="display:flex"><input id="auto" class="w3-input highlight"   type="text"><div style="width:1.3rem;margin:auto"><img src="img\loupe.png" alt=""></div></div> -->
                 </div>
               </div>
@@ -90,17 +101,7 @@ try{
         <h2>품목 상세보기</h2>
         <span>채팅하기를 이용해 판매자와 대화할 수 있습니다.</span>
       </div> -->
-      <?php $imgdao = $dao->searchProduct_detail(isset($mb) ? $mb["mb_num"] : 'null', isset($om) ? $om["om_id"] : 'null',$pr_id, $pr_title); ?>
-      <!-- 슬라이드 이미지 -->
-      <?php foreach ($imgdao as $row) : ?>
 
-      <?php
-        $pr_imgs = $row["pr_img"];
-        $pr_img = explode(",", $pr_imgs);
-        // var_dump($pr_img);
-        // print_r( $row);
-      ?>
-      <!-- 딱딲해 -->
 
       <!-- 메인상품을 감싸는 박스  -->
       <div id="mainProduct_box">
@@ -396,10 +397,30 @@ try{
     <!-- 푸터 부분  -->
     <?php require_once 'metrocket_footer.php';?>
     <script type="text/javascript">
+    let departure_stationID="";
+    let arrival_stationID="";
+
     var slider = $('.bxslider');
     var slider_bx =null;
 
       $(document).ready(function(){
+        var stationName = $('#arrival_station').val();
+        $.ajax({
+            url:'searchStation_odsayAPI.php', //request 보낼 서버의 경로
+            type:'post', // 메소드(get, post)
+            data:{station:stationName,return_result:'s_num'}, //보낼 데이터
+            success: function(data) {
+                //서버로부터 정상적으로 응답이 왔을 때 실행
+                var json_data= JSON.parse(data);
+                arrival_stationID=json_data[0];
+            },
+            error: function(err) {
+              // alert("관심 상품을 등록하기 위해서 로그인을 먼저 해주세요");
+              // history.back();
+            }
+        });
+
+
         $("#rep_btn").click(function() {
           $.ajax({
             url : "reply_ok.php",
@@ -580,21 +601,23 @@ try{
         customPager.innerHTML = makediv;
     }
 
+    //검색버튼 눌럿을때
     $("#arrivalTime_btn").click(function() {
       let mb_id = "<?= isset($mb) ? $mb["mb_num"] : 'null' ?>";
       let om_id = "<?= isset($om) ? $om["om_id"] : 'null' ?>";
 
       if (mb_id != 'null' || om_id != 'null') {
         $.ajax({
-          url : "reply_ok.php",
-          type : "get",
+          url : "subwayPath_odsayAPI.php",
+          type : "post",
           data : {
-            "departure_station" : $(".departure_station").val(),
-            "arrival_station" : $(".arrival_station").val()
+            departure_stationID : departure_stationID,
+            arrival_stationID : arrival_stationID
           },
           success : function(data) {
-            document.getElementById('requiredTime').innerHTML = data.requiredTime;
-            document.getElementById('requiredTime_detail').innerHTML =data.requiredTime_detail;
+            alert(data);
+            // document.getElementById('requiredTime').innerHTML = data;
+            // document.getElementById('requiredTime_detail').innerHTML =data.requiredTime_detail;
             document.querySelector(".timeResult").classList.remove("hidden");
             document.querySelector(".search_arrivalTime").classList.add("hidden");
           },
@@ -608,6 +631,65 @@ try{
       }
     })
 
+    $(document).ready(function(){
+      var auto_complete = $("#auto");
+      var auto_complete_object =null;
+
+      auto_complete_object=auto_complete.autocomplete({
+        source : "",	// source 는 자동 완성 대상
+      });
+
+    $('#auto').on('keyup', function(){
+      if(this.value !== ""){
+        var station = $('#auto').val();
+        //alert(optVal);
+        $.post('searchStation_odsayAPI.php',{station:station,return_result:'s_name'},function(data) {
+            var station_object = $.parseJSON(data);
+            let source = $.map(station_object.stationName,function(item,i) { //json[i] 번째 에 있는게 item 임.
+              chosung = "";
+              //Hangul.d(item, true) 을 하게 되면 item이 분해가 되어서
+              //["ㄱ", "ㅣ", "ㅁ"],["ㅊ", "ㅣ"],[" "],["ㅂ", "ㅗ", "ㄲ"],["ㅇ", "ㅡ", "ㅁ"],["ㅂ", "ㅏ", "ㅂ"]
+              //으로 나오는데 이중 0번째 인덱스만 가지고 오면 초성이다.
+              full = Hangul.disassemble(item).join("").replace(/ /gi, "");	//공백제거된 ㄱㅣㅁㅊㅣㅂㅗㄲㅇㅡㅁㅂㅏㅂ
+              Hangul.d(item, true).forEach(function(strItem, index) {
+
+                if(strItem[0] != " "){	//띄어 쓰기가 아니면
+                  chosung += strItem[0];//초성 추가
+                }
+              });
+                return {
+                  label : chosung + "|" + (item).replace(/ /gi, "") +"|" + full, //실제 검색어랑 비교 대상 ㄱㅊㅂㅇㅂ|김치볶음밥|ㄱㅣㅁㅊㅣㅂㅗㄲㅇㅡㅁㅂㅏㅂ 이 저장된다.
+                  value : item,
+                  chosung : chosung,
+                  full : full,
+                  index : i
+                }
+              });
+
+
+          auto_complete_object=auto_complete.autocomplete({
+            source : source,	// source 는 자동 완성 대상
+            select : function(event, ui) {	//아이템 선택시
+              console.log(ui.item.label + " 선택 완료");
+              departure_stationID= station_object.stationID[ui.item.index];
+            },
+            focus : function(event, ui) {	//포커스 가면
+              return false;//한글 에러 잡기용도로 사용됨
+            },
+          }).autocomplete( "instance" )._renderItem = function( ul, item ) {
+          //.autocomplete( "instance" )._renderItem 설절 부분이 핵심
+              return $( "<li>" )	//기본 tag가 li로 되어 있음
+                .append( "<div>" + item.value + "</div>" )	//여기에다가 원하는 모양의 HTML을 만들면 UI가 원하는 모양으로 변함.
+                .appendTo( ul );	//웹 상으로 보이는 건 정상적인 "김치 볶음밥" 인데 내부에서는 ㄱㅊㅂㅇㅂ,김치 볶음밥 에서 검색을 함.
+          };
+        })
+      }
+    })
+  });
+  $("#auto").on("keyup",function(){	//검색창에 뭔가가 입력될 때마다
+   input = $("#auto").val();	//입력된 값 저장
+   // $( "#auto" ).autocomplete( "search", Hangul.disassemble(input).join("").replace(/ /gi, "") );	//자모 분리후 띄어쓰기 삭제
+  })
 
 
 
