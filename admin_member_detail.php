@@ -2,26 +2,44 @@
   require_once("modules/db.php");
   require_once("modules/notification.php");
 
-  $member_id = Post('mb_id', null);
-  $oauth_id = Post('om_id', null);
+  $member_id = Post('id', null);
+  $oauth_id = Post('om', null);
   $name = Get('all', null);
   $mb_om = Get('mball', null);
 
   if($member_id != null){
     $dao = new Member();
-    $lista = $dao->admin_Member_all_select($member_id);
+    $member = $dao->admin_Member_all_select($member_id);
   }elseif($oauth_id != null){
     $dao = new Oauths();
-    $listb = $dao->admin_Om_select($oauth_id);
+    $other_member = $dao->admin_Om_select($oauth_id);
   }elseif ($name != null && $mb_om != null) {
     $dao = new Member();
     $listc = $dao->admin_Member_Search($name, $mb_om);
   }else{
     echo "오류가 발생";
   }
-  $list_all = (isset($lista) ? ($lista ? $lista : null) :
-              (isset($listb) ? ($listb ? $listb : null) :
+  $list_all = (isset($member) ? ($member ? $member : null) :
+              (isset($other_member) ? ($other_member ? $other_member : null) :
               (isset($listc) ? ($listc ? $listc : null) : "값이 없습니다.")));
+// var_dump($list_all);
+if(!(is_null($listc))){
+  $dao = new Oauths;
+  // echo $listc[0]['mb_id'];
+  $other_member = $dao->admin_Om_select($listc[0]['mb_id']);
+  // var_dump($other_member);
+  if(is_null($other_member)){
+        $dao = new Member();
+        $member  = $dao->admin_Member_id_all_select($listc[0]['mb_id']);
+        // var_dump($member);
+  }else{
+      // echo "??";
+  }
+}else{
+  $listc = null;
+}
+
+
   // var_dump($list_all)."<br>";
   // echo $member_id."<br>";
   // echo $oauth_id."<br>";
@@ -65,6 +83,7 @@
         <input type="hidden" name="mom_id" value="<?=isset($row["om_id"]) ? $row["om_id"] : null ?>">
         <input type="submit" name="warning_send" id="warning_send" value="경고 보내기" />
       </form>
+      <iframe style="float:left;" frameborder="0"  id="main_frame" src="admin_member_detail_sangpum.php?id=<?=isset($member[0]["mb_id"]) ? $member[0]["mb_id"] : 'null'?>&om=<?=isset($other_member[0]["om_id"]) ? $other_member[0]["om_id"] : 'null'?>" width="100%"></iframe>
     <?php endforeach ?>
     <?php
     //맴버 차단

@@ -23,7 +23,7 @@
   </head>
   <body>
     <div>
-      <form action="admin_member_list.php" method="get">
+      <form action="admin_member_block_list.php" method="get">
         <input type="hidden" name="p" value="<?=$pid?>">
         <input type="text" name="s_value" >
         <input type="submit" value="검색하기">
@@ -57,12 +57,12 @@
               try {
                 $s_value = Get('s_value', null);
                 if(empty($s_value) == true){
-                  $result = $dao->mem_SelectPageLength($pid, 8, 'null','null','');
-                  $list = $dao->mem_SelectPageList($result['current'], 8, 'null','null','');
+                  $result = $dao->mem_SelectPageLength($pid, 8, 'admin','null','');
+                  $list = $dao->mem_SelectPageList($result['current'], 8, 'admin','null','');
                   // echo "none";
                 }else{
-                  $result = $dao->mem_SelectPageLength($pid, 8,  'null','null',$s_value);
-                  $list = $dao->mem_SelectPageList($result['current'], 8, 'null','null',$s_value);
+                  $result = $dao->mem_SelectPageLength($pid, 8,  'admin','null',$s_value);
+                  $list = $dao->mem_SelectPageList($result['current'], 8, 'admin','null',$s_value);
                   // echo "go";
                   // echo $s_value;
                 }
@@ -89,7 +89,7 @@
     <div id="pagenation_box"class="w3-center">
         <?php
         if($result['start'] < $result['current'] ) :?>
-          <a class="abtn" href="admin_member_list.php?p=<?=($pid - 1)?>&s_value=<?=$s_value?>">&lt;</a>
+          <a class="abtn" href="admin_member_block_list.php?p=<?=($pid - 1)?>&s_value=<?=$s_value?>">&lt;</a>
         <?php endif ?>
 
         <?php for($i=$result['start']; $i<=$result['end']; $i++): ?>
@@ -97,7 +97,7 @@
         <?php endfor ?>
 
         <?php if( $result['end'] > $result['current']) : ?>
-          <a class="abtn" href="admin_member_list.php?p=<?=($pid + 1)?>&s_value=<?=$s_value?>">&gt;</a>
+          <a class="abtn" href="admin_member_block_list.php?p=<?=($pid + 1)?>&s_value=<?=$s_value?>">&gt;</a>
         <?php endif ?>
     </div>
   </body>

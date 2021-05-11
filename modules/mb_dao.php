@@ -137,18 +137,37 @@
     //페이지 내이션
       public function mem_SelectPageLength($cPage, $viewLen, $mb_id, $om_id, $s_value= null) {
         $this->openDB();
-       if($this->quTable == 'member'){
           // echo "여긴가?";
           if($mb_id == 'null' && $om_id == 'null'){
               if(empty($s_value) == true){
                 // echo "여긴가?2";
                 $query = $this->db->prepare("select sum(cnt) from
-                (
-                    select count(*) as cnt from member m where mb_operation = 2 and mb_email_certify != '0000-00-00 00:00:00'
-                    Union all
-                    select count(*) as cnts from oauth_member o ) as s
-              ");
-              }else{
+                    (
+                        select count(*) as cnt from member m where mb_operation = 2 and mb_email_certify != '0000-00-00 00:00:00'
+                        Union all
+                        select count(*) as cnts from oauth_member o ) as s
+                  ");
+                }
+            }elseif($mb_id === 'admin'){
+                if(empty($s_value) == true){
+                  // echo "여긴가?2";
+                  $query = $this->db->prepare("select sum(cnt) from
+                    (
+                        select count(*) as cnt from member m where mb_operation = 2 and mb_email_certify != '0000-00-00 00:00:00' and mb_block = 'y'
+                        Union all
+                        select count(*) as cnts from oauth_member o where om_block = 'y') as s
+                  ");
+                }else{
+                    // echo "여긴가?3";
+                    $query = $this->db->prepare("
+                    select sum(cnt) from
+                    ( select count(*) as cnt from member m where mb_operation = 2 and concat(m.mb_id,m.mb_name,m.line_station) like :s_value and mb_email_certify != '0000-00-00 00:00:00' and mb_block = 'y'
+                      Union all
+                      select count(*) as cnts from oauth_member o where concat(o.om_id,o.om_nickname,o.line_station) like :s_value and om_block = 'y') as s
+                    ");
+                    $query->bindValue(":s_value", "%$s_value%",  PDO::PARAM_STR);
+                  }
+            }else{
                 // echo "여긴가?3";
                 $query = $this->db->prepare("
                 select sum(cnt) from
@@ -158,8 +177,8 @@
                 ");
                 $query->bindValue(":s_value", "%$s_value%",  PDO::PARAM_STR);
               }
-            }
-        }
+
+
       $query->execute();
       $fetch = $query->fetch(PDO::FETCH_ASSOC);
       $countLen = $fetch['sum(cnt)'];
@@ -198,16 +217,35 @@
       // echo $mb_id;
       // echo $om_id;
 
-        if($this->quTable == 'member'){
-          if($mb_id == 'null' && $om_id == 'null'){
-              if(empty($s_value) == true){
-                $sql = "
-                (select m.mb_name, m.mb_id, m.mb_email, m.mb_datetime, m.line_station, (select count(rep_mb.mb_id) from member_declaration rep_mb where rep_mb.mb_id = m.mb_num) as rep_count from member m where mb_operation = 2 and mb_email_certify != '0000-00-00 00:00:00')
-                  union all
-                (select o.om_nickname, o.om_id, o.om_email, o.om_datetime, o.line_station, (select count(rep_mb.om_id) from member_declaration rep_mb where rep_mb.om_id = o.om_id) as rep_count from oauth_member o)
-                limit :start, :viewLen";
 
-                $query = $this->db->prepare($sql);
+          if($mb_id == 'null' && $om_id == 'null'){
+                if(empty($s_value) == true){
+                  $sql = "
+                  (select m.mb_name, m.mb_id, m.mb_email, m.mb_datetime, m.line_station, (select count(rep_mb.mb_id) from member_declaration rep_mb where rep_mb.mb_id = m.mb_num) as rep_count from member m where mb_operation = 2 and mb_email_certify != '0000-00-00 00:00:00')
+                    union all
+                  (select o.om_nickname, o.om_id, o.om_email, o.om_datetime, o.line_station, (select count(rep_mb.om_id) from member_declaration rep_mb where rep_mb.om_id = o.om_id) as rep_count from oauth_member o)
+                  limit :start, :viewLen";
+                  $query = $this->db->prepare($sql);
+                }
+              }elseif($mb_id === 'admin'){
+                  if(empty($s_value) == true){
+                    // echo "여긴가?11112";
+                   $sql = "
+                       (select m.mb_name, m.mb_id, m.mb_email, m.mb_datetime, m.line_station, (select count(rep_mb.mb_id) from member_declaration rep_mb where rep_mb.mb_id = m.mb_num) as rep_count from member m where mb_operation = 2 and mb_email_certify != '0000-00-00 00:00:00' and mb_block = 'y')
+                         union all
+                       (select o.om_nickname, o.om_id, o.om_email, o.om_datetime, o.line_station, (select count(rep_mb.om_id) from member_declaration rep_mb where rep_mb.om_id = o.om_id) as rep_count from oauth_member o where om_block = 'y')
+                       limit :start, :viewLen";
+                    $query = $this->db->prepare($sql);
+                  }else{
+                      // echo "여긴가?3";
+                      $sql = "
+                          (select m.mb_name, m.mb_id, m.mb_email, m.mb_datetime, m.line_station, (select count(rep_mb.mb_id) from member_declaration rep_mb where rep_mb.mb_id = m.mb_num) as rep_count from member m where mb_operation = 2 and concat(m.mb_id,m.mb_name) like :s_value and mb_email_certify != '0000-00-00 00:00:00' and mb_block = 'y')
+                          union all
+                          (select o.om_nickname, o.om_id, o.om_email, o.om_datetime, o.line_station, (select count(rep_mb.om_id) from member_declaration rep_mb where rep_mb.om_id = o.om_id) as rep_count from oauth_member o where concat(o.om_id,o.om_nickname) like :s_value and om_block = 'y')
+                          limit :start, :viewLen";
+                      $query = $this->db->prepare($sql);
+                      if($s_value)$query->bindValue(":s_value", "%$s_value%",  PDO::PARAM_STR);
+                    }
               }else{
                 // echo "2??";
                 $sql = "
@@ -218,31 +256,10 @@
                 $query = $this->db->prepare($sql);
                 if($s_value)$query->bindValue(":s_value", "%$s_value%",  PDO::PARAM_STR);
               }
-            }
 
-
-              $query->bindValue(":start", $start, PDO::PARAM_INT);
-              $query->bindValue(":viewLen", $viewLen, PDO::PARAM_INT);
-
-
-              $query->execute();
-              $fetch = $query->fetchAll(PDO::FETCH_ASSOC);
-              try{
-              if(!$fetch){
-                // echo "결과 값이 없습니다.";
-              }
-              return $fetch;
-              }catch(PDOException $e){
-                exit($e ->getMessage());
-              }
-            }
-
-      $query = $this->db->prepare($sql);
       $query->bindValue(":start", $start, PDO::PARAM_INT);
       $query->bindValue(":viewLen", $viewLen, PDO::PARAM_INT);
-      $query->bindValue(":mb_id", $mb_id,  PDO::PARAM_STR);
-      $query->bindValue(":om_id", $om_id,  PDO::PARAM_STR);
-      if($s_value)$query->bindValue(":s_value", "%$s_value%",  PDO::PARAM_STR);
+
 
       $query->execute();
       $fetch = $query->fetchAll(PDO::FETCH_ASSOC);

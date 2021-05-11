@@ -58,8 +58,8 @@
         <!-- 상품 설명  -->
         <?= $row["pr_explanation"] ?><br>
         <form action="admin_member_detail.php" method="post">
-          <input type="hidden" name="om_id" value="<?=isset($row["om_id"]) ? $row["om_id"] : null ?>">
-          <input type="hidden" name="mb_id" value="<?=isset($row["mb_id"]) ? $row["mb_id"] : null ?>">
+          <input type="hidden" name="om" value="<?=isset($row["om_id"]) ? $row["om_id"] : null ?>">
+          <input type="hidden" name="id" value="<?=isset($row["mb_id"]) ? $row["mb_id"] : null ?>">
           <input type="submit" value="회원보기" />
         </form>
 
@@ -99,7 +99,7 @@
       if(array_key_exists('product_del',$_POST))
       {
         product_del();
-        userGoto("상품을 삭제 하셨습니다", "");
+        userGoto("상품을 삭제 하셨습니다", "admin_product_list.php");
       }
     ?>
     <script type="text/javascript">
