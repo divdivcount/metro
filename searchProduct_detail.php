@@ -4,6 +4,7 @@ ini_set('display_errors', '1');
 require_once('modules/db.php');
 try{
   $dao = new Product;
+  $member = new Member;
   $replyobject = new Reply;
   $interest = new Interest;
   $pr_id = Get("id", 0);
@@ -80,7 +81,7 @@ try{
               </div>
 
               <div class="timeResult hidden">
-                <span>도착시간</span>
+                <span>소요시간</span>
                 <div id="requiredTime">00:00</div>
                 <div id="requiredTime_detail">오전 00:00 ~ 오후 00:00</div>
               </div>
@@ -91,6 +92,33 @@ try{
 
           </div>
 
+          <div class="requestTrade_modalBox hidden">
+            <div class="requestTrade_imgBox">
+              <div class="img_box" style="margin:0;width:12.0rem;height:12.0rem" ><img src="img/question.png" alt="">                            </div>
+            </div>
+            <div class="requestTrade_contentBox">
+
+              <h3>[거래요청하기]</h3>
+
+              <p><span>"<?=$row["pr_title"]?>"</span><br>요청하기를 누르면 판매자에게 쪽지가 전달됩니다.</p>
+
+              <div class="requestTrade_btnLine">
+                <form  action="memo_requestTrade.php" method="post">
+
+                  <input type="hidden" name= "id" value="<?=$row["pr_id"]?>">
+                  <!-- 받는 회원아이디 -->
+                  <?php $member = $member->Member_all_select($row["mb_id"]);?>
+                  <input type="hidden" name="me_recv_mb_id" value="<?=  $member[0]["mb_id"] ?  $member[0]["mb_id"] : $row["om_id"] ?>" id="me_recv_mb_id" readonly required class="frm_input required" size="47"></br>
+                  <!-- 내용 -->
+                  <input type="hidden" name="me_memo" value="<?=$mb['mb_id'] ? $mb['mb_id'] : $om['mb_nickname'] ?> 님이 거래를 요청했습니다.">
+                  <button type="button" class="w3-button w3-round-xlarge w3-gray" onclick="requestTrade_close()">취소하기</button>
+                  <button type="submit" class="w3-button w3-round-xlarge w3-blue">요청하기</button>
+                </form>
+              </div>
+
+            </div>
+
+          </div>
         </div>
       </div>
     </div>
@@ -220,7 +248,7 @@ try{
                 ?>&id=<?=$row["pr_id"]?>" class="td_btn" onclick="win_memo(this.href); return false;">쪽지보내기</a></span>
               </button>
 
-              <button type="button" class="talk w3-button w3-round-large w3-blue">
+              <button type="button" onclick="requestTrade_open()" class="talk w3-button w3-round-large w3-blue">
                 <div class="img_box" style="width:2.1rem;height:2.1rem"><img src="img/talk.png" alt=""></div>
                 <span>거래요청</span>
               </button>
@@ -272,7 +300,7 @@ try{
               <form method="get" name ="rep_form" id="rep_form" action="reply_delete.php">
                 <input type="hidden" name="rno" value="<?=$reple['idx']?>" />
                 <input type="hidden" name="b_no" value="<?=$pr_id?>">
-                <a href="javascript:rep_form.submit();">댓글 삭제</a>
+                <a onclick="document.getElementById('rep_form').submit();">댓글 삭제</a>
               </form>
             </div>
           </div>
@@ -404,6 +432,8 @@ try{
     var slider_bx =null;
 
       $(document).ready(function(){
+
+        //도착역 미리 검색후 지정
         var stationName = $('#arrival_station').val();
         $.ajax({
             url:'searchStation_odsayAPI.php', //request 보낼 서버의 경로
@@ -421,35 +451,7 @@ try{
         });
 
 
-        $("#rep_btn").click(function() {
-          $.ajax({
-            url : "reply_ok.php",
-            type : "get",
-            data : {
-              "bno" : $(".bno").val(),
-              "mb_id" : $(".mb_dat_user").val(),
-              "om_id" : $(".om_dat_user").val(),
-              "rep_con" : $(".rep_con").val()
-            },
-            success : function(data) {
-            alert("댓글이 작성되었습니다");
-            location.reload();
-          },
-          error : function(e){
-            alert("로그인을 먼저 해주세요");
-            location.repleace("./index.php");
-          }
-          });
-        })
-
-        $(".dat_del_btn").click(function() {
-          $("#rep_del").modal();
-        });
-
-        //이미지 하나일때 체크
-
         var bxslider_img = document.querySelector(".bxslider").getElementsByTagName('img');
-
         //이미지가 하나이상일때 설정
         if (bxslider_img.length > 1) {
           slider_bx = slider.bxSlider( {
@@ -478,15 +480,53 @@ try{
               controls: true    // 이전 다음 버튼 노출 여부
           });
         }
+
         // 이미지 선택해서 슬라이드 넘기는 부분 함수
         bxSetting();
+        let today = new Date();
+        alert();
     });
+    // ↑ document.ready 끝나는 부분
+
+    //로그인여부 확인하는 함수
+    function check_login() {
+      let mb_id = "<?= isset($mb) ? $mb["mb_num"] : 'null' ?>";
+      let om_id = "<?= isset($om) ? $om["om_id"] : 'null' ?>";
+
+      if (mb_id != 'null' || om_id != 'null')
+        return true;
+      else
+        return false;
+    }
+
+
+    $("#rep_btn").click(function() {
+      if (check_login()) {
+        $.ajax({
+          url : "reply_ok.php",
+          type : "get",
+          data : {
+            "bno" : $(".bno").val(),
+            "mb_id" : $(".mb_dat_user").val(),
+            "om_id" : $(".om_dat_user").val(),
+            "rep_con" : $(".rep_con").val()
+          },
+          success : function(data) {
+          alert("댓글이 작성되었습니다");
+          location.reload();
+        },
+        error : function(e){
+          // alert("로그인을 먼저 해주세요");
+          // location.repleace("./index.php");
+        }
+        });
+      }else
+        alert("댓글을 등록하기 위해서 로그인을 먼저 해주세요");
+    })
 
     //관심상품 클릭시 값넘어가는거
     var star_btn = document.getElementById('star_btn');
-     //  star_btn.addEventListener('click',(event)=>{
-     //
-     // });
+
     function registerInterest() {
       let values =star_btn.dataset.value;
       let pr_id = "<?= $pr_id ?>";
@@ -535,14 +575,20 @@ try{
     }
 
     var win_memo = function(href) { // 쪽지 팝업창
-    var new_win = window.open(href, 'win_memo', 'left=100,top=100,width=620,height=600,scrollbars=1');
-    new_win.focus();
+      if (check_login()) {
+        var new_win = window.open(href, 'win_memo', 'left=100,top=100,width=620,height=600,scrollbars=1');
+        new_win.focus();
+      }else
+        alert("쪽지기능을 이용하시려면 로그인을 먼저 해주세요");
     }
 
     // 신고하기모달팝업 관련 함수
     function report_open() {
-      document.querySelector(".modal").classList.remove("hidden");
-      document.querySelector(".report_modalBox").classList.remove("hidden");
+      if (check_login()) {
+        document.querySelector(".modal").classList.remove("hidden");
+        document.querySelector(".report_modalBox").classList.remove("hidden");
+      }else
+        alert("신고기능을 이용하시려면 로그인을 먼저 해주세요");
     }
     function report_close() {
       document.querySelector(".modal").classList.add("hidden");
@@ -551,14 +597,29 @@ try{
 
     // 도착시간 모달팝업 관련 함수
     function arrivalTime_open() {
-      document.querySelector(".modal").classList.remove("hidden");
-      document.querySelector(".arrivalTime_modalBox").classList.remove("hidden");
+      if (check_login()) {
+        document.querySelector(".modal").classList.remove("hidden");
+        document.querySelector(".arrivalTime_modalBox").classList.remove("hidden");
+      }else
+        alert("도착시간을 확인하시려면 로그인을 먼저 해주세요");
     }
     function arrivalTime_close() {
       document.querySelector(".modal").classList.add("hidden");
       document.querySelector(".arrivalTime_modalBox").classList.add("hidden");
     }
 
+    // 거래요청 모달팝업 관련 함수
+    function requestTrade_open() {
+      if (check_login()) {
+        document.querySelector(".modal").classList.remove("hidden");
+        document.querySelector(".requestTrade_modalBox").classList.remove("hidden");
+      }else
+        alert("거래를 요청하시려면 로그인을 먼저 해주세요");
+    }
+    function requestTrade_close() {
+      document.querySelector(".modal").classList.add("hidden");
+      document.querySelector(".requestTrade_modalBox").classList.add("hidden");
+    }
 
     // 글자수 카운트 (댓글쪽)
     $('#rep_con').keyup(function (e){
@@ -601,34 +662,62 @@ try{
         customPager.innerHTML = makediv;
     }
 
-    //검색버튼 눌럿을때
-    $("#arrivalTime_btn").click(function() {
-      let mb_id = "<?= isset($mb) ? $mb["mb_num"] : 'null' ?>";
-      let om_id = "<?= isset($om) ? $om["om_id"] : 'null' ?>";
 
-      if (mb_id != 'null' || om_id != 'null') {
-        $.ajax({
-          url : "subwayPath_odsayAPI.php",
-          type : "post",
-          data : {
-            departure_stationID : departure_stationID,
-            arrival_stationID : arrival_stationID
-          },
-          success : function(data) {
-            alert(data);
-            // document.getElementById('requiredTime').innerHTML = data;
-            // document.getElementById('requiredTime_detail').innerHTML =data.requiredTime_detail;
-            document.querySelector(".timeResult").classList.remove("hidden");
-            document.querySelector(".search_arrivalTime").classList.add("hidden");
-          },
-          error : function(e){
-            alert("로그인을 먼저 해주세요");
-            location.repleace("./index.php");
+    //검색버튼 눌럿을때 odsay 지하철경로관련api를 호출하는 페이지 호출후  도착시간 불러옴
+    $("#arrivalTime_btn").click(function() {
+      $.ajax({
+        url : "subwayPath_odsayAPI.php",
+        type : "post",
+        data : {
+          departure_stationID : departure_stationID,
+          arrival_stationID : arrival_stationID
+        },
+        success : function(data) {
+          let today = new Date();
+          var requiredTime =data;
+          var requiredHour = Math.floor(data / 60);
+          var requiredMin = data % 60;
+          var arrivalTime_string="";
+          var arrivalHour = today.getHours() + requiredHour;
+          var arrivalMin = today.getMinutes() + requiredMin;
+
+          if (arrivalMin > 60) {
+            arrivalHour++;
+            arrivalMin -= 60;
           }
-        });
-      }else{
-        alert("관심 상품을 등록하기 위해서 로그인을 먼저 해주세요");
-      }
+
+          //다음날으로 넘어갈때
+          if (arrivalHour > 24) {
+            arrivalTime_string += "다음날 ";
+            arrivalHour -= 24;
+          }
+
+          //ex 9분 -> 09분
+          if (arrivalMin < 10)
+            arrivalMin = "0" + arrivalMin;
+
+          //오후 오전 구분
+          if (arrivalHour > 12)
+            arrivalTime_string += "오후 " + (arrivalHour-12) + ":" + arrivalMin;
+          else
+            arrivalTime_string += "오전 " + arrivalHour + ":" + arrivalMin;
+
+          //ex 9:9 -> 09:09
+          if (requiredHour < 10)
+            requiredHour = "0" + requiredHour;
+          if (requiredMin < 10)
+            requiredMin = "0" + requiredMin;
+
+          document.getElementById('requiredTime').innerHTML = requiredHour+":"+requiredMin;
+          document.getElementById('requiredTime_detail').innerHTML = today.toLocaleTimeString().slice(today.toLocaleTimeString().lengt,-3)+ " ~ " + arrivalTime_string;
+          document.querySelector(".timeResult").classList.remove("hidden");
+          document.querySelector(".search_arrivalTime").classList.add("hidden");
+        },
+        error : function(e){
+          alert("로그인을 먼저 해주세요");
+          location.repleace("./index.php");
+        }
+      });
     })
 
     $(document).ready(function(){
@@ -642,7 +731,7 @@ try{
     $('#auto').on('keyup', function(){
       if(this.value !== ""){
         var station = $('#auto').val();
-        //alert(optVal);
+        // 오디세이 역 검색 api 호출해주는 php 페이지 호출
         $.post('searchStation_odsayAPI.php',{station:station,return_result:'s_name'},function(data) {
             var station_object = $.parseJSON(data);
             let source = $.map(station_object.stationName,function(item,i) { //json[i] 번째 에 있는게 item 임.
@@ -666,7 +755,7 @@ try{
                 }
               });
 
-
+          // 검색 키워드자동완성 실질적 선언부분
           auto_complete_object=auto_complete.autocomplete({
             source : source,	// source 는 자동 완성 대상
             select : function(event, ui) {	//아이템 선택시

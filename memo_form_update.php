@@ -56,7 +56,7 @@ if(!(empty($_SESSION['ss_mb_id']) || empty($_SESSION['naver_mb_id']) || empty($_
 					SET	me_recive_mb_id		= '$recv_mb_id',
 						me_send_mb_id			= '$all',
 						me_send_datetime		= '$me_send_datetime',
-						me_text				= '{$_POST['me_memo']}',
+						me_text				= '{$_POST["me_memo"]}',
 						pr_id = $pr_id";
 	    $result = mysqli_query($conn, $sql);
 			// echo $sql."<br>";

@@ -280,6 +280,38 @@ display : -webkit-box;
   .search_arrivalTime{display: flex;text-align: center;align-items:flex-end;}
   .search_arrivalTime .w3-button{width: 16.0rem;padding: 0.8rem 1.6rem;font-size:1.5rem;font-family: "NotoSansKR_r";outline: none;}
 
+/* 거래요청 모달팝업 */
+.modal .requestTrade_modalBox {
+  max-width:600px;
+  width: 80%;
+  height: auto;
+  position: absolute;
+  background-color: #fff;
+  border-top-left-radius: : 20px;
+  border-top-right-radius: : 20px;
+  background-color: #ffffff;
+}
+.requestTrade_imgBox{
+  display: flex;
+  justify-content:center;
+  width: 100%;
+  height: auto;
+  padding-top: 3.0rem;
+  text-align: center;
+  background-color: #0099ff;
+}
+.requestTrade_contentBox{
+  width: 100%;
+  height: auto;
+  padding: 3.0rem 0;
+  text-align: center;
+}
+.requestTrade_contentBox h3{font-family: "NotoSansKR_m";font-size: 2.0rem;color: #1d1d1d;margin: 0;padding: 0;}
+.requestTrade_contentBox p{font-family: "NotoSansKR_r";font-size: 2.0rem;color: #7d7d7d;margin-top: 1.0rem}
+.requestTrade_contentBox p span{padding-bottom: 1.0rem}
+.requestTrade_btnLine{width: 100%;display: flex;justify-content:center;;margin-top:4.0rem; }
+  .requestTrade_btnLine .w3-button{padding: 1.0rem 4.5rem;color:white!important;font-family: "NotoSansKR_r";font-size: 1.5rem;margin: 0 4.0rem}
+
 .ui-autocomplete{z-index: 10003}
 
 .closeBtn_box {
