@@ -276,8 +276,8 @@ try{
     <div id="reply_container">
 
       <div class="reply_view">
-        <h3>댓글  php숫자 </h3>
         <?php if(isset($replys)) : ?>
+          <h3>댓글 <?=$replys[0]["reply_count"];?> </h3>
         <?php foreach ($replys as $reple) : ?>
 
           <!-- 댓글올라오면 생기는 부분 (유저이름 시간 댓글내용 삭제기능 ) -->
@@ -285,7 +285,14 @@ try{
             <div class="rep_profile">
 
               <div class="rep_imgLine">
-                <b><img src="<?=$reple['mb_img'] ? $reple['mb_img'] : "files/".$reple['mb_img'] ?>"></b>
+                <?php $ch = is_null($reple["mb_img"]) ? 0 : 1;
+                ?>
+                <b><?php if($ch > 0) : ?>
+                  <img src="<?= isset($reple["mb_img"]) ?
+                ( $reple["mb_img"] != "img/normal_profile.png" ?
+                ( strpos($reple["mb_img"], "http") === 0 ? $reple["mb_img"] : "files/".$reple["mb_img"] ): $reple["mb_img"])
+                 : $reple["mb_img"] ?>"></b>
+               <?php endif ?>
               </div>
 
               <div class="rep_textLine">
