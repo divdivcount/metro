@@ -10,6 +10,7 @@ try{
   $pr_id = Get("id", 0);
   $pr_title = Get("title",0);
   $replys = $replyobject->reply_select($pr_id);
+  $i = 0;
 }catch(PDOException $e){
     echo $e;
   }
@@ -155,7 +156,7 @@ try{
             <div class="userProfile">
               <!-- 사람사진 -->
               <div class="profileImg">
-                <img class=" w3-circle" src="<?= $mb['mb_image'] ?($mb['mb_image'] == 'img/normal_profile.png' ? $mb['mb_image'] : 'files/'.$mb['mb_image']) : $om['om_image_url'] ?>" alt="">
+                <img class=" w3-circle" src="<?= isset($row["profile_img"]) ?($row["profile_img"] == 'img/normal_profile.png' ? $row["profile_img"] : ( strpos($row["profile_img"], "http") === 0 ?  $row["profile_img"] : 'files/'.$row["profile_img"] )) : "" ?>" alt="">
               </div>
 
               <!-- 이름이랑 호선  -->
@@ -303,11 +304,11 @@ try{
             </div>
 
             <div class="" id="rep_del">
-
-              <form method="get" name ="rep_form" id="rep_form" action="reply_delete.php">
+              <?php $i++ ?>
+              <form method="get" name ="rep_form<?=$i?>" id="rep_form<?=$i?>" action="reply_delete.php">
                 <input type="hidden" name="rno" value="<?=$reple['idx']?>" />
                 <input type="hidden" name="b_no" value="<?=$pr_id?>">
-                <a onclick="document.getElementById('rep_form').submit();"><?php isset($mb["mb_id"]) ? ($mb["mb_id"] == $reple['mb_id'] ? "댓글 삭제" : ""): ($om["om_id"] == $reple['om_id'] ? "댓글 삭제" : "") ?></a>
+                <a onclick="document.getElementById('rep_form<?=$i?>').submit();"><?= isset($mb["mb_num"]) ? ($mb["mb_id"] == $reple['mb_id'] ? "댓글 삭제" : "" ) : (isset($om) ? ($om["om_id"] == $reple['mb_id'] ? "댓글 삭제" : "") : ""); ?></a>
               </form>
             </div>
           </div>
