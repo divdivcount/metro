@@ -307,7 +307,7 @@ try{
               <form method="get" name ="rep_form" id="rep_form" action="reply_delete.php">
                 <input type="hidden" name="rno" value="<?=$reple['idx']?>" />
                 <input type="hidden" name="b_no" value="<?=$pr_id?>">
-                <a onclick="document.getElementById('rep_form').submit();">댓글 삭제</a>
+                <a onclick="document.getElementById('rep_form').submit();"><?php isset($mb["mb_id"]) ? ($mb["mb_id"] == $reple['mb_id'] ? "댓글 삭제" : ""): ($om["om_id"] == $reple['om_id'] ? "댓글 삭제" : "") ?></a>
               </form>
             </div>
           </div>
