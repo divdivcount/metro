@@ -88,7 +88,7 @@ class Product extends MetroDAO {
       }
       else return null;
     }
-
+    // 거래 완료 작성중 
     public function Product_status_update($pr_id) {
       // 회원 정보 1명 찾기
       $this->openDB();
@@ -116,6 +116,7 @@ class Product extends MetroDAO {
         }
       }
     }
+
     public function Product_block_update($pr_id, $gap) {
       // 회원 정보 1명 찾기
       $this->openDB();

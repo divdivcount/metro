@@ -4,20 +4,22 @@ $dao = new Product;
 $pid = Get('p', 1);
 $ctg_name = Get("ctg_name", 0);
 $ctg_station = Get("ctg_station", 0);
+
+// echo $a;
 // echo $ctg_name."호선"."<br>";
 // echo $ctg_station."역"."<br>";
 if($ctg_name != "all" && $ctg_station){
 	// echo "통과1";
-	$sql = "select s.s_name, i.l_name  from station s, line i where i.l_id = $ctg_name";
+	$sql = "select s.s_name, i.l_name  from station s, line i where i.l_id = '$ctg_name'";
 	$result = mysqli_query($conn, $sql);
 	$a = 0;
 	while($station = mysqli_fetch_assoc($result)){
 		// print_r($station)."<br>";
 		if(array_search($ctg_station, $station) === false) {
-			$theVariable = "not";
+			// $theVariable = "not";
 			// echo $theVariable."<br>";
 		}else{
-			$theVariable = "sure";
+			// $theVariable = "sure";
 			// echo $theVariable."<br>";
 			$a = 1;
 			break;
@@ -107,6 +109,7 @@ if($a == 0){
 	            </select>
 							<input type="hidden" name="ctg_name" value="<?=$ctg_name?>">
 							<input type="hidden" name="ctg_station" value="<?=$ctg_station?>">
+
 	            <input type="text" name="s_value">
           </div>
 				</form>
@@ -143,6 +146,7 @@ if($a == 0){
 									<span>호선을 선택해 주세요.</span>
 									<select name="ctg_name" id="selectID" class="w3-select">
 										<option value="">선택</option>
+										<option value="all">전체</option>
 										<?php
 										$sql = " select * from line";
 										$result = mysqli_query($conn, $sql);
@@ -216,9 +220,13 @@ if($a == 0){
 
 							</div>
 
-							<button type="submit" id ="close_pop" class="w3-button w3-blue w3-ripple w3-round-xlarge">물건보러가기</button>
+							<button onclick="search_product()" id ="close_pop" class="w3-button w3-blue w3-ripple w3-round-xlarge">물건보러가기</button>
 							</form>
-
+							<script>
+								function search_product(){
+									document.getElementById('selectMetro_box').submit();
+								}
+							</script>
 				    </div>
 				  </div>
 
@@ -235,17 +243,17 @@ if($a == 0){
 						// echo $s_value."검색어"."<br>";
 						// echo $category."카테고리"."<br>";
 						if($s_value){
-							$result = $dao->SelectPageLength($pid, 10, $ctg_name, $ctg_station, '');
-						  $list = $dao->SelectPageList($result['current'], 10,$ctg_name, $ctg_station, $s_value);
+							$result = $dao->SelectPageLength($pid, 10, $ctg_name, $ctg_station, $s_value, '');
+						  $list = $dao->SelectPageList($result['current'], 10,$ctg_name, $ctg_station, $s_value, '');
 						}elseif($category){
-							$result = $dao->SelectPageLength($pid, 10, $ctg_name, $ctg_station, $category);
+							$result = $dao->SelectPageLength($pid, 10, $ctg_name, $ctg_station, '', $category);
 						  $list = $dao->SelectPageList($result['current'], 10,$ctg_name, $ctg_station, '', $category);
 						}elseif($s_value && $category){
-							$result = $dao->SelectPageLength($pid, 10, $ctg_name, $ctg_station, $category);
+							$result = $dao->SelectPageLength($pid, 10, $ctg_name, $ctg_station, $s_value,$category);
 						  $list = $dao->SelectPageList($result['current'], 10,$ctg_name, $ctg_station, $s_value, $category);
 						}else{
-						$result = $dao->SelectPageLength($pid, 10, $ctg_name, $ctg_station, '');
-						$list = $dao->SelectPageList($result['current'], 10, $ctg_name, $ctg_station, '');
+						$result = $dao->SelectPageLength($pid, 10, $ctg_name, $ctg_station, '','');
+						$list = $dao->SelectPageList($result['current'], 10, $ctg_name, $ctg_station, '','');
 					}
 				} catch (PDOException $e) {
 					$result = null;

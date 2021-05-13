@@ -164,14 +164,27 @@ class MetroDAO {
 					$query = $this->db->prepare("select count(*) from $this->quTable where om_id = :om_id and mb_id is :mb_id and pr_block = 1");
 					// echo "????";
 				}else{
+					// echo "통과했냐 6트";
+
 					if($category){
 						 // echo "어 ?";
 							$query = $this->db->prepare("select count(*) from $this->quTable where l_id = :mb_id and pr_station = :om_id and ca_name = :category and pr_block = 1");
 							// echo "SelectPageLength1";
 							$query->bindValue(":category", $category,  PDO::PARAM_STR);
 					}else{
-						// echo "SelectPageLength2";
-						$query = $this->db->prepare("select count(*) from $this->quTable where l_id = :mb_id and pr_station = :om_id and pr_block = 1");
+						if($s_value){
+							// echo "SelectPageList1";
+							$query = $this->db->prepare( "select count(*) from product p  where l_id = :mb_id and pr_station = :om_id and pr_title like :s_value and pr_block = 1 ");
+							$query->bindValue(":s_value", "%$s_value%",  PDO::PARAM_STR);
+						}elseif($s_value && $category){
+							// echo "SelectPageList4";
+							$query = $this->db->prepare( "select count(*)  from product p  where l_id = :mb_id and pr_station = :om_id and pr_title and ca_name = :category and pr_title like :s_value and pr_block = 1");
+							$query->bindValue(":s_value", "%$s_value%",  PDO::PARAM_STR);
+							$query->bindValue(":category", $category,  PDO::PARAM_STR);
+						}else{
+							// echo "SelectPageLength2";
+							$query = $this->db->prepare("select count(*) from $this->quTable where l_id = :mb_id and pr_station = :om_id and pr_block = 1");
+						}
 					}
 
 					// echo "??";
@@ -450,7 +463,7 @@ class MetroDAO {
 		$query->execute();
 	}
 
-
+	//이거 아닌데.. 구매상()
 	public function Gohistory($cat_key, $id_key, $pr_img, $pr_name, $pa, $pr_qty, $mb_num,$num,$now,$last_id) {
     $this->openDB();
     $query = $this->db->prepare("insert into $this->quTable values (:cat_key, :id_key, :pr_img, :pr_name, :pa,:pr_qty,:mb_num,:pr_num,:pr_now,0,DEFAULT,DEFAULT)");

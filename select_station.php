@@ -10,7 +10,7 @@ require_once('modules/db.php');
 
       <form  id="selectMetro_box" action="station_update.php" method="post">
         <input type="hidden" name="mode" value="modify">
-        <input type="hidden" name="mbs_id"  value="<?= $mb["mb_id"] ? $mb["mb_id"] : 'null' ?>">
+        <input type="hidden" name="mbs_id"  value="<?= isset($mb["mb_id"]) ? $mb["mb_id"] : 'null' ?>">
         <input type="hidden" name="om_id"  value="<?= isset($om["om_id"]) ? $om["om_id"] : 'null' ?>">
 
         <div class="title_line">
@@ -24,6 +24,7 @@ require_once('modules/db.php');
             <span>호선을 선택해 주세요.</span>
             <select name="ctg_name" id="selectID" class="w3-select">
               <option value="">선택</option>
+              <option value="all">전체</option>
               <?php
               $sql = " select * from line";
               $select_station_result = mysqli_query($conn, $sql);
