@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style media="screen">
+      body{
+        margin:0;
+      }
+      .wrapPage{
+        width:100%;
+        margin:0;
+      }
+      .bannerBox{
+        width:100%;
+      }
+      .bannerImgBox{
+        width:100%;
+      }
+      .bannerImgBox img {
+        width:100%;
+        height:auto;
+      }
+
+
+      .bannerBox2{
+        width:100%;
+
+      }
+      .bannerImgBox2{
+        width:100%;
+      }
+      .backImg{
+        background-size: cover;
+      }
+      @media only screen and (min-width: 1920px) {
+        .wrapPage{
+          width: 1920px;
+          margin: 0 auto;
+        }
+      }
+
+       @media only screen and (max-width: 768px) {
+        .bannerImgBox{
+          position: relative;
+          width:100%;
+          height:320px;
+          margin: 0 auto;
+          overflow: hidden;
+        }
+        .bannerImgBox img {
+          width:100%;
+          height:auto;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: auto;
+          height: 100%;
+        }
+      }
+
+      /* @media only screen and (max-width: 768px) {
+       .bannerImgBox2{
+         width:100%;
+
+         margin: 0 auto;
+       }
+       .backImg{
+         background-size:cover;
+         background-position: 50% 50%;
+         height:320px;
+       }
+     } */
+    </style>
+  </head>
+  <body>
+    <div class="wrapPage">
+        <div class="bannerBox">
+          <div class="bannerImgBox">
+            <img src="img/slideimg_0.png" alt="">
+          </div>
+        </div>
+
+        <!-- <div class="bannerBox2">
+          <div class="bannerImgBox2">
+            <div class="backImg" style="background-image:url(./img/bannerImg_1.png)"></div>
+          </div>
+        </div> -->
+
+        <div class="contentBox">
+
+        </div>
+    </div>
+  </body>
+  <script type="text/javascript">
+    window.addEventListener("resize", test);
+    function test() {
+      var w_width = window.outerWidth;
+      if (w_width < 768) {
+        var want_height = w_width / 2.4;
+        document.querySelector(".bannerImgBox").style.height = want_height + "px";
+      }
+    }
+
+
+  </script>
+</html>

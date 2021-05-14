@@ -50,10 +50,10 @@ require_once('modules/db.php');
     <!-- 메인 배너이미지 부분 -->
     <div id="bannerImg_box">
       <div class="bxslider">
-        <div><img src="img\slideimg_0.png" alt=""></div>
-        <div><img src="img\slideimg_1.png" alt=""></div>
-        <div><img src="img\slideimg_2.png" alt=""></div>
-        <div><img src="img\slideimg_3.png" alt=""></div>
+        <div class="bx_img"><img src="img\slideimg_0.png" alt=""></div>
+        <div class="bx_img"><img src="img\slideimg_1.png" alt=""></div>
+        <div class="bx_img"><img src="img\slideimg_2.png" alt=""></div>
+        <div class="bx_img"><img src="img\slideimg_3.png" alt=""></div>
       </div>
       <!-- 이중select box 로 지하철역 선택하는 부분 -->
         <form  id="selectMetro_box" action="searchProduct.php" method="get">
@@ -296,6 +296,8 @@ require_once('modules/db.php');
 
     // 768px 일때 사이트 소개이미지파일 다른해상도 파일로 변경
     changeWidth_RecentProducts_gridbox(2);      // 최근상품 그리드박스 높이 정의
+
+    // setAllBannerImage();
   });
 
 
@@ -479,7 +481,8 @@ require_once('modules/db.php');
 
 
   function setAllBannerImage() {
-
+    var w_width = window.outerWidth;
+    var bannerImg_box_img = document.querySelector('.bxslider').getElementsByTagName('img');
     if (w_width <= 768) {
       for (var i = 0; i < bannerImg_box_img.length; i++) {
         bannerImg_box_img.item(i).src = bannerImg_box_img.item(i).src.slice(0,-4) + "_m.png";
@@ -487,8 +490,8 @@ require_once('modules/db.php');
     }else{
 
     }
-
   }
+
   var check_M = 0;
   //768px 때 서브배너이미지 변경 (모바일용으로)
   function changeSubBannerImge() {
@@ -541,12 +544,21 @@ require_once('modules/db.php');
   window.addEventListener("resize", changeContent);
 
     function changeContent() {
+      var w_width = window.outerWidth;
+      if (w_width < 768) {
+        var want_height = w_width / 2.4;
+        var bx_img_array= document.getElementsByClassName("bx_img");
+        for (var i = 0; i < bx_img_array.length; i++) {
+          bx_img_array.item(i).style.height = want_height + "px";
+        }
+      }
+
       if (document.getElementById('moreInfo_btn').dataset.tf=="0") {
         changeWidth_RecentProducts_gridbox(2);
       }else {
         changeWidth_RecentProducts_gridbox(4);
       }
-      changeSubBannerImge();
+      // changeSubBannerImge();
     }
 
 </script>
