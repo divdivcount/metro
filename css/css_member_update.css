@@ -37,11 +37,14 @@
 @media only screen and (max-width: 1440px) {
 }
 @media only screen and (max-width: 1024px) {
+  html,body{font-size: 9px!important;}
 }
 @media only screen and (max-width: 768px) {
+  html,body{font-size: 8px!important;}
   #userInfo_box{width: 100%;}
 }
 @media only screen and (max-width: 540px) {
+  html,body{font-size: 7px!important;}
   #userInfo_box{grid-template-columns: 40% 60%;}
 }
 @media only screen and (max-width: 425px) {
@@ -52,5 +55,6 @@
   #station input[type=button]{max-width: 100px;margin: 2.0rem 0 0 auto ;}
 }
 @media only screen and (max-width: 360px) {
+  html,body{font-size: 6px!important;}
   .button_contatiner_margin .w3-button{width: 18rem}
 }

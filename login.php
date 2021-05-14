@@ -64,7 +64,7 @@ $naver_apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code&cli
     // mysqli_close($conn); // 데이터베이스 접속 종료
   ?>
     <script type="text/javascript">
-      document.querySelector(".modal").classList.add("hidden");
+      document.querySelector(".modal_header").classList.add("hidden");
     </script>
 
   <?php
@@ -77,7 +77,7 @@ $naver_apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code&cli
     // mysqli_close($conn); // 데이터베이스 접속 종료
     ?>
       <script type="text/javascript">
-        document.querySelector(".modal").classList.add("hidden");
+        document.querySelector(".modal_header").classList.add("hidden");
       </script>
 
     <?php
@@ -91,7 +91,7 @@ $naver_apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code&cli
     // mysqli_close($conn); // 데이터베이스 접속 종료
     ?>
       <script type="text/javascript">
-      document.querySelector(".modal").classList.add("hidden");
+      document.querySelector(".modal_header").classList.add("hidden");
       </script>
     <?php
   }else{

@@ -27,13 +27,14 @@ body {
   margin: 0;
   margin-top: 5.0rem;
   width: 100%;
-  height: 200px;
   display: flex;
   justify-content:space-between;
   padding: 2.0rem;
+  max-height: 16.0rem;
 }
 .productInfo_part_img{
-  max-width: 160px;
+  max-width: 16.0rem;
+  max-height: 16.0rem;
   flex-grow: 0;
 }
 .productInfo_part_text{
@@ -66,11 +67,12 @@ body {
     display: flex;
     justify-content: space-between;
   }
-  .pr_buttons button{
+  .pr_buttons .w3-button{
+    padding: 0.8rem 1.6rem;
     font-size: 2.0rem;
   }
   .completeSale_btn{
-    margin-left: 20px;
+    margin-left: 2.0rem;
   }
 .checkSale_line{
   font-size: 2.0rem;
@@ -147,3 +149,22 @@ body {
     display: none;
 }
 .completeSale_btn{background-color:#fff!important }
+
+
+@media only screen and (max-width: 1024px) {
+  html,body{font-size: 9px!important;}
+}
+@media only screen and (max-width: 768px) {
+  html,body{font-size: 8px!important;}
+  .productTitle_line{flex-direction: column;}
+  .pr_buttons{width: 100%;justify-content:flex-end;}
+}
+@media only screen and (max-width: 540px) {
+  html,body{font-size: 7px!important;}
+}
+@media only screen and (max-width: 425px) {
+
+}
+@media only screen and (max-width: 360px) {
+  html,body{font-size: 6px!important;}
+}

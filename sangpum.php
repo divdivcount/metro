@@ -109,9 +109,9 @@ ini_set('display_errors', '1');
                 while ($rowaa = mysqli_fetch_assoc($want_member)) { //여기
                 ?>
                 <option value="<?=$rowaa["me_send_mb_id"]?>"><?=$rowaa["me_send_mb_id"]?></option>
-              <?php }
-
-              ?>
+                <?php
+                }
+                ?>
             </select>
             <div class="pr_buttons" data-sell_check ="<?= $row['pr_status'] ?>">
               <button type="button" class="reviseProduct_btn w3-button w3-blue w3-round" onclick="updateProduct(<?=$row["pr_id"]?>,<?=isset($mb) ? $mb["mb_num"] : 'null'?>, <?= isset($om) ? $om["om_id"] : 'null' ?>)">수정하기</button>
