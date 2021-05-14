@@ -487,29 +487,20 @@ require_once('modules/db.php');
     var bannerImg_box_img = document.querySelector('.bxslider').getElementsByTagName('img');
 
     if (w_width <= 768 && check_M == 0) {
-      for (var i = 0; i < bannerImg_box_img.length; i++) {
-        bannerImg_box_img.item(i).src = bannerImg_box_img.item(i).src.slice(0,-4) + "_m.png";
-        check_M = 1;
-      }
-
       //사이트 서브 배너 이미지
       document.getElementById('img01').src = "img/bannerImg_1_768x320.png";
       document.getElementById('img02').src = "img/bannerImg_2_768x320.png";
       document.getElementById('img03').src = "img/bannerImg_3_768x110.png";
     }else if(check_M == 1){
-      for (var i = 0; i < bannerImg_box_img.length; i++) {
-        bannerImg_box_img.item(i).src = bannerImg_box_img.item(i).src.slice(0,-6) + ".png";
-        check_M =  0;
-      }
       //사이트 서브 배너 이미지
       document.getElementById('img01').src = "img/bannerImg_1.png";
       document.getElementById('img02').src = "img/bannerImg_2.png";
       document.getElementById('img03').src = "img/bannerImg_3.png";
     }
-
-    setTimeout(function(e) {
-      slider_bx.reloadSlider();
-    },1)
+    //
+    // setTimeout(function(e) {
+    //   slider_bx.reloadSlider();
+    // },1)
   }
 
   //더보기 버튼
