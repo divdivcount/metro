@@ -546,7 +546,7 @@ require_once('modules/db.php');
       }else {
         changeWidth_RecentProducts_gridbox(4);
       }
-      // changeSubBannerImge();
+      changeSubBannerImge();
     }
 
 </script>
