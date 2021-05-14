@@ -219,7 +219,7 @@ ini_set('display_errors', '1');
           type:'post', // 메소드(get, post)
           data:{pr_id:pr_id, selectId:selectId}, //보낼 데이터
           success: function(data) {
-            alert(data);
+            // alert(data);
             window.location.reload()
           },
           error: function(err) {

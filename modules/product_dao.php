@@ -88,33 +88,51 @@ class Product extends MetroDAO {
       }
       else return null;
     }
-    // 거래 완료 작성중 
-    public function Product_status_update($pr_id) {
+    // 거래 완료 작성중
+    public function Product_status_update($pr_id, $mb_id, $om_id,$date) {
       // 회원 정보 1명 찾기
       $this->openDB();
       $query = $this->db->prepare("update product set pr_status = '거래완료' where pr_id = :pr_id");
       $query->bindValue(":pr_id", $pr_id, PDO::PARAM_INT);
       $query->execute();
-
-      $query = $this->db->prepare("select * from product where pr_id=:pr_id");
+      // var_dump($query);
+      $query = $this->db->prepare("
+        select
+         p.pr_id,
+         p.pr_title,
+         p.pr_status,
+         p.pr_price,
+         p.ca_name,
+         (select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,
+         pi.pr_img,
+         l.l_name,
+         p.pr_station
+        from
+          product p
+          left join product_img pi ON p.pr_img_id = pi.pr_img_id
+          left join line l ON p.l_id = l.l_id
+          left join interest ia on ia.pr_id = p.pr_id
+        where
+          pi.main_check = 'y'
+          and pr_block = 1
+          and p.pr_id = :pr_id
+      ");
       $query->bindValue(":pr_id", $pr_id, PDO::PARAM_INT);
-
+      $query->execute();
 
       while ($fetch = $query->fetch(PDO::FETCH_ASSOC)) {
         $status = $fetch['pr_status'];
-        // var_dump($status);
+        echo $status;
         if($status === '거래완료') {
-          $last_id = 0;
-          $query = $this->db->prepare("insert into product_history valuse (null, {$fetch['pr_id']},{$fetch['pr_img_id']},{$fetch['pr_order_id']},{$fetch['pr_id']}) ");
+          $query = $this->db->prepare("insert into product_history values (null, :pr_id,'{$fetch['pr_img']}',:mb_id,:om_id,'{$fetch['ca_name']}',:date) ");
           $query->bindValue(":pr_id", $pr_id, PDO::PARAM_INT);
-          $query->execute();
-          if($last_id == 0){
-      			$last_id = $this->db->lastInsertId();//오토 인크리먼트로 가장 최근 값
-      		}
-      		$this->db->exec("update product_history set pr_order_id = {$last_id} where pu_id = " . $this->db->lastInsertId());
-      		return $last_id;
+          $query->bindValue(":mb_id", $mb_id, PDO::PARAM_STR);
+          $query->bindValue(":om_id", $om_id, PDO::PARAM_INT);
+          $query->bindValue(":date", $date, PDO::PARAM_STR);
         }
       }
+        $query->execute();
+      var_dump($query);
     }
 
     public function Product_block_update($pr_id, $gap) {
@@ -125,6 +143,7 @@ class Product extends MetroDAO {
       $query->bindValue(":gap", $gap, PDO::PARAM_INT);
       $query->execute();
     }
+
 
 
     public function admin_product_list_detail($mb_id,$om_id,$pr_id) {
