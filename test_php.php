@@ -4,22 +4,27 @@
   require_once("modules/db.php");
   require_once("modules/notification.php");
 
-  $check = $_GET["check"];
-  foreach ($check as $value) {
-    echo $value;
+  $pr_id = Post("pr_id", 0);
+  $member_checkId = Post("selectId", null);
+  echo $pr_id;
+  echo $member_checkId;
+  if(!(is_null($member_checkId))){
+    $dao = new Member;
+    $member = $dao->admin_Member_id_all_select($member_checkId);
+    // var_dump($member);
+    if(is_null($member)){
+      // echo "이곳과";
+      $dao = new Oauths;
+      $other_member = $dao->admin_Om_select($member_checkId);
+    }else{
+      // echo "이곳";
+    }
+  }elseif (!(is_null($om_id))) {
+    // echo "저곳";
+    $dao = new Oauths;
+    $oauth = $dao->admin_Om_select($om_id, $gap);
+
   }
-  $otherReason="";
-  // $otherReason = $_GET["otherReason"] ? $_GET["otherReason"] : "null";
-if(isset($_GET["otherReason"])){
-    $otherReason =  $_GET["otherReason"];
-  }
-  echo $otherReason;
-
-
-  // $pr_id = Post('pr_id', null);
-  // echo $pr_id;
-
-  //pr + mb or om 인거 있으면 한 품목에 관해서 하나의 신고만 가능
  ?>
  <!DOCTYPE html>
  <html lang="en" dir="ltr">
