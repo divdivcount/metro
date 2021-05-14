@@ -292,10 +292,10 @@ require_once('modules/db.php');
 
     load_category(tapmenuItem.item(0).innerText);
     // $(".owl-carousel").owlCarousel(obj);
-
-
+    changeWidth_RecentProducts_gridbox(2);
+    changeContent();
     // 768px 일때 사이트 소개이미지파일 다른해상도 파일로 변경
-    changeWidth_RecentProducts_gridbox(2);      // 최근상품 그리드박스 높이 정의
+          // 최근상품 그리드박스 높이 정의
 
     // setAllBannerImage();
   });
@@ -351,7 +351,6 @@ require_once('modules/db.php');
 
 
   $(document).ready(function(){ // html 문서를 다 읽어들인 후
-
 
     //헤더 로그인 메뉴쪽 모달팝업 제어 함수
     function login_open() {
@@ -409,6 +408,7 @@ require_once('modules/db.php');
         })
       }
     })
+
   });
   $("#auto").on("keyup",function(){	//검색창에 뭔가가 입력될 때마다
   input = $("#auto").val();	//입력된 값 저장
@@ -479,18 +479,6 @@ require_once('modules/db.php');
     }
   }
 
-
-  function setAllBannerImage() {
-    var w_width = window.outerWidth;
-    var bannerImg_box_img = document.querySelector('.bxslider').getElementsByTagName('img');
-    if (w_width <= 768) {
-      for (var i = 0; i < bannerImg_box_img.length; i++) {
-        bannerImg_box_img.item(i).src = bannerImg_box_img.item(i).src.slice(0,-4) + "_m.png";
-      }
-    }else{
-
-    }
-  }
 
   var check_M = 0;
   //768px 때 서브배너이미지 변경 (모바일용으로)
