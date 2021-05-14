@@ -492,7 +492,6 @@ try{
         // 이미지 선택해서 슬라이드 넘기는 부분 함수
         bxSetting();
         let today = new Date();
-        alert();
     });
     // ↑ document.ready 끝나는 부분
 

@@ -509,11 +509,11 @@ require_once('modules/db.php');
     function changeBtn_style() {
       if (document.getElementById('moreInfo_btn').dataset.tf=="0") {
         changeWidth_RecentProducts_gridbox(4);
-        document.getElementById('moreInfo_btn').innerHTML="<div style='display:flex;align-items:center'>닫기<img src='img/listup_15x15.png' style='margin-left:1.0rem;height:1.5rem;'></div>";
+        document.getElementById('moreInfo_btn').innerHTML="<div style='display:flex;align-items:center;justify-content:center'>닫기<img src='img/listup_15x15.png' style='margin-left:1.0rem;height:1.5rem;'></div>";
         document.getElementById('moreInfo_btn').dataset.tf="1"
       }else {
         changeWidth_RecentProducts_gridbox(2);
-        document.getElementById('moreInfo_btn').innerHTML ="<div style='display:flex;align-items:center'>최신매물 더 보기<img src='img/dropdown_15x15.png' style='margin-left:1.0rem;height:1.5rem;'></div>";
+        document.getElementById('moreInfo_btn').innerHTML ="<div style='display:flex;align-items:center;justify-content:center'>최신매물 더 보기<img src='img/dropdown_15x15.png' style='margin-left:1.0rem;height:1.5rem;'></div>";
         document.getElementById('moreInfo_btn').dataset.tf="0"
       }
     }
