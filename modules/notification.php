@@ -32,7 +32,23 @@ function userGoto($msg, $url)
 <?php
   exit();
 }
-
+function userGotoGo($msg, $url)
+{
+  $directlink = ($url == '')?'history.go(-2);':'location.href=\''.$url.'\';';
+?>
+<!doctype html>
+<html>
+<head><meta charset="utf-8">
+</head>
+<body>
+  <script type="text/javascript">
+    alert('<?= $msg ?>');
+    <?= $directlink ?>
+  </script>
+</body>
+<?php
+  exit();
+}
 // Process
 // <meta http-equiv="refresh" content="0 url=/page/board/read.php?idx=">
 ?>

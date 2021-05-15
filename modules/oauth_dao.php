@@ -38,6 +38,7 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/modules/db_dao.php');
       $query -> bindValue(":mb_uid", $mb_uid, PDO::PARAM_STR);
       $query->execute();
       $fetch = $query->fetchAll(PDO::FETCH_ASSOC);
+      // var_dump($fetch);
       if($fetch){
         return $fetch;
       }
@@ -45,8 +46,8 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/modules/db_dao.php');
     }
 
     public function admin_Om_block($om_id, $gap) {
-      echo $om_id;
-      echo $gap;
+      // echo $om_id;
+      // echo $gap;
           $this->openDB();
           $query = $this->db->prepare("update $this->quTable set om_block=:gap where om_id=:om_id");
           $query->bindValue(':om_id', $om_id, PDO::PARAM_INT);

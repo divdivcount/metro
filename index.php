@@ -55,9 +55,16 @@ require_once('modules/db.php');
 
           $gallerySelect = $galleryObj->Gallery_Select();
         ?>
-        <?php foreach ($gallerySelect as $gallery_img ): ?>
-          <div class="bx_img"><img src="files/gallery/<?=$gallery_img['fname']?>" alt=""></div>
-        <?php endforeach ?>
+        <?php if(!(is_null($gallerySelect))) : ?>
+          <?php foreach ($gallerySelect as $gallery_img ): ?>
+            <div class="bx_img"><img src="files/gallery/<?=$gallery_img['fname']?>" alt=""></div>
+          <?php endforeach ?>
+        <?php else : ?>
+          <div class="bx_img"><img src="img/slideimg_0.png" alt=""></div>
+          <div class="bx_img"><img src="img/slideimg_1.png" alt=""></div>
+          <div class="bx_img"><img src="img/slideimg_2.png" alt=""></div>
+          <div class="bx_img"><img src="img/slideimg_3.png" alt=""></div>
+        <?php endif ?>
       </div>
       <!-- 이중select box 로 지하철역 선택하는 부분 -->
         <form  id="selectMetro_box" action="searchProduct.php" method="get">

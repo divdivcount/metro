@@ -20,7 +20,7 @@
 			$_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
 			if($_SESSION['ss_mb_id'] == 'admin' && isset($_SESSION['ip'])) {//세션유저, 세션 아이피가 있으면 TRUE
 
-				var_dump($_SESSION['ip']);
+				// var_dump($_SESSION['ip']);
 				if($_SESSION['ip'] != $_SERVER['REMOTE_ADDR'] && !$this->InternalIP()) {//세션[ip]와 접속한 ip가 다르 지정한 아이피와 다르면 false
 					//세션 탈취?
 					session_destroy();

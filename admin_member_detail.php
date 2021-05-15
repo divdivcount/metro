@@ -1,6 +1,5 @@
 <?php
-  require_once("modules/db.php");
-  require_once("modules/notification.php");
+  require_once("modules/admin.php");
 
   $member_id = Post('id', null);
   $oauth_id = Post('om', null);
@@ -17,7 +16,7 @@
     $dao = new Member();
     $listc = $dao->admin_Member_Search($name, $mb_om);
   }else{
-    echo "오류가 발생";
+    // echo "오류가 발생";
   }
   $list_all = (isset($member) ? ($member ? $member : null) :
               (isset($other_member) ? ($other_member ? $other_member : null) :
@@ -91,7 +90,9 @@ if(!(is_null($listc))){
         $mem_id = Post("mem_id",null);
         $om_id = Post('mom_id', null);
         $gap = Post("gap",null);
-        echo $mem_id;
+        // echo $mem_id;
+        // echo $om_id;
+        // echo $gap;
         //쿼리 짜고 함수 지정
         if(!(is_null($mem_id))){
           $dao = new Member;
@@ -110,7 +111,7 @@ if(!(is_null($listc))){
           // echo "저곳";
           $dao = new Oauths;
           $oauth = $dao->admin_Om_select($om_id, $gap);
-
+          $dao->admin_Om_block($oauth[0]["om_id"], $gap);
         }
       }
       if(array_key_exists('mem_block',$_POST))
@@ -118,9 +119,9 @@ if(!(is_null($listc))){
         $gap = Post("gap",null);
         mem_block();
           if($gap == 'y'){
-            userGoto("회원을 차단 하셨습니다", "");
+            userGotoGo("회원을 차단 하셨습니다", "");
           }else{
-            userGoto("회원을 차단해체 하셨습니다", "");
+            userGotoGo("회원을 차단해체 하셨습니다", "");
           }
       }
       //경고 보내기
@@ -138,18 +139,18 @@ if(!(is_null($listc))){
           $member = $dao->admin_Member_id_all_select($mem_id);
           // var_dump($member);
           if(is_null($member)){
-            echo "이곳과";
+            // echo "이곳과";
 
             $dao = new Oauths;
             $other_member = $dao->admin_Om_select($mem_id);
             $warning_count =  $other_member[0]['warning_count']+1;
-            echo $warning_count;
+            // echo $warning_count;
             $memo_text = "고객님의 현재 경고를 받은 수는".$warning_count."개 입니다.\n불 합리하다 생각하신다면 실시간 상담을 통하여 메세지를 보내주세요.";
             $dao->admin_om_waring_send($other_member[0]["om_id"], $admin, $time, $recive,$memo_text);
           }else{
-            echo "이곳";
+            // echo "이곳";
             $warning_count =  $member[0]['warning_count']+1;
-            echo $warning_count;
+            // echo $warning_count;
             $memo_text = "고객님의 현재 경고를 받은 수는".$warning_count."개 입니다.\n불 합리하다 생각하신다면 실시간 상담을 통하여 메세지를 보내주세요.";
             $dao->admin_waring_send($member[0]["mb_id"], $admin, $time, $recive,$memo_text);
           }

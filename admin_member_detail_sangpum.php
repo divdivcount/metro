@@ -1,6 +1,5 @@
 <?php
-  require_once("modules/db.php");
-  require_once("modules/notification.php");
+  require_once("modules/admin.php");
   $mb_id = Get("id", 'null');
   $om_id = Get("om", 'null');
   // echo $mb_id;
