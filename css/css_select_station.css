@@ -26,32 +26,7 @@
 }
 .closeBtn_2{cursor: pointer;}
 
-.modal_2 {
-   position: absolute;
-   top: 0;
-   left: 0;
-   width: 100%;
-   height: 100%;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-}
-.modal_2 .bg {
-   width: 100%;
-   height: 100%;
-   background-color: rgba(0, 0, 0, 0.6);
-   z-index: 10000;
-}
-.test_modal_2{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  z-index: 10001
-}
-.modalBox_2 {
+.selectStation_modalBox {
   position: absolute;
   background-color: #fff;
   width: 80%;

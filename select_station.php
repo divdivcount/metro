@@ -1,61 +1,55 @@
 <?php
 require_once('modules/db.php');
 ?>
-<div class="modal_2 hidden">
-<div class="bg">
-  <div class="test_modal_2">
+  <div class="selectStation_modalBox hidden">
+    <div class="closeBtn_box_2"><img src="img/cancle.png" class="selectStation_closeBtn" onclick="selectStation_close()"></div>
 
-    <div class="modalBox_2">
-      <div class="closeBtn_box_2"><img src="img/cancle.png" class="closeBtn_2"></div>
+    <form  id="selectMetro_box" action="station_update.php" method="post">
+      <input type="hidden" name="mode" value="modify">
+      <input type="hidden" name="mbs_id"  value="<?= isset($mb["mb_id"]) ? $mb["mb_id"] : 'null' ?>">
+      <input type="hidden" name="om_id"  value="<?= isset($om["om_id"]) ? $om["om_id"] : 'null' ?>">
 
-      <form  id="selectMetro_box" action="station_update.php" method="post">
-        <input type="hidden" name="mode" value="modify">
-        <input type="hidden" name="mbs_id"  value="<?= isset($mb["mb_id"]) ? $mb["mb_id"] : 'null' ?>">
-        <input type="hidden" name="om_id"  value="<?= isset($om["om_id"]) ? $om["om_id"] : 'null' ?>">
+      <div class="title_line">
+      </div>
 
-        <div class="title_line">
-        </div>
+      <div class="input_line">
 
-        <div class="input_line">
+        <div id="bothFind_item">
 
-          <div id="bothFind_item">
-
-          <div class="find_item">
-            <span>호선을 선택해 주세요.</span>
-            <select name="ctg_name" id="selectID" class="w3-select">
-              <option value="">선택</option>
-              <option value="all">전체</option>
-              <?php
-              $sql = " select * from line";
-              $select_station_result = mysqli_query($conn, $sql);
-              while ($row = mysqli_fetch_assoc($select_station_result)) {
-              ?>
-              <option value="<?=$row["l_id"]?>"><?=$row["l_name"]?></option>
-            <?php }
-            mysqli_close($conn);
+        <div class="find_item">
+          <span>호선을 선택해 주세요.</span>
+          <select name="ctg_name" id="selectID" class="w3-select">
+            <option value="">선택</option>
+            <option value="all">전체</option>
+            <?php
+            $sql = " select * from line";
+            $select_station_result = mysqli_query($conn, $sql);
+            while ($row = mysqli_fetch_assoc($select_station_result)) {
             ?>
-            </select>
-          </div>
-
-          <div class="find_item">
-            <span>지하철역을 입력해주세요.</span>
-
-            <div style="display:flex"><input id="auto" class="w3-input highlight" name="station" value='' type="text"><div style="width:1.3rem;margin:auto"><img src="img\loupe.png" alt=""></div></div>
-          </div>
-
-          </div>
-
-          <button type="submit" class="w3-button w3-blue w3-ripple w3-round-xlarge close_pop">등록</button>
+            <option value="<?=$row["l_id"]?>"><?=$row["l_name"]?></option>
+          <?php }
+          mysqli_close($conn);
+          ?>
+          </select>
         </div>
-      </form>
 
-    </div>
-  </div>
+        <div class="find_item">
+          <span>지하철역을 입력해주세요.</span>
+
+          <div style="display:flex"><input id="auto" class="w3-input highlight" name="station" value='' type="text"><div style="width:1.3rem;margin:auto"><img src="img\loupe.png" alt=""></div></div>
+        </div>
+
+        </div>
+
+        <button type="submit" class="w3-button w3-blue w3-ripple w3-round-xlarge close_pop">등록</button>
+      </div>
+    </form>
 
   </div>
-</div>
 <script type="text/javascript">
 $(document).ready(function(){ // html 문서를 다 읽어들인 후
+  
+
     $('#selectID').on('change', function(){
         if(this.value !== ""){
             var optVal = $(this).find(":selected").val();

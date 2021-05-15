@@ -100,22 +100,9 @@ ini_set('display_errors', '1');
             <div class="pr_title"><?= $row['pr_title'] ?></div>
 
             <!-- 버튼들 -->
-            <select name="ctg_name" id="selectID" class="w3-select">
-                <option value="">선택 해주세요</option>
-                <?php
-                $sql = "select DISTINCT(me_send_mb_id) from mb_om_memo where pr_id = {$row['pr_id']}";
-                $want_member = mysqli_query($conn, $sql);  //여기
-
-                while ($rowaa = mysqli_fetch_assoc($want_member)) { //여기
-                ?>
-                <option value="<?=$rowaa["me_send_mb_id"]?>"><?=$rowaa["me_send_mb_id"]?></option>
-                <?php
-                }
-                ?>
-            </select>
             <div class="pr_buttons" data-sell_check ="<?= $row['pr_status'] ?>">
               <button type="button" class="reviseProduct_btn w3-button w3-blue w3-round" onclick="updateProduct(<?=$row["pr_id"]?>,<?=isset($mb) ? $mb["mb_num"] : 'null'?>, <?= isset($om) ? $om["om_id"] : 'null' ?>)">수정하기</button>
-              <button type="button" class="completeSale_btn w3-button w3-light-grey w3-round" onclick='completeSale(this,<?=$row["pr_id"]?>)'>판매완료</button>
+              <button type="button" class="completeSale_btn w3-button w3-light-grey w3-round" onclick="selectBuyer_open(<?=$row['pr_id']?>)">판매완료</button>
               <button type="button" class="deleteProduct_btn w3-button w3-dark-grey w3-round">삭제하기</button>
             </div>
           </div>
@@ -203,24 +190,15 @@ ini_set('display_errors', '1');
       }
     };
 
-    //판매완료시 버튼처리 부분
-    function completeSale(e,pr_id) {
-      e.style.display ="none";
-      var parent = e.parentNode;
-      // alert(parent.dataset.sell_check);
-      var child =parent.childNodes;
-      // alert(child[1].dataset.test);
-      child[1].style.display ="none";
-      child[5].style.display ="block";
-      var selectId = $("#selectID option:selected").val();
-      //  판매완료시 판매상품 id 전달
+
+    function selectBuyer_open(p_id) {
+      var pr_id = p_id;
       $.ajax({
-          url:'test_php.php', //request 보낼 서버의 경로
+          url:'return_buyerList.php', //request 보낼 서버의 경로
           type:'post', // 메소드(get, post)
-          data:{pr_id:pr_id, selectId:selectId}, //보낼 데이터
+          data:{pr_id:pr_id}, //보낼 데이터
           success: function(data) {
-            // alert(data);
-            window.location.reload()
+            parent.document.getElementById('selectBuyer_selectBox').innerHTML = data;
           },
           error: function(err) {
               //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
@@ -228,6 +206,8 @@ ini_set('display_errors', '1');
           }
       });
 
+        parent.document.querySelector(".my_one_page_modal").classList.remove("hidden");
+        parent.document.querySelector(".selectBuyer_modalBox").classList.remove("hidden");
     }
 
     function updateProduct(pr_id, mb_id, om_id) {

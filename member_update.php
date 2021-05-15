@@ -88,7 +88,7 @@ if(isset($_SESSION['ss_mb_id'])){
 
       <label><span class="blue">*</span>주변 역 설정하기</label>
       <div id="station" style="display:flex;"><input class="input_station" type="text" id="pw2" value="<?=$mb['line_station'] ? $mb['line_station'] : $om['line_station']?>" required>
-      <input class="w3-button w3-light-gray w3-round" type="button" id="openBtn" value="역 검색"> </div>
+      <input class="w3-button w3-light-gray w3-round" type="button" id="selectStation_openBtn" value="역 검색"> </div>
 
 
       </div>
@@ -103,10 +103,11 @@ if(isset($_SESSION['ss_mb_id'])){
 <script type="text/javascript">
   $(document).ready(function(){
     function selectStation_open() {
-      parent.document.querySelector(".modal_2").classList.remove("hidden");
+      parent.document.querySelector(".my_one_page_modal").classList.remove("hidden");
+      parent.document.querySelector(".selectStation_modalBox").classList.remove("hidden");
       // parent.document.body.style.backgroundColor = "rgba(0, 0, 0, 0.6)";
     }
-    document.getElementById("openBtn").addEventListener("click", selectStation_open);
+    document.getElementById("selectStation_openBtn").addEventListener("click", selectStation_open);
   });
 
 </script>

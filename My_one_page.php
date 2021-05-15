@@ -65,14 +65,14 @@
   ?>
   <!-- 최상단 로고 및 상단메뉴 -->
     <?php require_once('metrocket_header.php') ?>
-    <?php require_once('select_station.php'); ?>
+
 
   <!-- 모달팝업 (hidden여부로 팝업) -->
   <div class="my_one_page_modal hidden">
     <div class="bg">          <!-- 백그라운드 잡는 부분  -->
       <div class="fix_page">  <!-- 화면가운데 fix로 잡는 부분  -->
 
-        <div class="modalBox">            <!-- 콘텐츠 들어가는부분 -->
+        <div class="updateImage_modalBox hidden">            <!-- 콘텐츠 들어가는부분 -->
 
           <div class="closeBtn_box"><img src="img/cancle.png" class="" onclick="updateImage_close()" style="width:2.3rem;height:2.3rem;cursor:pointer"></div>
           <h3>프로필 이미지 등록</h3>
@@ -97,9 +97,20 @@
             </div>
 
           </form>
-
         </div>
 
+        <div class="selectBuyer_modalBox hidden">
+          <div class="closeBtn_box"><img src="img/cancle.png" class="" onclick="selectBuyer_close()" style="width:2.3rem;height:2.3rem;cursor:pointer"></div>
+          <div class="img_box"><img src="img/checked_blue.png" alt=""></div>
+          <h3>[판매완료하기]</h3>
+          <span>구매자를 선택해주세요.</span>
+          <div id="selectBuyer_selectBox">
+
+          </div>
+          <div class="selectBuyer_btnBox"><button ype="button" class="w3-button w3-round-large w3-blue" onclick="completeSale()">판매완료</button></div>
+        </div>
+
+        <?php require_once('select_station.php'); ?>
       </div>
     </div>
   </div>
@@ -110,7 +121,7 @@
     <div class="profile_box">
       <div class="prfileImg_box">
         <img class="w3-circle" src="<?=isset($mb['mb_image']) ?($mb['mb_image'] == 'img/normal_profile.png' ? $mb['mb_image'] : 'files/'.$mb['mb_image']) : $om['om_image_url']?>" >
-        <img src="img/camera.png" style="position:absolute;left:70%;top:70%;" alt="" class="open_updateImage_btn" data-check_om="<?= isset($om['om_id']) ? $om['om_id'] : "1" ?> ">
+        <img src="img/camera.png" style="position:absolute;left:70%;top:70%;" alt="" class="open_updateImage_btn" onclick="updateImage_open()" data-check_om="<?= isset($om['om_id']) ? $om['om_id'] : "1" ?> ">
       </div>
         <div class="user_name"><?=isset($mb['mb_name']) ? $mb['mb_name'] : $om['om_nickname']?></div>
     </div>
@@ -156,23 +167,22 @@
 </body>
 <script type="text/javascript">
   $(document).ready(function(){
-
-    function selectStation_close() {
-       document.querySelector(".modal_2").classList.add("hidden");
-    }
-    document.querySelector('.closeBtn_2').addEventListener("click", selectStation_close);
-
   });
+  //역검색 모달창 닫는함수
+  function selectStation_close() {
+     document.querySelector(".my_one_page_modal").classList.add("hidden");
+     document.querySelector(".selectStation_modalBox").classList.add("hidden");
+  }
 
-
-  var iframe = document.getElementById('main_frame')
+  var iframe = document.getElementById('main_frame');
 
   window.addEventListener('DOMContentLoaded', function () {
   iframe.addEventListener('load', autoHeight);
   })
 
+  //iframe 높이 조절
   function autoHeight() {
-  var frame = iframe
+  var frame = iframe;
     var sub = frame.contentDocument ? frame.contentDocument : frame.contentWindow.document
     iframe.height = sub.body.scrollHeight
   }
@@ -181,14 +191,15 @@
   function updateImage_open() {
     if (document.querySelector(".open_updateImage_btn").dataset.check_om == 1) {
        document.querySelector(".my_one_page_modal").classList.remove("hidden");
+       document.querySelector(".updateImage_modalBox").classList.remove("hidden");
     }else{
       alert("소셜 로그인 유저는 사이트내에서 프로필 이미지 및 닉네임 변경이 불가합니다.");
     }
   }
   function updateImage_close() {
     document.querySelector(".my_one_page_modal").classList.add("hidden");
+    document.querySelector(".updateImage_modalBox").classList.add("hidden");
   }
-  document.querySelector(".open_updateImage_btn").addEventListener("click", updateImage_open);
 
   const realInput = document.getElementById('real-input');
   const uploadImg_btn = document.getElementById('uploadImg_btn');
@@ -220,6 +231,31 @@
       }
 
   })
+  function selectBuyer_close() {
+    document.querySelector(".my_one_page_modal").classList.add("hidden");
+    document.querySelector(".selectBuyer_modalBox").classList.add("hidden");
+  }
+
+  //구매자 선택 모달팝업에서 판매완료버튼 선택시 처리부분
+  function completeSale() {
+    var selectId = $("#selectID option:selected").val();
+    var pr_id = $("#salePrid").val();
+    //  판매완료시 판매상품 id 전달
+    $.ajax({
+        url:'test_php.php', //request 보낼 서버의 경로
+        type:'post', // 메소드(get, post)
+        data:{pr_id:pr_id, selectId:selectId}, //보낼 데이터
+        success: function(data) {
+          selectBuyer_close();
+          document.getElementById("main_frame").contentWindow.location.reload();;
+        },
+        error: function(err) {
+            //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
+            alert(err);
+        }
+    });
+  }
+
 </script>
 </html>
 <?php } ?>

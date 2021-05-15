@@ -95,7 +95,8 @@ body {
  height: 100%;
  z-index: 10001
 }
-.my_one_page_modal .modalBox {
+/* 이미지 업로드 모달박스  */
+.updateImage_modalBox {
  position: absolute;
  background-color: #fff;
  width: 80%;
@@ -115,7 +116,7 @@ body {
 }
 .closeBtn{cursor: pointer;}
 
-.modalBox h3{
+.updateImage_modalBox h3{
   width: 100%;
   font-family: "NotoSansKR_m";
   font-size: 3.0rem;
@@ -124,7 +125,7 @@ body {
   text-align: left;
   margin: 0;
 }
-.modalBox p{
+.updateImage_modalBox p{
   width: 100%;
   font-family: "NotoSansKR_r";
   font-size: 2.0rem;
@@ -134,6 +135,43 @@ body {
   margin-top: 0.6rem;
   margin-bottom: 3.0rem;
 }
+
+/* 역선택 모달팝업 */
+.selectStation_modalBox {
+  position: absolute;
+  background-color: #fff;
+  width: 80%;
+  max-width: 1500px;
+  height: auto;
+  padding: 15px;
+  z-index: 10002;
+  background-color: #f9f9f9;
+  box-shadow: 10px 10px 50px 0 rgba(0, 0, 0, 0.16);
+    border-radius: 30px;
+}
+#selectMetro_box{
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  padding: 3.0rem 2.0rem;
+  z-index: 1;
+  font-family: "NotoSansKR_r";
+  font-size:2.3rem;
+}
+
+#selectMetro_box .title_line{width: 100%;display: flex;justify-content: flex-end;}
+#selectMetro_box .input_line{display: flex;justify-content: space-between;height: 80%;align-items: center;}
+#selectMetro_box span{font-size:1.8rem;color: #a1a1a1;}
+#selectMetro_box .find_item{width: 45%;border-bottom: 3px solid #a5a5a5;}
+#selectMetro_box .w3-button{width:20%;height: 7.0rem;font-family: "NotoSansKR_r";}
+#selectMetro_box .w3-input{outline: none;background-color:#f9f9f9!important;border: none;}
+#selectMetro_box .w3-select{outline: none;background-color:#f9f9f9!important;border: none;}
+#selectMetro_box .find_item:nth-child(1){}
+#selectMetro_box #bothFind_item{display: flex;width: 75%;flex-direction: row;justify-content: space-between;align-items: center;}
+
+.ui-autocomplete{z-index: 10010!important}
+
+
 .changedProfile_image{
   margin: 0 auto;
   width: 21.0rem;
@@ -195,7 +233,7 @@ body {
 
 
 .blue{color: blue;}
-.hidden {display: none;}
+.hidden {display: none!important}
 @media only screen and (min-width: 1920px) {
   body{
     width: 1920px;
