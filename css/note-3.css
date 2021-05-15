@@ -1,0 +1,114 @@
+html,body {
+    font-size: 10px !important;
+    text-decoration: none;
+}
+
+body {
+    width: auto;
+    height: auto;
+    background: #F0F0F0;
+    padding: 4.2% 7% 10% 7%;
+    margin: 0;
+}
+
+.note {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 0.6fr 1.2fr 0.5fr;
+    align-content: center;
+    row-gap: 5.2%;
+}
+.note2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 0.6fr;
+    align-content: center;
+    row-gap: 5.2%;
+}
+
+.header {
+    grid-column: 1 / span 2;
+    width: 100%;
+}
+.header2 {
+    grid-column: 1 / span 2;
+    width: 100%;
+}
+.title {
+    font-size: 2rem;
+    color: #3b3b3b;
+    padding-left: 2.1%;
+}
+
+.text {
+    font-size: 1.5rem;
+    color: #3b3b3b;
+    padding-left: 2.1%;
+}
+
+.note div:nth-child(2) {
+    grid-column: 1 / span 2;
+    text-align: center;
+    line-height: 40px;
+    font-size: 1.5rem;
+    width: 100%;
+    color: #fff;
+    background-color: #09f;
+}
+
+.content {
+    grid-column: 1 / span 2;
+    background-color: #fff;
+    color: #3b3b3b;
+    width: 110%;
+    line-height: 25px;
+    box-shadow: 0px 3px 10px #b3b3b3;
+    border-radius: 20px;
+    padding-left: 30px;
+    font-size: 1.5rem;
+}
+.content > input{
+  border: none;
+}
+.conbtn {
+    text-align: right;
+}
+
+.conbtn > input {
+    font-size: 1.5rem;
+    color:#fff;
+    border: 0;
+    outline: 0;
+    width: 30%;
+    height: 50%%;
+    border-radius: 15px;
+}
+
+.cbtn {
+    background-color: #09f;
+    margin-bottom: 7.22px;
+}
+
+.content2 {
+    grid-column: 1 / span 2;
+    background-color: #fff;
+    box-shadow: 0px 3px 10px #b3b3b3;
+    border-radius: 20px;
+    padding: 30px;
+    font-size: 1.5rem;
+    color: #D4D4D4;
+}
+
+@media screen and (max-width: 768px) {
+    html,body {
+        font-size: 8px !important;
+    }
+
+    .content {
+        width: 94%;
+    }
+
+    .conbtn > button {
+        width: 70%;
+    }
+}
