@@ -19,7 +19,7 @@
     $dao = new Member;
     $member = $dao->admin_Member_id_all_select($member_checkId);
     // var_dump($member);
-    $product_history->Product_status_update($pr_id,$member[0]["mb_num"],null,$time);
+
     if(is_null($member)){
       // echo "이곳과";
       $dao = new Oauths;
@@ -27,6 +27,7 @@
       $product_history->Product_status_update($pr_id,null,$other_member[0]["om_id"],$time);
     }else{
       // echo "이곳";
+      $product_history->Product_status_update($pr_id,$member[0]["mb_num"],null,$time);
     }
   }
   userGoto("판매 완료 처리가 되었습니다.","");
