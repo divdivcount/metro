@@ -1,6 +1,6 @@
 <?php
 require_once('modules/db.php');  // DB연결을 위한 같은 경로의 dbconn.php를 인클루드합니다.
-
+require_once('modules/notification.php');
 $mb_id = isset($_SESSION['ss_mb_id']) ? $_SESSION['ss_mb_id'] : null;
 $om_id = isset($_SESSION['naver_mb_id']) ? $_SESSION['naver_mb_id'] : (isset($_SESSION['kakao_mb_id']) ? $_SESSION['kakao_mb_id'] : null);
 $om_id = substr($om_id, 5);
@@ -22,4 +22,5 @@ $sql = " INSERT INTO mb_om_memo
       pr_id = $pr_id";
 
 $result = mysqli_query($conn, $sql);
+userGoto("거래 신청 쪽지를 보냈습니다.", "");
 ?>

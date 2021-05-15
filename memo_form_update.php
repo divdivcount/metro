@@ -18,8 +18,8 @@ if(!(empty($_SESSION['ss_mb_id']) || empty($_SESSION['naver_mb_id']) || empty($_
 	$pr_id = trim($_POST['id']);
 	if(strpos($recv_list1, "sir") !== false) {
 	    $recv_list = explode('sir', $recv_list1);
-			echo $recv_list[0]."<br>";
-			echo $recv_list[1]."<br>";
+			// echo $recv_list[0]."<br>";
+			// echo $recv_list[1]."<br>";
 			$sql = " SELECT om_id, om_nickname FROM oauth_member WHERE om_id = $recv_list[1]";
 	} else {
 			$sql = " SELECT mb_id, mb_name FROM member WHERE mb_id = '{$recv_list1}' ";
