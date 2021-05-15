@@ -1,5 +1,5 @@
 <?php
-
+require_once($_SERVER['DOCUMENT_ROOT'].'/modules/module_protect.php');
 class MetroDAO {
 	// Field
 	protected $db = null;

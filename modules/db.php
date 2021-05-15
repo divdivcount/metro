@@ -1,67 +1,26 @@
 <?php
-	require_once('modules/parameter.php');
-	require_once('modules/db_dao.php');
-	require_once('modules/mb_dao.php');
-	require_once('modules/reply_dao.php');
-	require_once('modules/oauth_dao.php');
-	require_once('modules/dbconn.php');
-	require_once('modules/strequ.php');
-	require_once('modules/product_dao.php');
-	require_once('modules/mem_del_reasons_dao.php');
-	require_once('modules/product_image_dao.php');
-	require_once('modules/interest_dao.php');
-
+	require_once($_SERVER['DOCUMENT_ROOT'].'/modules/parameter.php');
+	require_once($_SERVER['DOCUMENT_ROOT'].'/modules/db_dao.php');
+	require_once($_SERVER['DOCUMENT_ROOT'].'/modules/mb_dao.php');
+	require_once($_SERVER['DOCUMENT_ROOT'].'/modules/reply_dao.php');
+	require_once($_SERVER['DOCUMENT_ROOT'].'/modules/oauth_dao.php');
+	require_once($_SERVER['DOCUMENT_ROOT'].'/modules/dbconn.php');
+	require_once($_SERVER['DOCUMENT_ROOT'].'/modules/strequ.php');
+	require_once($_SERVER['DOCUMENT_ROOT'].'/modules/product_dao.php');
+	require_once($_SERVER['DOCUMENT_ROOT'].'/modules/mem_del_reasons_dao.php');
+	require_once($_SERVER['DOCUMENT_ROOT'].'/modules/product_image_dao.php');
+	require_once($_SERVER['DOCUMENT_ROOT'].'/modules/interest_dao.php');
+	require_once($_SERVER['DOCUMENT_ROOT'].'/modules/db_gallery.php');
+	require_once($_SERVER['DOCUMENT_ROOT'].'/modules/module_protect.php');
 	class ProLogin extends MetroDAO {
 		private $session = false;
-		private function PasswordVerify($id, $pw) {
-			$this->openDB();
-			$query = $this->db->prepare("select pw from admin where id=:id");
-			$query->bindValue(':id', $id);
-			$query->execute();
-			$result = $query->fetch(PDO::FETCH_ASSOC);
-			$pwhash = $result['pw'];
-			// echo "<br>해쉬값".password_verify($pw, $pwhash); 0true , 1false
-
-			if(password_verify($pw, $pwhash)) {
-				return true;
-			}
-			return false;
-		}
-
-		public function PasswordChange($old, $new) {
-			if($this->SignedIn()) {
-				$id = $_SESSION['user'];
-				if($this->PasswordVerify($id, $old)) {
-					$newhash = password_hash($new, PASSWORD_DEFAULT);
-					// 새로 받은 비밀번호를 해쉬값으로 변경
-					//아이디를 찾아 pw 값 변경
-					$this->openDB();
-					$query = $this->db->prepare("update admin set pw=:pw where id=:id");
-					$query->bindValue(':id', $id);
-					$query->bindValue(':pw', $newhash);
-					return $query->execute();
-				}
-			}
-			return false;
-		}
-
-		public function SignIn($id, $pw) {
-			if($this->SignedIn()) {
-				return true;
-			}
-		if($this->PasswordVerify($id, $pw) && $this->InternalIP()) {
-				$_SESSION['user'] = $id;
-				$_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];//사이트에 접속한 ip를 세션 아이피에 담음
-				return true;
-			}
-			else {
-				return false;
-			}
-		}
 
 		public function SignedIn() {
 			$this->Initalization();
-			if(isset($_SESSION['user']) && isset($_SESSION['ip'])) {//세션유저, 세션 아이피가 있으면 TRUE
+			$_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
+			if($_SESSION['ss_mb_id'] == 'admin' && isset($_SESSION['ip'])) {//세션유저, 세션 아이피가 있으면 TRUE
+
+				var_dump($_SESSION['ip']);
 				if($_SESSION['ip'] != $_SERVER['REMOTE_ADDR'] && !$this->InternalIP()) {//세션[ip]와 접속한 ip가 다르 지정한 아이피와 다르면 false
 					//세션 탈취?
 					session_destroy();

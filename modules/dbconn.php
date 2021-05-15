@@ -1,4 +1,5 @@
 <?php
+require_once($_SERVER['DOCUMENT_ROOT'].'/modules/module_protect.php');
 $mysql_host = "localhost";
 $mysql_user = "metro";
 $mysql_password = "metro20210316";

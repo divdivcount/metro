@@ -1,5 +1,6 @@
 <?php
-  require_once('db_dao.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/modules/module_protect.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/modules/db_dao.php');
 
   class Reasons extends MetroDAO {
     protected $quTable = 'reasons_for_withdrawal';

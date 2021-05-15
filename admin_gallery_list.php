@@ -1,5 +1,7 @@
 <?php
 // Load Modules
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
 require_once("modules/admin.php");
 
 // Parameter
@@ -23,52 +25,6 @@ $result = $galleryObj ->SelectGallery();
   <body>
     <main>
       <div>
-        <!-- web -->
-        <ul id="sub"><!-- list-> oppenUploader함수실행 -->
-          <li><button type="button" name="button" onclick="list.openUploader()">추가</button></li><li><button type="button" name="button" onclick="list.openList()">변경 및 제거</button></li><li><button type="button" name="button" onclick="list.cancel()">선택취소</button></li><li>
-            <button type="button" name="button" onclick="list.dom.deleteForm.submit()">삭제</button></li><li id="len"></li><!-- list->openList()함수실행 -->                                                                      <!-- list.cancel()함수실행 -->
-        </ul><!-- list-> dom -> deleteForm.submit()함수실행 -->
-
-        <form id="modifyForm" action="admin_gallery_modify.php" method="post">
-          <input type="text" name="id" class="hidden">
-          <input type="text" name="description" class="hidden">
-        </form>
-        <form id="deleteForm" action="admin_gallery_delete.php" method="post">
-          <div id="gallery">
-              <?php $i = 0; ?><!-- 체크 고유 아이디 -->
-              <?php if($result) : ?>
-              <?php foreach($result as $row) : ?>
-                <div>
-                  <input type="checkbox" name="id[]" value="<?= $row['id'] ?>">
-                  <label onclick="list.pick(<?= $i ?>)"></label>
-                  <img src="files/gallery/<?= $row['file'] ?>" alt="" width="124px" height="124px">
-                  <input type="text" name="description" onkeyup="backdoor(<?= $i ?>)" placeholder="<?= $row['description'] ?>">
-                  <button type="button" name="button" onclick="list.modify(<?= $i++ ?>)" disabled>설명 수정</button>
-                </div>
-              <?php endforeach ?>
-            <?php else : ?>
-              <div>
-                <h2 style="width:300px;">사진을 등록해주세요.</h2>
-              </div>
-          <?php endif ?>
-          </div>
-        </form>
-
-
-        <form id="uploadForm" action="admin_gallery_upload.php" method="post" enctype="multipart/form-data">
-          <ul>
-            <li>jpeg, png, gif 파일 업로드 가능(용량 제한 없음)</li>
-            <li>다중 업로드 가능</li>
-          </ul>
-          <input type="file" name="files[]" value="" accept="image/jpeg,image/png,image/gif" onchange="imageURL(this)" multiple="multiple">
-          <button type="submit" name="upload">업로드</button>
-          <div class="imgs">
-
-          </div>
-        </form>
-      </div>
-      <!-- mobile -->
-      <div>
 
         <ul id="sub"><!-- list-> oppenUploader함수실행 -->
           <li><button type="button" name="button" onclick="list.openUploader()">추가</button></li><li><button type="button" name="button" onclick="list.openList()">변경 및 제거</button></li><li><button type="button" name="button" onclick="list.cancel()">선택취소</button></li><li>
@@ -87,7 +43,7 @@ $result = $galleryObj ->SelectGallery();
                 <div>
                   <input type="checkbox" name="id[]" value="<?= $row['id'] ?>">
                   <label onclick="list.pick(<?= $i ?>)"></label>
-                  <img src="files/gallery/<?= $row['file'] ?>" alt="" width="124px" height="124px">
+                  <img src="files/gallery/<?= $row['fname'] ?>" alt="" width="124px" height="124px">
                   <input type="text" name="description" onkeyup="backdoor(<?= $i ?>)" placeholder="<?= $row['description'] ?>">
                   <button type="button" name="button" onclick="list.modify(<?= $i++ ?>)" disabled>설명 수정</button>
                 </div>

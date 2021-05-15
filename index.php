@@ -50,10 +50,14 @@ require_once('modules/db.php');
     <!-- 메인 배너이미지 부분 -->
     <div id="bannerImg_box">
       <div class="bxslider">
-        <div class="bx_img"><img src="img\slideimg_0.png" alt=""></div>
-        <div class="bx_img"><img src="img\slideimg_1.png" alt=""></div>
-        <div class="bx_img"><img src="img\slideimg_2.png" alt=""></div>
-        <div class="bx_img"><img src="img\slideimg_3.png" alt=""></div>
+        <?php
+          $galleryObj = new Gallery;
+
+          $gallerySelect = $galleryObj->Gallery_Select();
+        ?>
+        <?php foreach ($gallerySelect as $gallery_img ): ?>
+          <div class="bx_img"><img src="files/gallery/<?=$gallery_img['fname']?>" alt=""></div>
+        <?php endforeach ?>
       </div>
       <!-- 이중select box 로 지하철역 선택하는 부분 -->
         <form  id="selectMetro_box" action="searchProduct.php" method="get">
