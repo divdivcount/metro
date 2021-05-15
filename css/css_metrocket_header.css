@@ -9,6 +9,7 @@
 }
 #topToolbar_box{
   margin-right: 10%;
+  font-family: "NotoSansKR_r";
 }
 #topToolbar_box ul{
   padding: 0;
@@ -16,12 +17,17 @@
   display: flex;
 }
 #topToolbar_box li{
+  display: flex;
+  align-items: center;
   font-family: "NotoSansKR_r";
   text-decoration: none;
   padding: 0.8rem 1.2rem;
   font-size: 2.0rem;
   color:#707070;
   cursor: pointer;
+}
+#topToolbar_box li img{
+  margin-right: 0.5rem;
 }
 .imgbox_1 {
   margin-left: 10%;

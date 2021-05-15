@@ -88,7 +88,7 @@ ini_set('display_errors', '1');
 
         <!-- 상품 이미지  -->
         <div class="productInfo_part_img">
-          <img src="files/<?= $row['pr_img'] ?>" width="100%" height="100%" />
+          <div class="img_box"><img src="files/<?= $row['pr_img'] ?>" width="100%" height="100%" /></div>
         </div>
 
         <!--   상품 관련 텍스트정보 -->

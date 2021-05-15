@@ -87,7 +87,7 @@ ini_set('display_errors', '1');
 
         <!-- 상품 이미지  -->
         <div class="productInfo_part_img">
-          <img src="files/<?= $row['pr_img'] ?>" width="100%" height="100%" />
+          <div class="img_box"><img src="files/<?= $row['pr_img'] ?>" width="100%" height="100%" /></div>
         </div>
 
         <!--   상품 관련 텍스트정보 -->
@@ -120,7 +120,7 @@ ini_set('display_errors', '1');
           <div class="productRecommendation_line">
 
             <!-- 별점  -->
-            <div class="pr_starcount"><img src="img\star_19x19.png"><?=$row['i_count'] ?></div>
+            <div class="pr_starcount"><img src="img\star_19x19.png" style="width:1.9rem;height:1.9rem"><?=$row['i_count'] ?></div>
 
             <!-- 역 -->
             <div class="pr_station"><?= $row['l_name'] ?> <?= $row['pr_station'] ?></div>
@@ -182,7 +182,7 @@ ini_set('display_errors', '1');
           completeSale_btn.item(i).style.display="block";
           reviseProduct_btn.item(i).style.display="block";
           deleteProduct_btn.item(i).style.display="none";
-        }else if (pr_buttons.item(i).dataset.sell_check == "판매완료") { //판매 완료가 true(1)이면  수정 및 판매완료 버튼 감추기
+        }else if (pr_buttons.item(i).dataset.sell_check == "거래완료") { //판매 완료가 true(1)이면  수정 및 판매완료 버튼 감추기
           completeSale_btn.item(i).style.display="none";
           reviseProduct_btn.item(i).style.display="none";
           deleteProduct_btn.item(i).style.display="block";
