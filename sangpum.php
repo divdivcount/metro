@@ -2,6 +2,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
     require_once('modules/db.php');
+    require_once('modules/notification.php');
     $dao = new Product;
     $pid = Get('p', 1);
 
@@ -103,7 +104,10 @@ ini_set('display_errors', '1');
             <div class="pr_buttons" data-sell_check ="<?= $row['pr_status'] ?>">
               <button type="button" class="reviseProduct_btn w3-button w3-blue w3-round" onclick="updateProduct(<?=$row["pr_id"]?>,<?=isset($mb) ? $mb["mb_num"] : 'null'?>, <?= isset($om) ? $om["om_id"] : 'null' ?>)">수정하기</button>
               <button type="button" class="completeSale_btn w3-button w3-light-grey w3-round" onclick="selectBuyer_open(<?=$row['pr_id']?>)">판매완료</button>
-              <button type="button" class="deleteProduct_btn w3-button w3-dark-grey w3-round">삭제하기</button>
+              <form method="post">
+                <input type="hidden" name="pr_id" value="<?=$row['pr_id']?>">
+                <button type="submit" name="product_del" id="product_del" class="deleteProduct_btn w3-button w3-dark-grey w3-round">삭제하기</button>
+              </form>
             </div>
           </div>
           <!--  2. 판매여부 라인 -->
@@ -167,7 +171,19 @@ ini_set('display_errors', '1');
 		</div>
 
 	</div>
+  <?php
+    function product_del(){
+      $dao = new Product;
 
+      $pr_id = Post("pr_id", null);
+      $dao->admin_product_del($pr_id);
+    }
+    if(array_key_exists('product_del',$_POST))
+    {
+      product_del();
+      userGoto("상품을 삭제 하셨습니다", "");
+    }
+   ?>
   <script>
 
     //   판매여부에따라 버튼 출력 방식

@@ -90,7 +90,7 @@
       function product_del(){
         $dao = new Product;
         $pr_id = Get('id', null);
-        echo $pr_id;
+        // echo $pr_id;
         $dao->admin_product_del($pr_id);
       }
       if(array_key_exists('product_del',$_POST))
