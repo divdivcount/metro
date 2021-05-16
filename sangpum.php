@@ -214,11 +214,19 @@ ini_set('display_errors', '1');
           type:'post', // 메소드(get, post)
           data:{pr_id:pr_id}, //보낼 데이터
           success: function(data) {
-            parent.document.getElementById('selectBuyer_selectBox').innerHTML = data;
+            var contact = JSON.parse(data);
+            parent.document.getElementById('selectBuyer_selectBox').innerHTML = contact.html;
+            alert(contact.emptyCheck);
+            if(contact.emptyCheck == 0){
+              parent.document.getElementById("selectBuyer_complete_btn").classList.add("hidden");
+              parent.document.getElementById("selectBuyer_cancle_btn").classList.remove("hidden");
+            }
+
           },
           error: function(err) {
               //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
               alert(err);
+              alert("에러테스트");
           }
       });
 

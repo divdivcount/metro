@@ -107,7 +107,10 @@
           <div id="selectBuyer_selectBox">
 
           </div>
-          <div class="selectBuyer_btnBox"><button ype="button" class="w3-button w3-round-large w3-blue" onclick="completeSale()">판매완료</button></div>
+          <div class="selectBuyer_btnBox">
+            <button type="button" id="selectBuyer_complete_btn" class="w3-button w3-round-large w3-blue" onclick="completeSale()">판매완료</button>
+            <button type="button" id="selectBuyer_cancle_btn" class="w3-button w3-round-large w3-blue hidden" onclick="selectBuyer_close()">취소</button>
+          </div>
         </div>
 
         <?php require_once('select_station.php'); ?>
@@ -236,7 +239,8 @@
     document.querySelector(".selectBuyer_modalBox").classList.add("hidden");
   }
 
-  //구매자 선택 모달팝업에서 판매완료버튼 선택시 처리부분
+  //구매자 선택 모달팝업에서 판매완료버튼
+   //선택시 처리부분
   function completeSale() {
     var selectId = $("#selectID option:selected").val();
     var pr_id = $("#salePrid").val();
@@ -247,7 +251,9 @@
         data:{pr_id:pr_id, selectId:selectId}, //보낼 데이터
         success: function(data) {
           selectBuyer_close();
-          document.getElementById("main_frame").contentWindow.location.reload();;
+          alert("판매 처리 완료가 되었습니다.");
+          document.getElementById("main_frame").contentWindow.location.reload();
+
         },
         error: function(err) {
             //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
@@ -255,6 +261,8 @@
         }
     });
   }
+
+
 
 </script>
 </html>

@@ -12,6 +12,7 @@
 	require_once($_SERVER['DOCUMENT_ROOT'].'/modules/interest_dao.php');
 	require_once($_SERVER['DOCUMENT_ROOT'].'/modules/db_gallery.php');
 	require_once($_SERVER['DOCUMENT_ROOT'].'/modules/module_protect.php');
+	require_once($_SERVER['DOCUMENT_ROOT'].'/modules/product_history_dao.php');
 	class ProLogin extends MetroDAO {
 		private $session = false;
 

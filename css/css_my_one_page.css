@@ -135,43 +135,6 @@ body {
   margin-top: 0.6rem;
   margin-bottom: 3.0rem;
 }
-
-/* 역선택 모달팝업 */
-.selectStation_modalBox {
-  position: absolute;
-  background-color: #fff;
-  width: 80%;
-  max-width: 1500px;
-  height: auto;
-  padding: 15px;
-  z-index: 10002;
-  background-color: #f9f9f9;
-  box-shadow: 10px 10px 50px 0 rgba(0, 0, 0, 0.16);
-    border-radius: 30px;
-}
-#selectMetro_box{
-  width: 100%;
-  flex-direction: column;
-  align-items: center;
-  padding: 3.0rem 2.0rem;
-  z-index: 1;
-  font-family: "NotoSansKR_r";
-  font-size:2.3rem;
-}
-
-#selectMetro_box .title_line{width: 100%;display: flex;justify-content: flex-end;}
-#selectMetro_box .input_line{display: flex;justify-content: space-between;height: 80%;align-items: center;}
-#selectMetro_box span{font-size:1.8rem;color: #a1a1a1;}
-#selectMetro_box .find_item{width: 45%;border-bottom: 3px solid #a5a5a5;}
-#selectMetro_box .w3-button{width:20%;height: 7.0rem;font-family: "NotoSansKR_r";}
-#selectMetro_box .w3-input{outline: none;background-color:#f9f9f9!important;border: none;}
-#selectMetro_box .w3-select{outline: none;background-color:#f9f9f9!important;border: none;}
-#selectMetro_box .find_item:nth-child(1){}
-#selectMetro_box #bothFind_item{display: flex;width: 75%;flex-direction: row;justify-content: space-between;align-items: center;}
-
-.ui-autocomplete{z-index: 10010!important}
-
-
 .changedProfile_image{
   margin: 0 auto;
   width: 21.0rem;
@@ -230,6 +193,86 @@ body {
   height: 5.0rem;
   border: none;outline: none;
 }
+
+/* 역선택 모달팝업 */
+.selectStation_modalBox {
+  position: absolute;
+  background-color: #fff;
+  width: 80%;
+  max-width: 1500px;
+  height: auto;
+  padding: 15px;
+  z-index: 10002;
+  box-shadow: 10px 10px 50px 0 rgba(0, 0, 0, 0.16);
+  border-radius: 30px;
+}
+#selectMetro_box{
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  padding: 3.0rem 2.0rem;
+  z-index: 1;
+  font-family: "NotoSansKR_r";
+  font-size:2.3rem;
+}
+
+#selectMetro_box .title_line{width: 100%;display: flex;justify-content: flex-end;}
+#selectMetro_box .input_line{display: flex;justify-content: space-between;height: 80%;align-items: center;}
+#selectMetro_box span{font-size:1.8rem;color: #a1a1a1;}
+#selectMetro_box .find_item{width: 45%;border-bottom: 3px solid #a5a5a5;}
+#selectMetro_box .w3-button{width:20%;height: 7.0rem;font-family: "NotoSansKR_r";}
+#selectMetro_box .w3-input{outline: none;background-color:#f9f9f9!important;border: none;}
+#selectMetro_box .w3-select{outline: none;background-color:#f9f9f9!important;border: none;}
+#selectMetro_box .find_item:nth-child(1){}
+#selectMetro_box #bothFind_item{display: flex;width: 75%;flex-direction: row;justify-content: space-between;align-items: center;}
+
+.ui-autocomplete{z-index: 10010!important}
+
+
+/* 구매자 설정 후 판매완료 모달팝업 */
+.selectBuyer_modalBox{
+  position: absolute;
+  background-color: #fff;
+  width: 80%;
+  max-width: 600px;
+  height: auto;
+  padding: 15px;
+  box-shadow: 10px 10px 50px 0 rgba(0, 0, 0, 0.16);
+  border-radius: 30px;
+}
+.selectBuyer_modalBox .img_box{
+  width: 100%;
+  text-align: center;
+}
+.selectBuyer_modalBox .img_box img{
+  width: 7.0rem;
+  height: 7.0rem;
+}
+.selectBuyer_modalBox h3{
+  width: 100%;
+  color: #3d3d3d;
+  font-family: "NotoSansKR_m";
+  font-size: 2.0rem;
+  text-align: center;
+  margin: 1.0rem 0;
+}
+.selectBuyer_modalBox span{
+  width: 100%;
+  color: #7d7d7d;
+  font-family: "NotoSansKR_r";
+  font-size: 2.0rem;
+  text-align: center;
+}
+#selectBuyer_selectBox {
+
+  width: 100%;
+}
+#selectBuyer_selectBox select{
+  width: 65%;
+  min-width: 200px;
+  text-align: center;
+}
+
 
 
 .blue{color: blue;}

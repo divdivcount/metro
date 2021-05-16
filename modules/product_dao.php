@@ -101,13 +101,11 @@ class Product extends MetroDAO {
         select
          p.pr_id,
          p.pr_title,
-         p.pr_status,
-         p.pr_price,
-         p.ca_name,
-         (select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,
          pi.pr_img,
-         l.l_name,
-         p.pr_station
+        (select count(i.in_hit) from interest i where i.pr_id = p.pr_id) as i_count,
+         p.pr_station,
+         p.pr_price,
+         p.pr_status
         from
           product p
           left join product_img pi ON p.pr_img_id = pi.pr_img_id
@@ -125,7 +123,7 @@ class Product extends MetroDAO {
         $status = $fetch['pr_status'];
         echo $status;
         if($status === '거래완료') {
-          $query = $this->db->prepare("insert into product_history values (null, :pr_id,'{$fetch['pr_img']}',:mb_id,:om_id,'{$fetch['ca_name']}',:date) ");
+          $query = $this->db->prepare("insert into product_history values (null, :pr_id,'{$fetch['pr_title']}' ,'{$fetch['pr_img']}',{$fetch['i_count']},'{$fetch['pr_station']}','{$fetch['pr_price']}','{$fetch['pr_status']}',:mb_id,:om_id,:date) ");
           $query->bindValue(":pr_id", $pr_id, PDO::PARAM_INT);
           $query->bindValue(":mb_id", $mb_id, PDO::PARAM_STR);
           $query->bindValue(":om_id", $om_id, PDO::PARAM_INT);
