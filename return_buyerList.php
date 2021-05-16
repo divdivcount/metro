@@ -5,18 +5,35 @@
   $pr_id = $_POST['pr_id'] ? $_POST['pr_id'] : null;
 
   $want_member = $dao->memo_select($pr_id);
+
   if(!(is_null($want_member))){
     $other_member = $dao->admin_Om_select($want_member[0]["me_send_mb_id"]);
+
+    if(is_null($other_member)){
+      $dao = new Member;
+      $member = $dao->admin_Member_id_all_select($want_member[0]["me_send_mb_id"]);
+      // var_dump($member);
+      if(is_null($member)){
+        // echo "이곳과";
+        $dao = new Oauths;
+        $other_member = $dao->admin_Om_select($want_member[0]["me_send_mb_id"]);
+      }else{
+        // echo "이곳";
+      }
+    }
+
     echo '{"html":"';
-    echo "select name='ctg_name' id='selectID' class='w3-select'>";
+    echo "<select name='ctg_name' id='selectID' class='w3-select'>";
     echo '<option>선택 해주세요</option>';
     foreach ($want_member as $rowaa) {
-      // code...
-      echo "<option value='".$rowaa["me_send_mb_id"]."'>".$other_member[0]["om_nickname"]."</option>";
+      echo "<option value='";
+      echo isset($member[0]["mb_num"]) ? $member[0]["mb_num"] : (isset($other_member[0]["om_id"]) ? $other_member[0]["om_id"] : null);
+      echo "'>";
+      echo $rowaa["me_send_mb_id"];
+      echo "</option>";
     }
     echo '</select>';
     echo "<input id='salePrid' type='hidden' value='".$pr_id."'>";
-    echo '';
     echo '","emptyCheck":1}';
   }else{
     echo '{"html":"';
