@@ -49,7 +49,7 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/modules/db_dao.php');
       // 회원 출력
       $this->openDB();
       $query = $this->db->prepare("select DISTINCT(me_send_mb_id) from mb_om_memo where pr_id = :pr_id");
-      $query -> bindValue(":pr_id", $pr_id, PDO::PARAM_STR);
+      $query -> bindValue(":pr_id", $pr_id, PDO::PARAM_INT);
       $query->execute();
       $fetch = $query->fetchAll(PDO::FETCH_ASSOC);
       // var_dump($fetch);
