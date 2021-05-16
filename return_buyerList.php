@@ -19,7 +19,8 @@
     echo '</select>';
     echo '<input id="salePrid" type="hidden" name="" value="'.$pr_id.'">';
   }else{
-    return null;
+    echo "아무것도 없습니다.";
+    echo '<input id="salePrid" type="hidden" name="" value="'.$pr_id.'">';
   }
 
  ?>
