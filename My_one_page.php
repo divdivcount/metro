@@ -251,6 +251,7 @@
         data:{pr_id:pr_id, selectId:selectId}, //보낼 데이터
         success: function(data) {
           selectBuyer_close();
+          alert("판매 처리 완료가 되었습니다.");
           document.getElementById("main_frame").contentWindow.location.reload();
 
         },

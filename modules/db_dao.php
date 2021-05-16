@@ -158,8 +158,9 @@ class MetroDAO {
 					$om_id = null;
 					// echo "통과했냐6트";
 					$query = $this->db->prepare("select count(*) from $this->quTable where mb_id = :mb_id and om_id is :om_id");
-					// echo "통과했냐3트";
+
 				}elseif($om_id != 'null' && $mb_id == 'null'){
+					// echo "통과했냐3트";
 					$mb_id = null;
 					$query = $this->db->prepare("select count(*) from $this->quTable where om_id = :om_id and mb_id is :mb_id");
 				}

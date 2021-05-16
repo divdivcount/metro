@@ -27,7 +27,7 @@
     echo '<option>선택 해주세요</option>';
     foreach ($want_member as $rowaa) {
       echo "<option value='";
-      echo isset($member[0]["mb_num"]) ? $member[0]["mb_num"] : (isset($other_member[0]["om_id"]) ? $other_member[0]["om_id"] : null);
+      echo isset($member[0]["mb_id"]) ? $member[0]["mb_id"] : (isset($other_member[0]["om_id"]) ? $other_member[0]["om_id"] : null);
       echo "'>";
       echo $rowaa["me_send_mb_id"];
       echo "</option>";

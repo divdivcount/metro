@@ -6,6 +6,9 @@
   $product_history = new Product;
   $pr_id = Post("pr_id", 0);
   $member_checkId = Post("selectId", null);
+
+  echo $pr_id;
+  echo $member_checkId;
   $time = date("Y-m-d H:i:s");
 
   // echo $pr_id;
@@ -30,5 +33,5 @@
       $product_history->Product_status_update($pr_id,$member[0]["mb_num"],null,$time);
     }
   }
-  userGoto("판매 완료 처리가 되었습니다.","");
+  // userGoto("판매 완료 처리가 되었습니다.","");
  ?>
