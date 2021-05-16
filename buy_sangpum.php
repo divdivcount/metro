@@ -2,7 +2,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
     require_once('modules/db.php');
-    $dao = new Product;
+    $dao = new Product_history;
     $pid = Get('p', 1);
 
   if(empty($_SESSION['ss_mb_id']) && empty($_SESSION['naver_mb_id']) && empty($_SESSION['kakao_mb_id']) ){
@@ -115,13 +115,13 @@ ini_set('display_errors', '1');
           <!-- 4. 별점과 역정보 라인 -->
           <div class="productRecommendation_line">
 
+            <!-- 별점  -->
+            <div class="pr_starcount"><img src="img\star_19x19.png" style="width:1.9rem;height:1.9rem"><?=$row['i_count'] ?></div>
+
             <!-- 역 -->
-            <div class="pr_station"><?= $row['l_name'] ?> <?= $row['pr_station'] ?></div>
+            <div class="pr_station"><?= $row['pr_station'] ?></div>
           </div>
 
-          <div class="hidden">
-            <?= $row['pr_id'] ?>
-          </div>
 
         </div>
       </div>
