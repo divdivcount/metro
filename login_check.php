@@ -1,7 +1,10 @@
 <?php
 // Load Modules
+// error_reporting(E_ALL);
+// ini_set('display_errors', '1');
 require_once("modules/db.php");
-
+require_once("modules/notification.php");
+$db = new ProLogin();
 $mb_id = trim($_POST['mb_id']);
 $mb_password = trim($_POST['mb_password']);
 
@@ -72,15 +75,20 @@ if ($mb['mb_email_certify'] == '0000-00-00 00:00:00') {
 	exit;
 }
 
-$_SESSION['ss_mb_id'] = $mb_id; // 아이디/비밀번호 확인 후 세션 생성
 
-if(isset($_SESSION['ss_mb_id']) && $mb['mb_operation'] == 2) { // 세션이 있다면 로그인 확인 페이지로 이동
+
+if(!isset($_SESSION['ss_mb_id']) && $mb['mb_operation'] == 2) { // 세션이 있다면 로그인 확인 페이지로 이동
 	echo "<script>alert('로그인 되었습니다.');</script>";
 	echo "<script>location.replace('./index.php');</script>";
 	$_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
-}else{
+	$_SESSION['ss_mb_id'] = $mb_id;
+}elseif(!isset($_SESSION['ss_mb_id']) && $mb['mb_operation'] == 1 && $db->InternalIP()){
 	echo "<script>alert('관리자님 안녕하세요.');</script>";
 	echo "<script>location.replace('./admin_index.php');</script>";
+	$_SESSION['ss_mb_id'] = $mb_id;
+	$_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
+}else{
+	userGoto("로그인에 실패했습니다.", "");
 }
 mysqli_close($conn); // 데이터베이스 접속 종료
 ?>

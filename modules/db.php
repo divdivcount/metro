@@ -28,7 +28,7 @@
 				var_dump($_SESSION['ip'] != $_SERVER['REMOTE_ADDR'] && !$this->InternalIP())."<br>";
 				if($_SESSION['ip'] != $_SERVER['REMOTE_ADDR'] && !$this->InternalIP()) {//세션[ip]와 접속한 ip가 다르 지정한 아이피와 다르면 false
 					//세션 탈취?
-					session_unset($_SESSION['ss_mb_id'] == 'admin');
+					// session_unset($_SESSION['ss_mb_id'] == 'admin');
 					session_destroy();
 					return false;
 				}
@@ -37,7 +37,7 @@
 			return false;
 		}
 		//접속 아이피 지정
-		private function InternalIP() {
+		public function InternalIP() {
 			if(startsWith($_SERVER['REMOTE_ADDR'], '192.168.') || $_SERVER['REMOTE_ADDR'] === '127.0.0.1' || $_SERVER['REMOTE_ADDR'] === '::1') {//localhost
 				return true;//startsWith(접속한 ip, 192.168)가 같으면 true
 			}

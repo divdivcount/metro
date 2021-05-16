@@ -1,3 +1,9 @@
+<?php
+// Load Modules
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+require_once("modules/admin.php");
+?>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
