@@ -44,6 +44,20 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/modules/db_dao.php');
       }
       else return null;
     }
+    //이 위치가 아니지만 나중에 수정하겠습니다.
+    public function memo_select($pr_id) {
+      // 회원 출력
+      $this->openDB();
+      $query = $this->db->prepare("select DISTINCT(me_send_mb_id) from mb_om_memo where pr_id = :pr_id");
+      $query -> bindValue(":pr_id", $pr_id, PDO::PARAM_STR);
+      $query->execute();
+      $fetch = $query->fetchAll(PDO::FETCH_ASSOC);
+      // var_dump($fetch);
+      if($fetch){
+        return $fetch;
+      }
+      else return null;
+    }
 
     public function admin_Om_block($om_id, $gap) {
       // echo $om_id;
