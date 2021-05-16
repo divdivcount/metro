@@ -16,7 +16,7 @@ class Gallery extends MetroDAO {
 public function Gallery_Select() {
 	// 회원 번호 찾기 User_page 회원번호 찾는데 사용합니다.
 	$this->openDB();
-	$query = $this->db->prepare("select fname from gallery order by id desc limit 0, 4");
+	$query = $this->db->prepare("select description ,fname from gallery order by id desc limit 0, 4");
 	$query->execute();
 	$fetch = $query->fetchAll(PDO::FETCH_ASSOC);
 	// var_dump($fetch);

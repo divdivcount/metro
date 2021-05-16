@@ -57,7 +57,7 @@ require_once('modules/db.php');
         ?>
         <?php if(!(is_null($gallerySelect))) : ?>
           <?php foreach ($gallerySelect as $gallery_img ): ?>
-            <div class="bx_img"><img src="files/gallery/<?=$gallery_img['fname']?>" alt=""></div>
+            <div class="bx_img"><a href="<?=$gallery_img['description']?>"><img src="files/gallery/<?=$gallery_img['fname']?>" alt=""></a></div>
           <?php endforeach ?>
         <?php else : ?>
           <div class="bx_img"><img src="img/slideimg_0.png" alt=""></div>

@@ -139,7 +139,7 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/modules/db_dao.php');
       public function mem_SelectPageLength($cPage, $viewLen, $mb_id, $om_id, $s_value= null) {
         $this->openDB();
           // echo "여긴가?";
-          if($mb_id == 'null' && $om_id == 'null'){
+          if($mb_id == 'null' && $om_id == 'null' && $s_value == null){
               if(empty($s_value) == true){
                 // echo "여긴가?2";
                 $query = $this->db->prepare("select sum(cnt) from
@@ -169,7 +169,7 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/modules/db_dao.php');
                     $query->bindValue(":s_value", "%$s_value%",  PDO::PARAM_STR);
                   }
             }else{
-                // echo "여긴가?3";
+                // echo "여긴가?4";
                 $query = $this->db->prepare("
                 select sum(cnt) from
                 ( select count(*) as cnt from member m where mb_operation = 2 and concat(m.mb_id,m.mb_name,m.line_station) like :s_value and mb_email_certify != '0000-00-00 00:00:00'
@@ -219,7 +219,7 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/modules/db_dao.php');
       // echo $om_id;
 
 
-          if($mb_id == 'null' && $om_id == 'null'){
+          if($mb_id == 'null' && $om_id == 'null' && $s_value == null){
                 if(empty($s_value) == true){
                   $sql = "
                   (select m.mb_name, m.mb_id, m.mb_email, m.mb_datetime, m.line_station, (select count(rep_mb.mb_id) from member_declaration rep_mb where rep_mb.mb_id = m.mb_num) as rep_count from member m where mb_operation = 2 and mb_email_certify != '0000-00-00 00:00:00')
@@ -250,9 +250,9 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/modules/db_dao.php');
               }else{
                 // echo "2??";
                 $sql = "
-                  (select m.mb_name, m.mb_id, m.mb_email, m.mb_datetime, m.line_station, (select count(rep_mb.mb_id) from member_declaration rep_mb where rep_mb.mb_id = m.mb_num) as rep_count from member m where mb_operation = 2 and concat(m.mb_id,m.mb_name) like :s_value and mb_email_certify != '0000-00-00 00:00:00')
+                  (select m.mb_name, m.mb_id, m.mb_email, m.mb_datetime, m.line_station, (select count(rep_mb.mb_id) from member_declaration rep_mb where rep_mb.mb_id = m.mb_num) as rep_count from member m where mb_operation = 2 and concat(m.mb_id,m.mb_name, m.mb_email) like :s_value and mb_email_certify != '0000-00-00 00:00:00')
                   union all
-                  (select o.om_nickname, o.om_id, o.om_email, o.om_datetime, o.line_station, (select count(rep_mb.om_id) from member_declaration rep_mb where rep_mb.om_id = o.om_id) as rep_count from oauth_member o where concat(o.om_id,o.om_nickname) like :s_value)
+                  (select o.om_nickname, o.om_id, o.om_email, o.om_datetime, o.line_station, (select count(rep_mb.om_id) from member_declaration rep_mb where rep_mb.om_id = o.om_id) as rep_count from oauth_member o where concat(o.om_id,o.om_nickname, o.om_email) like :s_value)
                 limit :start, :viewLen";
                 $query = $this->db->prepare($sql);
                 if($s_value)$query->bindValue(":s_value", "%$s_value%",  PDO::PARAM_STR);

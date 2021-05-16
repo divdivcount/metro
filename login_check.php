@@ -79,7 +79,7 @@ if(isset($_SESSION['ss_mb_id']) && $mb['mb_operation'] == 2) { // 세션이 있�
 	echo "<script>location.replace('./index.php');</script>";
 }else{
 	echo "<script>alert('관리자님 안녕하세요.');</script>";
-	echo "<script>location.replace('./admin_product_list.php');</script>";
+	echo "<script>location.replace('./admin_index.php');</script>";
 }
 mysqli_close($conn); // 데이터베이스 접속 종료
 ?>
