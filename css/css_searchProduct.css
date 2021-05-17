@@ -178,14 +178,25 @@ ul{list-style: none;}
   flex-direction: column;
   align-items: center;
 }
-
+#overlay{
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #000;
+  opacity: 0.5;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
 .productInfo_box .productImg_box{
   width: 100%;
   height: 65%;
+  position: relative;
 }
 .productInfo_box .productImg_box img{
   width: 100%;
   height: 100%;
+  object-fit: fill;
   border-top-right-radius: 3.0rem;
   border-top-left-radius: 3.0rem;
 }

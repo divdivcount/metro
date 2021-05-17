@@ -18,6 +18,11 @@
 <link rel="stylesheet" href="css/css_metrocket_header.css">
 <link rel="stylesheet" href="css/css_metrocket_footer.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="apple-touch-icon" sizes="180x180" href="css/favicon_package_v0.16/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="css/favicon_package_v0.16/favicon.ico">
+<!-- <link rel="icon" type="image/png" sizes="16x16" href="css/favicon_package_v0.16/favicon-16x16.png"> -->
+<link rel="manifest" href="css/favicon_package_v0.16/site.webmanifest">
+<link rel="mask-icon" href="css/favicon_package_v0.16/safari-pinned-tab.svg" color="#5bbad5">
 
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://unpkg.com/hangul-js" type="text/javascript"></script>
@@ -109,6 +114,26 @@
             <button type="button" id="selectBuyer_complete_btn" class="w3-button w3-round-large w3-blue" onclick="completeSale()">판매완료</button>
             <button type="button" id="selectBuyer_cancle_btn" class="w3-button w3-round-large w3-dark-grey hidden" onclick="selectBuyer_close()">취소</button>
           </div>
+        </div>
+
+        <div class="changeBuyer_modalBox hidden">
+          <div class="changeBuyer_imgBox">
+            <div class="img_box" style="margin:0;width:12.0rem;height:12.0rem" ><img src="img/question.png" alt="">                            </div>
+          </div>
+          <div class="changeBuyer_contentBox">
+
+            <h3>[판매수정하기]</h3>
+
+            <p>해당상품의 판매수정을 하시겠습니까?</p>
+            <div id="changeBuyer_selectBox">
+            </div>
+            <div class="changeBuyer_btnLine">
+                <button type="button" class="w3-button w3-round-xlarge w3-gray" onclick="requestTrade_close()">취소하기</button>
+                <button type="submit" class="w3-button w3-round-xlarge w3-blue">수정하기</button>
+            </div>
+
+          </div>
+
         </div>
 
         <?php require_once('select_station.php'); ?>
@@ -260,7 +285,26 @@
     });
   }
 
+  function changeBuyer() {
+    var selectId = $("change_selectID option:selected").val();
+    var pr_id = $("#change_salePrid").val();
+    //  판매완료시 판매상품 id 전달
+    $.ajax({
+        url:'.php', //request 보낼 서버의 경로
+        type:'post', // 메소드(get, post)
+        data:{pr_id:pr_id, selectId:selectId}, //보낼 데이터
+        success: function(data) {
+          changeBuyer_open();
+          alert("판매수정 처리 완료가 되었습니다.");
+          document.getElementById("main_frame").contentWindow.location.reload();
 
+        },
+        error: function(err) {
+            //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
+            alert(err);
+        }
+    });
+  }
 
 </script>
 </html>
