@@ -43,7 +43,7 @@
 
       <?php if ($list): ?>
       <!-- 상품 나오는 박스  -->
-      <h3 class="h3"><?=isset($list[0]["mb_name"]) ? $list[0]["mb_name"] : $list[0]["om_nickname"]?></M>님의 게시글</h3>
+      <h3 class="h3"><?=isset($list[0]["mb_name"]) ? $list[0]["mb_name"] : $list[0]["om_nickname"]?>님의 게시글</h3>
       <div class="productList_box">
 
         <?php foreach ($list as $rows) : ?>
