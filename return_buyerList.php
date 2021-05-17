@@ -23,6 +23,7 @@
     }
 
     echo '{"html":"';
+    echo "<p>구매자를 선택해주세요.</p>";
     echo "<select name='ctg_name' id='selectID' class='w3-select'>";
     echo '<option>선택 해주세요</option>';
     foreach ($want_member as $rowaa) {
@@ -37,7 +38,8 @@
     echo '","emptyCheck":1}';
   }else{
     echo '{"html":"';
-    echo "아무것도 없습니다.";
+    echo "<div class='img_box'><img src='img/checked_blue.png'></div>";
+    echo "<p>구매요청자가 없습니다.<br>구매 요청자가 있어야 판매완료가 가능합니다.</p>";
     echo "<input id='salePrid' type='hidden' value='".$pr_id."'>";
     echo '","emptyCheck":0}';
   }

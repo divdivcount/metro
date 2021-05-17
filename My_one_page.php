@@ -103,13 +103,11 @@
           <div class="closeBtn_box"><img src="img/cancle.png" class="" onclick="selectBuyer_close()" style="width:2.3rem;height:2.3rem;cursor:pointer"></div>
           <div class="img_box"><img src="img/checked_blue.png" alt=""></div>
           <h3>[판매완료하기]</h3>
-          <p>구매자를 선택해주세요.</p>
           <div id="selectBuyer_selectBox">
-
           </div>
           <div class="selectBuyer_btnBox">
             <button type="button" id="selectBuyer_complete_btn" class="w3-button w3-round-large w3-blue" onclick="completeSale()">판매완료</button>
-            <button type="button" id="selectBuyer_cancle_btn" class="w3-button w3-round-large w3-blue hidden" onclick="selectBuyer_close()">취소</button>
+            <button type="button" id="selectBuyer_cancle_btn" class="w3-button w3-round-large w3-dark-grey hidden" onclick="selectBuyer_close()">취소</button>
           </div>
         </div>
 

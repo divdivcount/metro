@@ -267,14 +267,39 @@ body {
   width: 100%;
   display: flex;
   justify-content: center;
+  flex-direction: column;
 }
-#selectBuyer_selectBox select{
+#selectBuyer_selectBox .img_box{
+  width: 100%;
+  text-align: center;
+}
+#selectBuyer_selectBox .img_box img{
+  width: 6.0rem;
+  height: 6.0rem;
+}
+#selectBuyer_selectBox p{
+  margin-bottom: 3.0rem;
+}
+#selectBuyer_selectBox .w3-select{
   width: 65%;
   min-width: 200px;
+  margin: 0 auto 5.0rem;
+  color: #7d7d7d;
+  font-family: "NotoSansKR_r";
+  font-size: 1.5rem;
+  padding: 0.5rem 0;
+  border-bottom: 2px solid #a7a7a7;
 }
 .selectBuyer_btnBox {
   width: 100%;
   text-align: center;
+  margin-bottom: 3.0rem;
+}
+.selectBuyer_btnBox .w3-button{
+  padding: 0.8rem 1.6rem;
+  width: 18.0rem;
+  font-family: "NotoSansKR_r";
+  font-size: 1.5rem;
 }
 
 
