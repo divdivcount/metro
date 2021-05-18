@@ -38,7 +38,7 @@
     echo '","emptyCheck":1}';
   }else{
     echo '{"html":"';
-    echo "<div class='img_box'><img src='img/img/noResult.png'></div>";
+    echo "<div class='img_box'><img src='img/noResult.png'></div>";
     echo "<p>구매요청자가 없습니다.<br>구매 요청자가 있어야 판매완료가 가능합니다.</p>";
     echo "<input id='salePrid' type='hidden' value='".$pr_id."'>";
     echo '","emptyCheck":0}';

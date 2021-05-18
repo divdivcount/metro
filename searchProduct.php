@@ -280,9 +280,16 @@ if($a == 0){
         <!-- 상품 예시 샘플 php로 띄울거임 -->
         <a href="searchProduct_detail.php?id=<?=$row['pr_id']?>&title=<?=$row['pr_title']?>"><div class="productInfo_box">
           <!-- 상품 이미지부분 -->
-          <div class="productImg_box">
-            <img src="files/<?=$row["pr_img"]?>" alt="">
-          </div>
+					<?php	if ($row["pr_status"] ==="거래완료") :?>
+						<div class="productImg_box">
+							<div id="overlay"><span>거래 완료</span></div>
+							<img src="files/<?=$row["pr_img"]?>" alt="">
+						</div>
+					<?php else: ?>
+						<div class="productImg_box">
+							<img src="files/<?=$row["pr_img"]?>" alt="">
+						</div>
+					<?php endif ?>
 
           <!-- 상품 상세설명 -->
           <div class="productText_box">

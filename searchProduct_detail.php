@@ -347,7 +347,6 @@ try{
       <div class="otherProduct_gridBox">
 
         <!-- 기타 상품 정보  -->
-        <!-- 이형식으로 쭉 클래스 긴건 애교로 -->
         <?php foreach ($sameProduct as $rows) : ?>
         <a href="searchProduct_detail.php?id=<?=$rows['pr_id']?>&title=<?=$rows['pr_title']?>"><div class="otherProduct_content">
 
@@ -392,14 +391,20 @@ try{
       <div class="otherProduct_gridBox">
 
         <!-- 기타 상품 정보  -->
-        <!-- 이형식으로 쭉 클래스 긴건 애교로 -->
         <?php foreach ($panmejaProduct as $product) : ?>
         <a href="searchProduct_detail.php?id=<?=$product['pr_id']?>&title=<?=$product['pr_title']?>"><div class="otherProduct_content">
 
           <!-- 이미지 부분 -->
-          <div class="otherProduct_content_img radiusTop">
-            <img src="files/<?=$product["pr_img"]?>" class="radiusTop" alt="">
-          </div>
+          <?php	if ($product["pr_status"] ==="거래완료") :?>
+						<div class="otherProduct_content_img radiusTop">
+							<div id="overlay"><span>거래 완료</span></div>
+							<img src="files/<?=$product["pr_img"]?>" class="radiusTop" alt="">
+						</div>
+					<?php else: ?>
+						<div class="otherProduct_content_img radiusTop">
+							<img src="files/<?=$product["pr_img"]?>" class="radiusTop" alt="">
+						</div>
+					<?php endif ?>
 
           <!-- 상품 내용 -->
           <div class="otherProduct_content_text radiusBottom">

@@ -50,6 +50,8 @@ body {
 }
 .productTitle_line{
   width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
   .pr_title{
     font-size: 3.0rem;
@@ -155,7 +157,7 @@ body {
     min-height: 14.0rem;
     min-width: 14.0rem;
   }
-  .pr_buttons{width: 100%;justify-content:flex-end;}
+  /* .pr_buttons{width: 100%;justify-content:flex-end;} */
 }
 @media only screen and (max-width: 540px) {
   html,body{font-size: 7px!important;}
