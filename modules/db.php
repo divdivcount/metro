@@ -19,7 +19,7 @@
 		public function SignedIn() {
 			$this->Initalization();
 
-			if($_SESSION['ss_mb_id'] == 'admin' && isset($_SESSION['ip'])) {//세션유저, 세션 아이피가 있으면 TRUE
+			if(isset($_SESSION['ss_mb_id']) == 'admin' && isset($_SESSION['ip'])) {//세션유저, 세션 아이피가 있으면 TRUE
 
 				// var_dump($_SESSION['ip'])."<br>";
 				// var_dump($_SERVER['REMOTE_ADDR'])."<br>";
