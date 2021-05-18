@@ -3,6 +3,16 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/jquery.tzSelect/tzSelect/jquery.tzSelect.css">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+    <script src="https://cdn.tutorialzine.com/misc/adPacks/v1.js" async=""></script>
+    <script src="css/jquery.tzSelect\tzSelect/jquery.tzSelect.js">
+
+
+    </script>
+
     <title></title>
     <style media="screen">
       body{
@@ -18,14 +28,48 @@
   <body>
     <div class="wrapPage">
       <div class="contentBox">
-        <div class="" style="width:150px;height:150px;-webkit-filter:opacity(.7) drop-shadow(0 0 0 black)">
-          <img src="img/test_sang2.png" alt=""style="">
-        </div>
+        <form method="post" action="">
+        <select name="fancySelect" class="makeMeFancy">
+
+            <!-- Notice the HTML5 data attributes -->
+
+            <option value="0" selected="selected" data-skip="1">Choose Your Product</option>
+            <option value="1" data-icon="img/testPeople.png" date-test="testiPhone" data-html-text="iPhone 4&lt;i&gt;in stock&lt;/i&gt;">iPhone 4</option>
+            <option value="2" data-icon="img/testPeople.png" date-test="testiPod" data-html-text="iPod &lt;i&gt;in stock&lt;/i&gt;">iPod</option>
+            <option value="3" data-icon="img/testPeople.png" date-test="testMacBook" data-html-text="MacBook Air&lt;i&gt;out of stock&lt;/i&gt;">MacBook Air</option>
+            <option value="4" data-icon="img/testPeople.png" date-test="testiMac" data-html-text="iMac Station&lt;i&gt;in stock&lt;/i&gt;">iMac Station</option>
+        </select>
+      </form>
       </div>
+
+      <button type="button" name="button" onclick="test()">진짜</button>
+      <button type="button" name="button" onclick="test2()">가짜</button>
     </div>
   </body>
   <script type="text/javascript">
+  $(document).ready(function(){
 
+  	$('select.makeMeFancy').tzSelect({
+  		render : function(option){
+  			return $('<li>',{
+  				html:	'<img src="'+option.data('icon')+'" /><span>'+
+  						option.data('html-text')+'</span>'
+  			});
+  		},
+  		className : 'hasDetails'
+  	});
 
+  	// Calling the default version of the dropdown
+  	$('select.regularSelect').tzSelect();
+
+  });
+  function test() {
+    var te = document.querySelector('.makeMeFancy');
+    alert(te.value);
+  }
+  function test2() {
+    var te = document.querySelector('.selectbox');
+    alert(te.value);
+  }
   </script>
 </html>

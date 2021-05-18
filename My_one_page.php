@@ -128,7 +128,7 @@
             <div id="changeBuyer_selectBox">
             </div>
             <div class="changeBuyer_btnLine">
-                <button type="button" class="w3-button w3-round-xlarge w3-gray" onclick="requestTrade_close()">취소하기</button>
+                <button type="button" class="w3-button w3-round-xlarge w3-gray" onclick="changeBuyer_close()">취소하기</button>
                 <button type="submit" class="w3-button w3-round-xlarge w3-blue">수정하기</button>
             </div>
 
@@ -194,11 +194,17 @@
 <script type="text/javascript">
   $(document).ready(function(){
   });
-  //역검색 모달창 닫는함수
+  //구매자 선택후 판매처리  모달창 닫는함수
   function selectStation_close() {
      document.querySelector(".my_one_page_modal").classList.add("hidden");
      document.querySelector(".selectStation_modalBox").classList.add("hidden");
   }
+  //판매된 상품 구매자 수정하는 모달창 닫는함수
+  function changeBuyer_close() {
+     document.querySelector(".my_one_page_modal").classList.add("hidden");
+     document.querySelector(".changeBuyer_modalBox").classList.add("hidden");
+  }
+
 
   var iframe = document.getElementById('main_frame');
 
@@ -262,8 +268,7 @@
     document.querySelector(".selectBuyer_modalBox").classList.add("hidden");
   }
 
-  //구매자 선택 모달팝업에서 판매완료버튼
-   //선택시 처리부분
+  //구매자 선택 모달팝업에서 판매완료버튼 선택시 처리부분
   function completeSale() {
     var selectId = $("#selectID option:selected").val();
     var pr_id = $("#salePrid").val();
@@ -274,7 +279,7 @@
         data:{pr_id:pr_id, selectId:selectId}, //보낼 데이터
         success: function(data) {
           selectBuyer_close();
-          alert("판매 처리 완료가 되었습니다.");
+          alert("판매 처리 완료 되었습니다.");
           document.getElementById("main_frame").contentWindow.location.reload();
 
         },
@@ -285,6 +290,7 @@
     });
   }
 
+  //판매수정버튼 클릭시 뜨는 모달팝업에서 처리부분
   function changeBuyer() {
     var selectId = $("change_selectID option:selected").val();
     var pr_id = $("#change_salePrid").val();
@@ -294,8 +300,8 @@
         type:'post', // 메소드(get, post)
         data:{pr_id:pr_id, selectId:selectId}, //보낼 데이터
         success: function(data) {
-          changeBuyer_open();
-          alert("판매수정 처리 완료가 되었습니다.");
+          changeBuyer_close();
+          alert("판매자 수정이 완료 되었습니다.");
           document.getElementById("main_frame").contentWindow.location.reload();
 
         },

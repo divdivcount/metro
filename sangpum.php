@@ -104,9 +104,10 @@ ini_set('display_errors', '1');
             <div class="pr_buttons" data-sell_check ="<?= $row['pr_status'] ?>">
               <button type="button" class="reviseProduct_btn w3-button w3-blue w3-round" onclick="updateProduct(<?=$row["pr_id"]?>,<?=isset($mb) ? $mb["mb_num"] : 'null'?>, <?= isset($om) ? $om["om_id"] : 'null' ?>)">수정하기</button>
               <button type="button" class="completeSale_btn w3-button w3-light-grey w3-round" onclick="selectBuyer_open(<?=$row['pr_id']?>)">판매완료</button>
-              <form method="post">
+              <form method="post" style="display:flex">
                 <input type="hidden" name="pr_id" value="<?=$row['pr_id']?>">
                 <button type="submit" name="product_del" id="product_del" class="deleteProduct_btn w3-button w3-dark-grey w3-round">삭제하기</button>
+                <button type="button" id="updateBuyer_btn" class="updateBuyer_btn w3-button w3-indigo w3-round" onclick="changeBuyer_open(<?=$row['pr_id']?>)">판매수정</button>
               </form>
             </div>
           </div>
@@ -190,6 +191,7 @@ ini_set('display_errors', '1');
     var reviseProduct_btn = document.getElementsByClassName('reviseProduct_btn');
     var completeSale_btn = document.getElementsByClassName('completeSale_btn');
     var deleteProduct_btn =   document.getElementsByClassName('deleteProduct_btn');
+    var updateBuyer_btn =   document.getElementsByClassName('updateBuyer_btn');
     var pr_buttons = document.getElementsByClassName('pr_buttons');
 
     window.onload = function() {
@@ -198,15 +200,17 @@ ini_set('display_errors', '1');
           completeSale_btn.item(i).style.display="block";
           reviseProduct_btn.item(i).style.display="block";
           deleteProduct_btn.item(i).style.display="none";
+          updateBuyer_btn.item(i).style.display="none";
         }else if (pr_buttons.item(i).dataset.sell_check == "거래완료") { //판매 완료가 true(1)이면  수정 및 판매완료 버튼 감추기
           completeSale_btn.item(i).style.display="none";
           reviseProduct_btn.item(i).style.display="none";
           deleteProduct_btn.item(i).style.display="block";
+          updateBuyer_btn.item(i).style.display="block";
         }
       }
     };
 
-
+    // 판매완료클릭시 구매자선택 모달팝업 오픈
     function selectBuyer_open(p_id) {
       var pr_id = p_id;
       $.ajax({
@@ -219,18 +223,43 @@ ini_set('display_errors', '1');
             if(contact.emptyCheck == 0){
               parent.document.getElementById("selectBuyer_complete_btn").classList.add("hidden");
               parent.document.getElementById("selectBuyer_cancle_btn").classList.remove("hidden");
+            }else if (contact.emptyCheck == 1) {
+              parent.document.getElementById("selectBuyer_complete_btn").classList.remove("hidden");
+              parent.document.getElementById("selectBuyer_cancle_btn").classList.add("hidden");
+            }else{
+              alert("오류가발생했습니다")
             }
-
           },
           error: function(err) {
               //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
               alert(err);
           }
       });
-
         parent.document.querySelector(".my_one_page_modal").classList.remove("hidden");
         parent.document.querySelector(".selectBuyer_modalBox").classList.remove("hidden");
     }
+
+
+    // 판매수정클릭시 구매자선택 모달팝업 오픈
+    function changeBuyer_open(p_id) {
+      var pr_id = p_id;
+      $.ajax({
+          url:'return_update_buyerList.php', //request 보낼 서버의 경로
+          type:'post', // 메소드(get, post)
+          data:{pr_id:pr_id}, //보낼 데이터
+          success: function(data) {
+            var contact = JSON.parse(data);
+            parent.document.getElementById('changeBuyer_selectBox').innerHTML = contact.html;
+          },
+          error: function(err) {
+              //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
+              alert(err);
+          }
+      });
+        parent.document.querySelector(".my_one_page_modal").classList.remove("hidden");
+        parent.document.querySelector(".changeBuyer_modalBox").classList.remove("hidden");
+    }
+
 
     function updateProduct(pr_id, mb_id, om_id) {
       $("#upadteId").submit();

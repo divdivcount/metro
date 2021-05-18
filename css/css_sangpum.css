@@ -74,6 +74,9 @@ body {
     padding: 0.8rem 1.6rem;
     font-size: 2.0rem;
   }
+  #updateBuyer_btn{
+    margin-left: 2.0rem;
+  }
   .completeSale_btn{
     margin-left: 2.0rem;
   }
@@ -147,7 +150,7 @@ body {
 .clear{clear:both;}
 
 
-.reviseProduct_btn, .completeSale_btn, .deleteProduct_btn {
+.reviseProduct_btn, .completeSale_btn, .deleteProduct_btn, .updateBuyer_btn {
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
     display: none;
 }
