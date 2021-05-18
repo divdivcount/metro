@@ -38,7 +38,7 @@
 		}
 		//접속 아이피 지정
 		public function InternalIP() {
-			if(startsWith($_SERVER['REMOTE_ADDR'], '192.168.') || $_SERVER['REMOTE_ADDR'] === '127.0.0.1' || $_SERVER['REMOTE_ADDR'] === '::1') {//localhost
+			if(startsWith($_SERVER['REMOTE_ADDR'], '192.168.') || $_SERVER['REMOTE_ADDR'] === '127.0.0.1' || $_SERVER['REMOTE_ADDR'] === '::1' || $_SERVER['REMOTE_ADDR'] === '121.165.86.230') {//localhost
 				return true;//startsWith(접속한 ip, 192.168)가 같으면 true
 			}
 			return false;
