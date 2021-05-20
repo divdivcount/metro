@@ -7,7 +7,7 @@
 					html : option.text()
 				});
 			},
-			className : ''
+			class : ''
 		},options);
 
 		return this.each(function(){
@@ -19,17 +19,17 @@
 
 			var selectBoxContainer = $('<div>',{
 				width		: select.outerWidth(),
-				className	: 'tzSelect',
-				html		: '<div class="selectBox" value=""></div>'
+				class	: 'tzSelect',
+				html		: '<div class="selectBox" value=""></div><img src="img/dropdown_15x15.png" style="width:1.5rem;height:1.5rem" alt="">'
 			});
 
-			var dropDown = $('<ul>',{className:'dropDown'});
+			var dropDown = $('<ul>',{class:'dropDown'});
 			var selectBox = selectBoxContainer.find('.selectBox');
-
+			selectBox.html("구매자를 선택해주세요.");
 			// Looping though the options of the original select element
 
-			if(options.className){
-				dropDown.addClass(options.className);
+			if(options.class){
+				dropDown.addClass(options.class);
 			}
 
 			select.find('option').each(function(i){
@@ -108,8 +108,11 @@
 			// If we click anywhere on the page, while the
 			// dropdown is shown, it is going to be hidden:
 
-			$(document).click(function(){
-				dropDown.trigger('hide');
+			$('.tzSelect').click(function(){
+				if(selectBox.hasClass('expanded')){
+					dropDown.trigger('hide');
+				}
+				else dropDown.trigger('show');
 			});
 
 		});

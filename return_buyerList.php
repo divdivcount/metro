@@ -23,13 +23,14 @@
     }
 
     echo '{"html":"';
-    echo "<p>구매자를 선택해주세요.</p>";
-    echo "<select name='ctg_name' id='selectID' class='w3-select'>";
-    echo '<option>선택 해주세요</option>';
+    echo "<select id='selectID' class='fancy_SelectBuyerSelectBox'>";
+    echo "<option value='0' selected='selected' data-skip='1'>구매자를 선택해주세요.</option>";
     foreach ($want_member as $rowaa) {
       echo "<option value='";
       echo isset($member[0]["mb_id"]) ? $member[0]["mb_id"] : (isset($other_member[0]["om_id"]) ? $other_member[0]["om_id"] : null);
-      echo "'>";
+      echo "' data-icon='";
+      echo isset($member[0]["mb_image"]) ? $member[0]["mb_image"] : $other_member[0]["om_iamge_url"];
+      echo "' data-html-text='".$rowaa["me_send_mb_id"]."'>";
       echo $rowaa["me_send_mb_id"];
       echo "</option>";
     }

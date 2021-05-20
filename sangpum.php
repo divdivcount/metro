@@ -46,11 +46,17 @@ ini_set('display_errors', '1');
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/css_noamlfont.css">
 <link rel="stylesheet" href="css/css_sangpum.css">
+<link rel="stylesheet" href="css/jquery.tzSelect/tzSelect/jquery.tzSelect.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+<script src="css/jquery.tzSelect\tzSelect/jquery.tzSelect.js"></script>
+
+
 <style>
 
 </style>
@@ -213,28 +219,30 @@ ini_set('display_errors', '1');
     // 판매완료클릭시 구매자선택 모달팝업 오픈
     function selectBuyer_open(p_id) {
       var pr_id = p_id;
-      $.ajax({
-          url:'return_buyerList.php', //request 보낼 서버의 경로
-          type:'post', // 메소드(get, post)
-          data:{pr_id:pr_id}, //보낼 데이터
-          success: function(data) {
-            var contact = JSON.parse(data);
-            parent.document.getElementById('selectBuyer_selectBox').innerHTML = contact.html;
-            if(contact.emptyCheck == 0){
-              parent.document.getElementById("selectBuyer_complete_btn").classList.add("hidden");
-              parent.document.getElementById("selectBuyer_cancle_btn").classList.remove("hidden");
-            }else if (contact.emptyCheck == 1) {
-              parent.document.getElementById("selectBuyer_complete_btn").classList.remove("hidden");
-              parent.document.getElementById("selectBuyer_cancle_btn").classList.add("hidden");
-            }else{
-              alert("오류가발생했습니다")
-            }
-          },
-          error: function(err) {
-              //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
-              alert(err);
-          }
-      });
+      // $.ajax({
+      //     url:'return_buyerList.php', //request 보낼 서버의 경로
+      //     type:'post', // 메소드(get, post)
+      //     data:{pr_id:pr_id}, //보낼 데이터
+      //     success: function(data) {
+      //       var contact = JSON.parse(data);
+      //       parent.document.getElementById('selectBuyer_selectBox').innerHTML = contact.html;
+      //       if(contact.emptyCheck == 0){
+      //         parent.document.getElementById("selectBuyer_complete_btn").classList.add("hidden");
+      //         parent.document.getElementById("selectBuyer_cancle_btn").classList.remove("hidden");
+      //       }else if (contact.emptyCheck == 1) {
+      //         parent.document.getElementById("selectBuyer_complete_btn").classList.remove("hidden");
+      //         parent.document.getElementById("selectBuyer_cancle_btn").classList.add("hidden");
+      //       }else{
+      //         alert("오류가발생했습니다")
+      //       }
+      //     },
+      //     error: function(err) {
+      //         //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
+      //         alert(err);
+      //     }
+      // });
+      // parent.createSelectBox_changeBuyerModal();
+        parent.createSelectBox_selectBuyerModal(pr_id);
         parent.document.querySelector(".my_one_page_modal").classList.remove("hidden");
         parent.document.querySelector(".selectBuyer_modalBox").classList.remove("hidden");
     }
@@ -243,21 +251,7 @@ ini_set('display_errors', '1');
     // 판매수정클릭시 구매자선택 모달팝업 오픈
     function changeBuyer_open(p_id) {
       var pr_id = p_id;
-      $.ajax({
-          url:'return_update_buyerList.php', //request 보낼 서버의 경로
-          type:'post', // 메소드(get, post)
-          data:{pr_id:pr_id}, //보낼 데이터
-          success: function(data) {
-            var contact = JSON.parse(data);
-            parent.document.getElementById('changeBuyer_selectBox').innerHTML = contact.html;
-          },
-          error: function(err) {
-              //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
-              alert(err);
-          }
-      });
-        parent.document.querySelector(".my_one_page_modal").classList.remove("hidden");
-        parent.document.querySelector(".changeBuyer_modalBox").classList.remove("hidden");
+      parent.createSelectBox_changeBuyerModal(pr_id);
     }
 
 

@@ -37,8 +37,6 @@ if(!(is_null($listc))){
 }else{
   $listc = null;
 }
-
-
   // var_dump($list_all)."<br>";
   // echo $member_id."<br>";
   // echo $oauth_id."<br>";
@@ -50,42 +48,65 @@ if(!(is_null($listc))){
 
 ?>
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    <?php foreach ($list_all as $row):?>
-
-      <?php
+<html lang="ko" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="css/admin_member_detail.css">
+</head>
+<body>
+  <?php foreach ($list_all as $row):?>
+  <?php
       // echo "--------------------------------------------<br>";
       //   var_dump(strpos($row["mb_image"], "http"));
       // echo "--------------------------------------------<br>";
       ?>
-      <!-- 유저 프로필 뽑히는 곳 -->
-      사진 <img src="<?= isset($row["mb_image"]) ? ($row["mb_image"] != "img/normal_profile.png" ? (strpos($row["mb_image"], "http") === 0 ? $row["mb_image"] : "files/".$row["mb_image"]) : $row["mb_image"]) : $row["om_image_url"] ?>"><br>
-      이름 <?= isset($row["mb_name"]) ? $row["mb_name"] : $row["om_nickname"] ?><br>
-      메일 <?= isset($row["mb_email"]) ? $row["mb_email"] : $row["om_email"]?><br>
-      역 <?=$row["line_station"]?><br>
-      신고 수<?=$row["rep_count"]?><br>
-      경고 수<?=$row["warning_count"]?><br>
-      <!-- 버튼 제어 하는 곳 -->
+  <div class="member-container">
+    <!-- 유저 프로필 뽑히는 곳 -->
+    <div class="member-content">
+      <img
+        src="<?= isset($row["mb_image"]) ? ($row["mb_image"] != "img/normal_profile.png" ? (strpos($row["mb_image"], "http") === 0 ? $row["mb_image"] : "files/".$row["mb_image"]) : $row["mb_image"]) : $row["om_image_url"] ?>">
+      <span class="content-info">
+        <ul>
+          <li>이름</li>
+          <li>이메일</li>
+          <li>주변 역</li>
+          <li>신고 수</li>
+          <li>경고 수</li>
+        </ul>
+        <ul>
+          <li><?= isset($row["mb_name"]) ? $row["mb_name"] : $row["om_nickname"] ?></li>
+          <li><?= isset($row["mb_email"]) ? $row["mb_email"] : $row["om_email"]?></li>
+          <li><?=$row["line_station"]?></li>
+          <li><?=$row["rep_count"]?></li>
+          <li><?=$row["warning_count"]?></li>
+        </ul>
+      </span>
+    </div>
+    <!-- 버튼 제어 하는 곳 -->
+    <div class="member-button">
       <form method="post">
         <input type="hidden" name="mem_id" value="<?=isset($row["mb_id"]) ? $row["mb_id"] : null ?>">
         <input type="hidden" name="mom_id" value="<?=isset($row["om_id"]) ? $row["om_id"] : null ?>">
-        <input type="hidden" name= "gap" value="<?= (isset($row["mb_block"]) ? $row["mb_block"] : $row["om_block"] ) == 'n' ? 'y' : 'n' ?>">
-        <input type="submit" name="mem_block" id="mem_block" value="<?= (isset($row["mb_block"]) ? $row["mb_block"] : $row["om_block"] ) == 'n' ? '차단하기' : '차단해체' ?>" />
+        <input type="hidden" name="gap"
+          value="<?= (isset($row["mb_block"]) ? $row["mb_block"] : $row["om_block"] ) == 'n' ? 'y' : 'n' ?>">
+        <input type="submit" name="mem_block" id="mem_block"
+          value="<?= (isset($row["mb_block"]) ? $row["mb_block"] : $row["om_block"] ) == 'n' ? '차단하기' : '차단해체' ?>" />
       </form>
       <form method="post">
         <input type="hidden" name="mem_id" value="<?=isset($row["mb_id"]) ? $row["mb_id"] : null ?>">
         <input type="hidden" name="mom_id" value="<?=isset($row["om_id"]) ? $row["om_id"] : null ?>">
         <input type="submit" name="warning_send" id="warning_send" value="경고 보내기" />
       </form>
-      <iframe style="float:left;" frameborder="0"  id="main_frame" src="admin_member_detail_sangpum.php?id=<?=isset($member[0]["mb_id"]) ? $member[0]["mb_id"] : 'null'?>&om=<?=isset($other_member[0]["om_id"]) ? $other_member[0]["om_id"] : 'null'?>" width="100%"></iframe>
-    <?php endforeach ?>
-    <?php
-    //맴버 차단
+    </div>
+    <!-- 해당 회원 게시글 나오는 곳 -->
+    <div class="member-board">
+      <iframe width="100%" height="100%" src="admin_member_detail_sangpum.php?id=<?=isset($member[0]["mb_id"]) ? $member[0]["mb_id"] : 'null'?>&om=<?=isset($other_member[0]["om_id"]) ? $other_member[0]["om_id"] : 'null'?>" frameborder="0" style="float:left;" id="main_frame" 
+        ></iframe>
+    </div>
+  </div>
+  <?php endforeach ?>
+  <?php
+  //맴버 차단
       function mem_block(){
         $mem_id = Post("mem_id",null);
         $om_id = Post('mom_id', null);
@@ -166,5 +187,6 @@ if(!(is_null($listc))){
         userGoto("경고 메세지를 보내셨습니다", "");
       }
     ?>
-  </body>
+</body>
+
 </html>

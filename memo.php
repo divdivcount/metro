@@ -66,7 +66,7 @@ for ($i=0; $row=mysqli_fetch_assoc($result); $i++)
 
 $str = ''; // 페이징 시작
 if ($page > 1) {
-	$str .= '<a href="./memo.php?kind='.$kind.'&amp;page=1" class="pg_page pg_start">처음</a>';
+	$str .= '<a href="./memo.php?kind='.$kind.'&amp;page=1" class="pg_page pg_start"><</a>';
 }
 
 $start_page = ( ( (int)( ($page - 1 ) / $page_rows ) ) * $page_rows ) + 1;
@@ -88,11 +88,11 @@ if ($total_page > 1) {
 if ($total_page > $end_page) $str .= '<a href="./memo.php?kind='.$kind.'&amp;page='.($end_page+1).'" class="pg_page pg_next">다음</a>';
 
 if ($page < $total_page) {
-	$str .= '<a href="./memo.php?kind='.$kind.'&amp;page='.$total_page.'" class="pg_page pg_end">맨끝</a>';
+	$str .= '<a href="./memo.php?kind='.$kind.'&amp;page='.$total_page.'" class="pg_page pg_end">></a>';
 }
 
 if ($str) // 페이지가 있다면 생성
-	$write_page = "<nav class=\"pg_wrap\"><span class=\"pg\">{$str}</span></nav>";
+	$write_page = "<nav id='pagenation_box'><span class=\"pg\">{$str}</span></nav>";
 else
 	$write_page = "";
 
@@ -109,17 +109,17 @@ mysqli_close($conn); // 데이터베이스 접속 종료
 	<!-- 쪽지 목록 시작 { -->
 	<div class="note">
     <div class="header">
-        <div>
-            <img src="img/note.png">
-            <span class="title">쪽지함</span>
-            <span class="text">전체 <?php echo $kind_title ?>쪽지 <?php echo $total_count ?>통</span>
-        </div>
+      <div class="header_img">
+        <img src="img/note.png">
+        <span class="title">쪽지함</span>
+      </div>
+      <span class="text">전체 <?php echo $kind_title ?>쪽지 <?php echo $total_count ?>통</span>
     </div>
 
 			<button class="btn1" onclick="location.href ='./memo.php?kind=recive'">받은쪽지</button>
 			<button class="btn2" onclick="location.href ='./memo.php?kind=send'">보낸쪽지</button>
 
-
+  </div>
 		<div id="contentBody">
 			<table class='contentheader'>
 			<!-- <caption>
@@ -151,10 +151,26 @@ mysqli_close($conn); // 데이터베이스 접속 종료
 			<?php if ($i==0) { echo '<tr><td colspan="4">자료가 없습니다.</td></tr>'; }  ?>
 			</tbody>
 			</table>
-		</div>
-	</div>
-  <p><?php echo $write_page;  ?><!-- 페이지 --></p>
-	<!-- } 쪽지 목록 끝 -->
+      <!-- 페이지네이션 -->
+      <?php echo $write_page;  ?>
 
+		</div>
 </body>
+  <script type="text/javascript">
+  <?php
+    $kind= $_REQUEST["kind"];
+      if ($kind =="recive") {
+  ?>
+        document.querySelector('.btn1').classList.add("current");
+        document.querySelector('.btn2').classList.remove("current");
+  <?php
+      }else{
+  ?>
+        document.querySelector('.btn2').classList.add("current");
+        document.querySelector('.btn1').classList.remove("current");
+  <?php
+      }
+  ?>
+
+  </script>
 </html>

@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="css/css_metrocket_header.css">
 <link rel="stylesheet" href="css/css_metrocket_footer.css">
+<link rel="stylesheet" href="css/jquery.tzSelect/tzSelect/jquery.tzSelect.css">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="apple-touch-icon" sizes="180x180" href="css/favicon_package_v0.16/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="css/favicon_package_v0.16/favicon.ico">
@@ -27,6 +28,7 @@
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://unpkg.com/hangul-js" type="text/javascript"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="css/jquery.tzSelect\tzSelect/jquery.tzSelect.js"></script>
 
 <style>
 .click_box{
@@ -205,7 +207,6 @@
      document.querySelector(".changeBuyer_modalBox").classList.add("hidden");
   }
 
-
   var iframe = document.getElementById('main_frame');
 
   window.addEventListener('DOMContentLoaded', function () {
@@ -289,12 +290,83 @@
         }
     });
   }
+  function createSelectBox_selectBuyerModal(a) {
+    var pr_id = a;
+    $.ajax({
+        url:'return_buyerList.php', //request 보낼 서버의 경로
+        type:'post', // 메소드(get, post)
+        data:{pr_id:pr_id}, //보낼 데이터
+        success: function(data) {
+          var contact = JSON.parse(data);
+          document.getElementById('selectBuyer_selectBox').innerHTML = contact.html;
+          if(contact.emptyCheck == 0){
+            document.getElementById("selectBuyer_complete_btn").classList.add("hidden");
+            document.getElementById("selectBuyer_cancle_btn").classList.remove("hidden");
+          }else if (contact.emptyCheck == 1) {
+            document.getElementById("selectBuyer_complete_btn").classList.remove("hidden");
+            document.getElementById("selectBuyer_cancle_btn").classList.add("hidden");
+          }else{
+            alert("오류가발생했습니다")
+          }
+        },
+        error: function(err) {
+            //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
+            alert(err);
+        },
+        complete: function(data){
+          $('#selectID').tzSelect({
+            render : function(option){
+              return $('<li>',{
+                html:	'<img src="'+option.data('icon')+'" /><span>'+
+                    option.data('html-text')+'</span>'
+              });
+            },
+            class : 'hasDetails'
+          });
+
+          document.querySelector(".my_one_page_modal").classList.remove("hidden");
+          document.querySelector(".selectBuyer_modalBox").classList.remove("hidden");
+        }
+    });
+  }
+
+  function createSelectBox_changeBuyerModal(a) {
+    var pr_id = a;
+    $.ajax({
+        url:'return_update_buyerList.php', //request 보낼 서버의 경로
+        type:'post', // 메소드(get, post)
+        data:{pr_id:pr_id}, //보낼 데이터
+        success: function(data) {
+          var contact = JSON.parse(data);
+          document.getElementById('changeBuyer_selectBox').innerHTML = contact.html;
+        },
+        error: function(err) {
+            //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행
+            alert(err);
+        },
+        complete: function(data){
+          $('#change_selectID').tzSelect({
+            render : function(option){
+              return $('<li>',{
+                html:	'<img src="'+option.data('icon')+'" /><span>'+
+                    option.data('html-text')+'</span>'
+              });
+            },
+            class : 'hasDetails'
+          });
+
+          document.querySelector(".my_one_page_modal").classList.remove("hidden");
+          document.querySelector(".changeBuyer_modalBox").classList.remove("hidden");
+        }
+    });
+  }
+
 
   //판매수정버튼 클릭시 뜨는 모달팝업에서 처리부분
   function changeBuyer() {
-    var selectId = $("change_selectID option:selected").val();
+    var selectId = $("change_selectID").val();
     var pr_id = $("#change_salePrid").val();
-    //  판매완료시 판매상품 id 전달
+    //  판매수정시 판매상품 id 전달
     $.ajax({
         url:'.php', //request 보낼 서버의 경로
         type:'post', // 메소드(get, post)
@@ -303,7 +375,6 @@
           changeBuyer_close();
           alert("판매자 수정이 완료 되었습니다.");
           document.getElementById("main_frame").contentWindow.location.reload();
-
         },
         error: function(err) {
             //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행

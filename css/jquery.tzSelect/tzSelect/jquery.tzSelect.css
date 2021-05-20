@@ -1,53 +1,53 @@
 /*-------------------------------
 *	Default dropdown styles
 --------------------------------*/
-
+html,body{font-size: 10px;}
 .tzSelect{
 
 	/* This is the container of the new select element */
-
+	width:60%!important;
 	height:34px;
-	display:inline-block;
+	display:flex;
+	align-items:center;
 	min-width:200px;
 	position:relative;
-	margin:5px;
-
+	margin:5px auto 5.0rem;
+	cursor:pointer;
+	border-bottom:solid 2px #a7a7a7;
 	/* Preloading the background image for the dropdown */
-	background:url("img/dropdown_slice.png") no-repeat -99999px;
+
 }
 
 .tzSelect .selectBox{
-	position:absolute;
+	display: flex;
+	align-items:center;
+	padding-left:0.5rem;
 
 	height:100%;
 	width:100%;
 
 	/* Font settings */
 
-	font:13px/34px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	/* font:13px/34px "Lucida Sans Unicode", "Lucida Grande", sans-serif; */
+	font-family: "NotoSansKR_r";
+	color:#7d7d7d;
+	font-size:1.5rem;
 	text-align:center;
 	text-shadow:1px 1px 0 #EEEEEE;
-	color:#666666;
+
 
 	/* Using CSS3 multiple backgrounds and a fallback */
 
-	background:url('img/select_slice.png') repeat-x #ddd;
+	/* background:url('img/select_slice.png') repeat-x #ddd;
 	background-image:url('img/select_slice.png'),url('img/select_slice.png'),url('img/select_slice.png'),url('img/select_slice.png');
 	background-position:0 -136px, right -204px, 50% -68px, 0 0;
-	background-repeat: no-repeat, no-repeat, no-repeat, repeat-x;
+	background-repeat: no-repeat, no-repeat, no-repeat, repeat-x; */
 
-	cursor:pointer;
+
 
 	-moz-border-radius:3px;
 	-webkit-border-radius:3px;
 	border-radius:3px;
-}
-
-.tzSelect .selectBox:hover,
-.tzSelect .selectBox.expanded{
-	background-position:0 -170px, right -238px, 50% -102px, 0 -34px;
-	color:#2c5667;
-	text-shadow:1px 1px 0 #9bc2d0;
 }
 
 .tzSelect .dropDown{
@@ -55,10 +55,10 @@
 	top:40px;
 	left:0;
 	width:100%;
-	border:1px solid #32333b;
 	list-style:none;
 	z-index:1000;
-
+	padding: 1.0rem 2.0rem;
+	background-color:white;
 	-moz-box-sizing:border-box;
 	-webkit-box-sizing:border-box;
 	box-sizing:border-box;
@@ -69,15 +69,12 @@
 }
 
 .tzSelect li{
-	background-color:#222;
+
 	cursor:pointer;
 	padding:6px;
 	text-align:center;
 }
 
-.tzSelect li:hover{
-	background-color:#292929;
-}
 
 
 /*-----------------------------------------------------
@@ -90,41 +87,21 @@
 }
 
 .tzSelect .hasDetails li{
-	height:85px;
+	display: flex;
+	align-items: center;
+	height:auto;
 	position:relative;
 	padding:0;
 	text-align:left;
-
-	/* Again, using CSS3 multiple backgrounds with a fallback */
-
-	background:url('img/dropdown_slice.png') repeat-x #222;
-	background-image:url('img/dropdown_slice.png'),url('img/dropdown_slice.png'),url('img/dropdown_slice.png');
-	background-position: 50% -171px, 0 -85px, 0 0;
-	background-repeat: no-repeat, no-repeat, repeat-x;
+	margin: 1.0rem 0;
 }
 .tzSelect .hasDetails li img{
-	width: 30px;
-	height: 30px;
-
+	width: 5.0rem;
+	height: 5.0rem;
+	margin-right: 1.0rem;
 }
-.tzSelect .hasDetails li:hover{
-	background-position: 50% -256px, 0 -85px, 0 0;
-}
-
 .tzSelect .hasDetails li span{
-	left:88px;
-	position:absolute;
-	top:27px;
-}
-
-.tzSelect .hasDetails li i{
-	color:#999999;
-	display:block;
-	font-size:12px;
-}
-
-.tzSelect .hasDetails li img{
-	left:9px;
-	position:absolute;
-	top:13px;
+	font-family: "NotoSansKR_r";
+	color:#7d7d7d;
+	font-size:1.5rem;
 }

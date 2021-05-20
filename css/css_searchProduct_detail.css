@@ -340,11 +340,9 @@ display : -webkit-box;
  justify-content: flex-end;
 }
 .closeBtn{cursor: pointer;}
-
-
-
 .hidden {display: none;}
 
+.ui-menu-item{font-size: 1.4rem;}
 
 @media only screen and (min-width: 1920px) {
   #wrapPage{
