@@ -20,5 +20,6 @@ class Product_history extends MetroDAO {
       $query->bindValue(':selectId', $selectId, PDO::PARAM_STR);
       $query->execute();
     }
+  }
 }
   ?>
