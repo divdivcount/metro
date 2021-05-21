@@ -575,7 +575,7 @@ class MetroDAO {
 	product.pr_block,
   product.pr_price,
   count(interest.in_hit=1) as i_count,
-  count(case
+  max(case
     when myAccountInfo.myAccountType='mb'
     then interest.mb_id
     when myAccountInfo.myAccountType='om'
