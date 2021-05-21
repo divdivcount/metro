@@ -12,7 +12,7 @@ class Product_history extends MetroDAO {
     $query = $this->db->prepare("update product_history set :member_check = :selectId where pr_id = :pr_id ");
     $query -> bindValue(":pr_id", $pr_id, PDO::PARAM_INT);
     $query->bindValue(':selectId', $selectId, PDO::PARAM_STR);
-    $query->bindValue(':member_check', $member_check, PDO::PARAM_STR);
+    $query->bindValue(':member_check', `$member_check`, PDO::PARAM_STR);
     $query->execute();
     $fetch = $query->fetchAll(PDO::FETCH_ASSOC);
     // var_dump($fetch);
