@@ -1,6 +1,6 @@
 <?php
   require_once('modules/db.php');
-  require_once('modules/notification');
+  require_once('modules/notification.php');
   $dao = new Oauths;
   $product = new Product_history;
   $pr_id = Post('pr_id',null);
