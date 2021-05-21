@@ -29,7 +29,7 @@
       echo "<option data-value='";
       echo isset($member[0]["mb_id"]) ? $member[0]["mb_id"] : (isset($other_member[0]["om_id"]) ? $other_member[0]["om_id"] : null);
       echo "' data-icon='";
-      echo isset($member[0]["mb_image"]) ? $member[0]["mb_image"] : $other_member[0]["om_iamge_url"];
+      echo isset($member[0]["mb_image"]) ? $member[0]["mb_image"] : $other_member[0]["om_image_url"];
       echo "' data-html-text='".$rowaa["me_send_mb_id"]."'>";
       echo $rowaa["me_send_mb_id"];
       echo "</option>";
