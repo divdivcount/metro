@@ -11,6 +11,14 @@ $me_text = $_POST["me_memo"];
 
 $all = ($mb_id ? $mb_id :
        ($om_id ? $om_id : null));
+
+echo $mb_id."<br>";
+echo $om_id."<br>";
+echo $pr_id."<br>";
+echo $recv_mb_id."<br>";
+echo $all."<br>";
+echo $me_text = $_POST["me_memo"]."<br>";
+echo $pr_id."<br>";
 $me_send_datetime = date('Y-m-d H:i:s', time());
 
 
@@ -22,5 +30,5 @@ $sql = " INSERT INTO mb_om_memo
       pr_id = $pr_id";
 
 $result = mysqli_query($conn, $sql);
-userGoto("거래 신청 쪽지를 보냈습니다.", "");
+// userGoto("거래 신청 쪽지를 보냈습니다.", "");
 ?>

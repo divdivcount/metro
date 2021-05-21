@@ -108,8 +108,8 @@ try{
 
                   <input type="hidden" name= "id" value="<?=$row["pr_id"]?>">
                   <!-- 받는 회원아이디 -->
-                  <?php $member = $member->Member_all_select($row["mb_id"]);?>
-                  <input type="hidden" name="me_recv_mb_id" value="<?=  $member[0]["mb_id"] ?  $member[0]["mb_id"] : $row["om_id"] ?>" id="me_recv_mb_id" readonly required class="frm_input required" size="47"></br>
+                  <?php $member = $member->Member_all_select($row["mb_id"]); echo $row["om_id"];?>
+                  <input type="hidden" name="me_recv_mb_id" value="<?=isset($member[0]["mb_id"]) ?  $member[0]["mb_id"] : $row["om_id"] ?>" id="me_recv_mb_id" readonly required class="frm_input required" size="47"></br>
                   <!-- 내용 -->
                   <input type="hidden" name="me_memo" value="<?=isset($mb) ? $mb['mb_id'] : $om['om_nickname'] ?> 님이 거래를 요청했습니다.">
                   <button type="button" class="w3-button w3-round-xlarge w3-gray" onclick="requestTrade_close()">취소하기</button>

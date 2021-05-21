@@ -1,4 +1,6 @@
 <?php
+  error_reporting( E_ALL );
+  ini_set( "display_errors", 1 );
   require_once('modules/db.php');
   require_once('modules/notification.php');
   $dao = new Oauths;
