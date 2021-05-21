@@ -26,7 +26,7 @@
     echo "<select id='change_selectID' class='fancy_ChangeBuyerSelectBox'>";
     echo "<option value='0' selected='selected' data-skip='1'>변경할 구매자를 선택해주세요.</option>";
     foreach ($want_member as $rowaa) {
-      echo "<option value='";
+      echo "<option data-value='";
       echo isset($member[0]["mb_id"]) ? $member[0]["mb_id"] : (isset($other_member[0]["om_id"]) ? $other_member[0]["om_id"] : null);
       echo "' data-icon='";
       echo isset($member[0]["mb_image"]) ? $member[0]["mb_image"] : $other_member[0]["om_iamge_url"];
@@ -35,13 +35,13 @@
       echo "</option>";
     }
     echo '</select>';
-    echo "<input id='salePrid' type='hidden' value='".$pr_id."'>";
+    echo "<input id='change_salePrid' type='hidden' value='".$pr_id."'>";
     echo '","emptyCheck":1}';
   }else{
     echo '{"html":"';
     echo "<div class='img_box'><img src='img/noResult.png'></div>";
     echo "<p>구매요청자가 없습니다.<br>구매 요청자가 있어야 판매완료가 가능합니다.</p>";
-    echo "<input id='salePrid' type='hidden' value='".$pr_id."'>";
+    echo "<input id='change_salePrid' type='hidden' value='".$pr_id."'>";
     echo '","emptyCheck":0}';
   }
 

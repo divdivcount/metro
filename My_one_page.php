@@ -129,9 +129,10 @@
             <p>해당상품의 판매수정을 하시겠습니까?</p>
             <div id="changeBuyer_selectBox">
             </div>
+            <button type="button" name="button" onclick="test()">ddd</button>
             <div class="changeBuyer_btnLine">
                 <button type="button" class="w3-button w3-round-xlarge w3-gray" onclick="changeBuyer_close()">취소하기</button>
-                <button type="submit" class="w3-button w3-round-xlarge w3-blue">수정하기</button>
+                <button type="submit" class="w3-button w3-round-xlarge w3-blue" onclick="changeBuyer()">수정하기</button>
             </div>
 
           </div>
@@ -364,7 +365,7 @@
 
   //판매수정버튼 클릭시 뜨는 모달팝업에서 처리부분
   function changeBuyer() {
-    var selectId = $("change_selectID").val();
+    var selectId = $("#change_selectID").val();
     var pr_id = $("#change_salePrid").val();
     //  판매수정시 판매상품 id 전달
     $.ajax({
@@ -383,6 +384,11 @@
     });
   }
 
+
+  function test() {
+    alert(document.getElementById('change_selectID').value);
+    alert(document.getElementById('change_salePrid').value);
+  }
 </script>
 </html>
 <?php } ?>

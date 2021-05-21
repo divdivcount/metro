@@ -26,7 +26,7 @@
     echo "<select id='selectID' class='fancy_SelectBuyerSelectBox'>";
     echo "<option value='0' selected='selected' data-skip='1'>구매자를 선택해주세요.</option>";
     foreach ($want_member as $rowaa) {
-      echo "<option value='";
+      echo "<option data-value='";
       echo isset($member[0]["mb_id"]) ? $member[0]["mb_id"] : (isset($other_member[0]["om_id"]) ? $other_member[0]["om_id"] : null);
       echo "' data-icon='";
       echo isset($member[0]["mb_image"]) ? $member[0]["mb_image"] : $other_member[0]["om_iamge_url"];

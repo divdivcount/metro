@@ -63,7 +63,6 @@
 					// When a click occurs, we are also reflecting
 					// the change on the original select element:
 					select.val(option.val());
-					alert(select.val());
 					return false;
 				});
 

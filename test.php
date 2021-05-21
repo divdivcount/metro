@@ -4,7 +4,7 @@
   $dao = new Oauths;
   $product = new Product_history;
   $pr_id = Post('pr_id',null);
-  $selectId = Post('selectId',null);
+  $selectId = Post('selectId', null);
   $member_check = "";
 
   if(!(is_null($selectId))){
