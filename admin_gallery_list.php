@@ -17,6 +17,7 @@ $result = $galleryObj ->SelectGallery();
 <html lang="ko" dir="ltr">
   <head>
     <title></title>
+    <link rel="stylesheet" href="css/css_noamlfont.css">
     <link href="css/css_sub2.css" rel="stylesheet" type="text/css">
     <link href="css/admin_cul.css" rel="stylesheet" type="text/css">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

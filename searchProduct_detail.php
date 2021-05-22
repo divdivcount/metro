@@ -63,9 +63,13 @@ try{
           </div>
 
           <div class="arrivalTime_modalBox hidden" action="">
-            <div class="closeBtn_box"><img src="img/cancle.png" class="" onclick="arrivalTime_close()" style="width:2.3rem;height:2.3rem;cursor:pointer"></div>
+            <div class="arrivalTime_imgBox">
+              <div class="img_box" style="margin:0;width:12.0rem;height:12.0rem" ><img src="img/impatient.png" alt="">                            </div>
+            </div>
             <div class="arrivalTime_contentBox">
+              <h3>[도착시간 알아보기]</h3>
               <div id="bothFind_item">
+
                 <div class="find_item">
                   <span>출발역을 입력해주세요.</span>
                   <input type="text" id="auto" class="w3-input highlight" value="" name="departure_station" placeholder="여긴 검색하는부분">
@@ -77,9 +81,6 @@ try{
                   <!-- <div style="display:flex"><input id="auto" class="w3-input highlight"   type="text"><div style="width:1.3rem;margin:auto"><img src="img\loupe.png" alt=""></div></div> -->
                 </div>
               </div>
-              <div id="arr_imgBox">
-                <img src="img/rocket.png" style="width:7.1rem;height:3.8rem" alt="">
-              </div>
 
               <div class="timeResult hidden">
                 <span>소요시간</span>
@@ -87,7 +88,8 @@ try{
                 <div id="requiredTime_detail">오전 00:00 ~ 오후 00:00</div>
               </div>
               <div class="search_arrivalTime">
-                <button type="button" class="w3-button w3-blue w3-round-large" id="arrivalTime_btn">검색</button>
+                <button type="button" class="w3-button w3-round-xlarge w3-gray" onclick="arrivalTime_close()">취소하기</button>
+                <button type="button" class="w3-button w3-blue w3-round-xlarge" id="arrivalTime_btn">검색</button>                
               </div>
             </div>
 
@@ -618,6 +620,8 @@ try{
     function arrivalTime_close() {
       document.querySelector(".modal").classList.add("hidden");
       document.querySelector(".arrivalTime_modalBox").classList.add("hidden");
+      document.querySelector(".timeResult").classList.add("hidden");
+      document.querySelector("#bothFind_item").classList.remove("hidden");
     }
 
     // 거래요청 모달팝업 관련 함수
@@ -723,7 +727,7 @@ try{
           document.getElementById('requiredTime').innerHTML = requiredHour+":"+requiredMin;
           document.getElementById('requiredTime_detail').innerHTML = today.toLocaleTimeString().slice(today.toLocaleTimeString().lengt,-3)+ " ~ " + arrivalTime_string;
           document.querySelector(".timeResult").classList.remove("hidden");
-          document.querySelector(".search_arrivalTime").classList.add("hidden");
+          document.querySelector("#bothFind_item").classList.add("hidden");
         },
         error : function(e){
           alert("로그인을 먼저 해주세요");

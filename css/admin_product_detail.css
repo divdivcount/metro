@@ -4,15 +4,15 @@ html, body{
 #content_box{
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content:space-between;
   width: 81%;
-  margin: 0 auto;
+  height: auto;
+  margin: 5.0rem auto;
 }
 #mainProduct_box{
   display: flex;
   justify-content: space-between;
   height: 45.0rem;
-  margin: 5.0rem 0 0;
 }
 
 #slideImg_box{
@@ -21,7 +21,7 @@ html, body{
   height:45.0rem;
   margin-right:5.0rem;
 }
-.bx-wrapper{border: none!important; margin: 0;}
+.bx-wrapper{border: none!important; margin: 0;height: 100%!important;}
 .bx-wrapper .bx-viewport{height: 100%!important;}
 .bx-viewport div{height: 100%;}
 .bx-viewport .bxslider img{width: 100%;max-width: 100%;height: 100%;margin: 0 auto;}
@@ -39,6 +39,23 @@ html, body{
   padding: 2.0rem 3.0rem;
   overflow-y:scroll;
 }
+#mainProduct_information::-webkit-scrollbar {
+  margin-top: 0.5rem;
+  width: 8px;
+  height: 8px;
+  background: #ffffff;
+  }
+  #mainProduct_information::-webkit-scrollbar-thumb{
+    border-radius: 3.5px;
+    background-color:#E1E5E9
+  }
+  #mainProduct_information::-webkit-scrollbar-thumb:active {
+    background-color: #ced4da;
+  }
+  #mainProduct_information::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+
 #mainProduct_information h4{
   width: 100%;
   margin: 0 0 2.0rem;
@@ -63,13 +80,27 @@ html, body{
 #button_box{
   display: flex;
   justify-content: flex-end;
+  margin-top:8.0rem;
+}
+#button_box form{
+  max-width: 30%;
+  width: 27.0rem;
+  margin-left: 2.0rem;
 }
 #button_box input[type=submit]{
-  width: 27.0rem;
+  width: 100%;
   color: #7d7d7d;
-  padding: 2.0rem auto;
+  padding: 1.6rem 0;
   font-size: 1.5rem;
-  font-family: "NotoSansKR_m"
+  font-family: "NotoSansKR_m";
+  box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.16);
+  border: solid 1px #e5e5e5;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+#button_box input[type=submit]:hover{
+  background-color:#ccc;
+  color: #000;
 }
 @media only screen and (max-width: 1024px) {
   html,body{font-size: 9px!important;}
@@ -79,7 +110,16 @@ html, body{
   @media only screen and (max-width: 768px) {
     html,body{font-size: 8px!important;}
     #mainProduct_box{flex-direction: column;height: auto;}
-    #slideImg_box{width: 100%;}
+    #slideImg_box{width: 100%;min-width:0;}
     #mainProduct_information{width: auto;margin-top: 5.0rem;}
+    #button_box{justify-content: space-between;}
+    #button_box form{margin-left: 0;}
   }
-}
+  @media only screen and (max-width: 540px) {
+    html,body{font-size: 7px!important;}
+  }
+  @media only screen and (max-width: 425px) {
+  }
+  @media only screen and (max-width: 375px) {
+    html,body{font-size: 6px!important;}
+  }

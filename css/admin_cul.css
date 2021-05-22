@@ -1,3 +1,6 @@
+html, body{
+  font-size: 10px;
+}
 form{
   display:block;
   width:100%;
@@ -52,8 +55,9 @@ input[type=checkbox] + label {
 input[type=checkbox]:checked + label,
 button[type=button]:hover,
 button[type=submit]:hover {
-  border-color: #0df;
-  background-color: #0df;
+  background-image: url("../img/check_black.png");
+  background-repeat:no-repeat;
+  background-size: cover;
 }
 button[type=button],
 button[type=submit] {
@@ -191,7 +195,20 @@ ul#sub>li>* {
 ul#sub>li input[type=text] {
   width: 4em;
 }
+#sub button{
+  width: 12.0rem;
+  height: auto;
+  padding: 0.8rem 1.6rem;
+  background-color: #ffffff;
+  box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.16);
+  font-family: "NotoSansKR_m";
+  color: #7b7b7b;
+  font-size: 1.5rem;
+  border: none;
+}
+#gallery button{
 
+}
 
 .sign_pw_bg{
   margin: 0;

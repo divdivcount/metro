@@ -2,7 +2,6 @@
   require_once("modules/admin.php");
   $dao = new Product;
   $pr_id = Get('id', null);
-  echo $pr_id;
 
   if(isset($_SESSION['ss_mb_id']) && $_SESSION['ss_mb_id'] !== 'admin'){
     echo "<script>alert('로그인을 해주세요');</script>";
