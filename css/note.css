@@ -32,12 +32,13 @@ body {
     font-size: 2rem;
     color: #3b3b3b;
     margin-left: 1.0rem;
+    font-family: "NotoSansKR_m";
 }
 
 .text {
     font-size: 1.5rem;
-    font-family: "NotoSansKR_m";
-    color: #3b3b3b;
+    font-family: "NotoSansKR_r";
+    color: #9b9b9b;
     padding-left: 2.1%;
 }
 

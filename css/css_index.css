@@ -37,29 +37,29 @@ body {
   font-family: "NotoSansKR_r";
 }
 
-#selectMetro_box span{font-size:1.8rem;color: #a1a1a1;}
+#selectMetro_box span{font-size:2.0rem;color: #a1a1a1;}
 #selectMetro_box .find_item{width: 40%;border-bottom: 3px solid #a5a5a5;}
-#selectMetro_box .w3-button{width:200px;height: 7.0rem;font-size:1.5rem;font-family: "NotoSansKR_r";outline: none;}
-#selectMetro_box .w3-input{font-size:1.8rem;color: #3b3b3b;outline: none;background-color:#f9f9f9!important;border: none;padding: 0.5rem}
-#selectMetro_box .w3-select{font-size:1.8rem;color: #3b3b3b;outline: none;background-color:#f9f9f9!important;border: none;padding: 0.5rem}
+#selectMetro_box .w3-button{width:200px;height: 7.0rem;font-size:2.0rem;font-family: "NotoSansKR_r";outline: none;}
+#selectMetro_box .w3-input{font-size:2.0rem;color: #3b3b3b;outline: none;background-color:#f9f9f9!important;border: none;padding: 0.5rem}
+#selectMetro_box .w3-select{font-size:2.0rem;color: #3b3b3b;outline: none;background-color:#f9f9f9!important;border: none;padding: 0.5rem}
 #selectMetro_box .find_item:nth-child(1){}
 #selectMetro_box #bothFind_item{display: flex;width: 60%;flex-direction: row;justify-content: space-between;align-items:flex-end;}
 
-.ui-menu-item{font-size: 1.4rem;}
+.ui-menu-item{font-size: 1.8rem;}
 
 #mainContent_box {
   position: relative;
   width: 75%;
   margin: 20.0rem auto 5.0rem auto;
   font-family: "NotoSansKR_m";
-  font-size: 1.8rem;
+  font-size: 2.0rem;
   color: #707070;
 }
 #main_tapmenu{
   margin: 0 auto;
-  width: 400px;
+  width: 40.0rem;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 .tapmenuItem{
   color: #707070;
@@ -112,7 +112,7 @@ body {
 }
 
 .productText_box{width: 100%;height:auto;display: flex;flex-direction: column;margin-top: 0.5rem;padding: 0 1.0rem;justify-content: space-around;}
-.productText_box_title_line{width: 100%;height:2.1rem;margin-top: 0.5rem;font-family: "NotoSansKR_r";font-size: 1.5rem;color: #3b3b3b;text-align: center;text-overflow:ellipsis;overflow:hidden;
+.productText_box_title_line{width: 100%;height:auto;margin-top: 0.5rem;font-family: "NotoSansKR_r";font-size: 2.0rem;color: #3b3b3b;text-align: center;text-overflow:ellipsis;overflow:hidden;
 overflow : hidden;
 text-overflow : ellipsis;
 height : auto; /*(대신 height를 설정해준다. 텍스트 크기에 맞춰 height가 1줄인 경우를 생각하자.) */
@@ -121,7 +121,7 @@ display : -webkit-box;
 -webkit-line-clamp : 1; /*(줄 개수를 설정한다. 만약 2줄이상이라면 height와 해당 값을 수정한다.) */
 -webkit-box-orient: vertical; }
 
-.productText_box_station_line{width: 100%;height:2.1rem;margin-top: 0.5rem;font-family: "NotoSansKR_t";font-size: 1.5rem;color: #707070;text-align: center;
+.productText_box_station_line{width: 100%;height:auto;margin-top: 0.5rem;font-family: "NotoSansKR_r";font-size: 2.0rem;color: #707070;text-align: center;
 overflow : hidden;
 text-overflow : ellipsis;
 height : auto; /*(대신 height를 설정해준다. 텍스트 크기에 맞춰 height가 1줄인 경우를 생각하자.) */
@@ -130,7 +130,7 @@ display : -webkit-box;
 -webkit-line-clamp : 1; /*(줄 개수를 설정한다. 만약 2줄이상이라면 height와 해당 값을 수정한다.) */
 -webkit-box-orient: vertical;}
 
-.productText_box_category_line{width: 100%;height:2.1rem;margin-top: 0.5rem;font-family: "NotoSansKR_t";font-size: 1.5rem;color: #707070;text-align: center;
+.productText_box_category_line{width: 100%;height:auto;margin-top: 0.5rem;font-family: "NotoSansKR_r";font-size: 2.0rem;color: #707070;text-align: center;
 overflow : hidden;
 text-overflow : ellipsis;
 height : auto; /*(대신 height를 설정해준다. 텍스트 크기에 맞춰 height가 1줄인 경우를 생각하자.) */
@@ -139,7 +139,7 @@ display : -webkit-box;
 -webkit-line-clamp : 1; /*(줄 개수를 설정한다. 만약 2줄이상이라면 height와 해당 값을 수정한다.) */
 -webkit-box-orient: vertical;}
 
-.productText_box_price_line{width: 100%;height:2.1rem;margin-top: 0.5rem;font-family: "NotoSansKR_m";font-size: 1.5rem;color: #3b3b3b;text-align: center;
+.productText_box_price_line{width: 100%;height:auto;margin-top: 0.5rem;font-family: "NotoSansKR_m";font-size: 2.0rem;color: #3b3b3b;text-align: center;
 overflow : hidden;
 text-overflow : ellipsis;
 height : auto; /*(대신 height를 설정해준다. 텍스트 크기에 맞춰 height가 1줄인 경우를 생각하자.) */
@@ -176,19 +176,19 @@ display : -webkit-box;
   margin: 0 0 1.0rem  0;
   font-family: "NotoSansKR_r";
   text-align: center;
-  font-size:2.0rem;
+  font-size:2.5rem;
 }
 #c_img01 .contentImg_text p{
   font-family: "NotoSansKR_m";
   text-align: center;
   font-weight: 500;
-  font-size:3.0rem;
+  font-size:4.5rem;
   margin:0;
 }
 #c_img01 .contentImg_text span{
   font-family: "NotoSansKR_t";
   text-align: center;
-  font-size:2.0rem;
+  font-size:2.5rem;
   font-weight: 100;
 }
 #c_img02 .contentImg_text{
@@ -200,7 +200,7 @@ display : -webkit-box;
 #c_img02 .contentImg_text p{
   font-family: "NotoSansKR_r";
   font-weight: 500;
-  font-size:3.0rem;
+  font-size:4.0rem;
   color:#3b3b3b;
   margin:0;
 }
@@ -252,7 +252,7 @@ display : -webkit-box;
   place-content:center;
 }
 #moreInfo_btn{
-  font-size: 1.5rem;
+  font-size: 2.0rem;
   font-family: "NotoSansKR_m";
   font-weight: 500;
   box-shadow:3px 3px 10px 0 rgba(0, 0, 0, 0.16);
@@ -285,7 +285,7 @@ display : -webkit-box;
   margin-top: 10.0rem;
   margin-bottom: 1.0rem;
   text-align: center;
-  font-size: 4.5rem;
+  font-size: 3.0rem;
   font-weight: 500;
   color: #444444;
 }
@@ -320,7 +320,7 @@ display : -webkit-box;
   padding: 4.0rem 2.0rem;
 }
 
-.textBox_1 span{font-size: 1.5rem;color:#3b3b3b; margin: 1.0rem;font-weight: 500;}
+.textBox_1 span{font-size: 2.0rem;font-family: "NotoSansKR_m";color:#3b3b3b; margin: 1.0rem;font-weight: 500;}
 .textBox_1 p{font-size: 1.5rem;color:#707070;margin:1.0rem 0 0 0;}
 .textBox_1 img {width:100%;}
 .blue_line{width:45px;height: 0px;border-top: solid #0099ff 2px;margin: 0 auto }
@@ -383,14 +383,14 @@ a{text-decoration: none;}
   #explain_box{}
   .textBox_1{margin: 2.0rem 2.5rem;}
   #c_img01 .contentImg_text{top: 25%;transform: translate(-50%, -25%);}
-  #c_img01 .contentImg_text p{font-size:2.5rem;}
-  #c_img01 .contentImg_text h5,#c_img01 .contentImg_text span{font-size:1.25rem;}
+  #c_img01 .contentImg_text p{font-size:3.5rem;}
+  #c_img01 .contentImg_text h5,#c_img01 .contentImg_text span{font-size:2.25rem;}
 
-  #c_img02 .contentImg_text p{font-size:2.5rem;}
+  #c_img02 .contentImg_text p{font-size:3.5rem;}
 
   #c_img03 .contentImg_text{left: 60%;top: 25%;transform: translate(-60%, -25%);}
-  #c_img03 .contentImg_text p{font-size:2.0rem;}
-  #c_img03 .contentImg_text h5,#c_img01 .contentImg_text span{font-size:1.25rem;}
+  #c_img03 .contentImg_text p{font-size:2.25rem;}
+  #c_img03 .contentImg_text h5,#c_img01 .contentImg_text span{font-size:1.75rem;}
 
   .imgbox_3{width: 40%;}
 }

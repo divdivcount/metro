@@ -4,7 +4,7 @@
 require_once('modules/db.php'); // DB연결을 위한 같은 경로의 dbconn.php를 인클루드합니다.
 
 $mb_id = isset($_SESSION['ss_mb_id']) ? $_SESSION['ss_mb_id'] : null;
-$om_id =	isset($_SESSION['naver_mb_id']) ? $_SESSION['naver_mb_id'] : $_SESSION['kakao_mb_id'];
+$om_id =	isset($_SESSION['naver_mb_id']) ? $_SESSION['naver_mb_id'] : (isset($_SESSION['kakao_mb_id']) ? $_SESSION['kakao_mb_id'] : null);
 $om_id = substr($om_id, 5);
 $all = isset($mb_id) ? $mb_id : $om_id;
 $kind = $_GET['kind'] ? $_GET['kind'] : 'recive';
@@ -51,7 +51,7 @@ $sql = " SELECT a.*,b.mb_id, b.mb_email, c.om_id,c.om_nickname
             FROM mb_om_memo a
             LEFT JOIN member b ON (a.me_{$kind}_mb_id = b.mb_id)
             LEFT JOIN oauth_member c ON (a.me_{$kind}_mb_id = c.om_id)
-            WHERE a.me_{$kind}_mb_id = '{$memo[me_send_mb_id]}'";
+            WHERE a.me_{$kind}_mb_id = '{$memo["me_send_mb_id"]}'";
 // echo $sql;
 $result = mysqli_query($conn, $sql);
 $memos = mysqli_fetch_assoc($result);
@@ -62,48 +62,76 @@ mysqli_close($conn); // 데이터베이스 접속 종료
 <html>
 <head>
 	<title>Memo View</title>
-	<link href="./style.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="css/css_memo_view.css">
+	<link rel="stylesheet" href="css/css_noamlfont.css">
 </head>
 <body id="memo">
 	<!-- 쪽지보기 시작 { -->
-	<div>
-		<h1>쪽지 보기</h1>
-
-		<ul>
-			<li><a href="./memo.php?kind=recive">받은쪽지</a></li>
-			<li><a href="./memo.php?kind=send">보낸쪽지</a></li>
-		</ul>
-
-		<article>
-			<header>
-				<h1>쪽지 내용</h1>
-			</header>
-			<table>
-				<colgroup>
-					<col width="20%">
-					<col width="*">
-					<col width="20%">
-					<col width="*">
-				</colgroup>
-				<tr>
-					<th><?php echo $kind_str ?>사람</th>
-					<td><strong><?php echo $memo['me_send_mb_id'] ?></strong></td>
-					<th><?php echo $kind_date ?>시간</th>
-					<td><strong><?php echo substr($memo['me_send_datetime'], 0, 16); ?></strong></td>
-				</tr>
-				<tr>
-					<td colspan="4"><?php echo nl2br($memo['me_text']) ?></td>
-				</tr>
-			</table>
-		</article>
-
-		<div class="win_btn">
-			<?php if ($kind == 'recive') {  ?><a href="./memo_form.php?me_recive_mb_id=<?php echo $memos['mb_id'] != null ? $memos['mb_id']  : 'sir'.$memos['om_id']  ?>&amp;me_id=<?php echo $memo['me_id'] ?>&amp;id=<?=$memos['pr_id']?>">
-				<?php if($memo['me_send_mb_id'] === 'admin'){echo "";}else{echo "답장";}?></a><?php }  ?>
-			<a href="./memo.php?kind=<?php echo $kind ?>">목록보기</a>
-			<button type="button" onclick="window.close();">창닫기</button>
+	<div class="note">
+		<div class="header">
+			<img src="img/note.png">
+			<span class="title">쪽지함</span>
 		</div>
+		<button class="btn1" onclick="location.href ='./memo.php?kind=recive'">받은쪽지</button>
+		<button class="btn2" onclick="location.href ='./memo.php?kind=send'">보낸쪽지</button>
+	</div>
+
+	<div>
+
+
+	<div class="content_box">
+
+			<!-- 받는사람 나오고 버튼있는 박스 -->
+			<div class="sendMemo_box">
+				<!-- 받는사람 나오는 부분  -->
+				<div class="recive_member">
+					<div class="">
+						<?php echo $kind_str ?>사람
+						<?php echo $memo['me_send_mb_id'] ?>
+					</div>
+					<div class="">
+						<?php echo $kind_date ?>시간
+						<?php echo substr($memo['me_send_datetime'], 0, 16); ?>
+					</div>
+				</div>
+
+				<!-- 답장하기버튼 -->
+				<div class="conbtn">
+						<?php if ($kind == 'recive') {  ?>
+							<?php if($memo['me_send_mb_id'] === 'admin'){}
+								else{?>
+									<button id="submit_memo" type="button" onclick='location.href="./memo_form.php?me_recive_mb_id=<?php echo $memos['mb_id'] != null ? $memos['mb_id']  : 'sir'.$memos['om_id']  ?>&amp;me_id=<?php echo $memo['me_id'] ?>&amp;id=<?=$memos['pr_id']?>"'>답장하기</button>
+								<?php } ?>
+							<?php }  ?>
+							<button id="returnList_btn" onclick="location.href ='./memo.php?kind=<?php echo $kind ?>'">목록보기</button>
+				</div>
+			</div>
+
+			<div class="insertText_box">
+				<textarea name="me_memo" rows="10" cols="50" readonly><?php echo nl2br($memo['me_text']) ?></textarea>
+			</div>
+
+	</div>
+
+
 	</div>
 	<!-- } 쪽지보기 끝 -->
 </body>
+<script type="text/javascript">
+<?php
+	$kind= $_REQUEST["kind"];
+		if ($kind =="recive") {
+?>
+			document.querySelector('.btn1').classList.add("current");
+			document.querySelector('.btn2').classList.remove("current");
+<?php
+		}else{
+?>
+			document.querySelector('.btn2').classList.add("current");
+			document.querySelector('.btn1').classList.remove("current");
+<?php
+		}
+?>
+
+</script>
 </html>

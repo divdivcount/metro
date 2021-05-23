@@ -460,7 +460,7 @@ require_once('modules/db.php');
   //content_count 보여주고싶은 콘텐츠들의 행의 수 (열은 css 자동으로 조정)
   function changeWidth_RecentProducts_gridbox(content_count) {
     var w_width = window.outerWidth;
-    let content_rem = 19.4;
+    let content_rem = 22.6;
     if (w_width <= 1440) {
       if (w_width <= 1024) {
         if (w_width <= 768) {

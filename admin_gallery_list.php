@@ -41,12 +41,15 @@ $result = $galleryObj ->SelectGallery();
               <?php $i = 0; ?><!-- 체크 고유 아이디 -->
               <?php if($result) : ?>
               <?php foreach($result as $row) : ?>
-                <div>
-                  <input type="checkbox" name="id[]" value="<?= $row['id'] ?>">
-                  <label onclick="list.pick(<?= $i ?>)"></label>
-                  <img src="files/gallery/<?= $row['fname'] ?>" alt="" width="124px" height="124px">
-                  <input type="text" name="description" onkeyup="backdoor(<?= $i ?>)" placeholder="<?= $row['description'] ?>">
-                  <button type="button" name="button" onclick="list.modify(<?= $i++ ?>)" disabled>설명 수정</button>
+                <div class="banner_box">
+                  <div class="bannerImg_box"><img src="files/gallery/<?= $row['fname'] ?>" alt=""></div>
+                  <div class="banner_selectBox">
+                    <input type="checkbox" name="id[]" value="<?= $row['id'] ?>">
+                    <label onclick="list.pick(<?= $i ?>)"></label>
+                    <input type="text" name="description" onkeyup="backdoor(<?= $i ?>)" placeholder="<?= $row['description'] ?>">
+                    <button type="button" class="chaneLink_btn" onclick="list.modify(<?= $i++ ?>)" disabled>설명 수정</button>
+                  </div>
+
                 </div>
               <?php endforeach ?>
             <?php else : ?>
@@ -89,13 +92,13 @@ $result = $galleryObj ->SelectGallery();
           boxes: {
             box: document.getElementById('gallery').getElementsByTagName('div'),
             getId: function(i) {
-              return this.box[i].children[0];
+              return this.box[i].getElementsByClassName('banner_selectBox').item(0).children[0];
             },
             getDescription: function(i) {
-              return this.box[i].children[3];
+              return this.box[i].getElementsByClassName('banner_selectBox').item(0).children[2];
             },
             getSubmit: function(i) {
-              return this.box[i].children[4];
+              return this.box[i].getElementsByClassName('banner_selectBox').item(0).children[3];
             }
           },
           modifyForm: {

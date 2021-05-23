@@ -200,12 +200,15 @@ ini_set('display_errors', '1');
       </div>
 
     <div class="btn_box">
-      <input class="w3-button w3-blue w3-round-large" type="submit" name="upload" value="수정 완료">
-      <input class="w3-button w3-round-large" type="button" name="" value="취소">
-      <input class="w3-button w3-darkgray w3-round-large" type="button" name="" value="삭제">
-      </div>
-
+      <input class="w3-button w3-blue w3-round-large" type="submit" name="upload" value="수정 완료"></form>
+      <input class="w3-button w3-round-large" type="button" name="" value="취소" onclick="history.back();">
+      <form  action="delete_product.php" method="post">
+        <input type="hidden" name="pr_id" value="<?= $pr_ida ?>">
+        <input class="w3-button w3-dark-gray w3-round-large" type="submit" value="삭제">
       </form>
+
+    </div>
+
     <?php endforeach ?>
       <!-- 폼끝  -->
 <?php else : ?>
@@ -318,7 +321,7 @@ ini_set('display_errors', '1');
 
 <div class="btn_box">
   <input class="w3-button w3-blue w3-round-large" type="submit" name="upload" value="완료">
-  <input class="w3-button w3-round-large" type="button" name="" value="취소">
+  <input class="w3-button w3-round-large" type="button" name="" value="취소" onclick="history.back();">
   </div>
 
   </form>
@@ -436,6 +439,11 @@ ini_set('display_errors', '1');
         priceCheckText.className = "priceCheck_on"
         price_check.value = "1";
       }
+
+    }
+
+
+    function del_product(pr_id) {
 
     }
   </script>

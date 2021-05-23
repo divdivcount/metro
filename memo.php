@@ -4,7 +4,7 @@
 require_once('modules/db.php');  // DB연결을 위한 같은 경로의 dbconn.php를 인클루드합니다.
 
 $mb_id = isset($_SESSION['ss_mb_id']) ? $_SESSION['ss_mb_id'] : null;
-$om_id =	isset($_SESSION['naver_mb_id']) ? $_SESSION['naver_mb_id'] : $_SESSION['kakao_mb_id'];
+$om_id =	isset($_SESSION['naver_mb_id']) ? $_SESSION['naver_mb_id'] : (isset($_SESSION['kakao_mb_id']) ? $_SESSION['kakao_mb_id'] : null);
 $om_id = substr($om_id, 5);
 $all = isset($mb_id) ? $mb_id : $om_id;
 $kind = $_GET['kind'] ? $_GET['kind'] : 'recive';
@@ -103,7 +103,7 @@ mysqli_close($conn); // 데이터베이스 접속 종료
 <head>
 	<title>Memo</title>
 	<link href="css/note.css" rel="stylesheet" type="text/css">
-  <link href="css/content.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="css/css_noamlfont.css">
 </head>
 <body id="memo">
 	<!-- 쪽지 목록 시작 { -->
