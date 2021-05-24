@@ -16,6 +16,7 @@
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="css/admin_member_detail.css">
+  <link rel="stylesheet" href="css/css_noamlfont.css">
   <style type="text/css">
     body {
       overflow-y: hidden;

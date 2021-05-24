@@ -11,6 +11,7 @@ require_once("modules/admin.php");
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/admin_index.css">
+  <link rel="stylesheet" href="css/css_noamlfont.css">
   <script src="https://code.jquery.com/jquery-latest.min.js"></script>
   <script src="Y_custom.js"></script>
   <title>Metroket Admin</title>

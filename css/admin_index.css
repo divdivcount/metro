@@ -2,7 +2,7 @@ Reset CSS
 * { box-sizing: border-box; }
 li, ul { list-style: none; }
 a { text-decoration: none; }
-html{ font-size: 10px !important; }
+html{ font-size: 10px !important; font-family: "NotoSansKR_r";}
 a:visited{
   color: #222;
 }
@@ -15,7 +15,6 @@ body {
   height: 100vh;
   background-color: #F0F0F0;
   overflow-y:hidden;
-
 }
 
 .container {
@@ -44,15 +43,17 @@ body {
   font-size: 2.5rem;
 }
 
-.header > ul > li {
-  color: #5b5b5b;
+.header > ul > li{
+  color: #5b5b5b!important;
   float: left;
   margin-left: 50px;
   line-height: 40px;
   font-size: 1.5rem;
   cursor: pointer;
 }
-
+.header > ul > li > a{
+  color: #5b5b5b!important;
+}
 .menu {
   grid-area: menu;
   background-color: #353535;

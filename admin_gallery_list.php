@@ -28,8 +28,11 @@ $result = $galleryObj ->SelectGallery();
       <div>
 
         <ul id="sub"><!-- list-> oppenUploader함수실행 -->
-          <li><button type="button" name="button" onclick="list.openUploader()">추가</button></li><li><button type="button" name="button" onclick="list.openList()">변경 및 제거</button></li><li><button type="button" name="button" onclick="list.cancel()">선택취소</button></li><li>
-            <button type="button" name="button" onclick="list.dom.deleteForm.submit()">삭제</button></li><li id="len"></li><!-- list->openList()함수실행 -->                                                                      <!-- list.cancel()함수실행 -->
+          <li><button type="button" name="button" onclick="list.openUploader()">추가</button></li>
+          <li><button type="button" name="button" onclick="list.openList()">돌아가기</button></li>
+          <li><button type="button" name="button" onclick="list.cancel()">선택취소</button></li>
+          <li><button type="button" name="button" onclick="list.dom.deleteForm.submit()">삭제</button></li>
+          <li id="len"></li><!-- list->openList()함수실행 -->                                                                      <!-- list.cancel()함수실행 -->
         </ul><!-- list-> dom -> deleteForm.submit()함수실행 -->
 
         <form id="modifyForm" action="admin_gallery_modify.php" method="post">
@@ -37,6 +40,7 @@ $result = $galleryObj ->SelectGallery();
           <input type="text" name="description" class="hidden">
         </form>
         <form id="deleteForm" action="admin_gallery_delete.php" method="post">
+          <h3>Main Logo(이미지 사이즈 1920*700)</h3>
           <div id="gallery">
               <?php $i = 0; ?><!-- 체크 고유 아이디 -->
               <?php if($result) : ?>
@@ -62,12 +66,10 @@ $result = $galleryObj ->SelectGallery();
 
 
         <form id="uploadForm" action="admin_gallery_upload.php" method="post" enctype="multipart/form-data">
-          <ul>
-            <li>jpeg, png, gif 파일 업로드 가능(용량 제한 없음)</li>
-            <li>다중 업로드 가능</li>
-          </ul>
-          <input type="file" name="files[]" value="" accept="image/jpeg,image/png,image/gif" onchange="imageURL(this)" multiple="multiple">
-          <button type="submit" name="upload">업로드</button>
+          <input type="file" name="files[]" id="realInput" class="hidden" value="" accept="image/jpeg,image/png,image/gif" onchange="imageURL(this)" multiple="multiple">
+          <h3>Main Logo(이미지 사이즈 1920*700)</h3>
+          <button type="button" id="fake_fileInput" class="selectImg_btn">파일선택</button>
+          <button type="submit" name="upload" class="uploadImg_btn">업로드</button>
           <div class="imgs">
 
           </div>
@@ -212,6 +214,13 @@ $result = $galleryObj ->SelectGallery();
         box.appendChild(in1);//box ==div ->input
         cnter.appendChild(box);//imgs 태크이름을 가져와서 obj,in1를 넣는다.
       }
+
+      var fake_fileInput=document.getElementById('fake_fileInput');
+      var realInput=document.getElementById('realInput');
+        fake_fileInput.addEventListener('click',()=>{
+         realInput.click();
+       });
+
       </script>
     </main>
   </body>
