@@ -260,6 +260,66 @@ class Product extends MetroDAO {
       }
       else return null;
     }
+    //신고 모듈
+    public function report_insert($mb_id, $om_id , $rep_mb = 1682382139, $conT, $otherReason ,$pr_id) {
+      $this->openDB();
+      // echo $rep_mb;
+      $query = $this->db->prepare("select mb_name from member where mb_num=:mb_id");
+      $query -> bindValue(":mb_id", $rep_mb, PDO::PARAM_INT);
+      $query->execute();
+      $mem_fetch = $query->fetchAll(PDO::FETCH_ASSOC);
+      // var_dump($mem_fetch);
+      if($mem_fetch){
+
+      }
+      else{
+        $mem_fetch =  null;
+      }
+      // echo $mem_fetch[0]["mb_name"];
+
+      if(is_null($mem_fetch)){
+        $query = $this->db->prepare("select om_nickname from oauth_member where om_id=:om_id");
+        $query -> bindValue(":om_id", $rep_mb, PDO::PARAM_INT);
+        $query->execute();
+        $fetch = $query->fetchAll(PDO::FETCH_ASSOC);
+        if($fetch){
+
+        }
+        else{
+           $fetch = null;
+        }
+      }
+
+      $rep_name = isset($mem_fetch[0]["mb_name"]) ? $mem_fetch[0]["mb_name"] : $fetch[0]["om_nickname"];
+      echo $rep_name;
+
+
+
+      if(!(is_null($mb_id))){
+        $mb_name= $fetch["mb_name"];
+        $query = $this->db->prepare("insert into member_declaration (mb_id, om_id, rep_mb, de_check, de_reason, pr_id) values (:mb_id, null, :rep_name, :conT, :otherReason,:pr_id)");
+        $query -> bindValue(":mb_id", $mb_id, PDO::PARAM_INT);
+        $query -> bindValue(":rep_name", $rep_name, PDO::PARAM_STR);
+
+      }else if(!(is_null($om_id))){
+
+        $query = $this->db->prepare("insert into member_declaration (mb_id, om_id, rep_mb, de_check, de_reason, pr_id) values (null, :om_id, :rep_name, :conT, :otherReason,:pr_id)");
+        $query -> bindValue(":om_id", $om_id, PDO::PARAM_INT);
+        $query -> bindValue(":rep_name", $rep_name, PDO::PARAM_STR);
+
+      }
+      $query -> bindValue(":pr_id", $pr_id, PDO::PARAM_INT);
+      $query -> bindValue(":conT", $conT, PDO::PARAM_STR);
+      if(!(is_null($otherReason))){
+        $query -> bindValue(":otherReason", $otherReason, PDO::PARAM_STR);
+      }
+      else{
+        $query -> bindValue(":otherReason", $otherReason, PDO::PARAM_INT);
+      }
+      $query->execute();
+    }
+
+
 
     public function admin_product_del($pr_id) {
       $this->openDB();

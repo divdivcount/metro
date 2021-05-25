@@ -1,3 +1,7 @@
+<?php
+  require_once("modules/parameter.php");
+  $report_member = isset($imgdao[0]["mb_id"]) ? $imgdao[0]["mb_id"] : (isset($imgdao[0]["om_id"]) ? $imgdao[0]["om_id"]  : null );
+?>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -101,6 +105,7 @@ input[type=radio]:checked + label { background-image: url('img/checkIn.png'); }
 </head>
 <body>
   <?php
+
   if(isset($_SESSION['ss_mb_id'])){
     $mb_ids = $_SESSION['ss_mb_id'];
     $sql = " SELECT * FROM member WHERE mb_id = '$mb_ids' ";
@@ -123,26 +128,28 @@ input[type=radio]:checked + label { background-image: url('img/checkIn.png'); }
     $om = mysqli_fetch_assoc($result);
     $rep_mb = $om['om_id'];
   }
+
    ?>
   <div class="bigB">
     <div class=mother>
       <div class="closeBtn_box"><img src="img/cancle.png" class="" onclick="report_close()" style="width:2.3rem;height:2.3rem;cursor:pointer"></div>
       <div class=reP><img src="img/reP.png">신고하기</div><br>
-	  <form action="test_php.php" method="get">
+	  <form action="report_mod.php" method="post">
 		<div class=conT>
-			<div class="conT_gridItem"><input type="radio" id="che0" value="광고성/홍보성" name="check[]"/><label for="che0">광고성/홍보성</label></div>
-			<div class="conT_gridItem"><input type="radio" id="che1" value="업자로 의심" name="check[]"/><label for="che1">업자로 의심</label></div>
-			<div class="conT_gridItem"><input type="radio" id="che2" value="판매글이 아닌 글" name="check[]"/><label for="che2">판매글이 아닌 글</label></div>
-			<div class="conT_gridItem"><input type="radio" id="che3" value="욕설/폭언" name="check[]"/><label for="che3">욕설/폭언</label></div>
-			<div class="conT_gridItem"><input type="radio" id="che4" value="같은 내용 반복 게시" name="check[]"/><label for="che4">같은 내용 반복 게시</label></div>
-			<div class="conT_gridItem"><input type="radio" id="che5" value="글과 사진이 연관이 없음" name="check[]"/><label for="che5">글과 사진이 연관이 없음</label></div>
-			<div class="conT_gridItem"><input type="radio" id="che6" value="기타" name="check[]" /><label for="che6">기타</label></div>
+			<div class="conT_gridItem"><input type="radio" id="che0" value="광고성/홍보성" name="check"/><label for="che0">광고성/홍보성</label></div>
+			<div class="conT_gridItem"><input type="radio" id="che1" value="업자로 의심" name="check"/><label for="che1">업자로 의심</label></div>
+			<div class="conT_gridItem"><input type="radio" id="che2" value="판매글이 아닌 글" name="check"/><label for="che2">판매글이 아닌 글</label></div>
+			<div class="conT_gridItem"><input type="radio" id="che3" value="욕설/폭언" name="check"/><label for="che3">욕설/폭언</label></div>
+			<div class="conT_gridItem"><input type="radio" id="che4" value="같은 내용 반복 게시" name="check"/><label for="che4">같은 내용 반복 게시</label></div>
+			<div class="conT_gridItem"><input type="radio" id="che5" value="글과 사진이 연관이 없음" name="check"/><label for="che5">글과 사진이 연관이 없음</label></div>
+			<div class="conT_gridItem"><input type="radio" id="che6" value="기타" name="check" /><label for="che6">기타</label></div>
 		</div>
 
 
     <textarea name="otherReason" id="textarea_otherReason" placeholder="기타 사유를 입력해 주세요."  class="textarea" disabled=false></textarea>
     <input type="hidden" name="member_num" value="<?= $rep_mb ?>">
-    <input type="hidden" name="member_num" value="<?= $rep_mb ?>">
+    <input type="hidden" name="report_member" value="<?= $report_member ?>">
+    <input type="hidden" name="pr_id" value="<?= $imgdao[0]["pr_id"] ?>">
     <div class="reportBtn_box">
       <button type="submit" class="w3-button w3-blue button">신고하기</button>
   		<button type="button" class="w3-button w3-light-grey button2" onclick="report_close()">취소</button>
@@ -154,7 +161,7 @@ input[type=radio]:checked + label { background-image: url('img/checkIn.png'); }
   </body>
   <script type="text/javascript">
 
-    var rep_checkbox = document.getElementsByName('check[]');
+    var rep_checkbox = document.getElementsByName('check');
     var otherReason = document.getElementById("che6")
     var textarea_otherReason =document.getElementById("textarea_otherReason");
 

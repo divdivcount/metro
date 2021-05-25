@@ -89,7 +89,7 @@ try{
               </div>
               <div class="search_arrivalTime">
                 <button type="button" class="w3-button w3-round-xlarge w3-gray" onclick="arrivalTime_close()">취소하기</button>
-                <button type="button" class="w3-button w3-blue w3-round-xlarge" id="arrivalTime_btn">검색</button>                
+                <button type="button" class="w3-button w3-blue w3-round-xlarge" id="arrivalTime_btn">검색</button>
               </div>
             </div>
 
@@ -179,7 +179,6 @@ try{
               <span>신고하기</span>
             </div>
           </div>
-
           <!-- 상품 및 유저 정보 + 부가기능 부분  -->
           <div id="productInfo_title">
 
