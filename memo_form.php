@@ -8,6 +8,7 @@ $pr_id = $_GET['id']; // GET 방식으로 넘어온 받는 제품번호
 <html>
 <head>
 	<title>Memo Form</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<link rel="stylesheet" href="css/css_memo_form.css">
 	<link rel="stylesheet" href="css/css_noamlfont.css">
