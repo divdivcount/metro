@@ -6,6 +6,8 @@
 
 
   $reportDao = new Product;
+
+
   //신고 내용
   $conT = Post("check", null);
   //신고하는 사람
@@ -18,22 +20,23 @@
     exit;
   }
   if(!(is_null($member_num))){
-    $daos = new Oauths;
+    $oauth = new Oauths;
     // echo $listc[0]['mb_id'];
-    $member_mb = $daos->admin_Om_select($member_num);
+    $member_mb = $oauth->admin_Om_select($member_num);
     // var_dump($other_member);
-    if(is_null($member)){
-          $daos = new Member();
-          $member_mb  = $daos->admin_Member_id_select($member_num);
+    if(is_null($member_mb)){
+          $mb_member = new Member;
+          $member_mb  = $mb_member->admin_Member_id_all_select($member_num);
           // var_dump($member);
     }else{
         // echo "??";
     }
+  }
   $two_Report_user_rep_name = isset($member_mb[0]["mb_name"]) ? $member_mb[0]["mb_name"] : $member_mb[0]["om_nickname"];
   $two_Report_user = $reportDao->report_select($member_num, $pr_id);
   $two_Report_user_rep_mb = $two_Report_user[0]["rep_mb"];
   $two_Report_user_pr_id = $two_Report_user[0]["pr_id"];
-  // var_dump($two_Report_user);
+  var_dump($two_Report_user);
   var_dump($two_Report_user_rep_name == $two_Report_user_rep_mb);
   var_dump( $pr_id == $two_Report_user_pr_id);
   if($two_Report_user_rep_name == $two_Report_user_rep_mb && $pr_id == $two_Report_user_pr_id){
@@ -41,13 +44,13 @@
     exit;
   }
     if(!(is_null($report_member))){
-      $dao = new Oauths;
+
       // echo $listc[0]['mb_id'];
-      $member = $dao->admin_Om_select($report_member);
+      $member = $oauth->admin_Om_select($report_member);
       // var_dump($other_member);
       if(is_null($member)){
-            $dao = new Member();
-            $member  = $dao->admin_Member_id_all_select($report_member);
+
+            $member  = $mb_member->admin_Member_id_all_select($report_member);
             // var_dump($member);
       }else{
           // echo "??";
