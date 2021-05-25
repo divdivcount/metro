@@ -109,7 +109,7 @@ mysqli_close($conn); // 데이터베이스 접속 종료
 			</div>
 
 			<div class="insertText_box">
-				<textarea name="me_memo" rows="10" cols="50" readonly><?php echo nl2br($memo['me_text']) ?></textarea>
+				<textarea name="me_memo" rows="10" cols="50" readonly><?php echo $memo['me_text']; ?></textarea>
 			</div>
 
 	</div>
