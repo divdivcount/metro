@@ -5,7 +5,10 @@
   // echo $mb_id;
   if($mb_id != 'null'){
     $members = new Member();
-    $member  = $members->admin_Member_id_all_select($mb_id);
+    $member  = $members->admin_Member_all_select($mb_id);
+  }elseif ($om_id) {
+    $members = new Oauths();
+    $oauthmember  = $members->Om_select($om_id);
   }
   // echo $om_id;
   $dao = new Product;
@@ -44,10 +47,11 @@
          echo $e->getMessage();
         }
     ?>
-    <?php if ($list): ?>
+    <?php if ($list):?>
     <!-- 상품 나오는 박스  -->
+
     <p>
-      <?=isset($list[0]["mb_name"]) ? $list[0]["mb_name"] : $list[0]["om_nickname"]?>님의 게시글
+      <?=isset($member[0]["mb_name"]) ? $member[0]["mb_name"] : $oauthmember[0]["om_nickname"]?>님의 게시글
     </p>
     <table>
       <tr>
