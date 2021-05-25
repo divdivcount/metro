@@ -296,7 +296,7 @@ class Product extends MetroDAO {
 
 
       if(!(is_null($mb_id))){
-        $mb_name= $fetch["mb_name"];
+
         $query = $this->db->prepare("insert into member_declaration (mb_id, om_id, rep_mb, de_check, de_reason, pr_id) values (:mb_id, null, :rep_name, :conT, :otherReason,:pr_id)");
         $query -> bindValue(":mb_id", $mb_id, PDO::PARAM_INT);
         $query -> bindValue(":rep_name", $rep_name, PDO::PARAM_STR);
