@@ -133,7 +133,7 @@ if($mb_id && isset($_GET['mode']) == 'modify') { // 세션이 있고 회원수�
 
 // 아이디 숫자와 영문만 처리하는 함수
 var mb_id = document.getElementById('mb_id');
-var engNum = /^[a-z0-9_]{4,12}$/;
+var engNum = /^[a-z]{1}[a-z0-9_]{3,12}$/;
 
 mb_id.onblur = function () {
 	if (!engNum.test(mb_id.value)) {
@@ -180,20 +180,22 @@ function fregisterform_submit(f) { // submit 최종 폼체크
 		}
 	}
 
-	if (f.mb_email.value.length < 1) { // 이메일 검사
+	if (f.mb_email.value.length < 1 || f.mb_email_two.value.length < 1) { // 이메일 검사
 		alert("이메일을 입력하십시오.");
 		f.mb_email.focus();
 		return false;
 	}
 
-	// if (f.mb_email.value.length > 0) { // 이메일 형식 검사
-	// 	var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-	// 	if (f.mb_email.value.match(regExp) == null) {
-	// 		alert("이메일 주소가 형식에 맞지 않습니다.");
-	// 		f.mb_email.focus();
-	// 		return false;
-	// 	}
-	// }
+	if (f.mb_email.value.length > 0 && f.mb_email_two.value.length > 0) { // 이메일 형식 검사
+		// var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+		var regExp_1 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])/i;
+		var regExp_2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}/i;
+		if (f.mb_email.value.match(regExp_1) == null || f.mb_email_two.value.match(regExp_2) == null) {
+			alert("이메일 주소가 형식에 맞지 않습니다.");
+			f.mb_email.focus();
+			return false;
+		}
+	}
 
 	return true;
 	}

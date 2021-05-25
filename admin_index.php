@@ -95,13 +95,24 @@ require_once("modules/admin.php");
 
     <div class="content">
       <iframe src="admin_product_list.php" width="100%" iframespacing=0 marginheight=0 marginwidth=0 scrolling="no" vspace=0 hspace=0
-        style="float:left; border: none; height: 100vh;" id="main_frame"></iframe>
+        style="float:left; border: none;" id="main_frame"></iframe>
     </div>
   </div>
 
   <script>
     function changeIframeUrl(url) {
       document.getElementById("main_frame").src = url;
+    }
+    var iframe = document.getElementById('main_frame');
+
+    window.addEventListener('DOMContentLoaded', function () {
+    iframe.addEventListener('load', autoHeight);
+    })
+    //iframe 높이 조절
+    function autoHeight() {
+    var frame = iframe;
+      var sub = frame.contentDocument ? frame.contentDocument : frame.contentWindow.document;
+      iframe.height = sub.body.scrollHeight;
     }
   </script>
 

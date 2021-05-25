@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="../css/css_testHtml.css">
+  </head>
+  <body>
+    <div class="tapmenu">
+        <button type="button" name="button" class="nomal current" onclick="test1(this)">아이디 찾기</button>
+        <button type="button" name="button" class="nomal" onclick="test2(this)">비밀번호 찾기</button>
+    </div>
+  </body>
+  <script type="text/javascript">
+    var toggle_btn=document.querySelector('.tapmenu').childNodes;
+    function test1(e) {
+      e.classList.add('current');
+      toggle_btn[3].classList.remove('current')
+    }
+    function test2(e) {
+      e.classList.add('current');
+      toggle_btn[1].classList.remove('current')
+    }
+  </script>
+</html>

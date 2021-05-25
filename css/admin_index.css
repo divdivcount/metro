@@ -2,7 +2,7 @@ Reset CSS
 * { box-sizing: border-box; }
 li, ul { list-style: none; }
 a { text-decoration: none; }
-html{ font-size: 10px !important; font-family: "NotoSansKR_r";}
+html{ font-size: 10px !important; font-family: "NotoSansKR_r";height: 100vh;}
 a:visited{
   color: #222;
 }
@@ -12,16 +12,17 @@ body {
   font-size: 1.5rem;
   margin: 0;
   padding: 0;
-  height: 100vh;
+  height: auto;
   background-color: #F0F0F0;
-  overflow-y:hidden;
+  /* overflow-y:hidden; */
 }
 
 .container {
   display: grid;
   grid-template-columns: 1fr 4.1fr 1.2fr;
-  grid-template-rows: 70px calc(100vh - 70px);
+  grid-template-rows: 70px auto;
   grid-template-areas:'menu header header''menu content content';
+  height: 100%;
 }
 
 .m-gnb {
@@ -95,6 +96,7 @@ body {
 
 .content {
   grid-area: content;
+  overflow-y: scroll;
 }
 
 /* Mobile CSS */

@@ -33,7 +33,7 @@
     <div class="content">
       <div class="content_table">
         <p>게시글</p>
-        <table>
+        <table id="userList_table">
         <tr>
           <th>글 제목</th>
           <th>해당 위치(호선, 역)</th>

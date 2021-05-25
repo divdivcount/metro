@@ -14,7 +14,7 @@ body {
     left:50%;
     top:50%;
     transform:translate(-50%,-50%);
-    margin: 30px auto 0 auto;
+    margin: 0 auto 0 auto;
     overflow: hidden;
 }
 /* #btn {
@@ -30,13 +30,8 @@ body {
      transition: .5s;
 }*/
 .input-group {
-    height: 350px;
-    position: absolute;
-    left:50%;
-    top:400px;
-    transform:translate(-50%,-50%);
-    margin: auto;
     width: 80%;
+    margin: 7.5rem auto 0;
 }
 .input-field_2 {
     width: 83%;
@@ -83,7 +78,7 @@ body {
     margin: 30px 10px 30px 0;
 }
 .imgbox{
-  margin-bottom: 20px;
+  margin: 2.0rem 0;
   text-align: center;
   width: 100%;
 }
@@ -104,16 +99,43 @@ body {
  border-radius: 20px;
  cursor: pointer;
 }
-#imgbtn_box {
+/* #imgbtn_box {
   display: flex;
 }
 #imgbtn_box img{
   width: 400px;
+} */
+.tapmenu{
+  width: 100%;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 8.0rem;
+  margin-top: 7.5rem;
 }
-#findId{visibility:visible;}
-#findPw{visibility:hidden;}
+.nomal{
+  font-family: "NotoSansKR_m";
+  color:#828282;
+  font-size: 2.3rem;
+  outline: none;
+  border: none;
+  border-bottom:solid 2px #00b3ff;
+  padding: 2px 0 0 0;
+}
+.current{
+  color: #00b3ff!important;
+  border: solid 2px #00b3ff!important;
+  border-bottom: none!important;
+  padding: 0 0 2px 0;
+}
+
+#findId{display:inherit;}
+#findPw{display:none;}
+
+#findId p,#findPw p {text-align: center;;font-family: "NotoSansKR_m"; font-size: 1.8rem; color: #828282}
 #findid_btn{cursor:pointer;}
 #findpw_btn{cursor:pointer;}
+
+
 .first_email {
   width:30%;
   border: none;
@@ -165,7 +187,6 @@ body {
   .form-wrap{width:90%;}
   .bluedot{margin-right: 3px;}
   .input-group {width: 100%;top:320px;}
-  .imgbox img{    width: 100%;  }
   .imgbox input{    width: 100%;  }
   .first_email {width:40%}
   .second_email {width:35%;margin: 0 0 0 10px}

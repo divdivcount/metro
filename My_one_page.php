@@ -217,8 +217,8 @@
   //iframe 높이 조절
   function autoHeight() {
   var frame = iframe;
-    var sub = frame.contentDocument ? frame.contentDocument : frame.contentWindow.document
-    iframe.height = sub.body.scrollHeight
+    var sub = frame.contentDocument ? frame.contentDocument : frame.contentWindow.document;
+    iframe.height = sub.body.scrollHeight;
   }
 
   // 유저 이미지 및 닉네임 변경모달창 관련 함수

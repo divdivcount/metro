@@ -22,14 +22,20 @@
                 </div>
 
                 <!-- 상단 아이디 및 비밀번호 찾기 버튼 -->
-                <div id="imgbtn_box">
+                <!-- <div id="imgbtn_box">
                   <img id = "findid_btn" src="img/findid_top_btn_on.png" onclick="findId()">
                   <img id = "findpw_btn" src="img/findpw_top_btn_off.png" onclick="findPw()">
+                </div> -->
+
+                <!-- 상단 아이디 및 비밀번호 찾기 버튼 -->
+                <div class="tapmenu">
+                    <button type="button" id = "findid_btn" class="nomal current" onclick="findId()">아이디 찾기</button>
+                    <button type="button" id = "findpw_btn" class="nomal" onclick="findPw()">비밀번호 찾기</button>
                 </div>
 
                 <!-- 아이디 찾는 폼 부분 -->
                 <form id="findId" action="findidpw_check.php" class="input-group" method="post">
-
+                  <p>본인인증에 사용했던 이메일로 인증해주세요.</p>
                   <!-- 이름 -->
                   <div class="inputbox">
                     <div class="textbox"><div class="bluedot">*</div>이름</div>
@@ -66,7 +72,7 @@
 
                 <!-- 비밀번호 찾는 폼 부분 -->
                 <form id="findPw" action="findidpw_check.php" class="input-group" method="post">
-
+                  <p>회원가입시 사용한 아이디와 이메일을 입력해주세요.</p>
                   <!-- 이름 -->
                   <div class="inputbox">
                     <div class="textbox"><div class="bluedot">*</div>이름</div>
@@ -117,16 +123,16 @@
       var findpw_btn =document.getElementById("findpw_btn");
 
       function findId(){
-        findid_btn.src = "img/findid_top_btn_on.png";
-        findpw_btn.src = "img/findpw_top_btn_off.png";
-        id_form.style.visibility="visible";
-        pw_form.style.visibility="hidden";
+        findid_btn.classList.add('current');
+        findpw_btn.classList.remove('current');
+        id_form.style.display="inherit";
+        pw_form.style.display="none";
       }
       function findPw(){
-        findid_btn.src = "img/findid_top_btn_off.png";
-        findpw_btn.src = "img/findpw_top_btn_on.png";
-        id_form.style.visibility="hidden";
-        pw_form.style.visibility="visible";
+        findid_btn.classList.remove('current');
+        findpw_btn.classList.add('current');
+        id_form.style.display="none";
+        pw_form.style.display="inherit";
       }
 
       // 이메일 선택 select 박스에 자동으로 텍스트 적용하는 함수

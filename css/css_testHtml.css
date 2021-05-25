@@ -1,0 +1,25 @@
+html,body{
+  width: 71%;
+  margin: 0 auto;
+  font-size: 10px;
+}
+.tapmenu{
+  width: 100%;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 8.0rem;
+}
+.nomal{
+  color:#828282;
+  font-size: 2.3rem;
+  outline: none;
+  border: none;
+  border-bottom:solid 2px #00b3ff;
+  padding: 2px 0 0 0;
+}
+.current{
+  color: #00b3ff!important;
+  border: solid 2px #00b3ff!important;
+  border-bottom: none!important;
+  padding: 0 0 2px 0;
+}
