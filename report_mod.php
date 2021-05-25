@@ -46,13 +46,14 @@
     exit;
   }else{
     if(!(is_null($report_member))){
-
+      // echo $report_member;
       // echo $listc[0]['mb_id'];
+      $oauth = new Oauths;
       $member = $oauth->admin_Om_select($report_member);
-      // var_dump($other_member);
+      // var_dump($member);
       if(is_null($member)){
-
-            $member  = $mb_member->admin_Member_id_all_select($report_member);
+            $mb_member = new Member;
+            $member  = $mb_member->admin_Member_all_select($report_member);
             // var_dump($member);
       }else{
           // echo "??";
@@ -69,7 +70,7 @@
       $otherReason = null;
     }
 
-    $reportDao->report_insert(isset($member[0]["mb_id"]) ? $member[0]["mb_id"] : null, isset($member[0]["om_id"]) ? $member[0]["om_id"] : null, $member_num, $conT, $otherReason, $pr_id);
+    $reportDao->report_insert(isset($member[0]["mb_num"]) ? $member[0]["mb_num"] : null, isset($member[0]["om_id"]) ? $member[0]["om_id"] : null, $member_num, $conT, $otherReason, $pr_id);
    //  echo $conT."<br>";
    //  echo $member_num."<br>";
    // echo $report_member."<br>";

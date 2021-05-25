@@ -278,6 +278,7 @@ class Product extends MetroDAO {
       // echo $mem_fetch[0]["mb_name"];
 
       if(is_null($mem_fetch)){
+        // echo "여기 아니지 ?";
         $query = $this->db->prepare("select om_nickname from oauth_member where om_id=:om_id");
         $query -> bindValue(":om_id", $rep_mb, PDO::PARAM_INT);
         $query->execute();
@@ -296,7 +297,7 @@ class Product extends MetroDAO {
 
 
       if(!(is_null($mb_id))){
-
+        // echo $mb_id;
         $query = $this->db->prepare("insert into member_declaration (mb_id, om_id, rep_mb, de_check, de_reason, pr_id) values (:mb_id, null, :rep_name, :conT, :otherReason,:pr_id)");
         $query -> bindValue(":mb_id", $mb_id, PDO::PARAM_INT);
         $query -> bindValue(":rep_name", $rep_name, PDO::PARAM_STR);
@@ -308,15 +309,19 @@ class Product extends MetroDAO {
         $query -> bindValue(":rep_name", $rep_name, PDO::PARAM_STR);
 
       }
+      // echo "if 나가기";
       $query -> bindValue(":pr_id", $pr_id, PDO::PARAM_INT);
       $query -> bindValue(":conT", $conT, PDO::PARAM_STR);
       if(!(is_null($otherReason))){
+        // echo "이쪽?1";
         $query -> bindValue(":otherReason", $otherReason, PDO::PARAM_STR);
       }
       else{
+        // echo "이쪽?2";
         $query -> bindValue(":otherReason", $otherReason, PDO::PARAM_INT);
       }
       $query->execute();
+      // var_dump($query);
     }
 
 
