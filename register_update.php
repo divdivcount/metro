@@ -143,7 +143,7 @@ if ($result) {
 		$content = ob_get_contents(); // 메일 내용
 		ob_end_clean(); //출력 버퍼를 정리 (지우기)하고 출력 버퍼링을 종료.
 
-		$mail_from = "dame502030@naver.com"; // 보내는 이메일 주소
+		$mail_from = "ycg475207@naver.com"; // 보내는 이메일 주소
 		$mail_to = $mb_email; // 받을 이메일 주소
 
 		mailer('관리자', $mail_from, $mail_to, $subject, $content); // 메일 전송
