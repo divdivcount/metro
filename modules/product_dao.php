@@ -261,7 +261,7 @@ class Product extends MetroDAO {
       else return null;
     }
     //신고 모듈
-    public function report_insert($mb_id, $om_id , $rep_mb = 1682382139, $conT, $otherReason ,$pr_id) {
+    public function report_insert($mb_id, $om_id , $rep_mb, $conT, $otherReason ,$pr_id) {
       $this->openDB();
       // echo $rep_mb;
       $query = $this->db->prepare("select mb_name from member where mb_num=:mb_id");
@@ -291,7 +291,7 @@ class Product extends MetroDAO {
       }
 
       $rep_name = isset($mem_fetch[0]["mb_name"]) ? $mem_fetch[0]["mb_name"] : $fetch[0]["om_nickname"];
-      echo $rep_name;
+      // echo $rep_name;
 
 
 
@@ -319,6 +319,52 @@ class Product extends MetroDAO {
       $query->execute();
     }
 
+
+    public function report_select($rep_mb, $pr_id) {
+      $this->openDB();
+      // echo $rep_mb;
+
+      $query = $this->db->prepare("select mb_name from member where mb_num=:mb_id");
+      $query -> bindValue(":mb_id", $rep_mb, PDO::PARAM_INT);
+      $query->execute();
+      $mem_fetch = $query->fetchAll(PDO::FETCH_ASSOC);
+      // var_dump($mem_fetch);
+      if($mem_fetch){
+
+      }
+      else{
+        $mem_fetch =  null;
+      }
+      // echo $mem_fetch[0]["mb_name"];
+
+      if(is_null($mem_fetch)){
+        $query = $this->db->prepare("select om_nickname from oauth_member where om_id=:om_id");
+        $query -> bindValue(":om_id", $rep_mb, PDO::PARAM_INT);
+        $query->execute();
+        $fetch = $query->fetchAll(PDO::FETCH_ASSOC);
+        if($fetch){
+
+        }
+        else{
+           $fetch = null;
+        }
+      }
+
+      $rep_name = isset($mem_fetch[0]["mb_name"]) ? $mem_fetch[0]["mb_name"] : $fetch[0]["om_nickname"];
+
+      $query = $this->db->prepare("select rep_mb, pr_id from member_declaration where rep_mb=:rep_name and pr_id = :pr_id");
+      $query -> bindValue(":rep_name", $rep_name, PDO::PARAM_STR);
+      $query -> bindValue(":pr_id", $pr_id, PDO::PARAM_INT);
+      $query->execute();
+      $fetch = $query->fetchAll(PDO::FETCH_ASSOC);
+      // var_dump($mem_fetch);
+      if($fetch){
+        return $fetch;
+      }
+      else{
+        return null;
+      }
+    }
 
 
     public function admin_product_del($pr_id) {
