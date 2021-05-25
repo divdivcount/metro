@@ -115,7 +115,7 @@
         userGoto("상품을 삭제 하셨습니다", "admin_product_list.php");
       }
     ?>
-    <!-- <script type="text/javascript">
+    <script type="text/javascript">
     var slider = $('.bxslider');
     var slider_bx =null;
       $(document).ready(function(){
@@ -149,6 +149,6 @@
           });
         }
     });
-    </script> -->
+    </script>
   </body>
 </html>
