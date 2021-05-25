@@ -101,7 +101,7 @@ if(!(is_null($listc))){
     </div>
     <!-- 해당 회원 게시글 나오는 곳 -->
     <div class="member-board">
-      <iframe width="100%" height="100%" src="admin_member_detail_sangpum.php?id=<?=isset($member[0]["mb_id"]) ? $member[0]["mb_id"] : 'null'?>&om=<?=isset($other_member[0]["om_id"]) ? $other_member[0]["om_id"] : 'null'?>" frameborder="0" style="float:left;" id="main_frame"
+      <iframe width="100%" height="100%" src="admin_member_detail_sangpum.php?id=<?=isset($member[0]["mb_num"]) ? $member[0]["mb_num"] : 'null'?>&om=<?=isset($other_member[0]["om_id"]) ? $other_member[0]["om_id"] : 'null'?>" frameborder="0" style="float:left;" id="main_frame"
         ></iframe>
     </div>
   </div>

@@ -58,7 +58,7 @@
         <th>신고 수</th>
       </tr>
       <?php foreach ($list as $rows) : ?>
-        <tr class="content_tr" style="cursor:pointer;" onclick="location.href='admin_product_detail.php?id=<?=$admin_list['pr_id']?>'">
+        <tr class="content_tr" style="cursor:pointer;" onclick="location.href='admin_product_detail.php?id=<?=$rows['pr_id']?>'">
           <td><?= $rows['pr_title'] ?></td>
           <td><?= $rows['l_name'] ?> <?= $rows['pr_station'] ?></td>
           <td><?=substr($rows["pr_date"], 0, 10)?></td>
