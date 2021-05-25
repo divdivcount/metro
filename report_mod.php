@@ -5,7 +5,7 @@
   require_once("modules/notification.php");
 
 
-  $reportDao = new Product;
+
 
 
   //신고 내용
@@ -23,26 +23,28 @@
     $oauth = new Oauths;
     // echo $listc[0]['mb_id'];
     $member_mb = $oauth->admin_Om_select($member_num);
-    // var_dump($other_member);
+    // var_dump($member_mb);
     if(is_null($member_mb)){
           $mb_member = new Member;
-          $member_mb  = $mb_member->admin_Member_id_all_select($member_num);
+          $member_mb  = $mb_member->admin_Member_all_select($member_num);
           // var_dump($member);
     }else{
         // echo "??";
     }
   }
   $two_Report_user_rep_name = isset($member_mb[0]["mb_name"]) ? $member_mb[0]["mb_name"] : $member_mb[0]["om_nickname"];
+  // echo $two_Report_user_rep_name;
+  $reportDao = new Product;
   $two_Report_user = $reportDao->report_select($member_num, $pr_id);
-  $two_Report_user_rep_mb = $two_Report_user[0]["rep_mb"];
-  $two_Report_user_pr_id = $two_Report_user[0]["pr_id"];
-  var_dump($two_Report_user);
-  var_dump($two_Report_user_rep_name == $two_Report_user_rep_mb);
-  var_dump( $pr_id == $two_Report_user_pr_id);
+  $two_Report_user_rep_mb = isset($two_Report_user[0]["rep_mb"]) ? $two_Report_user[0]["rep_mb"] : null;
+  $two_Report_user_pr_id = isset($two_Report_user[0]["pr_id"]) ? $two_Report_user[0]["pr_id"] : null;
+  // var_dump($two_Report_user);
+  // var_dump($two_Report_user_rep_name == $two_Report_user_rep_mb);
+  // var_dump( $pr_id == $two_Report_user_pr_id);
   if($two_Report_user_rep_name == $two_Report_user_rep_mb && $pr_id == $two_Report_user_pr_id){
     userGoto("이미 한번 신고처리 하셨습니다.", "");
     exit;
-  }
+  }else{
     if(!(is_null($report_member))){
 
       // echo $listc[0]['mb_id'];
@@ -74,6 +76,6 @@
    // echo $other_member[0]["om_id"]."<br>";
    // echo $member[0]["mb_id"]."<br>";
    // echo $pr_id."<br>";
-   // userGoto("신고처리가 완료되었습니다.", "");
-
+   userGoto("신고처리가 완료되었습니다.", "");
+ }
 ?>
