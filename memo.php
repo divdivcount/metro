@@ -110,11 +110,16 @@ mysqli_close($conn); // 데이터베이스 접속 종료
 	<!-- 쪽지 목록 시작 { -->
 	<div class="note">
     <div class="header">
-      <div class="header_img">
-        <img src="img/note.png">
-        <span class="title">쪽지함</span>
+      <div class="left_header">
+        <div class="header_img">
+          <img src="img/note.png">
+          <span class="title">쪽지함</span>
+        </div>
+        <span class="text">전체 <?php echo $kind_title ?>쪽지 <?php echo $total_count ?>통</span>
       </div>
-      <span class="text">전체 <?php echo $kind_title ?>쪽지 <?php echo $total_count ?>통</span>
+      <div class="right_header">
+        <img src="img/cancle.png" class="" onclick="self.close()" style="width:2.3rem;height:2.3rem;cursor:pointer">
+      </div>
     </div>
 
 			<button class="btn1" onclick="location.href ='./memo.php?kind=recive'">받은쪽지</button>
@@ -127,10 +132,10 @@ mysqli_close($conn); // 데이터베이스 접속 종료
 				전통<br>
 			</caption> -->
 			<colgroup>
-				<col width="20%">
-				<col width="">
-				<col width="">
-				<col width="20%">
+				<col width="28%">
+				<col width="28%">
+				<col width="28%">
+        <col width="">
 			</colgroup>
 			<thead>
 			<tr>

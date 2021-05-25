@@ -51,7 +51,7 @@ $result = $galleryObj ->SelectGallery();
                     <input type="checkbox" name="id[]" value="<?= $row['id'] ?>">
                     <label onclick="list.pick(<?= $i ?>)"></label>
                     <input type="text" name="description" onkeyup="backdoor(<?= $i ?>)" placeholder="<?= $row['description'] ?>">
-                    <button type="button" class="chaneLink_btn" onclick="list.modify(<?= $i++ ?>)" disabled>설명 수정</button>
+                    <button type="button" class="chaneLink_btn" onclick="list.modify(<?= $i++ ?>)" disabled>링크 수정</button>
                   </div>
 
                 </div>
@@ -92,15 +92,15 @@ $result = $galleryObj ->SelectGallery();
             count: document.getElementById('len')
           },
           boxes: {
-            box: document.getElementById('gallery').getElementsByTagName('div'),
+            box: document.getElementById('gallery').getElementsByClassName('banner_box'),
             getId: function(i) {
-              return this.box[i].getElementsByClassName('banner_selectBox').item(0).children[0];
+              return this.box[i].querySelector('.banner_selectBox').children[0];
             },
             getDescription: function(i) {
-              return this.box[i].getElementsByClassName('banner_selectBox').item(0).children[2];
+              return this.box[i].querySelector('.banner_selectBox').children[2];
             },
             getSubmit: function(i) {
-              return this.box[i].getElementsByClassName('banner_selectBox').item(0).children[3];
+              return this.box[i].querySelector('.banner_selectBox').children[3];
             }
           },
           modifyForm: {

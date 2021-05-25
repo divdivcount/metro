@@ -70,8 +70,13 @@ mysqli_close($conn); // 데이터베이스 접속 종료
 	<!-- 쪽지보기 시작 { -->
 	<div class="note">
 		<div class="header">
-			<img src="img/note.png">
-			<span class="title">쪽지함</span>
+			<div class="left_header">
+				<img src="img/note.png">
+		    <span class="title">쪽지 보내기</span>
+			</div>
+			<div class="right_header">
+				<img src="img/cancle.png" class="" onclick="self.close()" style="width:2.3rem;height:2.3rem;cursor:pointer">
+			</div>
 		</div>
 		<button class="btn1" onclick="location.href ='./memo.php?kind=recive'">받은쪽지</button>
 		<button class="btn2" onclick="location.href ='./memo.php?kind=send'">보낸쪽지</button>

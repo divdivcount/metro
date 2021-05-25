@@ -16,8 +16,13 @@ $pr_id = $_GET['id']; // GET 방식으로 넘어온 받는 제품번호
 <body id="memo">
 	<!-- 쪽지 보내기 시작 { -->
   <div class="header">
-    <img src="img/note.png">
-    <span class="title">쪽지 보내기</span>
+		<div class="left_header">
+			<img src="img/note.png">
+	    <span class="title">쪽지 보내기</span>
+		</div>  
+		<div class="right_header">
+			<img src="img/cancle.png" class="" onclick="self.close()" style="width:2.3rem;height:2.3rem;cursor:pointer">
+		</div>
   </div>
 
 	<div class="content_box">
