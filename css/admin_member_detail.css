@@ -2,7 +2,7 @@
 * { box-sizing: border-box; }
 ul, li { list-style: none; padding: 0; }
 a { text-decoration: none; }
-body { margin: 0; }
+body { margin: 0; font-family: "NotoSansKR_r";}
 html { font-size: 10px !important; }
 
 .member-container {
@@ -10,8 +10,8 @@ html { font-size: 10px !important; }
     display: grid;
     grid-template-areas: 'member-content member-button' 'member-board member-board';
     grid-template-columns: 2.45fr 1fr;
-    grid-template-rows: 1fr 2.67fr;
-    grid-gap: 30px;
+    grid-template-rows: 1fr auto;
+    grid-column-gap: 30px;
 }
 
 /* content CSS */
@@ -87,18 +87,19 @@ li {
 .member-board {
   grid-area: member-board;
   width: 82%;
-  height: 594px;
+  height: auto;
   justify-self: center;
   box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.16);
   position: relative;
+    margin: 3.0rem 0 0;
 }
 
 .board-content {
   font-size: 1.5rem;
   background-color: #fff;
   color: #7B7B7B;
-  margin: 0;
-  
+  height: 100%;
+  padding: 2.0rem;
 }
 
 .board-content p {
@@ -108,10 +109,6 @@ li {
 
 table {
   height: auto;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 
 th {
@@ -152,19 +149,20 @@ td:nth-child(5) {
 }
 
 #pagenation_box {
+  display: flex;
+  justify-content: center;
   text-align: center;
   width: 100%;
   font-family: "NotoSansKR_m";
   font-size: 2.0rem;
-  position: absolute;
-  margin: 2.0rem 0;
-  top: 93%;
-  transform: translateY(-93%);
+  padding-top:2.0rem;
 }
 
 #pagenation_box a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-decoration: none;
-  display: inline-block;
   width: 3.0rem;
   height: 3.0rem;
 }
@@ -242,18 +240,6 @@ td:nth-child(5) {
     height: 396px;
   }
 
-
-  .board-content {
-    font-size: 1.3rem;
-    
-    padding: 15px;
-  }
-
-  table {
-    position: static;
-    transform: translate(0%, 0%);
-  }
-
   p,
   td:nth-child(3),
   th:nth-child(3),
@@ -272,11 +258,5 @@ td:nth-child(5) {
     text-align: center;
   }
 
-  #pagenation_box {
-    position: static;
-    transform: translate(0%, 0%);
-  }
 
-  
 }
-

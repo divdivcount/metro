@@ -31,7 +31,7 @@
     <div class="content">
       <div class="content_table">
         <p>게시글</p>
-        <table>
+        <table id="userList_table">
         <tr>
           <th>회원 이름</th>
           <th>회원 아이디</th>

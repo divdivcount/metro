@@ -53,7 +53,7 @@
     <p>
       <?=isset($member[0]["mb_name"]) ? $member[0]["mb_name"] : $oauthmember[0]["om_nickname"]?>님의 게시글
     </p>
-    <table>
+    <table style="width:100%;">
       <tr>
         <th>글 제목</th>
         <th>해당 위치(호선, 역)</th>

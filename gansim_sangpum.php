@@ -84,7 +84,7 @@ ini_set('display_errors', '1');
       <!-- 상품 정보  -->
       <?php foreach ($list as $row) : ?>
 
-      <div class="productInfo_box">
+      <div class="productInfo_box" onclick="parent.changeURL('searchProduct_detail.php?id=<?=$row['pr_id']?>&title=<?=$row['pr_title']?>')">
 
         <!-- 상품 이미지  -->
         <div class="productInfo_part_img">

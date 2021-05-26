@@ -87,7 +87,7 @@ if(isset($_SESSION['ss_mb_id'])){
       <input class="input_email" type="text" id="email" name="mb_email" value="<?=$mb["mb_email"] ? $mb["mb_email"] : $om["om_email"] ?>"  readonly required>
 
       <label><span class="blue">*</span>주변 역 설정하기</label>
-      <div id="station" style="display:flex;"><input class="input_station" type="text" id="pw2" value="<?=$mb['line_station'] ? $mb['line_station'] : $om['line_station']?>" required>
+      <div id="station" style="display:flex;"><input class="input_station" type="text" id="pw2" value="<?=$mb['line_station'] ? $mb['line_station'] : (isset($om['line_station']) ? $om['line_station'] : "")?>" required>
       <input class="w3-button w3-light-gray w3-round" type="button" id="selectStation_openBtn" value="역 검색"> </div>
 
 

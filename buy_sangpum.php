@@ -58,7 +58,7 @@ ini_set('display_errors', '1');
 	<div class="w3-content w3-container">
 
     <!-- 제목 -->
-    <h3 class="h3">판매 내역</h3>
+    <h3 class="h3">구매 내역</h3>
     <?php
       try {
           // $start_s_value = empty($_REQUEST["start_s_value"]) ? "" : $_REQUEST["start_s_value"];

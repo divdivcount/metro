@@ -72,7 +72,7 @@ try{
 
                 <div class="find_item">
                   <span>출발역을 입력해주세요.</span>
-                  <input type="text" id="auto" class="w3-input highlight" value="" name="departure_station" placeholder="여긴 검색하는부분">
+                  <input type="text" id="auto" class="w3-input highlight" value="<?= substr($mb["line_station"],(strpos($mb["line_station"],';')+1)) ?>" name="departure_station" placeholder="여긴 검색하는부분">
                 </div>
 
                 <div class="find_item">
@@ -447,22 +447,100 @@ try{
 
       $(document).ready(function(){
 
+        function set_defaultStation(st_name) {
+          if (st_name != null && st_name != "") {
+            var stationName = st_name;
+            var result="";
+             $.ajax({
+                url:'searchStation_odsayAPI.php', //request 보낼 서버의 경로
+                type:'post', // 메소드(get, post)
+                data:{station:stationName,return_result:'s_num'}, //보낼 데이터
+                async:false,
+                success: function(data) {
+                    //서버로부터 정상적으로 응답이 왔을 때 실행
+                    var json_data= JSON.parse(data);
+                    result = json_data[0];
+                },
+                error: function(err) {
+                  // alert("관심 상품을 등록하기 위해서 로그인을 먼저 해주세요");
+                  // history.back();
+                }
+            });
+            return result;
+          }
+        }
+
+        departure_stationID=set_defaultStation($('#auto').val());
+        console.log(departure_stationID);
+        arrival_stationID=set_defaultStation($('#arrival_station').val());
+        console.log(arrival_stationID);
         //도착역 미리 검색후 지정
-        var stationName = $('#arrival_station').val();
-        $.ajax({
-            url:'searchStation_odsayAPI.php', //request 보낼 서버의 경로
-            type:'post', // 메소드(get, post)
-            data:{station:stationName,return_result:'s_num'}, //보낼 데이터
-            success: function(data) {
-                //서버로부터 정상적으로 응답이 왔을 때 실행
-                var json_data= JSON.parse(data);
-                arrival_stationID=json_data[0];
-            },
-            error: function(err) {
-              // alert("관심 상품을 등록하기 위해서 로그인을 먼저 해주세요");
-              // history.back();
-            }
-        });
+
+        //검색버튼 눌럿을때 odsay 지하철경로관련api를 호출하는 페이지 호출후  도착시간 불러옴
+        $("#arrivalTime_btn").click(function() {
+          //정확한 정보를 입력했는지 확인하는 if
+          if (departure_stationID != null && departure_stationID != "") {
+            $.ajax({
+              url : "subwayPath_odsayAPI.php",
+              type : "post",
+              data : {
+                departure_stationID : departure_stationID,
+                arrival_stationID : arrival_stationID
+              },
+              success : function(data) {
+                let today = new Date();
+                var requiredTime =data;
+                var requiredHour = Math.floor(data / 60);
+                var requiredMin = data % 60;
+                var arrivalTime_string="";
+                var arrivalHour = today.getHours() + requiredHour;
+                var arrivalMin = today.getMinutes() + requiredMin;
+
+                if (arrivalMin > 60) {
+                  arrivalHour++;
+                  arrivalMin -= 60;
+                }
+
+                //다음날으로 넘어갈때
+                if (arrivalHour > 24) {
+                  arrivalTime_string += "다음날 ";
+                  arrivalHour -= 24;
+                }
+
+                //ex 9분 -> 09분
+                if (arrivalMin < 10)
+                  arrivalMin = "0" + arrivalMin;
+
+                //오후 오전 구분
+                if (arrivalHour > 12)
+                  arrivalTime_string += "오후 " + (arrivalHour-12) + ":" + arrivalMin;
+                else
+                  arrivalTime_string += "오전 " + arrivalHour + ":" + arrivalMin;
+
+                //ex 9:9 -> 09:09
+                if (requiredHour < 10)
+                  requiredHour = "0" + requiredHour;
+                if (requiredMin < 10)
+                  requiredMin = "0" + requiredMin;
+
+                document.getElementById('requiredTime').innerHTML = requiredHour+":"+requiredMin;
+                document.getElementById('requiredTime_detail').innerHTML = today.toLocaleTimeString().slice(today.toLocaleTimeString().lengt,-3)+ " ~ " + arrivalTime_string;
+                document.querySelector(".timeResult").classList.remove("hidden");
+                document.querySelector("#bothFind_item").classList.add("hidden");
+              },
+              error : function(e){
+                alert("로그인을 먼저 해주세요");
+                location.repleace("./index.php");
+              }
+            });
+          } else if($('#auto').val() == "") {
+            alert("출발역을 입력해주세요.")
+          }else{
+            alert("정확한 정보 표시를 위해 역 검색 시 입력창 아래 표시되는 역 목록 중에 반드시 하나를 선택해 주세요.");
+          }
+
+        })
+
 
 
         var bxslider_img = document.querySelector(".bxslider").getElementsByTagName('img');
@@ -678,62 +756,7 @@ try{
     }
 
 
-    //검색버튼 눌럿을때 odsay 지하철경로관련api를 호출하는 페이지 호출후  도착시간 불러옴
-    $("#arrivalTime_btn").click(function() {
-      $.ajax({
-        url : "subwayPath_odsayAPI.php",
-        type : "post",
-        data : {
-          departure_stationID : departure_stationID,
-          arrival_stationID : arrival_stationID
-        },
-        success : function(data) {
-          let today = new Date();
-          var requiredTime =data;
-          var requiredHour = Math.floor(data / 60);
-          var requiredMin = data % 60;
-          var arrivalTime_string="";
-          var arrivalHour = today.getHours() + requiredHour;
-          var arrivalMin = today.getMinutes() + requiredMin;
 
-          if (arrivalMin > 60) {
-            arrivalHour++;
-            arrivalMin -= 60;
-          }
-
-          //다음날으로 넘어갈때
-          if (arrivalHour > 24) {
-            arrivalTime_string += "다음날 ";
-            arrivalHour -= 24;
-          }
-
-          //ex 9분 -> 09분
-          if (arrivalMin < 10)
-            arrivalMin = "0" + arrivalMin;
-
-          //오후 오전 구분
-          if (arrivalHour > 12)
-            arrivalTime_string += "오후 " + (arrivalHour-12) + ":" + arrivalMin;
-          else
-            arrivalTime_string += "오전 " + arrivalHour + ":" + arrivalMin;
-
-          //ex 9:9 -> 09:09
-          if (requiredHour < 10)
-            requiredHour = "0" + requiredHour;
-          if (requiredMin < 10)
-            requiredMin = "0" + requiredMin;
-
-          document.getElementById('requiredTime').innerHTML = requiredHour+":"+requiredMin;
-          document.getElementById('requiredTime_detail').innerHTML = today.toLocaleTimeString().slice(today.toLocaleTimeString().lengt,-3)+ " ~ " + arrivalTime_string;
-          document.querySelector(".timeResult").classList.remove("hidden");
-          document.querySelector("#bothFind_item").classList.add("hidden");
-        },
-        error : function(e){
-          alert("로그인을 먼저 해주세요");
-          location.repleace("./index.php");
-        }
-      });
-    })
 
     $(document).ready(function(){
       var auto_complete = $("#auto");
@@ -744,6 +767,7 @@ try{
       });
 
     $('#auto').on('keyup', function(){
+      departure_stationID="";
       if(this.value !== ""){
         var station = $('#auto').val();
         // 오디세이 역 검색 api 호출해주는 php 페이지 호출

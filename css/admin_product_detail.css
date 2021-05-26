@@ -1,13 +1,21 @@
 html, body{
   font-size: 10px;
 }
+body{
+  height: 100%;
+  padding: 5.0rem 0;
+  font-family: "NotoSansKR_r";
+}
+#wrapPage{
+
+}
 #content_box{
   display: flex;
   flex-direction: column;
   justify-content:space-between;
   width: 81%;
   height: auto;
-  margin: 5.0rem auto;
+  margin: 0 auto;
 }
 #mainProduct_box{
   display: flex;

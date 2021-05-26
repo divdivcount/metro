@@ -384,10 +384,8 @@
     });
   }
 
-
-  function test() {
-    alert(document.getElementById('change_selectID').value);
-    alert(document.getElementById('change_salePrid').value);
+  function changeURL(url) {
+    document.location = url;
   }
 </script>
 </html>

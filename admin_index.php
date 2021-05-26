@@ -100,20 +100,44 @@ require_once("modules/admin.php");
   </div>
 
   <script>
+  $(document).ready(function(){
+
+  });
+  var iframe_height="";
+
     function changeIframeUrl(url) {
       document.getElementById("main_frame").src = url;
     }
+
+
     var iframe = document.getElementById('main_frame');
 
     window.addEventListener('DOMContentLoaded', function () {
     iframe.addEventListener('load', autoHeight);
     })
+    window.addEventListener("resize", checkHeight);
+
+    function checkHeight() {
+      var frame_1 = iframe;
+      var sub_1 = frame_1.contentDocument ? frame_1.contentDocument : frame_1.contentWindow.document;
+      var content_height= sub_1.body.scrollHeight + 70;
+      if (content_height < window.innerHeight) {
+        document.querySelector('.menu').style.height="100vh";
+      }else{
+        document.querySelector('.menu').style.height="100%";
+      }
+      iframe.height = sub_1.body.scrollHeight;
+    }
+
     //iframe 높이 조절
     function autoHeight() {
     var frame = iframe;
       var sub = frame.contentDocument ? frame.contentDocument : frame.contentWindow.document;
       iframe.height = sub.body.scrollHeight;
+      checkHeight();
     }
+
+
   </script>
 
 </body>
