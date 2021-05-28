@@ -92,11 +92,11 @@ body {
 
 .menu1 a {
   color: #fff;
+  font-size: 1.5rem;
 }
 
 .content {
   grid-area: content;
-  overflow-y: scroll;
 }
 
 /* Mobile CSS */
@@ -225,4 +225,16 @@ body {
     top: 50%;
     transform: rotate(-45deg)
   }
+}
+@media only screen and (max-width: 1024px) {
+  html,body{font-size: 9px!important;}
+}
+@media only screen and (max-width: 768px) {
+  html,body{font-size: 8px!important;}
+}
+@media only screen and (max-width: 540px) {
+  html,body{font-size: 7px!important;}
+}
+@media only screen and (max-width: 360px) {
+  html,body{font-size: 6px!important;}
 }

@@ -111,12 +111,12 @@ body{
   color: #000;
 }
 @media only screen and (max-width: 1024px) {
-  html,body{font-size: 9px!important;}
+  html,body{font-size: 10px!important;}
   #slideImg_box{
     width: 40.0rem;
   }
   @media only screen and (max-width: 768px) {
-    html,body{font-size: 8px!important;}
+    html,body{font-size: 9px!important;}
     #mainProduct_box{flex-direction: column;height: auto;}
     #slideImg_box{width: 100%;min-width:0;}
     #mainProduct_information{width: auto;margin-top: 5.0rem;}
@@ -124,10 +124,10 @@ body{
     #button_box form{margin-left: 0;}
   }
   @media only screen and (max-width: 540px) {
-    html,body{font-size: 7px!important;}
+    html,body{font-size: 8px!important;}
   }
   @media only screen and (max-width: 425px) {
   }
   @media only screen and (max-width: 375px) {
-    html,body{font-size: 6px!important;}
+    html,body{font-size: 7px!important;}
   }

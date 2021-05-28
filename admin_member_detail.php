@@ -64,7 +64,7 @@ if(!(is_null($listc))){
   <div class="member-container">
     <!-- 유저 프로필 뽑히는 곳 -->
     <div class="member-content">
-      <img
+      <img style="width:14.0rem;height:14.0rem"
         src="<?= isset($row["mb_image"]) ? ($row["mb_image"] != "img/normal_profile.png" ? (strpos($row["mb_image"], "http") === 0 ? $row["mb_image"] : "files/".$row["mb_image"]) : $row["mb_image"]) : $row["om_image_url"] ?>">
       <span class="content-info">
         <ul>
@@ -194,12 +194,12 @@ if(!(is_null($listc))){
   window.addEventListener('DOMContentLoaded', function () {
   iframe.addEventListener('load', autoHeight);
   })
-
+  window.addEventListener("resize", autoHeight);
   //iframe 높이 조절
   function autoHeight() {
   var frame = iframe;
     var sub = frame.contentDocument ? frame.contentDocument : frame.contentWindow.document;
-    iframe.height = sub.body.scrollHeight;
+    iframe.height = sub.body.scrollHeight + 35;
   }
 </script>
 </html>

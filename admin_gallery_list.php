@@ -28,7 +28,7 @@ $result = $galleryObj ->SelectGallery();
       <div>
 
         <ul id="sub"><!-- list-> oppenUploader함수실행 -->
-          <li><button type="button" name="button" onclick="list.openUploader()">추가</button></li>
+          <li><button type="button" name="button" onclick="list.openUploader()">배너추가</button></li>
           <li><button type="button" name="button" onclick="list.openList()">돌아가기</button></li>
           <li><button type="button" name="button" onclick="list.cancel()">선택취소</button></li>
           <li><button type="button" name="button" onclick="list.dom.deleteForm.submit()">삭제</button></li>
@@ -161,6 +161,7 @@ $result = $galleryObj ->SelectGallery();
           this.dom.section.list.style.display = '';
         },
         openUploader: function() {
+          this.cancel();
           this.dom.menuLine.upload.style.display = 'none';
           this.dom.section.upload.style.display = '';
           this.dom.menuLine.list.style.display = '';

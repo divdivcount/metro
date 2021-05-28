@@ -27,8 +27,8 @@
     }
   </style>
 </head>
-<body>
-  <div class="board-content">
+<body style="padding:2.0rem;">
+  <div class="board-content" >
     <!-- 제목 -->
     <?php
         try {
