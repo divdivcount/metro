@@ -369,7 +369,7 @@
     var pr_id = $("#change_salePrid").val();
     //  판매수정시 판매상품 id 전달
     $.ajax({
-        url:'test.php', //request 보낼 서버의 경로
+        url:'changeBuyer.php', //request 보낼 서버의 경로
         type:'post', // 메소드(get, post)
         data:{pr_id:pr_id, selectId:selectId}, //보낼 데이터
         success: function(data) {
