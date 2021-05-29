@@ -57,6 +57,10 @@ if($explainText == null){
   userGoto("제품 설명란이 등록 되지 않았습니다.","");
   exit;
 }
+if($_FILES['files']['name'][0] !== ''){
+  userGoto("제품 이미지가 1장 이상 등록 되지 않았습니다.","");
+  exit;
+}
 
 try {
 
