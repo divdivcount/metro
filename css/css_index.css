@@ -401,7 +401,7 @@ a{text-decoration: none;}
     overflow: hidden;
   }
   .bx_img img {
-    width: auto!important;
+    width: 100%!important;
     height: 100%;
     position: absolute;
     top: 50%;
@@ -411,7 +411,8 @@ a{text-decoration: none;}
 
 
   html,body{font-size: 8px!important;}
-  #selectMetro_box{flex-direction: column;height: 180px; top:0;left:0;position: inherit;margin: 0 auto;transform: none;margin-top: 3.0rem;padding: 3.0rem 4.0rem;}
+  .bx-wrapper{margin-bottom: 0!important;}
+  #selectMetro_box{flex-direction: column;height: 180px; top:0;left:0;position: inherit;margin: 0 auto;transform: none;padding: 3.0rem 4.0rem;}
   #selectMetro_box #bothFind_item {width: 100%}
   #selectMetro_box .w3-button{width: 160px;height: 40px;padding: 10px 40px;}
   #mainContent_box {margin-top: 10.0rem}

@@ -329,6 +329,7 @@ require_once('modules/db.php');
           success: function(data) {
               //서버로부터 정상적으로 응답이 왔을 때 실행
               $('#owl-carousel').trigger('replace.owl.carousel', data).trigger('refresh.owl.carousel');
+              test_OWL();
           },
           error: function(err) {
               //서버로부터 응답이 정상적으로 처리되지 못햇을 때 실행

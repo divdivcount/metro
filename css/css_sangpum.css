@@ -71,6 +71,7 @@ body {
   .pr_buttons{
     display: flex;
     justify-content: space-between;
+    z-index: 10000;
   }
   .pr_buttons .w3-button{
     padding: 0.8rem 1.6rem;
