@@ -26,15 +26,6 @@
     echo '{"html":"';
     echo "<select id='selectID' class='fancy_SelectBuyerSelectBox'>";
     echo "<option value='0' selected='selected' data-skip='1'>구매자를 선택해주세요.</option>";
-    // for ($i=0; $i < count($result_member); $i++) {
-    //   echo "<option data-value='";
-    //   echo isset($result_member[$i]["mb_id"]) ? $result_member[$i]["mb_id"] : (isset($result_member[$i]["om_id"]) ? $other_member[$i]["om_id"] : null);
-    //   echo "' data-icon='";
-    //   echo isset($result_member[$i]["mb_image"]) ? $result_member[$i]["mb_image"] : $result_member[$i]["om_iamge_url"];
-    //   echo "' data-html-text='".$rowaa["me_send_mb_id"]."'>";
-    //   echo $rowaa["me_send_mb_id"];
-    //   echo "</option>";
-    // }
     for ($i=0; $i < count($result_member); $i++) {
       // var_dump($result_member[$i][0]["mb_id"]);
       echo "<option data-value='";
@@ -55,5 +46,4 @@
     echo "<input id='salePrid' type='hidden' value='".$pr_id."'>";
     echo '","emptyCheck":0}';
   }
-
  ?>
