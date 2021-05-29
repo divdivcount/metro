@@ -1,7 +1,7 @@
 Reset CSS
 * { box-sizing: border-box; }
 li, ul { list-style: none; }
-a { text-decoration: none; }
+a { text-decoration: none; cursor: pointer;}
 html{ font-size: 10px !important; font-family: "NotoSansKR_r";height: 100vh;}
 a:visited{
   color: #222;

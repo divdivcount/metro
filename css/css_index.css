@@ -256,7 +256,7 @@ display : -webkit-box;
   display: grid;
   grid-auto-flow:row;
   grid-template-columns: repeat(4,1fr);
-  grid-template-rows: repeat(4,1fr);
+  grid-template-rows: repeat(8,1fr);
   overflow: hidden;
   grid-gap: auto;
   transition-duration: 0.5s;
@@ -295,7 +295,7 @@ display : -webkit-box;
   background-image: url("../img/new_sub_bannerImg.png");
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: top center;
 }
 #explain_box{
   margin: 0 auto;

@@ -29,19 +29,19 @@ require_once("modules/admin.php");
             <li class="menu1">
               <a href="#">게시글 관리</a>
               <ul class="menu2">
-                <li><a href="#" onclick="changeIframeUrl('admin_product_list.php')" class="menu_li">전체 게시글 관리</a></li>
+                <li><a onclick="changeIframeUrl('admin_product_list.php')" class="menu_li">전체 게시글 관리</a></li>
                 <li><a onclick="changeIframeUrl('admin_product_blind.php')" class="menu_li">가리기한 게시글</a></li>
               </ul>
             </li>
             <li class="menu1">
-              <a href="#">회원관리</a>
+              <a>회원관리</a>
               <ul class="menu2">
                 <li class="menu_li"><a href="#" class="menu_li" onclick="changeIframeUrl('admin_member_list.php')">회원관리</a></li>
                 <li class="menu_li"><a href="#" class="menu_li" onclick="changeIframeUrl('admin_member_block_list.php')">차단당한 회원 관리</a></li>
               </ul>
             </li>
             <li class="menu1">
-              <a href="#">배너 변경</a>
+              <a>배너 변경</a>
               <ul class="menu2">
                 <li class="menu_li"><a href="#" class="menu_li" onclick="changeIframeUrl('admin_gallery_list.php')">배너 변경하기</a></li>
               </ul>

@@ -158,7 +158,7 @@ require_once('modules/db.php');
 
       <div id="recentProducts_gridbox">
         <?php
-        $sql = "select p.ca_name, p.pr_id,p.pr_title,p.pr_status,p.pr_price,pi.pr_img,l.l_name,p.pr_station from product p left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join member m ON p.mb_id = m.mb_num left outer join interest ia on ia.pr_id = p.pr_id where p.pr_img_id = pi.pr_img_id and pi.main_check = 'y' and pr_status='판매중' and pr_block = 1 order by pr_id desc limit 0,20";
+        $sql = "select p.ca_name, p.pr_id,p.pr_title,p.pr_status,p.pr_price,pi.pr_img,l.l_name,p.pr_station from product p left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join member m ON p.mb_id = m.mb_num left outer join interest ia on ia.pr_id = p.pr_id where p.pr_img_id = pi.pr_img_id and pi.main_check = 'y' and pr_status='판매중' and pr_block = 1 order by pr_id desc limit 0,32";
         $new_product_result = mysqli_query($conn, $sql);  //여기
         while ($product_result = mysqli_fetch_assoc($new_product_result)) { //여기 ?>
         <a href="searchProduct_detail.php?id=<?=$product_result['pr_id']?>&title=<?=$product_result['pr_title']?>"><div class="recent_productInfo_box">
@@ -187,6 +187,8 @@ require_once('modules/db.php');
 
     <!-- 매트로켓 장점 소개 부분  -->
     <div id="advantages_box">
+
+      <div id="background_bannerImg">
       <!-- 타이틀  -->
       <div class="titleText_1">
         왜 매트로켓이 좋을까요
@@ -195,41 +197,40 @@ require_once('modules/db.php');
         메트로켓은 가장 실용성있는 중고거래사이트 입니다.
       </div>
 
+      <!-- 텍스트 박스 4개  -->
+      <div id="explain_box">
 
-      <div id="background_bannerImg">
-        <!-- 텍스트 박스 4개  -->
-        <div id="explain_box">
-
-          <div class="textBox_1">
-            <div class="imgbox_3"><img src="img\locker_3.png" alt=""></div>
-            <span>비대면 거래</span>
-            <div class="blue_line"></div>
-            <p>필요에 따라 물품 보관함을 이용해 비대면 거래를 이용할 수 있습니다.</p>
-          </div>
-
-          <div class="textBox_1">
-            <div class="imgbox_3"><img src="img\time_3.png" alt=""></div>
-            <span>도착시간</span></li>
-            <div class="blue_line"></div>
-            <p>메트로켓은 출발시간에 맞춰서 도착시간을 알려줍니다.</p>
-          </div>
-
-          <div class="textBox_1">
-            <div class="imgbox_3"><img src="img\train_3.png" alt=""></div>
-            <span>지하철역 거래</span>
-            <div class="blue_line"></div>
-            <p>인증받은 주변 역을 중심으로 품목들을 볼 수 있고, 호선을 선택하여 다양한 물품들을 검색할 수 있습니다.</p>
-          </div>
-
-          <div class="textBox_1">
-            <div class="imgbox_3"><img src="img\shield_3.png" alt=""></div>
-            <span>안전거래</span>
-            <div class="blue_line"></div>
-            <p>실시간으로 물건을 직접 보고 거래하여 안전하게 거래를 이용할 수 있습니다.</p>
-          </div>
-
+        <div class="textBox_1">
+          <div class="imgbox_3"><img src="img\locker_3.png" alt=""></div>
+          <span>비대면 거래</span>
+          <div class="blue_line"></div>
+          <p>필요에 따라 물품 보관함을 이용해 비대면 거래를 이용할 수 있습니다.</p>
         </div>
+
+        <div class="textBox_1">
+          <div class="imgbox_3"><img src="img\time_3.png" alt=""></div>
+          <span>도착시간</span></li>
+          <div class="blue_line"></div>
+          <p>메트로켓은 출발시간에 맞춰서 도착시간을 알려줍니다.</p>
+        </div>
+
+        <div class="textBox_1">
+          <div class="imgbox_3"><img src="img\train_3.png" alt=""></div>
+          <span>지하철역 거래</span>
+          <div class="blue_line"></div>
+          <p>인증받은 주변 역을 중심으로 품목들을 볼 수 있고, 호선을 선택하여 다양한 물품들을 검색할 수 있습니다.</p>
+        </div>
+
+        <div class="textBox_1">
+          <div class="imgbox_3"><img src="img\shield_3.png" alt=""></div>
+          <span>안전거래</span>
+          <div class="blue_line"></div>
+          <p>실시간으로 물건을 직접 보고 거래하여 안전하게 거래를 이용할 수 있습니다.</p>
+        </div>
+
       </div>
+      </div>
+
 
 
       <!-- 배너이미지 3 -->
@@ -271,14 +272,13 @@ require_once('modules/db.php');
           auto: true,        // 자동 실행 여부
           autoHover: false,   // 마우스 호버시 정지 여부
           controls: true,    // 이전 다음 버튼 노출 여부
-          captions:true,
           adaptiveHeight:true
       })
     },1)
 
     load_category(tapmenuItem.item(0).innerText);
     // $(".owl-carousel").owlCarousel(obj);
-    changeWidth_RecentProducts_gridbox(2);
+    changeWidth_RecentProducts_gridbox(4);
     changeContent();
     // 768px 일때 사이트 소개이미지파일 다른해상도 파일로 변경
           // 최근상품 그리드박스 높이 정의
@@ -500,11 +500,11 @@ require_once('modules/db.php');
 
     function changeBtn_style() {
       if (document.getElementById('moreInfo_btn').dataset.tf=="0") {
-        changeWidth_RecentProducts_gridbox(4);
+        changeWidth_RecentProducts_gridbox(8);
         document.getElementById('moreInfo_btn').innerHTML="<div style='display:flex;align-items:center;justify-content:center'>닫기<img src='img/white_listup_btn_15x15.png' style='margin-left:1.0rem;height:1.5rem;'></div>";
         document.getElementById('moreInfo_btn').dataset.tf="1"
       }else {
-        changeWidth_RecentProducts_gridbox(2);
+        changeWidth_RecentProducts_gridbox(4);
         document.getElementById('moreInfo_btn').innerHTML ="<div style='display:flex;align-items:center;justify-content:center'>최신매물 더 보기<img src='img/white_dropdown_btn_15x15.png' style='margin-left:1.0rem;height:1.5rem;'></div>";
         document.getElementById('moreInfo_btn').dataset.tf="0"
       }
@@ -520,18 +520,24 @@ require_once('modules/db.php');
       // console.log(test_owl);
 
       var w_width = window.outerWidth;
-      if (w_width < 768) {
+      var bx_img_array= document.getElementsByClassName("bx_img");
+      if (w_width <= 768) {
         var want_height = w_width / 2.4;
-        var bx_img_array= document.getElementsByClassName("bx_img");
+        // var bx_viewport= document.querySelector(".bx_viewport");
+        // bx_viewport.style.height = want_height + "px";
         for (var i = 0; i < bx_img_array.length; i++) {
           bx_img_array.item(i).style.height = want_height + "px";
+        }
+      }else{
+        for (var i = 0; i < bx_img_array.length; i++) {
+          bx_img_array.item(i).style.height = "auto";
         }
       }
 
       if (document.getElementById('moreInfo_btn').dataset.tf=="0") {
-        changeWidth_RecentProducts_gridbox(2);
-      }else {
         changeWidth_RecentProducts_gridbox(4);
+      }else {
+        changeWidth_RecentProducts_gridbox(8);
       }
       changeSubBannerImge();
     }
