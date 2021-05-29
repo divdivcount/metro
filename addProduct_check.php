@@ -57,7 +57,8 @@ if($explainText == null){
   userGoto("제품 설명란이 등록 되지 않았습니다.","");
   exit;
 }
-if($_FILES['files']['name'][0] !== ''){
+// var_dump($_FILES['files']['name'][0] == '');
+if($_FILES['files']['name'][0] == ''){
   userGoto("제품 이미지가 1장 이상 등록 되지 않았습니다.","");
   exit;
 }
@@ -69,10 +70,14 @@ try {
   $productObj = new Product();
   $results = $productObj->Product_title_search($title,$om,$mb);
   // echo $pr_img_id."<br>";
-  foreach ($results as $rows) {
-    // echo $rows['pr_title']."<br>";
-    if($rows['pr_title'] == $title){
-      userGoto("이미 한번 입력된 제목 입니다.", "addProduct.php");
+  if(is_null($results)){
+
+  }else{
+    foreach ($results as $rows) {
+      // echo $rows['pr_title']."<br>";
+      if($rows['pr_title'] == $title){
+        userGoto("이미 한번 입력된 제목 입니다.", "addProduct.php");
+      }
     }
   }
   $ftime = time();
@@ -105,7 +110,7 @@ try {
         }
       }
     }
-    userGoNow('My_one_page.php');
+    userGoto("제품이 등록되었습니다. ",'My_one_page.php');
     exit;
   }
   if($mode == "modify"){

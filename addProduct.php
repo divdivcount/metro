@@ -298,7 +298,7 @@ ini_set('display_errors', '1');
         <div class="img_Item" style="background-image:url('../img/add_img.png')"></div>
         <div class="img_Item" style="background-image:url('../img/add_img.png')"></div>
         <div class="img_Item" style="background-image:url('../img/add_img.png')"></div>
-        <input type="file" id="real-input" name="files[]" class="image_inputType_file"  accept="image/jpeg,image/png,image/gif" style="display:none" required multiple>
+        <input type="file" id="real-input" name="files[]" class="image_inputType_file"  accept="image/jpeg,image/png,image/gif" style="display:none" multiple>
 
       </div>
 
