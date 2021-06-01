@@ -9,21 +9,25 @@ $om_line_station= '';
 // echo $om_line_station_update;
 if($ctg_name != "all" && $om_line_station_update){
 	// echo "통과1";
-	$sql = "select s.s_name, i.l_name  from station s, line i where i.l_id = '$ctg_name'";
+	$sql = "select s.s_name, i.l_name  from station s, line i where i.l_id = $ctg_name and s.l_id=i.l_id";
 	$line = mysqli_query($conn, $sql);
 	$a = 0;
 
 	while($station = mysqli_fetch_assoc($line)){
+
 		// print_r($station)."<br>";
 		if(array_search($om_line_station_update, $station) === false) {
 			// $theVariable = "not";
 			// echo $theVariable."<br>";
-		}else{
+		}else if(array_search($om_line_station_update, $station) !== false){
 			// $theVariable = "sure";
 			// echo $theVariable."<br>";
 			$ctg_name = $station["l_name"];
 			$om_line_station = $ctg_name."&nbsp;".$om_line_station_update;
+			// echo $om_line_station;
 			$a = 1;
+			break;
+		}else{
 			break;
 		}
 	}
@@ -36,8 +40,8 @@ if($ctg_name != "all" && $om_line_station_update){
 
 		while($station = mysqli_fetch_assoc($line)){
 			// print_r($station)."<br>";
-			if(array_search($om_line_station_update, $station) === false) {
-				$theVariable = "not";
+			if(array_search($om_line_station_update, $station) == false) {
+				// $theVariable = "not";
 				// echo $theVariable."<br>";
 			}else{
 				$ctg_name = $station["l_name"];

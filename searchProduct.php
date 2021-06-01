@@ -1,5 +1,6 @@
 <?php
 require_once('modules/db.php');
+require_once('modules/notification.php');
 $dao = new Product;
 $pid = Get('p', 1);
 $ctg_name = Get("ctg_name", 0);
@@ -7,19 +8,27 @@ $ctg_station = Get("ctg_station", 0);
 
 // echo $a;
 // echo $ctg_name."호선"."<br>";
-// echo $ctg_station."역"."<br>";
+// echo $ctg_station;
+
 if($ctg_name != "all" && $ctg_station){
 	// echo "통과1";
-	$sql = "select s.s_name, i.l_name  from station s, line i where i.l_id = '$ctg_name'";
-	$result = mysqli_query($conn, $sql);
+	$sql = "select s.s_name, i.l_name  from station s, line i where i.l_id = $ctg_name and s.l_id=i.l_id";
+	$line = mysqli_query($conn, $sql);
 	$a = 0;
-	while($station = mysqli_fetch_assoc($result)){
+	while($station = mysqli_fetch_assoc($line)){
 		// print_r($station)."<br>";
 		if(array_search($ctg_station, $station) === false) {
+			// echo $ctg_station;
 			// $theVariable = "not";
 			// echo $theVariable."<br>";
-		}else{
+			// if(array_search($ctg_station, $station) == true){
+			// 	$theVariable = "sure";
+			// 	echo $ctg_station;
+			// }
+		}elseif(array_search($ctg_station, $station) !== false){
+			// echo "통과4";
 			// $theVariable = "sure";
+			// echo $ctg_station;
 			// echo $theVariable."<br>";
 			$a = 1;
 			break;
@@ -30,9 +39,9 @@ if($ctg_name != "all" && $ctg_station){
 	// echo $ctg_station;
 	if($ctg_name == "all" && $ctg_station){
 		$sql = "select s.s_name, i.l_name from station s, line i where s.l_id = i.l_id and s.s_name = '$ctg_station'";
-		$result = mysqli_query($conn, $sql);
+		$line = mysqli_query($conn, $sql);
 		$a = 0;
-		while($station = mysqli_fetch_assoc($result)){
+		while($station = mysqli_fetch_assoc($line)){
 			// print_r($station)."<br>";
 			if(array_search($ctg_station, $station) === false) {
 				$theVariable = "not";
@@ -47,10 +56,9 @@ if($ctg_name != "all" && $ctg_station){
 		}
 	}
 }
-
+// echo $a;
 if($a == 0){
-	echo "<script>alert('입력을 잘못하셨거나 없는 역을 입력하셨습니다.');</script>";
-	echo "<script>location.replace('./index.php');</script>";
+	userGoto("없는 역을 입력하셨습니다.", "");
 	exit;
 }else{
 ?>
