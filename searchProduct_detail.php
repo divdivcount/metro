@@ -149,10 +149,69 @@ try{
         </div>
 
 
-
         <!-- 상품 이미지제외한 정보 및 버튼 있는 부분 -->
         <div id="mainProduct_information">
-          <!-- 판매유저 정보 및 신고버튼 -->
+          <!-- 상품 및 유저 정보 + 부가기능 부분  -->
+          <div id="productInfo_title">
+
+            <!-- 두번째줄 -->
+            <div class="productTitle_line">
+              <p><?= $row["pr_title"] ?></p>
+            </div>
+
+          </div>
+
+
+        <!-- 상품 설명  -->
+          <div id="productInfo_text" >
+            <div class="title_category">
+              <h3>상품설명 </h3>
+              <!-- 카테고리 내용 -->
+              <div class="pr_category">
+                <?= $row["ca_name"] ?> · 관심 <?= $row["i_count"] ?>
+              </div>
+            </div>
+
+
+            <p>
+              <?= $row["pr_explanation"] ?>
+            </p>
+          </div>
+
+          <!-- 여러버튼 모아둔 부분  -->
+          <div id="mainBtn_box">
+            <p>판매가<span> <?= $row["pr_price"] ?>원</span></p>
+            <!-- 여기 관심등록 -->
+            <div class="button_line">
+              <button type="button" id="requestTrade_btn" onclick="requestTrade_open()" class="talk w3-button w3-blue">
+                <div class="img_box" style="width:2.1rem;height:2.1rem"><img src="img/talk.png" alt=""></div>
+                <span>거래요청하기</span>
+              </button>
+
+              <button type="button" id="registerInterest_btn" class="w3-button w3-light-gray" onclick="registerInterest()">
+                <div  class="img_box" style="width:3.5rem;height:3.5rem;margin:0"> <img src="<?php if($row["mem_i_check"] == 0){echo "img/staroff_35x35.png";}elseif($row["mem_i_check"] == 1){echo "img/star_35x35.png";} ?>" id="star_btn" data-value="<?=$row["mem_i_check"] ? $row["mem_i_check"] : 0 ?>" alt="" ></div>
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+
+
+      <?php
+       $piec = explode("&nbsp;", $row["profile_station"]);
+       // echo $piec[1];
+       $sameProduct = $dao->same_searchProduct($row["l_id"],$piec[1],$row["ca_name"]);?>
+      <?php $panmejaProduct = $dao->panpeja_searchProduct($row["mb_id"]? $row["mb_id"] : 'null', $row["om_id"] ? $row["om_id"] : 'null' );?>
+
+    <div id="reply">
+      <!-- 댓글 시작 -->
+      <div id="reply_container">
+        <!-- 판매유저 정보 및 신고버튼 -->
+        <div id="sell_user">
+          <div id="hidden_title"><p>판매자정보</p></div>
           <div class="userProfile_line">
 
             <div class="userProfile">
@@ -163,7 +222,7 @@ try{
 
               <!-- 이름이랑 호선  -->
               <div class="pr_namestation">
-                <p><?= $row["profile_name"] ?></p>
+                <p><?= $row["profile_name"] ?> 님이 판매중입니다.</p>
 
                 <div class="imgPlusText">
                   <div class="img_box"><img src="img/maps-and-flags.png" alt=""></div>
@@ -172,173 +231,107 @@ try{
 
               </div>
             </div>
+          </div>
+          <div class="userBtn_line">
 
-            <!-- 신고하기 버튼  -->
-            <div id="reportBtn_box" class="imgPlusText" onclick="report_open()">
-              <div class="img_box"><img src="img/siren.png" alt=""></div>
+            <button type="button" id="reportBtn_box" class="" onclick="report_open()" >
+              <div class="img_box" style="width:1.9rem;height:1.9rem"><img src="img/siren.png" alt=""></div>
               <span>신고하기</span>
-            </div>
-          </div>
-          <!-- 상품 및 유저 정보 + 부가기능 부분  -->
-          <div id="productInfo_title">
+            </button>
 
-            <!-- 두번째줄 -->
-            <div class="productTitle_line">
-              <p><?= $row["pr_title"] ?></p>
-            </div>
+            <!-- 도착시간 확인 버튼 -->
+            <button type="button" class="" onclick="arrivalTime_open()">
+              <div class="img_box" style="width:1.9rem;height:1.9rem"><img src="img/flag.png" alt=""></div>
+              <span>도착시간</span>
+            </button>
 
-            <!-- 세번째줄  -->
-            <div class="productPrice_line">
-              <div class="imgPlusText">
-                <div class="img_box" style="width:2.5rem;height:2.5rem"><img src="img/tag.png" alt=""></div>
-                <span><?= $row["pr_price"] ?>원</span>
-                <!-- 가격제안 가능여부 -->
-                <div class="checkPricepNegotiation"><?php if($row["pr_check"] == 1){echo "(가격제안 가능)";}else{echo "(가격제안 불가능)";} ?></div>
-              </div>
+            <!-- 쪽지보낵 버튼 -->
+            <button type="button" class="">
+              <div class="img_box" style="width:1.5rem;height:2.1rem"><img src="img/chat.png" alt=""></div>
+              <span><a href="./memo_form.php?me_recive_mb_id=<?php
+              try{
+                $member = new Member;
+                if($row['mb_id']){
+                  $mb_name = $member->Member_Select($row['mb_id'] ? $row['mb_id'] : null);
+                  echo trim($mb_name[0]['mb_id']);
+                }else{
+                  echo trim("sir".$row['om_id']);
+                }
 
-            </div>
+              }catch(PDOException $e){
+                  echo $e;
+                }
+              ?>&id=<?=$row["pr_id"]?>" class="td_btn" onclick="win_memo(this.href); return false;">쪽지보내기</a></span>
+            </button>
 
-            <!-- 4번째줄 -->
-            <div class="productCategory_line">
-
-              <!-- 카테고리 내용 -->
-              <div class="pr_category">
-                <?= $row["ca_name"] ?> · 관심 <?= $row["i_count"] ?>
-              </div>
-
-
-            </div>
-          </div>
-
-
-        <!-- 상품 설명  -->
-          <div id="productInfo_text" >
-            <p>
-              <?= $row["pr_explanation"] ?>
-            </p>
-
-            <!-- 여러버튼 모아둔 부분  -->
-            <div id="extraBtn_box">
-
-              <!-- 여기 관심등록 -->
-              <button type="button" class="w3-button w3-round-large w3-light-gray" onclick="registerInterest()">
-                <div  class="img_box" style="width:1.9rem;height:1.9rem;margin:0"> <img src="<?php if($row["mem_i_check"] == 0){echo "img/staroff_19x19.png";}elseif($row["mem_i_check"] == 1){echo "img/star_19x19.png";} ?>" id="star_btn" data-value="<?=$row["mem_i_check"] ? $row["mem_i_check"] : 0 ?>" alt="" ></div>
-              </button>
-
-              <!-- 도착시간 확인 버튼 -->
-              <button type="button" class="w3-button w3-round-large w3-light-gray" onclick="arrivalTime_open()">
-                <div class="img_box" style="width:1.9rem;height:1.9rem"><img src="img/flag.png" alt=""></div>
-                <span>도착시간</span>
-              </button>
-
-              <!-- 쪽지보낵 버튼 -->
-              <button type="button" class="w3-button w3-round-large w3-light-gray">
-                <div class="img_box" style="width:1.5rem;height:2.1rem"><img src="img/chat.png" alt=""></div>
-                <span><a href="./memo_form.php?me_recive_mb_id=<?php
-                try{
-                  $member = new Member;
-                  if($row['mb_id']){
-                    $mb_name = $member->Member_Select($row['mb_id'] ? $row['mb_id'] : null);
-                    echo trim($mb_name[0]['mb_id']);
-                  }else{
-                    echo trim("sir".$row['om_id']);
-                  }
-
-                }catch(PDOException $e){
-                    echo $e;
-                  }
-                ?>&id=<?=$row["pr_id"]?>" class="td_btn" onclick="win_memo(this.href); return false;">쪽지보내기</a></span>
-              </button>
-
-              <button type="button" onclick="requestTrade_open()" class="talk w3-button w3-round-large w3-blue">
-                <div class="img_box" style="width:2.1rem;height:2.1rem"><img src="img/talk.png" alt=""></div>
-                <span>거래요청</span>
-              </button>
-            </div>
           </div>
 
         </div>
-      </div>
-
-
-
-
-
-
-
-
-      <?php
-       $piec = explode("&nbsp;", $row["profile_station"]);
-       // echo $piec[1];
-       $sameProduct = $dao->same_searchProduct($row["l_id"],$piec[1],$row["ca_name"]);?>
-      <?php $panmejaProduct = $dao->panpeja_searchProduct($row["mb_id"]? $row["mb_id"] : 'null', $row["om_id"] ? $row["om_id"] : 'null' );?>
-    <?php endforeach ?>
-    <!-- 댓글이 들어가야하는 부분입니다. -->
-    <!-- 댓글 시작 -->
-    <div id="reply_container">
-
-      <div class="reply_view">
-        <?php if(isset($replys)) : ?>
-          <h3>댓글 <?=$replys[0]["reply_count"];?> </h3>
-        <?php foreach ($replys as $reple) : ?>
-
-          <!-- 댓글올라오면 생기는 부분 (유저이름 시간 댓글내용 삭제기능 ) -->
-          <div class="dat_view">
-            <div class="rep_profile">
-
-              <div class="rep_imgLine">
-                <?php $ch = is_null($reple["mb_img"]) ? 0 : 1;
-                ?>
-                <b><?php if($ch > 0) : ?>
-                  <img src="<?= isset($reple["mb_img"]) ?
-                ( $reple["mb_img"] != "img/normal_profile.png" ?
-                ( strpos($reple["mb_img"], "http") === 0 ? $reple["mb_img"] : "files/".$reple["mb_img"] ): $reple["mb_img"])
-                 : $reple["mb_img"] ?>"></b>
-               <?php endif ?>
-              </div>
-
-              <div class="rep_textLine">
-                <div class="member_num"><b><?=$reple['mb_id']?></b></div>
-                <div class="reple_date"><?=$reple['date']?></div>
-              </div>
-
-            </div>
-
-            <div class="" id="rep_del">
-              <?php $i++ ?>
-              <form method="get" name ="rep_form<?=$i?>" id="rep_form<?=$i?>" action="reply_delete.php">
-                <input type="hidden" name="rno" value="<?=$reple['idx']?>" />
-                <input type="hidden" name="b_no" value="<?=$pr_id?>">
-                <a onclick="document.getElementById('rep_form<?=$i?>').submit();"><?= isset($mb["mb_num"]) ? ($mb["mb_id"] == $reple['mb_id'] ? "댓글 삭제" : "" ) : (isset($om) ? ($om["om_id"] == $reple['mb_id'] ? "댓글 삭제" : "") : ""); ?></a>
-              </form>
-            </div>
-          </div>
-
-          <div class="reple_text">
-            <?php echo nl2br("$reple[content]"); ?>
-          </div>
-
 
         <?php endforeach ?>
-        <?php endif?>
-      </div>
 
-        <div class="dat_ins">
-          <input type="hidden" name="bno" class="bno" value="<?=$pr_id?>">
-          <input type="hidden" name="mb_id" id="mb_id" class="mb_dat_user" value=<?=isset($mb) ? $mb["mb_num"] : 'null' ?>>
-          <input type="hidden" name="om_id" id="om_id" class="om_dat_user" value=<?=isset($om) ? $om["om_id"] : 'null'?>>
+        <div class="reply_view">
+          <?php if(isset($replys)) : ?>
+            <h3>댓글 <?=$replys[0]["reply_count"];?> </h3>
+          <?php foreach ($replys as $reple) : ?>
 
-          <div class="replyInsert_box" style="margin-top:10px;">
-            <textarea name="content" class="rep_con" id="rep_con" placeholder="댓글을 입력해주세요."></textarea>
-            <div id="check_replyCount"><span>0</span> / 100</div>
-          </div>
+            <!-- 댓글올라오면 생기는 부분 (유저이름 시간 댓글내용 삭제기능 ) -->
+            <div class="dat_view">
+              <div class="rep_profile">
 
-          <div class="rep_submitbtn_box"><button id="rep_btn" class="rep_btn w3-button w3-round-large w3-blue">댓글 등록</button></div>
+                <div class="rep_imgLine">
+                  <?php $ch = is_null($reple["mb_img"]) ? 0 : 1;
+                  ?>
+                  <b><?php if($ch > 0) : ?>
+                    <img src="<?= isset($reple["mb_img"]) ?
+                  ( $reple["mb_img"] != "img/normal_profile.png" ?
+                  ( strpos($reple["mb_img"], "http") === 0 ? $reple["mb_img"] : "files/".$reple["mb_img"] ): $reple["mb_img"])
+                   : $reple["mb_img"] ?>"></b>
+                 <?php endif ?>
+                </div>
+
+                <div class="rep_textLine">
+                  <div class="member_num"><b><?=$reple['mb_id']?></b></div>
+                  <div class="reple_date"><?=$reple['date']?></div>
+                </div>
+
+              </div>
+
+              <div class="" id="rep_del">
+                <?php $i++ ?>
+                <form method="get" name ="rep_form<?=$i?>" id="rep_form<?=$i?>" action="reply_delete.php">
+                  <input type="hidden" name="rno" value="<?=$reple['idx']?>" />
+                  <input type="hidden" name="b_no" value="<?=$pr_id?>">
+                  <a onclick="document.getElementById('rep_form<?=$i?>').submit();"><?= isset($mb["mb_num"]) ? ($mb["mb_id"] == $reple['mb_id'] ? "댓글 삭제" : "" ) : (isset($om) ? ($om["om_id"] == $reple['mb_id'] ? "댓글 삭제" : "") : ""); ?></a>
+                </form>
+              </div>
+            </div>
+
+            <div class="reple_text">
+              <?php echo nl2br("$reple[content]"); ?>
+            </div>
 
 
-
+          <?php endforeach ?>
+          <?php endif?>
         </div>
-      </div>
+
+          <div class="dat_ins">
+            <input type="hidden" name="bno" class="bno" value="<?=$pr_id?>">
+            <input type="hidden" name="mb_id" id="mb_id" class="mb_dat_user" value=<?=isset($mb) ? $mb["mb_num"] : 'null' ?>>
+            <input type="hidden" name="om_id" id="om_id" class="om_dat_user" value=<?=isset($om) ? $om["om_id"] : 'null'?>>
+
+            <div class="replyInsert_box" style="margin-top:10px;">
+              <textarea name="content" class="rep_con" id="rep_con" placeholder="댓글을 입력해주세요."></textarea>
+              <div id="check_replyCount"><span>0</span> / 100</div>
+            </div>
+
+            <div class="rep_submitbtn_box"><button id="rep_btn" class="rep_btn w3-button w3-round-xlarge w3-blue">댓글 등록</button></div>
+
+          </div>
+        </div>
+    </div>
+
       <!-- 댓글 끝 -->
 
       <!-- 다른 상품 소개 타이틀 -->
@@ -353,7 +346,7 @@ try{
 
           <!-- 이미지 부분 -->
           <div class="otherProduct_content_img">
-            <img src="files/<?=$rows["pr_img"]?>" class="radiusTop" alt="">
+            <img src="files/<?=$rows["pr_img"]?>" alt="">
           </div>
 
           <!-- 상품 내용 -->
