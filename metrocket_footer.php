@@ -21,7 +21,7 @@
         <div class="item">
           <ul class="secondUl_2">
             <li>이용약관</li>
-            <li><a href="gein.php">개인정보처리방침</a></li>
+            <li><a href="gein.php" target="_blank">개인정보처리방침</a></li>
           </ul>
         </div>
 
