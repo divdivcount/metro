@@ -15,6 +15,7 @@ a{text-decoration: none;}
 p{margin: 0}
 #wrapContainer_Box{
   width: 100%;
+  margin-bottom: 20rem;
 }
 #mainProduct_box{
   width: 71%;
@@ -112,8 +113,8 @@ p{margin: 0}
 #productInfo_text p::-webkit-scrollbar-track {}
 
 
-.radiusTop{border-top-left-radius: 10px;border-top-right-radius: 10px}
-.radiusBottom{border-bottom-left-radius: 10px;border-bottom-right-radius: 10px}
+/* .radiusTop{border-top-left-radius: 10px;border-top-right-radius: 10px}
+.radiusBottom{border-bottom-left-radius: 10px;border-bottom-right-radius: 10px} */
 
 /* */
 #sell_user{
