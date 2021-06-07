@@ -79,8 +79,7 @@ input[type=radio]:checked + label { background-image: url('img/checkIn.png'); }
 .button{
   width: 40%;
   max-width: 180px;
-  height: 5.0rem;
-  padding: 1.0rem 5.0rem;
+  
   border-radius: 50px;
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
   background-color: #0088ff;

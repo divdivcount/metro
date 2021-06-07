@@ -121,7 +121,7 @@
 
         <div class="changeBuyer_modalBox hidden">
           <div class="changeBuyer_imgBox">
-            <div class="img_box" style="margin:0;width:12.0rem;height:12.0rem" ><img src="img/question.png" alt="">                            </div>
+            <div class="img_box" ><img src="img/question.png" alt="" style="margin:0;width:12.0rem;height:12.0rem">                            </div>
           </div>
           <div class="changeBuyer_contentBox">
 
