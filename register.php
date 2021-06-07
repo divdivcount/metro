@@ -4,7 +4,6 @@ require_once("modules/db.php");
 ?>
 <html>
 <head>
-	<title>Register</title>
 	<link rel="stylesheet" href="css/css_register.css">
 	<link rel="stylesheet" href="css/css_noamlfont.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

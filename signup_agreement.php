@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>signup</title>
+    <title>메트로켓</title>
     <link href="css/css_signup_agreement.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="css/css_noamlfont.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +13,6 @@
     <!-- <link rel="icon" type="image/png" sizes="16x16" href="css/favicon_package_v0.16/favicon-16x16.png"> -->
     <link rel="manifest" href="css/favicon_package_v0.16/site.webmanifest">
     <link rel="mask-icon" href="css/favicon_package_v0.16/safari-pinned-tab.svg" color="#5bbad5">
-    <title>메트로켓</title>
   </head>
   <body>
     <div id="signupbox">

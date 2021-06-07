@@ -101,6 +101,6 @@ h3{
   #signupbox{width: 90%;}
   .line{width: 20%}
   .tite_1{width: 60%}
-  .imgbox img{    width: 100%;  }
+  .imgbox img{}
   .imgbox input{    width: 100%;  }
 }
