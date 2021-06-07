@@ -13,7 +13,7 @@
           <ul class="secondUl_1">
             <li>상품등록</li>
             <li>내 상품</li>
-            <li>채팅</li>
+            <li>쪽지</li>
             <li>프로필</li>
           </ul>
         </div>
@@ -21,7 +21,7 @@
         <div class="item">
           <ul class="secondUl_2">
             <li>이용약관</li>
-            <li><a href="">개인정보처리방침</a></li>
+            <li><a href="gein.php">개인정보처리방침</a></li>
           </ul>
         </div>
 
