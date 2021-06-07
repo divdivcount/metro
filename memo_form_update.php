@@ -17,7 +17,7 @@ if(!(empty($_SESSION['ss_mb_id']) || empty($_SESSION['naver_mb_id']) || empty($_
 	$me_send_datetime = date('Y-m-d H:i:s', time()); // 메모 작성일
 
 	$recv_list1 = trim($_POST['me_recv_mb_id']);
-	$pr_id = trim(Post('id', null));
+	$pr_id = trim(Post('id', 'null'));
 
 
 
