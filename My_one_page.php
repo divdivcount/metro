@@ -246,10 +246,16 @@
     realInput.click();
     document.getElementById('uploadCheck').value = "t";
   });
+
+  //삭제버튼 누르면 파일 정보를 삭제
   deleteImg_btn.addEventListener('click',()=>{
-    realInput.click();
+    realInput.value="";
+    // realInput.files[0].name ="img/normal_profile.png";
+    // alert(realInput.files[0].name);
     document.getElementById('uploadCheck').value = "f";
+    changedProfile_image.src="img/normal_profile.png";
   });
+
   changedProfile_image.addEventListener('click',()=>{
     realInput.click();
   });
@@ -257,13 +263,7 @@
     document.getElementById('uploadCheck').value = "default";
   });
 
-  //삭제버튼 누르면 파일 정보를 삭제
-  deleteImg_btn.addEventListener('click',()=>{
-    realInput.value="";
-    // realInput.files[0].name ="img/normal_profile.png";
-    // alert(realInput.files[0].name);
-    changedProfile_image.src="img/normal_profile.png";
-  });
+
 
   //사진 업로드 함수
   realInput.addEventListener('change',function(){
