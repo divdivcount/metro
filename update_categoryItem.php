@@ -23,7 +23,7 @@
 
       //역 위치
       echo '<div class="productText_box_station_line">';
-      echo '<span>',$row["pr_station"],'</span> </div>';
+      echo '<span>',$row["l_id"],'호선 </span>'.'<span>',$row["pr_station"],'</span> </div>';
 
       //가격
       echo '<div class="productText_box_price_line">';
