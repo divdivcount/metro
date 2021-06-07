@@ -61,7 +61,6 @@ echo $memos['pr_id'];
 
 <html>
 <head>
-	<title>Memo View</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="css/css_memo_view.css">
 	<link rel="stylesheet" href="css/css_noamlfont.css">
