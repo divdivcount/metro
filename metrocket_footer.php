@@ -1,4 +1,5 @@
 <div id="footer_box">
+  <div class="footer_wrap">
       <div id="information_box">
 
         <div class="item">
@@ -25,11 +26,12 @@
         </div>
 
         <div class="item">
-            <img src="img/facebook.png" alt="">
-            <img src="img/instagram.png" alt="">
-            <img src="img/blog.png" alt="">
+            <img src="img/facebook.png" alt="" >
+            <img src="img/instagram.png" alt="" >
+            <img src="img/blog.png" alt="" >
         </div>
 
       </div>
-        <div class="imgbox_4"><img src="img/metroket_footer.png" alt=""></div>
+        <div class="imgbox_4"><img src="img/metroket_footer_lightgray.png" alt="" ></div>
+      </div>
     </div>
