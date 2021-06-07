@@ -348,7 +348,7 @@ try{
       <?php if($sameProduct != null) :?>
         <?php foreach ($sameProduct as $rows) : ?>
 
-         <a href="searchProduct_detail.php?id=<?=$row['pr_id']?>&title=<?=$row['pr_title']?>&line=<?=$rows['l_id']?>&station=<?=$rows['pr_station']?>"><div class="otherProduct_content">
+         <a href="searchProduct_detail.php?id=<?=$rows['pr_id']?>&title=<?=$rows['pr_title']?>&line=<?=$rows['l_id']?>&station=<?=$rows['pr_station']?>"><div class="otherProduct_content">
 
           <!-- 이미지 부분 -->
           <div class="otherProduct_content_img">
@@ -429,7 +429,7 @@ try{
         <!-- 기타 상품 정보  -->
         <?php if($panmejaProduct != null) :?>
         <?php foreach ($panmejaProduct as $product) : ?>
-        <a href="searchProduct_detail.php?id=<?=$product['pr_id']?>&title=<?=$product['pr_title']?>"><div class="otherProduct_content">
+        <a href="searchProduct_detail.php?id=<?=$product['pr_id']?>&title=<?=$product['pr_title']?>&line=<?=$product['l_id']?>&station=<?=$product['pr_station']?>"><div class="otherProduct_content">
 
           <!-- 이미지 부분 -->
           <?php	if ($product["pr_status"] ==="거래완료") :?>
