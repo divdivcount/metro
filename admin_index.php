@@ -57,9 +57,8 @@ require_once("modules/admin.php");
         </div>
       </div>
       <!-- 모바일 메뉴 끝 -->
-      <div>게시판관리</div>
+      <div>관리자 페이지</div>
       <ul>
-        <li>프로필</li>
         <li><a href='./logout.php'>로그아웃</a></li>
       </ul>
     </div>

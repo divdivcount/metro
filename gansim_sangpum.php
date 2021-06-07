@@ -102,7 +102,7 @@ ini_set('display_errors', '1');
               <?php $imgdao = $dao->searchProduct_detail(isset($mb) ? $mb["mb_num"] : 'null', isset($om) ? $om["om_id"] : 'null',$row['pr_id'], $row['pr_title']); ?>
             <div class="pr_buttons">
               <?php foreach ($imgdao as $rows) : ?>
-              <img id="star_btn" src="<?php if($rows["mem_i_check"] == 0){echo "img/staroff_30x30png.png";}elseif($rows["mem_i_check"] == 1){echo "img/star_30x30.png";} ?>" data-value="<?=$rows["mem_i_check"]?>"
+              <img class="star_btn" src="<?php if($rows["mem_i_check"] == 0){echo "img/staroff_30x30png.png";}elseif($rows["mem_i_check"] == 1){echo "img/star_30x30.png";} ?>" data-value="<?=$rows["mem_i_check"]?>"
             <?php endforeach ?>
              data-pr_id="<?= $row['pr_id'] ?>" onclick="check_interest(this)" />
             </div>

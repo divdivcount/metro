@@ -126,7 +126,7 @@ body {
     color: #3b3b3b;
     font-weight: 500;
   }
-
+.star_btn img{height: 3.0rem;}
 #pagenation_box{
   text-align: center;
   width: 100%;
