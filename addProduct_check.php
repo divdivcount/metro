@@ -58,15 +58,16 @@ if($explainText == null){
   exit;
 }
 // var_dump($_FILES['files']['name'][0] == '');
-if($_FILES['files']['name'][0] == ''){
-  userGoto("제품 이미지가 1장 이상 등록 되지 않았습니다.","");
-  exit;
-}
+
 
 try {
 
   //제품을 먼저 추가 하고 pr_id를 불러 이미지 추가해야
   if($mode == 'insert'){
+    if($_FILES['files']['name'][0] == ''){
+      userGoto("제품 이미지가 1장 이상 등록 되지 않았습니다.","");
+      exit;
+    }
   $productObj = new Product();
   $results = $productObj->Product_title_search($title,$om,$mb);
   // echo $pr_img_id."<br>";
