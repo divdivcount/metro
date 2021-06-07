@@ -102,6 +102,7 @@ input[type=radio]:checked + label { background-image: url('img/checkIn.png'); }
   font-family: "NotoSansKR_r";
  }
 </style>
+<title>메트로켓</title>
 </head>
 <body>
   <?php

@@ -11,6 +11,7 @@ require_once("modules/db.php");
 	<link rel="icon" type="image/png" sizes="32x32" href="css/favicon_package_v0.16/favicon-32x32.ico">
 	<!-- <link rel="icon" type="image/png" sizes="16x16" href="css/favicon_package_v0.16/favicon-16x16.png"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>메트로켓</title>
 
 </head>
 <?php

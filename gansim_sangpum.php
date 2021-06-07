@@ -50,9 +50,7 @@ ini_set('display_errors', '1');
 <link rel="stylesheet" href="css/css_noamlfont.css">
 <link rel="stylesheet" href="css/css_gansim_sangpum.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<style>
-
-</style>
+<title>메트로켓</title>
 </head>
 <body>
 	<div class="w3-content w3-container">

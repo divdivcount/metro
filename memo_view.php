@@ -65,6 +65,7 @@ mysqli_close($conn); // 데이터베이스 접속 종료
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="css/css_memo_view.css">
 	<link rel="stylesheet" href="css/css_noamlfont.css">
+	<title>메트로켓</title>
 </head>
 <body id="memo">
 	<!-- 쪽지보기 시작 { -->

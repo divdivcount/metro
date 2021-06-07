@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="css/css_my_one_page.css">
     <link rel="stylesheet" href="css/css_noamlfont.css">
     <link rel="stylesheet" href="css/css_delete_userInfo.css">
-
+    <title>메트로켓</title>
   </head>
   <body>
     <div class="w3-container">

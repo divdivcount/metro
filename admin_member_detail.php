@@ -53,6 +53,7 @@ if(!(is_null($listc))){
   <meta charset="utf-8">
   <link rel="stylesheet" href="css/admin_member_detail.css">
   <link rel="stylesheet" href="css/css_noamlfont.css">
+  <title>Metroket Admin</title>
 </head>
 <body>
   <?php foreach ($list_all as $row):?>

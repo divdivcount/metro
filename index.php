@@ -36,7 +36,7 @@ require_once('modules/db.php');
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://unpkg.com/hangul-js" type="text/javascript"></script>
     <script src="css/OwlCarousel2-2.3.4/docs/assets/owlcarousel/owl.carousel.min.js"></script>
-
+    <title>메트로켓</title>
     <style>
       .ui-helper-hidden-accessible{display:none;}
     </style>

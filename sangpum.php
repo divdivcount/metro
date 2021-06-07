@@ -55,11 +55,7 @@ ini_set('display_errors', '1');
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
 <script src="css/jquery.tzSelect\tzSelect/jquery.tzSelect.js"></script>
-
-
-<style>
-
-</style>
+<title>메트로켓</title>
 </head>
 <body>
 	<div class="w3-content w3-container">

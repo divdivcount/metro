@@ -12,6 +12,7 @@ $pr_id = $_GET['id']; // GET 방식으로 넘어온 받는 제품번호
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<link rel="stylesheet" href="css/css_memo_form.css">
 	<link rel="stylesheet" href="css/css_noamlfont.css">
+	<title>메트로켓</title>
 </head>
 <body id="memo">
 	<!-- 쪽지 보내기 시작 { -->
@@ -19,7 +20,7 @@ $pr_id = $_GET['id']; // GET 방식으로 넘어온 받는 제품번호
 		<div class="left_header">
 			<img src="img/note.png">
 	    <span class="title">쪽지 보내기</span>
-		</div>  
+		</div>
 		<div class="right_header">
 			<img src="img/cancle.png" class="" onclick="self.close()" style="width:2.3rem;height:2.3rem;cursor:pointer">
 		</div>
@@ -38,7 +39,7 @@ $pr_id = $_GET['id']; // GET 방식으로 넘어온 받는 제품번호
 
 				<!-- 답장하기버튼 -->
 				<div class="conbtn">
-	        <input type="submit" class="cbtn" id="submit_memo" value="답장하기">
+	        <input type="submit" class="cbtn" id="submit_memo" value="보내기">
 	      </div>
     	</div>
 

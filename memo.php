@@ -105,6 +105,7 @@ mysqli_close($conn); // 데이터베이스 접속 종료
 	<link href="css/note.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="css/css_noamlfont.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>메트로켓</title>
 </head>
 <body id="memo">
 	<!-- 쪽지 목록 시작 { -->

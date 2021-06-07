@@ -40,6 +40,7 @@ try{
     <!-- <link rel="icon" type="image/png" sizes="16x16" href="css/favicon_package_v0.16/favicon-16x16.png"> -->
     <link rel="manifest" href="css/favicon_package_v0.16/site.webmanifest">
     <link rel="mask-icon" href="css/favicon_package_v0.16/safari-pinned-tab.svg" color="#5bbad5">
+    <title>메트로켓</title>
   </head>
   <body>
   <div id="wrapPage">

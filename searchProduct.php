@@ -87,7 +87,7 @@ if($a == 0){
       .ui-helper-hidden-accessible{display:none;}
     </style>
     <meta charset="utf-8">
-    <title></title>
+    <title>메트로켓</title>
   </head>
   <body>
 	<div id="wrapPage">
