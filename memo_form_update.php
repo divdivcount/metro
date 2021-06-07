@@ -18,6 +18,12 @@ if(!(empty($_SESSION['ss_mb_id']) || empty($_SESSION['naver_mb_id']) || empty($_
 
 	$recv_list1 = trim($_POST['me_recv_mb_id']);
 	$pr_id = trim(Post('id', null));
+
+
+
+
+	// echo $recv_list1;
+	// echo $pr_id;
 	if(strpos($recv_list1, "sir") !== false) {
 	    $recv_list = explode('sir', $recv_list1);
 			// echo $recv_list[0]."<br>";
@@ -61,8 +67,8 @@ if(!(empty($_SESSION['ss_mb_id']) || empty($_SESSION['naver_mb_id']) || empty($_
 						me_text				= '{$_POST["me_memo"]}',
 						pr_id = $pr_id";
 	    $result = mysqli_query($conn, $sql);
-			// echo $sql."<br>";
-			// echo $recv_mb_id."<br>";
+			echo $sql."<br>";
+			echo $recv_mb_id."<br>";
 
 	}
 
