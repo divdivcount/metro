@@ -149,7 +149,7 @@
     <!-- 유저정보  차후 php 작업 필요 -->
     <div class="profile_box">
       <div class="prfileImg_box">
-        <img class="w3-circle" src="<?=isset($mb['mb_image']) ?($mb['mb_image'] == 'img/normal_profile.png' ? $mb['mb_image'] : 'files/'.$mb['mb_image']) : $om['om_image_url']?>" >
+        <img class="w3-circle" src="<?=isset($mb['mb_image']) ?($mb['mb_image'] == 'img/normal_profile.png' ? $mb['mb_image'] : 'files/'.$mb['mb_image']) : $om['om_image_url']?>" onclick="updateImage_open()">
         <img src="img/camera.png" style="position:absolute;left:70%;top:70%;" alt="" class="open_updateImage_btn" onclick="updateImage_open()" data-check_om="<?= isset($om['om_id']) ? $om['om_id'] : "1" ?> ">
       </div>
         <div class="user_name"><?=isset($mb['mb_name']) ? $mb['mb_name'] : $om['om_nickname']?></div>
@@ -246,9 +246,12 @@
     realInput.click();
     document.getElementById('uploadCheck').value = "t";
   });
-  changedProfile_image.addEventListener('click',()=>{
+  deleteImg_btn.addEventListener('click',()=>{
     realInput.click();
     document.getElementById('uploadCheck').value = "f";
+  });
+  changedProfile_image.addEventListener('click',()=>{
+    realInput.click();
   });
   updateProfile_Button.addEventListener('click',()=>{
     document.getElementById('uploadCheck').value = "default";
