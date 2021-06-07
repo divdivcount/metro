@@ -8,8 +8,8 @@ $ctg_station = str_replace('+',"",trim(Get("ctg_station", 0)));
 
 
 // echo $a;
-// echo $ctg_name."호선"."<br>";
-// echo $ctg_station;
+echo $ctg_name."<br>";
+echo $ctg_station;
 
 if($ctg_name != "all" && $ctg_station){
 	// echo "통과1";
@@ -39,7 +39,7 @@ if($ctg_name != "all" && $ctg_station){
 	// echo "통과2";
 	// echo $ctg_station;
 	if($ctg_name == "all" && $ctg_station){
-		$sql = "select s.s_name, i.l_name from station s, line i where s.l_id = i.l_id and s.s_name = '$ctg_station'";
+		$sql = "select s.s_name, i.l_name,i.l_id from station s, line i where s.l_id = i.l_id and s.s_name = '$ctg_station'";
 		$line = mysqli_query($conn, $sql);
 		$a = 0;
 		while($station = mysqli_fetch_assoc($line)){
@@ -48,7 +48,7 @@ if($ctg_name != "all" && $ctg_station){
 				$theVariable = "not";
 				// echo $theVariable."<br>";
 			}else{
-				$ctg_name = $station["l_name"];
+				$ctg_name = $station["l_id"];
 				$theVariable = "sure";
 				// echo $theVariable."<br>";
 				$a = 1;
@@ -59,7 +59,7 @@ if($ctg_name != "all" && $ctg_station){
 }
 // echo $a;
 if($a == 0){
-	userGoto("없는 역을 입력하셨습니다.", "");
+	// userGoto("없는 역을 입력하셨습니다.", "");
 	exit;
 }else{
 ?>
