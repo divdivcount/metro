@@ -292,7 +292,7 @@ if($a == 0){
 	      <div id="productGrid_box">
 						<?php foreach ($list as $row) : ?>
 		        <!-- 상품 예시 샘플 php로 띄울거임 -->
-		        <a href="searchProduct_detail.php?id=<?=$row['pr_id']?>&title=<?=$row['pr_title']?>&line=<?=$ctg_name?>"><div class="productInfo_box">
+		        <a href="searchProduct_detail.php?id=<?=$row['pr_id']?>&title=<?=$row['pr_title']?>&line=<?=$ctg_name?>&station=<?=$ctg_station?>"><div class="productInfo_box">
 		          <!-- 상품 이미지부분 -->
 							<?php	if ($row["pr_status"] ==="거래완료") :?>
 								<div class="productImg_box">

@@ -12,6 +12,7 @@ try{
   $replys = $replyobject->reply_select($pr_id);
   $i = 0;
   $ctg_name = Get("line", null);
+  $ctg_station = Get("station", null);
 }catch(PDOException $e){
     echo $e;
   }
@@ -203,10 +204,10 @@ try{
 
 
       <?php
-       $piec = explode("&nbsp;", $row["profile_station"]);
-       echo $piec[1];
-       echo $ctg_name;
-       $sameProduct = $dao->same_searchProduct($ctg_name,$piec[1],$row["ca_name"]);?>
+       // $piec = explode("&nbsp;", $row["profile_station"]);
+       // echo $ctg_station;
+       // echo $ctg_name;
+       $sameProduct = $dao->same_searchProduct($ctg_name,$ctg_station,$row["ca_name"]);?>
       <?php $panmejaProduct = $dao->panpeja_searchProduct($row["mb_id"]? $row["mb_id"] : 'null', $row["om_id"] ? $row["om_id"] : 'null' );?>
 
     <div id="reply">
@@ -540,9 +541,9 @@ try{
         }
 
         departure_stationID=set_defaultStation($('#auto').val());
-        console.log(departure_stationID);
+
         arrival_stationID=set_defaultStation($('#arrival_station').val());
-        console.log(arrival_stationID);
+
         //도착역 미리 검색후 지정
 
         //검색버튼 눌럿을때 odsay 지하철경로관련api를 호출하는 페이지 호출후  도착시간 불러옴
