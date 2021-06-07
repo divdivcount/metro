@@ -175,7 +175,7 @@ try{
 
 
             <p>
-              <?= $row["pr_explanation"] ?>
+              <?= nl2br($row["pr_explanation"]); ?>
             </p>
           </div>
 
