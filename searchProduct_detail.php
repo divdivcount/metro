@@ -15,6 +15,7 @@ try{
   $ctg_station = Get("station", null);
 }catch(PDOException $e){
     echo $e;
+    // isset($mb) ? substr($mb["line_station"],(strpos($mb["line_station"],';')+1)) : substr($om["line_station"],(strpos($om["line_station"],';')+1))
   }
 ?>
 
@@ -75,7 +76,8 @@ try{
 
                 <div class="find_item">
                   <span>출발역을 입력해주세요.</span>
-                  <input type="text" id="auto" class="w3-input highlight" value="<?= isset($mb) ? substr($mb["line_station"],(strpos($mb["line_station"],';')+1)) : substr($om["line_station"],(strpos($om["line_station"],';')+1)) ?>" name="departure_station" placeholder="여긴 검색하는부분">
+
+                  <input type="text" id="auto" class="w3-input highlight" value="" name="departure_station" placeholder="여긴 검색하는부분">
                 </div>
 
                 <div class="find_item">
