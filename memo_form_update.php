@@ -1,4 +1,6 @@
 <?php
+error_reporting( E_ALL );
+ini_set( "display_errors", 1 );
 require_once('modules/db.php');  // DB연결을 위한 같은 경로의 dbconn.php를 인클루드합니다.
 require_once('modules/notification.php');
 
@@ -68,7 +70,7 @@ if(!(empty($_SESSION['ss_mb_id']) || empty($_SESSION['naver_mb_id']) || empty($_
 
 	if ($member_list) {
 	    $str_name_list = implode(',', $member_list['name']);
-		echo "<script>alert('{$str_name_list} 님께 쪽지를 전달하였습니다.');window.close();</script>";
+		// echo "<script>alert('{$str_name_list} 님께 쪽지를 전달하였습니다.');window.close();</script>";
 		// window.close();
 		exit;
 	} else {
