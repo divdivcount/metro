@@ -158,10 +158,10 @@ require_once('modules/db.php');
 
       <div id="recentProducts_gridbox">
         <?php
-        $sql = "select p.ca_name, p.pr_id,p.pr_title,p.pr_status,p.pr_price,pi.pr_img,l.l_name,p.pr_station from product p left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join member m ON p.mb_id = m.mb_num left outer join interest ia on ia.pr_id = p.pr_id where p.pr_img_id = pi.pr_img_id and pi.main_check = 'y' and pr_status='판매중' and pr_block = 1 order by pr_id desc limit 0,32";
+        $sql = "select p.ca_name, p.pr_id,p.pr_title,p.pr_status,p.pr_price,pi.pr_img,l.l_name,l.l_id,p.pr_station from product p left outer join product_img pi ON p.pr_img_id = pi.pr_img_id left outer join line l ON p.l_id = l.l_id left outer join member m ON p.mb_id = m.mb_num left outer join interest ia on ia.pr_id = p.pr_id where p.pr_img_id = pi.pr_img_id and pi.main_check = 'y' and pr_status='판매중' and pr_block = 1 order by pr_id desc limit 0,32";
         $new_product_result = mysqli_query($conn, $sql);  //여기
         while ($product_result = mysqli_fetch_assoc($new_product_result)) { //여기 ?>
-        <a href="searchProduct_detail.php?id=<?=$product_result['pr_id']?>&title=<?=$product_result['pr_title']?>"><div class="recent_productInfo_box">
+        <a href="searchProduct_detail.php?id=<?=$product_result['pr_id']?>&title=<?=$product_result['pr_title']?>&line=<?=$product_result['l_id']?>"><div class="recent_productInfo_box">
 
           <!-- 이미지 부분  -->
           <div class="productImg_box">
