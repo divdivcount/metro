@@ -259,9 +259,9 @@
   changedProfile_image.addEventListener('click',()=>{
     realInput.click();
   });
-  updateProfile_Button.addEventListener('click',()=>{
-    document.getElementById('uploadCheck').value = "default";
-  });
+  // updateProfile_Button.addEventListener('click',()=>{
+  //   document.getElementById('uploadCheck').value = "default";
+  // });
 
 
 
