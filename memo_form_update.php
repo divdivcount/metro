@@ -1,6 +1,6 @@
 <?php
-
 require_once('modules/db.php');  // DB연결을 위한 같은 경로의 dbconn.php를 인클루드합니다.
+require_once('modules/notification.php');
 
 $mb_id = isset($_SESSION['ss_mb_id']) ? $_SESSION['ss_mb_id'] : null;
 $om_id =	isset($_SESSION['naver_mb_id']) ? $_SESSION['naver_mb_id'] : $_SESSION['kakao_mb_id'];
@@ -15,7 +15,7 @@ if(!(empty($_SESSION['ss_mb_id']) || empty($_SESSION['naver_mb_id']) || empty($_
 	$me_send_datetime = date('Y-m-d H:i:s', time()); // 메모 작성일
 
 	$recv_list1 = trim($_POST['me_recv_mb_id']);
-	$pr_id = trim($_POST['id']);
+	$pr_id = trim(Post('id', null));
 	if(strpos($recv_list1, "sir") !== false) {
 	    $recv_list = explode('sir', $recv_list1);
 			// echo $recv_list[0]."<br>";
