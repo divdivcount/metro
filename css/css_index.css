@@ -46,7 +46,7 @@ body {
 #selectMetro_box #bothFind_item{display: flex;width: 60%;flex-direction: row;justify-content: space-between;align-items:flex-end;}
 
 .ui-menu-item{font-size: 1.8rem;}
-
+.ui-menu{max-height: 200px;overflow-x: hidden;overflow-y: scroll;position: fixed!important;}
 #mainContent_box {
   position: relative;
   width: 85%;

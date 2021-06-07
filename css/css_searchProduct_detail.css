@@ -210,7 +210,7 @@ display : -webkit-box;
 -webkit-line-clamp : 1; /*(줄 개수를 설정한다. 만약 2줄이상이라면 height와 해당 값을 수정한다.) */
 -webkit-box-orient: vertical;
 -webkit-text-size-adjust: none;}
-.otherProduct_content_text_price_line{width: 100%;font-family: "NotoSansKR_m";font-size: 1.5rem;color: #5b5b5b;
+.otherProduct_content_text_price_line{width: 100%;font-family: "NotoSansKR_m";font-size: 1.5rem;color: #5b5b5b;display: flex;justify-content: space-between;
 overflow : hidden;
 text-overflow : ellipsis;
 height : auto; /*(대신 height를 설정해준다. 텍스트 크기에 맞춰 height가 1줄인 경우를 생각하자.) */
@@ -370,7 +370,7 @@ display : -webkit-box;
 .hidden {display: none!important;}
 
 .ui-menu-item{font-size: 1.4rem;}
-.ui-menu{max-height: 200px;overflow-x: hidden;overflow-y: scroll;position: fixed;}
+.ui-menu{max-height: 200px;overflow-x: hidden;overflow-y: scroll;position: fixed!important;}
 
 @media only screen and (min-width: 1920px) {
   #wrapPage{

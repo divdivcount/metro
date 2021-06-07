@@ -466,7 +466,7 @@ try{
             <!-- 카테고리 및 관심 수 부분  -->
             <div class="otherProduct_content_text_category_line">
               <span><?=$product["ca_name"]?></span>
-              <span><?=$product["i_count"]?></span>
+              <span>관심<?=$product["i_count"]?></span>
             </div>
 
           </div>

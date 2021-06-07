@@ -83,6 +83,7 @@ ul{list-style: none;}
 #selectMetro_box #bothFind_item{display: flex;width: 75%;flex-direction: row;justify-content: space-between;align-items: center;margin: 0 auto}
 
 .ui-autocomplete{z-index: 10010!important}
+.ui-menu{max-height: 200px;overflow-x: hidden;overflow-y: scroll;position: fixed!important;}
 
 .closeBtn_box_2 {
   display: flex;
