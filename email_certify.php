@@ -12,7 +12,7 @@ $mb = mysqli_fetch_assoc($result);
 
 if (!$mb['mb_id']) {
 	echo "<script>alert('존재하는 회원이 아닙니다.');</script>";
-	echo "<script>location.replace('./login.php');</script>";
+	echo "<script>location.replace('./index.php');</script>";
 	exit;
 }
 
@@ -34,6 +34,6 @@ if ($mb_md5)
 }
 
 mysqli_close($conn); // 데이터베이스 접속 종료
-echo "<script>location.replace('./login.php');</script>";
+echo "<script>location.replace('./index.php');</script>";
 exit;
 ?>

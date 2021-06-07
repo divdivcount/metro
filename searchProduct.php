@@ -3,8 +3,9 @@ require_once('modules/db.php');
 require_once('modules/notification.php');
 $dao = new Product;
 $pid = Get('p', 1);
-$ctg_name = Get("ctg_name", 0);
-$ctg_station = Get("ctg_station", 0);
+trim($ctg_name = Get("ctg_name", 0));
+trim($ctg_station = Get("ctg_station", 0));
+
 
 // echo $a;
 // echo $ctg_name."호선"."<br>";
