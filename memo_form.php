@@ -1,8 +1,9 @@
 <?php
 require_once('modules/db.php'); // DB연결을 위한 같은 경로의 dbconn.php를 인클루드합니다.
+require_once('modules/notification.php');
 
 $me_recv_mb_id = $_GET['me_recive_mb_id']; // GET 방식으로 넘어온 받는 회원아이디
-$pr_id = $_GET['id']; // GET 방식으로 넘어온 받는 제품번호
+$pr_id = Get('id', null); // GET 방식으로 넘어온 받는 제품번호
 ?>
 
 <html>
