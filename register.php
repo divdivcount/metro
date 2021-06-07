@@ -8,7 +8,7 @@ require_once("modules/db.php");
 	<link rel="stylesheet" href="css/css_register.css">
 	<link rel="stylesheet" href="css/css_noamlfont.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<link rel="icon" type="image/png" sizes="32x32" href="css/favicon_package_v0.16/favicon-32x32.ico">
+	<link rel="icon" type="image/png" sizes="32x32" href="css/favicon_package_v0.16/favicon.ico">
 	<!-- <link rel="icon" type="image/png" sizes="16x16" href="css/favicon_package_v0.16/favicon-16x16.png"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>메트로켓</title>

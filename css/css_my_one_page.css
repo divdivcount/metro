@@ -24,6 +24,7 @@ body {
   margin-top: 7.5rem;
 }
 .profile_box .user_name{
+  font-family: "NotoSansKR_r";
   margin-top: 2.4rem;
   font-size: 3.0rem;
 }
