@@ -284,66 +284,77 @@ if($a == 0){
       </div>
 
       <!-- 상품 목록 그리드 박스  -->
-      <div id="productGrid_box">
-				<?php foreach ($list as $row) : ?>
-        <!-- 상품 예시 샘플 php로 띄울거임 -->
-        <a href="searchProduct_detail.php?id=<?=$row['pr_id']?>&title=<?=$row['pr_title']?>"><div class="productInfo_box">
-          <!-- 상품 이미지부분 -->
-					<?php	if ($row["pr_status"] ==="거래완료") :?>
-						<div class="productImg_box">
-							<div id="overlay"><span>거래 완료</span></div>
-							<img src="files/<?=$row["pr_img"]?>" alt="">
-						</div>
-					<?php else: ?>
-						<div class="productImg_box">
-							<img src="files/<?=$row["pr_img"]?>" alt="">
-						</div>
+			<?php if($list != null) : ?>
+	      <div id="productGrid_box">
+						<?php foreach ($list as $row) : ?>
+		        <!-- 상품 예시 샘플 php로 띄울거임 -->
+		        <a href="searchProduct_detail.php?id=<?=$row['pr_id']?>&title=<?=$row['pr_title']?>"><div class="productInfo_box">
+		          <!-- 상품 이미지부분 -->
+							<?php	if ($row["pr_status"] ==="거래완료") :?>
+								<div class="productImg_box">
+									<div id="overlay"><span>거래 완료</span></div>
+									<img src="files/<?=$row["pr_img"]?>" alt="">
+								</div>
+							<?php else: ?>
+								<div class="productImg_box">
+									<img src="files/<?=$row["pr_img"]?>" alt="">
+								</div>
+							<?php endif ?>
+
+		          <!-- 상품 상세설명 -->
+		          <div class="productText_box">
+
+		            <!-- 제목 -->
+		            <div class="productText_box_title_line">
+		              <span><?=$row["pr_title"]?></span>
+		            </div>
+
+		            <!-- 가격 -->
+		            <div class="productText_box_price_line">
+		              <span><?=$row["pr_price"]?></span>
+		            </div>
+
+		            <!-- 역 위치 -->
+		            <div class="oproductText_box_station_line">
+		              <span><?=$row["line_name"]?> <?=$row["pr_station"]?></span>
+		            </div>
+
+		            <!-- 카테고리 및 관심 수 부분  -->
+		            <div class="productText_box_category_line">
+		              <span><?=$row["ca_name"]?></span>
+		              <span>관심<?=$row["i_count"]?></span>
+		            </div>
+		          </div>
+		        </div></a>
+						<?php endforeach ?>
+					</div>
+				<?php else : ?>
+					<div id="empty_page">
+						<img src="img/sad_back.png" alt="">
+						<h4>EMPTY</h4>
+						<p>
+							<span>해당 역의 상품 정보가 비어있습니다.</span><br>
+							판매 상품이 올라가면 관련 정보가 보여집니다.
+						</p>
+					</div>
+				<?php endif; ?>
+	      <!-- 페이지 네이션 들어가는 부분 -->
+	      <div id="pagination">
+					<?php
+					if($result['start'] < $result['current'] ) :?>
+						<a class="abtn" href="searchProduct.php?p=<?=($pid - 1)?>&ctg_station=<?=$ctg_station?>&ctg_name=<?=$ctg_name?>&s_value=<?=$s_value?>">&lt;</a>
 					<?php endif ?>
 
-          <!-- 상품 상세설명 -->
-          <div class="productText_box">
+					<?php for($i=$result['start']; $i<=$result['end']; $i++): ?>
+						<a class="abtn <?php if($i === (int)$result['current']) echo 'current' ?>" href="?p=<?= $i ?>&ctg_station=<?=$ctg_station?>&ctg_name=<?=$ctg_name?>&s_value=<?=$s_value?>"><?= $i ?></a>
+					<?php endfor ?>
 
-            <!-- 제목 -->
-            <div class="productText_box_title_line">
-              <span><?=$row["pr_title"]?></span>
-            </div>
+					<?php if( $result['end'] > $result['current']) : ?>
+						<a class="abtn" href="searchProduct.php?p=<?=($pid + 1)?>&ctg_station=<?=$ctg_station?>&ctg_name=<?=$ctg_name?>&s_value=<?=$s_value?>">&gt;</a>
+					<?php endif ?>
+	      </div>
 
-            <!-- 가격 -->
-            <div class="productText_box_price_line">
-              <span><?=$row["pr_price"]?></span>
-            </div>
-
-            <!-- 역 위치 -->
-            <div class="oproductText_box_station_line">
-              <span><?=$row["line_name"]?> <?=$row["pr_station"]?></span>
-            </div>
-
-            <!-- 카테고리 및 관심 수 부분  -->
-            <div class="productText_box_category_line">
-              <span><?=$row["ca_name"]?></span>
-              <span>관심<?=$row["i_count"]?></span>
-            </div>
-          </div>
-        </div></a>
-				<?php endforeach ?>
-			</div>
-      <!-- 페이지 네이션 들어가는 부분 -->
-      <div id="pagination">
-				<?php
-				if($result['start'] < $result['current'] ) :?>
-					<a class="abtn" href="searchProduct.php?p=<?=($pid - 1)?>&ctg_station=<?=$ctg_station?>&ctg_name=<?=$ctg_name?>&s_value=<?=$s_value?>">&lt;</a>
-				<?php endif ?>
-
-				<?php for($i=$result['start']; $i<=$result['end']; $i++): ?>
-					<a class="abtn <?php if($i === (int)$result['current']) echo 'current' ?>" href="?p=<?= $i ?>&ctg_station=<?=$ctg_station?>&ctg_name=<?=$ctg_name?>&s_value=<?=$s_value?>"><?= $i ?></a>
-				<?php endfor ?>
-
-				<?php if( $result['end'] > $result['current']) : ?>
-					<a class="abtn" href="searchProduct.php?p=<?=($pid + 1)?>&ctg_station=<?=$ctg_station?>&ctg_name=<?=$ctg_name?>&s_value=<?=$s_value?>">&gt;</a>
-				<?php endif ?>
-      </div>
-
-    </div>
+	    </div>
 
     <!-- 푸터 부분  -->
     <?php require_once('metrocket_footer.php');?>

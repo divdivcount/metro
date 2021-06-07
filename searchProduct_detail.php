@@ -380,7 +380,37 @@ try{
 
       <?php endforeach ?>
     <?php else :?>
-      <?php echo "아직 없어요"; ?>
+      <!-- 이미지 부분 -->
+      <div class="otherProduct_content_img">
+        <img src="img/sangpum_none.png" alt="">
+      </div>
+
+      <!-- 상품 내용 -->
+      <div class="otherProduct_content_text radiusBottom">
+
+        <!-- 제목 -->
+        <div class="otherProduct_content_text_title_line">
+          <span>상품정보가 비어있습니다.</span>
+        </div>
+
+        <!-- 가격 -->
+        <div class="otherProduct_content_text_price_line">
+          <span></span>
+        </div>
+
+        <!-- 역 위치 -->
+        <div class="otherProduct_content_text_station_line">
+          <span></span>
+        </div>
+
+        <!-- 카테고리 및 관심 수 부분  -->
+        <div class="otherProduct_content_text_category_line">
+          <span></span>
+          <span></span>
+        </div>
+
+      </div>
+    </div>
     <?php endif;?>
 
       </div><!-- 그리드 박스의 끝  -->
@@ -392,6 +422,7 @@ try{
       <div class="otherProduct_gridBox">
 
         <!-- 기타 상품 정보  -->
+        <?php if($panmejaProduct != null) :?>
         <?php foreach ($panmejaProduct as $product) : ?>
         <a href="searchProduct_detail.php?id=<?=$product['pr_id']?>&title=<?=$product['pr_title']?>"><div class="otherProduct_content">
 
@@ -435,6 +466,39 @@ try{
         </div></a>
       <?php endforeach ?>
       </div><!-- 그리드 박스의 끝  -->
+    <?php else :?>
+      <!-- 이미지 부분 -->
+      <div class="otherProduct_content_img">
+        <img src="img/sangpum_none.png" alt="">
+      </div>
+
+      <!-- 상품 내용 -->
+      <div class="otherProduct_content_text radiusBottom">
+
+        <!-- 제목 -->
+        <div class="otherProduct_content_text_title_line">
+          <span>상품정보가 비어있습니다.</span>
+        </div>
+
+        <!-- 가격 -->
+        <div class="otherProduct_content_text_price_line">
+          <span></span>
+        </div>
+
+        <!-- 역 위치 -->
+        <div class="otherProduct_content_text_station_line">
+          <span></span>
+        </div>
+
+        <!-- 카테고리 및 관심 수 부분  -->
+        <div class="otherProduct_content_text_category_line">
+          <span></span>
+          <span></span>
+        </div>
+
+      </div>
+    </div>
+    <?php endif;?>
     </div>
     <!-- 푸터 부분  -->
     <?php require_once 'metrocket_footer.php';?>
