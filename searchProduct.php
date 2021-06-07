@@ -3,7 +3,7 @@ require_once('modules/db.php');
 require_once('modules/notification.php');
 $dao = new Product;
 $pid = Get('p', 1);
-trim($ctg_name = Get("ctg_name", 0));
+$ctg_name = trim(Get("ctg_name", 0));
 $ctg_station = str_replace('+',"",trim(Get("ctg_station", 0)));
 
 
@@ -328,6 +328,20 @@ if($a == 0){
 		        </div></a>
 						<?php endforeach ?>
 					</div>
+					<div id="pagination">
+						<?php
+						if($result['start'] < $result['current'] ) :?>
+							<a class="abtn" href="searchProduct.php?p=<?=($pid - 1)?>&ctg_station=<?=$ctg_station?>&ctg_name=<?=$ctg_name?>&s_value=<?=$s_value?>">&lt;</a>
+						<?php endif ?>
+
+						<?php for($i=$result['start']; $i<=$result['end']; $i++): ?>
+							<a class="abtn <?php if($i === (int)$result['current']) echo 'current' ?>" href="?p=<?= $i ?>&ctg_station=<?=$ctg_station?>&ctg_name=<?=$ctg_name?>&s_value=<?=$s_value?>"><?= $i ?></a>
+						<?php endfor ?>
+
+						<?php if( $result['end'] > $result['current']) : ?>
+							<a class="abtn" href="searchProduct.php?p=<?=($pid + 1)?>&ctg_station=<?=$ctg_station?>&ctg_name=<?=$ctg_name?>&s_value=<?=$s_value?>">&gt;</a>
+						<?php endif ?>
+					</div>
 				<?php else : ?>
 					<div id="empty_page">
 						<img src="img/sad_back.png" alt="">
@@ -339,20 +353,7 @@ if($a == 0){
 					</div>
 				<?php endif; ?>
 	      <!-- 페이지 네이션 들어가는 부분 -->
-	      <div id="pagination">
-					<?php
-					if($result['start'] < $result['current'] ) :?>
-						<a class="abtn" href="searchProduct.php?p=<?=($pid - 1)?>&ctg_station=<?=$ctg_station?>&ctg_name=<?=$ctg_name?>&s_value=<?=$s_value?>">&lt;</a>
-					<?php endif ?>
 
-					<?php for($i=$result['start']; $i<=$result['end']; $i++): ?>
-						<a class="abtn <?php if($i === (int)$result['current']) echo 'current' ?>" href="?p=<?= $i ?>&ctg_station=<?=$ctg_station?>&ctg_name=<?=$ctg_name?>&s_value=<?=$s_value?>"><?= $i ?></a>
-					<?php endfor ?>
-
-					<?php if( $result['end'] > $result['current']) : ?>
-						<a class="abtn" href="searchProduct.php?p=<?=($pid + 1)?>&ctg_station=<?=$ctg_station?>&ctg_name=<?=$ctg_name?>&s_value=<?=$s_value?>">&gt;</a>
-					<?php endif ?>
-	      </div>
 
 	    </div>
 
