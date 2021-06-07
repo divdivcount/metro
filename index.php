@@ -190,7 +190,7 @@ require_once('modules/db.php');
 
       <div id="background_bannerImg">
       <!-- 타이틀  -->
-      <div class="titleText_1">
+      <div class="titleText_1" style="margin:0">
         왜 매트로켓이 좋을까요
       </div>
       <div class="textStyle_1">
@@ -234,7 +234,7 @@ require_once('modules/db.php');
 
 
       <!-- 배너이미지 3 -->
-      <div class="contentImg_box" id="c_img03">
+      <div class="contentImg_box" id="c_img03" style="margin:0">
 
         <!-- 이미지  -->
         <div class="contentImg_img">
@@ -247,7 +247,6 @@ require_once('modules/db.php');
           <p>
             "사기는 NO! 안전하게 물건 사는 방법!"
           </p>
-          <span>메트로켓</span>
         </div>
       </div>
 

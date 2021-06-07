@@ -224,7 +224,7 @@ display : -webkit-box;
   transform: translate(-50%, -40%);
 }
 #c_img03 .contentImg_text h5{
-  margin: 0 0 0.5rem  0;
+  margin: 0;
   font-family: "NotoSansKR_t";
   font-size:2.0rem;
 }
@@ -291,6 +291,8 @@ display : -webkit-box;
   bac
 }
 #background_bannerImg{
+  margin-top: 10.0rem;
+  padding: 10.0rem 0;
   width: 100%;
   background-image: url("../img/new_sub_bannerImg.png");
   background-size: cover;
@@ -387,8 +389,9 @@ a{text-decoration: none;}
   #subContent_box .recent_productInfo_box .productImg_box{height:210px;}
   /* #subContent_box #recentProducts_gridbox{grid-template-columns: repeat(3,1fr)} */
 
+  #background_bannerImg{padding:5.0rem 0}
   #explain_box{grid-template-columns: repeat(2,1fr);}
-  .textBox_1{margin: 2.5rem 4.5rem;width: 25.0rem;height: 35.0rem;}
+  .textBox_1{margin: 0rem 4.5rem;width: 25.0rem;height: 35.0rem;}
   .textBox_1:nth-child(1),.textBox_1:nth-child(3){justify-self:end}
   .textBox_1:nth-child(2),.textBox_1:nth-child(4){justify-self:start}
 }
@@ -427,7 +430,7 @@ a{text-decoration: none;}
 
   #c_img03 .contentImg_text{left: 60%;top: 25%;transform: translate(-60%, -25%);}
   #c_img03 .contentImg_text p{font-size:2.25rem;}
-  #c_img03 .contentImg_text h5,#c_img01 .contentImg_text span{font-size:1.75rem;}
+  #c_img03 .contentImg_text h5,#c_img01 {font-size:1.75rem;}
 
   .imgbox_3{width: 40%;}
 }
