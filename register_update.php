@@ -43,6 +43,28 @@ $mbs_password = $rows['pass'];
 // echo $mb_pw["mb_password"];
 
 
+
+$sql = "select * from member where mb_id='{$_POST['mb_id']}'"; // 회원가입을 시도하는 아이디가 사용중인 아이디인지 체크
+$result = mysqli_query($conn, $sql);
+$id_check = mysqli_num_rows($result);
+// 	if ($id_check >= 1) {
+// 				echo "존재하는 아이디입니다.";
+// 			} else {
+// 				echo "존재하지 않는 아이디입니다.";
+// 			}
+// 		}
+if (mysqli_num_rows($result) > 0) { // 만약 사용중인 아이디라면 알림창을 띄우고 회원가입 페이지로 이동
+echo "<script>alert('이미 사용중인 회원아이디 입니다.');</script>";
+echo "<script>location.replace('./register.php');</script>";
+exit;
+}
+
+if (mysqli_num_rows($result) > 0) { // 만약 사용중인 이메일이라면 알림창을 띄우고 회원가입 페이지로 이동
+echo "<script>alert('이미 사용중인 회원 이메일 입니다.');</script>";
+echo "<script>location.replace('./register.php');</script>";
+exit;
+}
+
 if($mb_pw["mb_password"] != $mbs_password){
 	echo "<script>alert('현재 비밀번호가 일치하지 않습니다.');</script>";
 	echo "<script>location.replace('./member_update.php');</script>";

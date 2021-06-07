@@ -4,7 +4,7 @@ require_once('modules/notification.php');
 $dao = new Product;
 $pid = Get('p', 1);
 trim($ctg_name = Get("ctg_name", 0));
-trim($ctg_station = Get("ctg_station", 0));
+$ctg_station = str_replace('+',"",trim(Get("ctg_station", 0)));
 
 
 // echo $a;
