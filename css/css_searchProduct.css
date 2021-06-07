@@ -16,6 +16,7 @@ ul{list-style: none;}
 #wrapContainer_Box{
   margin: 0 auto;
   width: 65%;
+  margin-bottom: 20rem;
 }
 
 #pageTitle_box{
@@ -214,9 +215,9 @@ ul{list-style: none;}
 
 
 .productText_box{width: 100%;height:29%;display: flex;flex-direction: column;margin-top: 5px;padding: 1.0rem;background-color: white;box-shadow: 3px 3px 6px 0 rgba(0, 0, 0, 0.16);border-bottom-left-radius: 10px;border-bottom-right-radius: 10px}
-.productText_box_title_line{width: 100%;font-family: "NotoSansKR_m";font-size: 1.3rem;color: #5b5b5b;overflow : hidden;
+.productText_box_title_line{width: 100%;font-family: "NotoSansKR_m";font-size: 1.6rem;color: #5b5b5b;overflow : hidden;
 text-overflow : ellipsis;
-height : 1.9rem; /*(대신 height를 설정해준다. 텍스트 크기에 맞춰 height가 1줄인 경우를 생각하자.) */
+height : 2rem; /*(대신 height를 설정해준다. 텍스트 크기에 맞춰 height가 1줄인 경우를 생각하자.) */
 min-height: 15px;
 word-wrap : brek-word;
 display : -webkit-box;
@@ -240,16 +241,17 @@ display : -webkit-box;
 -webkit-line-clamp : 1; /*(줄 개수를 설정한다. 만약 2줄이상이라면 height와 해당 값을 수정한다.) */
 -webkit-box-orient: vertical;}
 .productText_box_category_line{width: 100%;display: flex;justify-content: space-between;
+  font-size: 1.6rem;
   overflow : hidden;
   text-overflow : ellipsis;
-  height : 1.5rem; /*(대신 height를 설정해준다. 텍스트 크기에 맞춰 height가 1줄인 경우를 생각하자.) */
+  height : 2rem; /*(대신 height를 설정해준다. 텍스트 크기에 맞춰 height가 1줄인 경우를 생각하자.) */
   min-height: 15px;
   word-wrap : brek-word;
   display : -webkit-box;
   -webkit-line-clamp : 1; /*(줄 개수를 설정한다. 만약 2줄이상이라면 height와 해당 값을 수정한다.) */
   -webkit-box-orient: vertical;}
 .productText_box_category_line span{font-family: "NotoSansKR_t";font-size: 0.8rem;color: #7d7d7d;}
-
+.oproductText_box_station_line{font-size: 1.6rem; height : 2rem; }
 #pagination{
   width: 100%;
   text-align: center;
