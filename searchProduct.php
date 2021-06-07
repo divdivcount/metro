@@ -260,16 +260,16 @@ if($a == 0){
 						// echo $category."카테고리"."<br>";
 						if($s_value){
 							$result = $dao->SelectPageLength($pid, 12, $ctg_name, $ctg_station, $s_value, '');
-						  $list = $dao->SelectPageList($result['current'], 10,$ctg_name, $ctg_station, $s_value, '');
+						  $list = $dao->SelectPageList($result['current'], 12,$ctg_name, $ctg_station, $s_value, '');
 						}elseif($category){
 							$result = $dao->SelectPageLength($pid, 12, $ctg_name, $ctg_station, '', $category);
-						  $list = $dao->SelectPageList($result['current'], 10,$ctg_name, $ctg_station, '', $category);
+						  $list = $dao->SelectPageList($result['current'], 12,$ctg_name, $ctg_station, '', $category);
 						}elseif($s_value && $category){
 							$result = $dao->SelectPageLength($pid, 12, $ctg_name, $ctg_station, $s_value,$category);
-						  $list = $dao->SelectPageList($result['current'], 10,$ctg_name, $ctg_station, $s_value, $category);
+						  $list = $dao->SelectPageList($result['current'], 12,$ctg_name, $ctg_station, $s_value, $category);
 						}else{
 						$result = $dao->SelectPageLength($pid, 12, $ctg_name, $ctg_station, '','');
-						$list = $dao->SelectPageList($result['current'], 10, $ctg_name, $ctg_station, '','');
+						$list = $dao->SelectPageList($result['current'], 12, $ctg_name, $ctg_station, '','');
 					}
 				} catch (PDOException $e) {
 					$result = null;
