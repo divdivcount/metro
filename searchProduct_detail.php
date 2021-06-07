@@ -189,7 +189,7 @@ try{
               </button>
 
               <button type="button" id="registerInterest_btn" class="w3-button w3-light-gray" onclick="registerInterest()">
-                <div  class="img_box" style="width:3.5rem;height:3.5rem;margin:0"> <img src="<?php if($row["mem_i_check"] == 0){echo "img/staroff_35x35.png";}elseif($row["mem_i_check"] == 1){echo "img/star_35x35.png";} ?>" id="star_btn" data-value="<?=$row["mem_i_check"] ? $row["mem_i_check"] : 0 ?>" alt="" ></div>
+                <div  class="img_box" style="width:3.5rem;height:3.5rem;margin:0"> <img src="<?php if($row["mem_i_check"] == 0){echo "img/staroff_35x35.png";}elseif($row["mem_i_check"] == 1){echo "img/searchproduct_star_on.png";} ?>" id="star_btn" data-value="<?=$row["mem_i_check"] ? $row["mem_i_check"] : 0 ?>" alt="" ></div>
               </button>
             </div>
 
@@ -626,7 +626,7 @@ try{
               success: function(data) {
                   //서버로부터 정상적으로 응답이 왔을 때 실행
                   $('#star_btn').html(data);
-                  star_btn.src ="img/star_19x19.png";
+                  star_btn.src ="img/star_35x35.png";
                   star_btn.dataset.value = 1;
               },
               error: function(err) {
@@ -642,7 +642,7 @@ try{
               data:{values:"1", pr_id : pr_id, mb_id:mb_id,om_id:om_id}, //보낼 데이터
               success: function(data) {
                   //서버로부터 정상적으로 응답이 왔을 때 실행
-                  star_btn.src = "img/staroff_19x19.png";
+                  star_btn.src = "img/staroff_35x35.png";
                   star_btn.dataset.value = 0;
               },
               error: function(err) {
