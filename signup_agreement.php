@@ -17,7 +17,7 @@
   <body>
     <div id="signupbox">
       <div class="imgbox">
-        <img src="img/metrocket.png" alt="" style="align-self: center;">
+        <a href="index.php"><img src="img/metrocket.png" alt="" style="align-self: center;"></a>
       </div>
 
       <div id="boundarybox">
