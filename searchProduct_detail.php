@@ -348,7 +348,7 @@ try{
       <?php if($sameProduct != null) :?>
         <?php foreach ($sameProduct as $rows) : ?>
 
-         <a href="searchProduct_detail.php?id=<?=$row['pr_id']?>&title=<?=$row['pr_title']?>&line=<?=$ctg_name?>&station=<?=$ctg_station?>"><div class="otherProduct_content">
+         <a href="searchProduct_detail.php?id=<?=$row['pr_id']?>&title=<?=$row['pr_title']?>&line=<?=$rows['l_id']?>&station=<?=$rows['pr_station']?>"><div class="otherProduct_content">
 
           <!-- 이미지 부분 -->
           <div class="otherProduct_content_img">
