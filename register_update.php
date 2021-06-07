@@ -58,11 +58,14 @@ echo "<script>alert('이미 사용중인 회원아이디 입니다.');</script>"
 echo "<script>location.replace('./register.php');</script>";
 exit;
 }
-
-if (mysqli_num_rows($result) > 0) { // 만약 사용중인 이메일이라면 알림창을 띄우고 회원가입 페이지로 이동
-echo "<script>alert('이미 사용중인 회원 이메일 입니다.');</script>";
-echo "<script>location.replace('./register.php');</script>";
-exit;
+$sql = "select mb_email from member"; // 회원가입을 시도하는 아이디가 사용중인 아이디인지 체크
+$email_result = mysqli_query($conn, $sql);
+while($email_result = mysqli_fetch_assoc($email_result)){
+	if($email_result == $mb_email){
+		echo "<script>alert('이미 사용중인 회원 이메일 입니다.');</script>";
+		echo "<script>location.replace('./register.php');</script>";
+		exit;
+	}
 }
 
 if($mb_pw["mb_password"] != $mbs_password){
