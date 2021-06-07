@@ -8,8 +8,8 @@ $ctg_station = str_replace('+',"",trim(Get("ctg_station", 0)));
 
 
 // echo $a;
-echo $ctg_name."<br>";
-echo $ctg_station;
+// echo $ctg_name."<br>";
+// echo $ctg_station;
 
 if($ctg_name != "all" && $ctg_station){
 	// echo "통과1";
