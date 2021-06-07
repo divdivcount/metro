@@ -11,6 +11,7 @@ try{
   $pr_title = Get("title",0);
   $replys = $replyobject->reply_select($pr_id);
   $i = 0;
+  $ctg_name = Get("lines", null);
 }catch(PDOException $e){
     echo $e;
   }
@@ -203,8 +204,8 @@ try{
 
       <?php
        $piec = explode("&nbsp;", $row["profile_station"]);
-       // echo $piec[1];
-       $sameProduct = $dao->same_searchProduct($row["l_id"],$piec[1],$row["ca_name"]);?>
+       echo $piec[1];
+       $sameProduct = $dao->same_searchProduct($ctg_name,$piec[1],$row["ca_name"]);?>
       <?php $panmejaProduct = $dao->panpeja_searchProduct($row["mb_id"]? $row["mb_id"] : 'null', $row["om_id"] ? $row["om_id"] : 'null' );?>
 
     <div id="reply">
