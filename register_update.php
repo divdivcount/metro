@@ -123,7 +123,6 @@ if($mode == "insert") { // 신규 등록 상태
 	$email_result = mysqli_query($conn, $sql);
 	while($email = mysqli_fetch_assoc($email_result)){
 		if($email["mb_email"] == $mb_email){
-			echo "이곳";
 			echo "<script>alert('이미 사용중인 회원 이메일 입니다.');</script>";
 			echo "<script>location.replace('./register.php');</script>";
 			exit;

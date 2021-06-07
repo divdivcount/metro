@@ -69,7 +69,7 @@ if($mb_id && isset($_GET['mode']) == 'modify') { // 세션이 있고 회원수�
 		<input type="hidden" name="mode" value="<?php echo $mode; ?>">
 
 			<div class="imgbox">
-        <img src="img/metrocket.png" alt="" style="align-self: center;">
+        <a href="index.php"><img src="img/metrocket.png" alt="" style="align-self: center;"></a>
       </div>
 
 			<div id="boundarybox">
