@@ -63,7 +63,7 @@ if($ctg_name != "all" && $ctg_station){
 }
 // echo $a;
 if($a == 0){
-	// userGoto("없는 역을 입력하셨습니다.", "");
+	userGoto("없는 역을 입력하셨습니다.", "");
 	exit;
 }else{
 ?>
