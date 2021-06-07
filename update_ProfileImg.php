@@ -6,6 +6,7 @@
   $productIMG = new Member();
   $member_num = Post("member_num", null);
   $nickname = Post("nickname", null);
+  $uploadCheck = Post("uploadCheck", null);
 
   if($nickname != null && $member_num != null){
     $productIMG->Member_nickname_update($member_num, $nickname);
@@ -23,10 +24,14 @@
       $query = "update member set mb_image='$fileName' where mb_num = TRIM($member_num)";
       $result = mysqli_query($conn, $query);
     }
-  }else{
+  }else if ($uploadCheck == "f") {
     $query = "update member set mb_image = 'img/normal_profile.png' where mb_num = TRIM($member_num)";
     $result = mysqli_query($conn, $query);
     $productIMG->Delete_mbImg($member_num);
+  }else if($uploadCheck == "default"){
+
+  }else{
+    
   }
 
 

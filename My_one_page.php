@@ -91,6 +91,7 @@
           </div>
           <span>닉네임</span>
           <form action="update_ProfileImg.php" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="uploadCheck" id="uploadCheck" value="default">
             <input type="file" id="real-input" name="files" class="image_inputType_file"  accept="image/jpeg,image/png,image/gif" style="display:none;" >
             <div class="inputNicname_Line">
               <input name="nickname" type="text" placeholder="<?=$mb['mb_name'] ? $mb['mb_name'] : $om['om_nickname']?>">
@@ -99,7 +100,7 @@
             </div>
 
             <div class="updateProfile_Button_Line">
-              <input class="w3-button w3-round-xxlarge w3-blue" type="submit" name="" value="저장">
+              <input id="updateProfile_Button" class="w3-button w3-round-xxlarge w3-blue" type="submit" value="저장">
               <input class="w3-button w3-round-xxlarge w3-light-gray" type="button" onclick="updateImage_close()" value="취소">
             </div>
 
@@ -128,7 +129,7 @@
 
             <p>해당상품의 판매수정을 하시겠습니까?</p>
             <div id="changeBuyer_selectBox">
-            </div>            
+            </div>
             <div class="changeBuyer_btnLine">
                 <button type="button" class="w3-button w3-round-xlarge w3-gray" onclick="changeBuyer_close()">취소하기</button>
                 <button type="submit" class="w3-button w3-round-xlarge w3-blue" onclick="changeBuyer()">수정하기</button>
@@ -238,10 +239,20 @@
   const uploadImg_btn = document.getElementById('uploadImg_btn');
   const deleteImg_btn = document.getElementById('deleteImg_btn');
   const changedProfile_image = document.getElementById('changedProfile_image');
+  const updateProfile_Button = document.getElementsByClassName('updateProfile_Button');
 
   //사진 올리기 버튼과 이미지에 파일업로드 이벤트 연결
-  uploadImg_btn.addEventListener('click',()=>{realInput.click();});
-  changedProfile_image.addEventListener('click',()=>{realInput.click();});
+  uploadImg_btn.addEventListener('click',()=>{
+    realInput.click();
+    document.getElementById('uploadCheck').value = "t";
+  });
+  changedProfile_image.addEventListener('click',()=>{
+    realInput.click();
+    document.getElementById('uploadCheck').value = "f";
+  });
+  updateProfile_Button.addEventListener('click',()=>{
+    document.getElementById('uploadCheck').value = "default";
+  });
 
   //삭제버튼 누르면 파일 정보를 삭제
   deleteImg_btn.addEventListener('click',()=>{
