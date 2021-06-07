@@ -6,6 +6,10 @@ $pid = Get('p', 1);
 $ctg_name = trim(Get("ctg_name", 0));
 $ctg_station = str_replace('+',"",trim(Get("ctg_station", 0)));
 
+if(!($ctg_name && $ctg_station)){
+	userGoto("역 정보가 선택되지 않았습니다.","");
+	exit;
+}
 
 // echo $a;
 // echo $ctg_name."<br>";
