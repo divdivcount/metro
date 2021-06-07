@@ -67,8 +67,8 @@ if(!(empty($_SESSION['ss_mb_id']) || empty($_SESSION['naver_mb_id']) || empty($_
 						me_text				= '{$_POST["me_memo"]}',
 						pr_id = $pr_id";
 	    $result = mysqli_query($conn, $sql);
-			echo $sql."<br>";
-			echo $recv_mb_id."<br>";
+			// echo $sql."<br>";
+			// echo $recv_mb_id."<br>";
 
 	}
 
@@ -76,7 +76,7 @@ if(!(empty($_SESSION['ss_mb_id']) || empty($_SESSION['naver_mb_id']) || empty($_
 
 	if ($member_list) {
 	    $str_name_list = implode(',', $member_list['name']);
-		// echo "<script>alert('{$str_name_list} 님께 쪽지를 전달하였습니다.');window.close();</script>";
+		echo "<script>alert('{$str_name_list} 님께 쪽지를 전달하였습니다.');window.close();</script>";
 		// window.close();
 		exit;
 	} else {
