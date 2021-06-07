@@ -341,8 +341,9 @@ try{
       <div class="otherProduct_gridBox">
 
         <!-- 기타 상품 정보  -->
+      <?php if($sameProduct != null) :?>
         <?php foreach ($sameProduct as $rows) : ?>
-          <?php if($rows['pr_id'] > 0) :?>
+
         <a href="searchProduct_detail.php?id=<?=$rows['pr_id']?>&title=<?=$rows['pr_title']?>"><div class="otherProduct_content">
 
           <!-- 이미지 부분 -->
@@ -376,10 +377,11 @@ try{
 
           </div>
         </div></a>
-      <?php else :?>
-        <?php echo "아직 없어요"; ?>
-      <?php endif;?>
+
       <?php endforeach ?>
+    <?php else :?>
+      <?php echo "아직 없어요"; ?>
+    <?php endif;?>
 
       </div><!-- 그리드 박스의 끝  -->
 
