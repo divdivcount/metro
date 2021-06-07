@@ -250,7 +250,7 @@ display : -webkit-box;
   display : -webkit-box;
   -webkit-line-clamp : 1; /*(줄 개수를 설정한다. 만약 2줄이상이라면 height와 해당 값을 수정한다.) */
   -webkit-box-orient: vertical;}
-.productText_box_category_line span{font-family: "NotoSansKR_t";font-size: 0.8rem;color: #7d7d7d;}
+.productText_box_category_line span{font-family: "NotoSansKR_t";font-size: 1.6rem;color: #7d7d7d;}
 .oproductText_box_station_line{font-size: 1.6rem; height : 2rem; }
 #pagination{
   width: 100%;
