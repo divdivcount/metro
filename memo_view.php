@@ -55,8 +55,8 @@ $sql = " SELECT a.*,b.mb_id, b.mb_email, c.om_id,c.om_nickname
 // echo $sql;
 $result = mysqli_query($conn, $sql);
 $memos = mysqli_fetch_assoc($result);
-echo $memos['mb_id'];
-echo $memos['pr_id'];
+// echo $memos['mb_id'];
+// echo $memos['pr_id'];
 ?>
 
 <html>
