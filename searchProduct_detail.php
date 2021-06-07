@@ -381,7 +381,7 @@ try{
 
       <?php endforeach ?>
     <?php else :?>
-      <div class="otherProduct_gridBox">
+      <div class="otherProduct_content">
       <!-- 이미지 부분 -->
       <div class="otherProduct_content_img">
         <img src="img/sangpum_none.png" alt="">
@@ -470,7 +470,7 @@ try{
       </div><!-- 그리드 박스의 끝  -->
     <?php else :?>
       <!-- 이미지 부분 -->
-    <div class="otherProduct_gridBox">
+    <div class="otherProduct_content">
         <div class="otherProduct_content_img">
           <img src="img/sangpum_none.png" alt="">
         </div>
