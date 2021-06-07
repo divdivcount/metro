@@ -239,7 +239,7 @@
   const uploadImg_btn = document.getElementById('uploadImg_btn');
   const deleteImg_btn = document.getElementById('deleteImg_btn');
   const changedProfile_image = document.getElementById('changedProfile_image');
-  const updateProfile_Button = document.getElementsByClassName('updateProfile_Button');
+  const updateProfile_Button = document.getElementById('updateProfile_Button');
 
   //사진 올리기 버튼과 이미지에 파일업로드 이벤트 연결
   uploadImg_btn.addEventListener('click',()=>{
