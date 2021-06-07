@@ -381,6 +381,7 @@ try{
 
       <?php endforeach ?>
     <?php else :?>
+      <div class="otherProduct_gridBox">
       <!-- 이미지 부분 -->
       <div class="otherProduct_content_img">
         <img src="img/sangpum_none.png" alt="">
@@ -469,35 +470,36 @@ try{
       </div><!-- 그리드 박스의 끝  -->
     <?php else :?>
       <!-- 이미지 부분 -->
-      <div class="otherProduct_content_img">
-        <img src="img/sangpum_none.png" alt="">
-      </div>
-
-      <!-- 상품 내용 -->
-      <div class="otherProduct_content_text radiusBottom">
-
-        <!-- 제목 -->
-        <div class="otherProduct_content_text_title_line">
-          <span>상품정보가 비어있습니다.</span>
+    <div class="otherProduct_gridBox">
+        <div class="otherProduct_content_img">
+          <img src="img/sangpum_none.png" alt="">
         </div>
 
-        <!-- 가격 -->
-        <div class="otherProduct_content_text_price_line">
-          <span></span>
-        </div>
+        <!-- 상품 내용 -->
+        <div class="otherProduct_content_text radiusBottom">
 
-        <!-- 역 위치 -->
-        <div class="otherProduct_content_text_station_line">
-          <span></span>
-        </div>
+          <!-- 제목 -->
+          <div class="otherProduct_content_text_title_line">
+            <span>상품정보가 비어있습니다.</span>
+          </div>
 
-        <!-- 카테고리 및 관심 수 부분  -->
-        <div class="otherProduct_content_text_category_line">
-          <span></span>
-          <span></span>
-        </div>
+          <!-- 가격 -->
+          <div class="otherProduct_content_text_price_line">
+            <span></span>
+          </div>
 
-      </div>
+          <!-- 역 위치 -->
+          <div class="otherProduct_content_text_station_line">
+            <span></span>
+          </div>
+
+          <!-- 카테고리 및 관심 수 부분  -->
+          <div class="otherProduct_content_text_category_line">
+            <span></span>
+            <span></span>
+          </div>
+
+        </div>
     </div>
     <?php endif;?>
     </div>
