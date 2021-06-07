@@ -55,8 +55,8 @@ $sql = " SELECT a.*,b.mb_id, b.mb_email, c.om_id,c.om_nickname
 // echo $sql;
 $result = mysqli_query($conn, $sql);
 $memos = mysqli_fetch_assoc($result);
-// echo $memos['mb_id'];
-mysqli_close($conn); // 데이터베이스 접속 종료
+echo $memos['mb_id'];
+echo $memos['pr_id'];
 ?>
 
 <html>
@@ -138,6 +138,7 @@ mysqli_close($conn); // 데이터베이스 접속 종료
 			document.querySelector('.btn1').classList.remove("current");
 <?php
 		}
+		mysqli_close($conn); // 데이터베이스 접속 종료
 ?>
 
 </script>
