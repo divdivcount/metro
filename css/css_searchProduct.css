@@ -84,6 +84,7 @@ ul{list-style: none;}
 
 .ui-autocomplete{z-index: 10010!important}
 .ui-menu{max-height: 200px;overflow-x: hidden;overflow-y: scroll;position: fixed!important;}
+.ui-menu-item{font-size: 1.8rem;}
 
 .closeBtn_box_2 {
   display: flex;

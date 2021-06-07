@@ -233,6 +233,7 @@ body {
 
 .ui-autocomplete{z-index: 10010!important}
 .ui-menu{max-height: 200px;overflow-x: hidden;overflow-y: scroll;position: fixed!important;}
+.ui-menu-item{font-size: 1.8rem;}
 
 
 /* 구매자 설정 후 판매완료 모달팝업 */
