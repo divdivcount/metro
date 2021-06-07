@@ -89,7 +89,7 @@ ini_set('display_errors', '1');
         <div class="productInfo_box">
 
         <!-- 상품 이미지  -->
-        <div class="productInfo_part_img" onclick="parent.changeURL('searchProduct_detail.php?id=<?=$row['pr_id']?>&title=<?=$row['pr_title']?>')">
+        <div class="productInfo_part_img" onclick="parent.changeURL('searchProduct_detail.php?id=<?=$row['pr_id']?>&title=<?=$row['pr_title']?>&line=<?=$row['l_id']?>&station=<?=$row['pr_station']?>')">
           <div class="img_box"><img src="files/<?= $row['pr_img'] ?>" width="100%" height="100%" /></div>
         </div>
 
@@ -100,7 +100,7 @@ ini_set('display_errors', '1');
           <div class="productTitle_line">
 
             <!-- 제목 -->
-            <div class="pr_title" onclick="parent.changeURL('searchProduct_detail.php?id=<?=$row['pr_id']?>&title=<?=$row['pr_title']?>')"><?= $row['pr_title'] ?></div>
+            <div class="pr_title" onclick="parent.changeURL('searchProduct_detail.php?id=<?=$row['pr_id']?>&title=<?=$row['pr_title']?>&line=<?=$row['l_id']?>&station=<?=$row['pr_station']?>')"><?= $row['pr_title'] ?></div>
 
             <!-- 버튼들 -->
             <div class="pr_buttons" data-sell_check ="<?= $row['pr_status'] ?>">
@@ -114,17 +114,17 @@ ini_set('display_errors', '1');
             </div>
           </div>
           <!--  2. 판매여부 라인 -->
-          <div class="checkSale_line" onclick="parent.changeURL('searchProduct_detail.php?id=<?=$row['pr_id']?>&title=<?=$row['pr_title']?>')">
+          <div class="checkSale_line" onclick="parent.changeURL('searchProduct_detail.php?id=<?=$row['pr_id']?>&title=<?=$row['pr_title']?>&line=<?=$row['l_id']?>&station=<?=$row['pr_station']?>')">
             <?= $row['pr_status'] ?>
           </div>
 
           <!-- 3. 상품가격라인 -->
-          <div class="productPrice_line" onclick="parent.changeURL('searchProduct_detail.php?id=<?=$row['pr_id']?>&title=<?=$row['pr_title']?>')">
+          <div class="productPrice_line" onclick="parent.changeURL('searchProduct_detail.php?id=<?=$row['pr_id']?>&title=<?=$row['pr_title']?>&line=<?=$row['l_id']?>&station=<?=$row['pr_station']?>')">
             <?= $row['pr_price'] ?>
           </div>
 
           <!-- 4. 별점과 역정보 라인 -->
-          <div class="productRecommendation_line" onclick="parent.changeURL('searchProduct_detail.php?id=<?=$row['pr_id']?>&title=<?=$row['pr_title']?>')">
+          <div class="productRecommendation_line" onclick="parent.changeURL('searchProduct_detail.php?id=<?=$row['pr_id']?>&title=<?=$row['pr_title']?>&line=<?=$row['l_id']?>&station=<?=$row['pr_station']?>')">
 
             <!-- 별점  -->
             <div class="pr_starcount"><img src="img\star_19x19.png" style="width:1.9rem;height:1.9rem"><?=$row['i_count'] ?></div>
