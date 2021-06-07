@@ -58,15 +58,9 @@ echo "<script>alert('이미 사용중인 회원아이디 입니다.');</script>"
 echo "<script>location.replace('./register.php');</script>";
 exit;
 }
-$sql = "select mb_email from member"; // 회원가입을 시도하는 아이디가 사용중인 아이디인지 체크
-$email_result = mysqli_query($conn, $sql);
-while($email_result = mysqli_fetch_assoc($email_result)){
-	if($email_result == $mb_email){
-		echo "<script>alert('이미 사용중인 회원 이메일 입니다.');</script>";
-		echo "<script>location.replace('./register.php');</script>";
-		exit;
-	}
-}
+
+
+
 
 if($mb_pw["mb_password"] != $mbs_password){
 	echo "<script>alert('현재 비밀번호가 일치하지 않습니다.');</script>";
@@ -123,6 +117,17 @@ if($mode == "insert") { // 신규 등록 상태
 		echo "<script>alert('이미 사용중인 회원아이디 입니다.');</script>";
 		echo "<script>location.replace('./register.php');</script>";
 		exit;
+	}
+
+	$sql = "select mb_email from member"; // 회원가입을 시도하는 아이디가 사용중인 아이디인지 체크
+	$email_result = mysqli_query($conn, $sql);
+	while($email = mysqli_fetch_assoc($email_result)){
+		if($email["mb_email"] == $mb_email){
+			echo "이곳";
+			echo "<script>alert('이미 사용중인 회원 이메일 입니다.');</script>";
+			echo "<script>location.replace('./register.php');</script>";
+			exit;
+		}
 	}
 
 	$sql = " INSERT INTO member
