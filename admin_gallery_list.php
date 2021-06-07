@@ -207,7 +207,7 @@ $result = $galleryObj ->SelectGallery();
         var box = document.createElement('div'); //div 생성
         var obj = document.createElement('img');//img 태크생성
         var in1 = document.createElement('input'); // 인풋태크 생성
-        in1.setAttribute('placeholder', '사진 설명을 입력'); //인풋 placeholder설정
+        in1.setAttribute('placeholder', 'URL을 등록해주세요'); //인풋 placeholder설정
         in1.setAttribute('type', 'text'); // type text
         in1.setAttribute('name', 'names[]'); // namse배열
         obj.setAttribute('src', src);//경로
