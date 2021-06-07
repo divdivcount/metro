@@ -91,7 +91,7 @@ body {
  display: flex;
  justify-content: center;
  align-items: center;
- /* position: fixed; */
+ position: fixed;
  /* position: absolute;
  left: 50%;
  top: 50%;
@@ -203,7 +203,7 @@ body {
 .selectStation_modalBox {
   position: absolute;
   background-color: #fff;
-  width: 80%;
+  width: 85%;
   max-width: 1500px;
   height: auto;
   padding: 15px;
@@ -229,9 +229,10 @@ body {
 #selectMetro_box .w3-input{outline: none;background-color:#f9f9f9!important;border: none;}
 #selectMetro_box .w3-select{outline: none;background-color:#f9f9f9!important;border: none;}
 #selectMetro_box .find_item:nth-child(1){}
-#selectMetro_box #bothFind_item{display: flex;width: 75%;flex-direction: row;justify-content: space-between;align-items: center;}
+#selectMetro_box #bothFind_item{display: flex;width: 75%;flex-direction: row;justify-content: space-between;align-items: flex-end;;}
 
 .ui-autocomplete{z-index: 10010!important}
+.ui-menu{max-height: 200px;overflow-x: hidden;overflow-y: scroll;position: fixed;}
 
 
 /* 구매자 설정 후 판매완료 모달팝업 */
@@ -342,7 +343,7 @@ body {
 .blue{color: blue;}
 .hidden {display: none!important}
 @media only screen and (min-width: 1920px) {
-  body{
+  #wrapPage{
     width: 1920px;
     margin: 0 auto!important;
   }
@@ -359,6 +360,7 @@ body {
 @media only screen and (max-width: 768px) {
   html,body{font-size: 8px!important;}
   .w3-content {width: 90%!important;}
+  #selectMetro_box #bothFind_item{width: 100%;}
   #userInfo_box{width: 100%;}
 }
 @media only screen and (max-width: 540px) {

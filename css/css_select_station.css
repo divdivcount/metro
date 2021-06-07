@@ -49,6 +49,7 @@
 @media only screen and (max-width: 1024px) {
 }
 @media only screen and (max-width: 768px) {
+  #selectMetro_box #bothFind_item{display: flex;width: 75%;flex-direction: row;justify-content: space-between;align-items: center;}
 
 }
 @media only screen and (max-width: 540px) {

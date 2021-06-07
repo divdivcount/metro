@@ -102,13 +102,23 @@ if(isset($_SESSION['ss_mb_id'])){
 </body>
 <script type="text/javascript">
   $(document).ready(function(){
+    function scrollDisable(){
+        $('body').addClass('scrollDisable').on('scroll touchmove mousewheel', function(e){
+            e.preventDefault();
+        });
+    }
+    function scrollAble(){
+        $('body').removeClass('scrollDisable').off('scroll touchmove mousewheel');
+    }
     function selectStation_open() {
       parent.document.querySelector(".my_one_page_modal").classList.remove("hidden");
       parent.document.querySelector(".selectStation_modalBox").classList.remove("hidden");
       // parent.document.body.style.backgroundColor = "rgba(0, 0, 0, 0.6)";
+      scrollDisable();
     }
     document.getElementById("selectStation_openBtn").addEventListener("click", selectStation_open);
   });
+  //Javascript
 
 </script>
 </html>
