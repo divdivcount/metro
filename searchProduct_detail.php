@@ -2,6 +2,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 require_once('modules/db.php');
+require_once('modules/notification.php');
 try{
   $dao = new Product;
   $member = new Member;
@@ -49,6 +50,7 @@ try{
   <div id="wrapPage">
     <?php $imgdao = $dao->searchProduct_detail(isset($mb) ? $mb["mb_num"] : 'null', isset($om) ? $om["om_id"] : 'null',$pr_id, $pr_title); ?>
     <!-- 슬라이드 이미지 -->
+    <?php if($imgdao != null) :?>
     <?php foreach ($imgdao as $row) : ?>
 
     <?php
@@ -275,6 +277,7 @@ try{
         </div>
 
         <?php endforeach ?>
+
 
         <div class="reply_view">
           <?php if(isset($replys)) : ?>
@@ -507,7 +510,11 @@ try{
         </div>
     </div>
     <?php endif;?>
+
     </div>
+  <?php else :?>
+    <?php userGoto("잘못된 값이 들어왔습니다.","");?>
+<?php endif;?>
     <!-- 푸터 부분  -->
     <?php require_once 'metrocket_footer.php';?>
     <script type="text/javascript">
