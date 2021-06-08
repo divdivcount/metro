@@ -48,7 +48,7 @@ require_once('modules/db.php');
   </div>
 <script type="text/javascript">
 $(document).ready(function(){ // html 문서를 다 읽어들인 후
-  
+
 
     $('#selectID').on('change', function(){
         if(this.value !== ""){
@@ -94,13 +94,14 @@ $(document).ready(function(){ // html 문서를 다 읽어들인 후
                };
         })
       }
+      $("#auto").on("keyup",function(){	//검색창에 뭔가가 입력될 때마다
+      input = $("#auto").val();	//입력된 값 저장
+      $( "#auto" ).autocomplete( "search", Hangul.disassemble(input).join("").replace(/ /gi, "") );	//자모 분리후 띄어쓰기 삭제
+      })
     })
   });
 
 
-  $("#auto").on("keyup",function(){	//검색창에 뭔가가 입력될 때마다
-  input = $("#auto").val();	//입력된 값 저장
-  $( "#auto" ).autocomplete( "search", Hangul.disassemble(input).join("").replace(/ /gi, "") );	//자모 분리후 띄어쓰기 삭제
-  })
+
 
 </script>

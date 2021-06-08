@@ -395,13 +395,14 @@ require_once('modules/db.php');
           };
         })
       }
+      $("#auto").on("keyup",function(){	//검색창에 뭔가가 입력될 때마다
+      input = $("#auto").val();	//입력된 값 저장
+      $( "#auto" ).autocomplete( "search", Hangul.disassemble(input).join("").replace(/ /gi, "") );	//자모 분리후 띄어쓰기 삭제
+      })
     })
 
   });
-  $("#auto").on("keyup",function(){	//검색창에 뭔가가 입력될 때마다
-  input = $("#auto").val();	//입력된 값 저장
-  $( "#auto" ).autocomplete( "search", Hangul.disassemble(input).join("").replace(/ /gi, "") );	//자모 분리후 띄어쓰기 삭제
-  })
+
 
   var obj ={
     nav:false,
