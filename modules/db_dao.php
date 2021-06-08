@@ -262,11 +262,11 @@ class MetroDAO {
 		}elseif($this->quTable == 'product_history'){
 				if($mb_id != 'null' && $om_id == 'null'){
 					$om_id = null;
-					$sql = "select ph.pr_id, ph.pr_title, ph.pr_img, ph.i_count, ph.pr_station, ph.l_id,ph.pr_price, ph.pr_status, ph.pr_now from product_history ph where mb_id = :mb_id and om_id is :om_id order by pu_id desc limit :start, :viewLen";
+					$sql = "select ph.pr_id, ph.pr_title, ph.pr_img, ph.i_count, ph.pr_station,ph.pr_price, ph.pr_status, ph.pr_now from product_history ph where mb_id = :mb_id and om_id is :om_id order by pu_id desc limit :start, :viewLen";
 					// echo "통과했냐7트";
 				}elseif($om_id != 'null' && $mb_id == 'null'){
 					$mb_id = null;
-					$sql = "select ph.pr_id, ph.pr_title, ph.pr_img, ph.i_count, ph.pr_station, ph.l_id,ph.pr_price, ph.pr_status, ph.pr_now from product_history ph where om_id = :om_id and mb_id is :mb_id order by pu_id desc limit :start, :viewLen";
+					$sql = "select ph.pr_id, ph.pr_title, ph.pr_img, ph.i_count, ph.pr_station,ph.pr_price, ph.pr_status, ph.pr_now from product_history ph where om_id = :om_id and mb_id is :mb_id order by pu_id desc limit :start, :viewLen";
 				}
 			}else{
 				if($mb_id != 'null' && $om_id == 'null'){
