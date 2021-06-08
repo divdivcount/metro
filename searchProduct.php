@@ -76,7 +76,7 @@ if($a == 0){
     <link rel="stylesheet" href="css/css_noamlfont.css">
     <link rel="stylesheet" href="css/css_metrocket_footer.css">
     <link rel="stylesheet" href="css/css_metrocket_header.css">
-		<link rel="icon" type="image/png" sizes="32x32" href="css/favicon_package_v0.16/favicon-32x32.ico">
+		<link rel="icon" type="image/png" sizes="32x32" href="css/favicon_package_v0.16/favicon.ico">
 		<!-- <link rel="icon" type="image/png" sizes="16x16" href="css/favicon_package_v0.16/favicon-16x16.png"> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
