@@ -340,6 +340,7 @@ require_once('modules/db.php');
 
   $(document).ready(function(){ // html 문서를 다 읽어들인 후
     //헤더 로그인 메뉴쪽 모달팝업 제어 함수
+    $("#auto").find('input').autocomplete();
     function login_open() {
       document.querySelector(".modal_header").classList.remove("hidden");
     }
